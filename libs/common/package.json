@@ -1,0 +1,19 @@
+{
+  "name": "@app/common",
+  "version": "0.0.1",
+  "description": "Common Library",
+  "author": "",
+  "private": true,
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.lib.json"
+  },
+  "dependencies": {
+    "@nestjs/common": "^10.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  }
+}

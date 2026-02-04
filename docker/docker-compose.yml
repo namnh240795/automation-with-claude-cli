@@ -1,0 +1,24 @@
+services:
+  nodejs-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: claude-nodejs-dev
+    working_dir: /workspace
+    volumes:
+      # Mount the parent directory to access projects
+      - ../:/workspace
+      # Mount shared skills folder
+      - ../skills:/home/nodejs/.claude/skills:ro
+      # Persist Claude CLI cache and config
+      - claude-cache:/home/nodejs/.cache
+      - claude-config:/home/nodejs/.config
+    environment:
+      # Keep color output
+      - TERM=xterm-256color
+    stdin_open: true
+    tty: true
+
+volumes:
+  claude-cache:
+  claude-config:

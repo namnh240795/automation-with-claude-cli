@@ -1,0 +1,5 @@
+export const enum ENVIRONMENT {
+  REDIS_HOST = 'REDIS_HOST',
+  REDIS_PORT = 'REDIS_PORT',
+  REDIS_TLS = 'REDIS_TLS',
+}
