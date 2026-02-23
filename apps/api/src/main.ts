@@ -7,7 +7,9 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { useContainer } from 'class-validator';
+import { apiReference } from '@scalar/nestjs-api-reference';
 import { AppModule } from './app.module';
+
 
 export async function bootstrap() {
   const fastifyAdapter = new FastifyAdapter();
@@ -110,23 +112,25 @@ export async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app as any, config);
 
-  // Swagger docs at /{service_prefix}/api
-  SwaggerModule.setup(`${servicePrefix}/api`, app as any, document, {
-    swaggerOptions: {
-      persistAuthorization: true,
-      tagsSorter: 'alpha',
-      operationsSorter: 'alpha',
-    },
-  });
+  // Setup Swagger JSON endpoint and Scalar UI
+  SwaggerModule.setup('api', app as any, document);
+  app.use(
+    '/reference',
+    apiReference({
+      url: '/api-json',
+      withFastify: true,
+    }),
+  );
 
   const port = +configService.get<string>('PORT', '3000') || 3000;
   await app.listen(port, '0.0.0.0');
 
   console.log(`🚀 ${servicePrefix.toUpperCase()} service running on port ${port}`);
-  console.log(`📚 Swagger docs: http://localhost:${port}/${servicePrefix}/api`);
+  console.log(`📖 Scalar reference: http://localhost:${port}/reference`);
+  console.log(`📚 Swagger JSON: http://localhost:${port}/api-json`);
 }
 
 // Only run bootstrap when this file is executed directly, not when imported for testing
-if (require.main === module) {
+if (require.main === module || process.argv[1].endsWith('/main.js')) {
   bootstrap();
 }

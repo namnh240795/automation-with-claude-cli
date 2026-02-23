@@ -1,0 +1,93 @@
+# Project Dependency Installation Rules
+
+This is a **pnpm workspace monorepo** with NestJS applications. When installing dependencies, follow these rules:
+
+## Installation Location Rules
+
+### Install at Workspace Root (packages shared across projects)
+- Use for: **Build tools**, **dev tools**, **bundlers** (rspack, webpack, etc.)
+- Command: `pnpm add -D -w <package>`
+- Examples: @rspack/core, @rspack/cli, run-script-webpack-plugin, rimraf
+
+### Install in apps/api (app-specific dependencies)
+- Use for: **Application runtime dependencies**, **app-specific dev deps**
+- Command: `pnpm add --filter api <package>` (from root) OR `pnpm add <package>` (from apps/api directory)
+- Examples: @nestjs/*, @fastify/*, business logic packages
+
+## Quick Reference
+
+```bash
+# Build tools / shared dev deps (rspack, webpack, etc.)
+pnpm add -D -w <package>
+
+# App-specific dependencies
+pnpm add --filter api <package>
+
+# Or navigate to apps/api first, then:
+cd apps/api && pnpm add <package>
+```
+
+## Common Mistakes to Avoid
+
+1. **Don't** install build tools (rspack, webpack) in apps/api - they won't be found
+2. **Don't** use `pnpm add` at root without `-w` or `--filter` - it will fail
+3. **Don't** install shared runtime deps at root unless needed by multiple workspaces
+
+## Current Setup
+
+- **Bundler**: Rspack (installed at workspace root)
+- **API Location**: apps/api
+- **Libs Location**: libs/*
+- **Build Script**: `pnpm run start:dev` (uses rspack)
+
+## Before Installing Dependencies
+
+1. Check if the package is a:
+   - Build tool/dev tool → use `-w` flag
+   - Runtime dependency for the app → use `--filter api`
+   - Shared library used by multiple apps → use `-w` flag
+
+2. Verify the package isn't already installed in the correct location
+
+## IMPORTANT: Keep rspack.config.js in Sync
+
+**ALWAYS update `rspack.config.js` when making these changes:**
+
+### 1. Adding a New Library to the Monorepo
+When you create a new library (e.g., `libs/new-lib`), you MUST:
+1. Add path aliases in `tsconfig.json`
+2. **Also add the same aliases in `rspack.config.js` resolve.alias section**
+
+Example for `libs/new-lib`:
+```javascript
+// In rspack.config.js resolve.alias:
+'@app/new-lib': path.resolve(__dirname, 'libs/new-lib/src'),
+'@app/new-lib/*': path.resolve(__dirname, 'libs/new-lib/src/*'),
+```
+
+### 2. Adding NestJS-related Packages
+When installing packages that use dynamic require (NestJS modules, Fastify plugins, etc.), add them to the `externals` array in `rspack.config.js`:
+
+Packages that typically need to be externalized:
+- `@nestjs/*` packages
+- `@fastify/*` packages
+- `class-validator`, `class-transformer`
+- Database drivers (ioredis, mongodb, etc.)
+- Any package with optional dependencies
+
+### 3. Reference - Current Path Aliases
+Always check and mirror these in `rspack.config.js`:
+```javascript
+// In tsconfig.json paths → Must also exist in rspack.config.js
+"@app/common" → libs/common/src
+"@app/app-logger" → libs/app-logger/src
+"@app/auth-utilities" → libs/auth-utilities/src
+"@app/caching" → libs/caching/src
+"@app/health" → libs/health/src
+```
+
+### Checklist After Making Changes
+- [ ] Added/updated path alias in `tsconfig.json`
+- [ ] Added/updated SAME path alias in `rspack.config.js`
+- [ ] Added NestJS/Fastify packages to `rspack.config.js` externals
+- [ ] Restarted dev server to apply changes
