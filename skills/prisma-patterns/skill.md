@@ -7,7 +7,7 @@ A skill for database operations using Prisma ORM following traceability-backend 
 For Prisma setup and installation, see **prisma-integration**.
 
 This skill focuses on **query patterns and operations**. For setup instructions:
-- Schema configuration
+- Schema configuration (with `prisma.config.ts`)
 - PrismaService creation
 - Migration workflow
 - Environment setup

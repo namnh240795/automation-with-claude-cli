@@ -315,3 +315,53 @@ import { PrismaService } from '../path/to/prisma.service';
 - **auth-guard-patterns** - Authentication and authorization
 - **prisma-patterns** - Database operations with Prisma
 - **dto-validation** - DTO creation and validation
+- **nestjs-helper** - CLI commands and generation
+
+## CLI Generation Commands
+
+### Generate Feature Module
+
+```bash
+# Generate complete feature structure
+nest g module feature
+nest g controller feature
+nest g service feature
+
+# Or use resource command
+nest g resource feature
+```
+
+### Generate Individual Components
+
+```bash
+# Module
+nest g mo feature
+
+# Controller
+nest g co feature --no-spec
+
+# Service
+nest g s feature --no-spec
+
+# Guard
+nest g gu auth
+
+# Pipe
+nest g pi validation
+
+# Interceptor
+nest g itc logging
+```
+
+### Monorepo Commands
+
+```bash
+# Generate library
+nest g lib shared
+
+# Generate sub-app
+nest g app auth-service
+
+# Generate in specific project
+nest g mo feature --project backend
+```

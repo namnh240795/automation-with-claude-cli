@@ -8,6 +8,9 @@ A skill for integrating Prisma ORM into NestJS applications following traceabili
 # Install Prisma CLI and client
 npm install prisma @prisma/client
 
+# Install dotenv (required)
+npm install --save-dev dotenv
+
 # Initialize Prisma
 npx prisma init
 
@@ -16,12 +19,91 @@ npm install prisma
 # Schema will use custom package name
 ```
 
-## Schema Configuration (schema.prisma)
+## Prisma Configuration
 
-### Standard Setup
+### prisma.config.ts
+
+```typescript
+// prisma.config.ts
+import "dotenv/config";
+import { defineConfig, env } from "prisma/config";
+
+export default defineConfig({
+  schema: "prisma/schema.prisma",
+  migrations: {
+    path: "prisma/migrations",
+    seed: "tsx prisma/seed.ts",
+  },
+  datasource: {
+    url: env("DATABASE_URL"),
+  },
+});
+```
+
+### Alternative: Using `satisfies` Operator
+
+```typescript
+// prisma.config.ts
+import "dotenv/config";
+import type { PrismaConfig } from "prisma";
+import { env } from "prisma/config";
+
+export default {
+  schema: "prisma/schema.prisma",
+  migrations: {
+    path: "prisma/migrations",
+    seed: "tsx prisma/seed.ts",
+  },
+  datasource: {
+    url: env("DATABASE_URL"),
+  },
+} satisfies PrismaConfig;
+```
+
+### Configuration Options
+
+| Option | Type | Required | Default | Description |
+|--------|------|----------|---------|-------------|
+| `schema` | `string` | No | `./prisma/schema.prisma`, `./schema.prisma` | Path to schema file or folder |
+| `migrations.path` | `string` | No | none | Migration files directory |
+| `migrations.seed` | `string` | No | none | Seed command for `npx prisma db seed` |
+| `datasource.url` | `string` | Yes | `''` | Database connection URL |
+| `datasource.shadowDatabaseUrl` | `string` | No | none | Shadow database URL for cloud DBs |
+| `views.path` | `string` | No | none | SQL view definitions directory |
+| `experimental.externalTables` | `boolean` | No | `false` | Enable external tables feature |
+
+### schema.prisma
 
 ```prisma
 // apps/backend/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Example model with audit fields
+model user {
+  id         String    @id @default(cuid())
+  username   String    @unique
+  email      String    @unique
+  password   String
+  full_name  String?
+  is_active  Boolean   @default(true)
+  created_at DateTime  @default(now())
+  created_by String
+  updated_at DateTime  @updatedAt
+  updated_by String
+  deleted_at DateTime?
+  deleted_by String?
+
+  @@index([email])
+  @@index([is_active])
+}
+```
 
 generator client {
   provider = "prisma-client-js"
@@ -52,7 +134,7 @@ model user {
 }
 ```
 
-### Custom Package Name (like traceability-backend)
+### Custom Package Name
 
 ```prisma
 generator client {
@@ -144,6 +226,10 @@ export class AppModule {}
 ```
 
 ## Environment Configuration
+
+`DATABASE_URL` is referenced in `prisma.config.ts` via `env("DATABASE_URL")`.
+
+### .env
 
 ### .env
 
@@ -365,16 +451,17 @@ async findWithOrg(id: string) {
 ## Migration Workflow
 
 ```bash
-# 1. Create migration
+# 1. Create/update prisma.config.ts (if not exists)
+# 2. Create migration
 npx prisma migrate dev --name init
 
-# 2. Generate client
+# 3. Generate client
 npx prisma generate
 
-# 3. View database in Prisma Studio
+# 4. View database in Prisma Studio
 npx prisma studio
 
-# 4. Deploy migrations to production
+# 5. Deploy migrations to production
 npx prisma migrate deploy
 ```
 
@@ -446,3 +533,18 @@ describe('UserService', () => {
   });
 });
 ```
+
+## Helper Functions Reference
+
+| Function | Description |
+|----------|-------------|
+| `defineConfig(config)` | Type-safe config builder helper |
+| `env(varName)` | Read environment variable |
+
+## File Naming Options
+
+Prisma Config files can be named as:
+- `prisma.config.*`
+- `.config/prisma.*`
+
+Supported extensions: `js`, `ts`, `mjs`, `cjs`, `mts`, `cts`
