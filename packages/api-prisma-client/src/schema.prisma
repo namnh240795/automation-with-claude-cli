@@ -11,117 +11,117 @@ datasource db {
 }
 
 // User profile model (references auth service user)
-model UserProfile {
-  id          String    @id @default(uuid())
-  userId      String    @unique @map("user_id")
-  bio         String?   @db.Text
-  avatarUrl   String?   @map("avatar_url")
-  dateOfBirth DateTime? @map("date_of_birth")
-  phoneNumber String?   @map("phone_number")
-  location    String?
-  website     String?
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt @map("updated_at")
+model user_profile {
+  id            String    @id @default(uuid())
+  user_id       String    @unique
+  bio           String?   @db.Text
+  avatar_url    String?
+  date_of_birth DateTime?
+  phone_number  String?
+  location      String?
+  website       String?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
 
   // Relations
-  posts    Post[]
-  comments Comment[]
+  posts    post[]
+  comments comment[]
 
-  @@map("user_profiles")
+  @@map("user_profile")
 }
 
 // Post model
-model Post {
-  id        String   @id @default(uuid())
-  title     String
-  slug      String   @unique
-  content   String   @db.Text
-  published Boolean  @default(false)
-  authorId  String   @map("author_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+model post {
+  id         String   @id @default(uuid())
+  title      String
+  slug       String   @unique
+  content    String   @db.Text
+  published  Boolean  @default(false)
+  author_id  String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   // Relations
-  author     UserProfile    @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  comments   Comment[]
-  categories PostCategory[]
-  tags       PostTag[]
+  author     user_profile    @relation(fields: [author_id], references: [id], onDelete: Cascade)
+  comments   comment[]
+  categories post_category[]
+  tags       post_tag[]
 
-  @@index([authorId])
+  @@index([author_id])
   @@index([slug])
-  @@map("posts")
+  @@map("post")
 }
 
 // Comment model
-model Comment {
-  id        String   @id @default(uuid())
-  content   String
-  postId    String   @map("post_id")
-  authorId  String   @map("author_id")
-  parentId  String?  @map("parent_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+model comment {
+  id         String   @id @default(uuid())
+  content    String
+  post_id    String
+  author_id  String
+  parent_id  String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   // Relations
-  post    Post        @relation(fields: [postId], references: [id], onDelete: Cascade)
-  author  UserProfile @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  parent  Comment?    @relation("CommentToComment", fields: [parentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  replies Comment[]   @relation("CommentToComment")
+  post    post         @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  author  user_profile @relation(fields: [author_id], references: [id], onDelete: Cascade)
+  parent  comment?     @relation("CommentToComment", fields: [parent_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  replies comment[]    @relation("CommentToComment")
 
-  @@index([postId])
-  @@index([authorId])
-  @@index([parentId])
-  @@map("comments")
+  @@index([post_id])
+  @@index([author_id])
+  @@index([parent_id])
+  @@map("comment")
 }
 
 // Category model
-model Category {
+model category {
   id          String   @id @default(uuid())
   name        String   @unique
   slug        String   @unique
   description String?
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
   // Relations
-  posts PostCategory[]
+  posts post_category[]
 
-  @@map("categories")
+  @@map("category")
 }
 
 // Post-Category many-to-many relation
-model PostCategory {
-  postId     String @map("post_id")
-  categoryId String @map("category_id")
+model post_category {
+  post_id     String
+  category_id String
 
-  post     Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  post     post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  category category @relation(fields: [category_id], references: [id], onDelete: Cascade)
 
-  @@id([postId, categoryId])
-  @@map("post_categories")
+  @@id([post_id, category_id])
+  @@map("post_category")
 }
 
 // Tag model
-model Tag {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  slug      String   @unique
-  createdAt DateTime @default(now()) @map("created_at")
+model tag {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  slug       String   @unique
+  created_at DateTime @default(now())
 
   // Relations
-  posts PostTag[]
+  posts post_tag[]
 
-  @@map("tags")
+  @@map("tag")
 }
 
 // Post-Tag many-to-many relation
-model PostTag {
-  postId String @map("post_id")
-  tagId  String @map("tag_id")
+model post_tag {
+  post_id String
+  tag_id  String
 
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-  tag  Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  post post @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  tag  tag  @relation(fields: [tag_id], references: [id], onDelete: Cascade)
 
-  @@id([postId, tagId])
-  @@map("post_tags")
+  @@id([post_id, tag_id])
+  @@map("post_tag")
 }

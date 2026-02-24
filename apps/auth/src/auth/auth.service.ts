@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { LogActivity } from '@app/app-logger';
 import { PrismaService } from '../prisma/prisma.service';
 import { SignUpDto, SignInDto } from '../dto';
 import { UserResponseDto, TokenResponseDto } from '../dto';
@@ -17,8 +18,9 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
+  @LogActivity()
   async signUp(signUpDto: SignUpDto): Promise<UserResponseDto> {
-    const { email, password, firstName, lastName } = signUpDto;
+    const { email, password, first_name, last_name } = signUpDto;
 
     // Check if user already exists
     const existingUser = await this.prisma.user.findUnique({
@@ -36,27 +38,29 @@ export class AuthService {
     const user = await this.prisma.user.create({
       data: {
         email,
-        passwordHash,
-        firstName,
-        lastName,
-        isActive: true,
-        emailVerified: false,
+        password_hash: passwordHash,
+        first_name,
+        last_name,
+        is_active: true,
+        email_verified: false,
       },
       select: {
         id: true,
         email: true,
-        firstName: true,
-        lastName: true,
-        isActive: true,
-        emailVerified: true,
-        createdAt: true,
-        updatedAt: true,
+        first_name: true,
+        last_name: true,
+        is_active: true,
+        email_verified: true,
+        created_at: true,
+        updated_at: true,
       },
     });
 
+    // Return DTO with snake_case properties
     return user;
   }
 
+  @LogActivity()
   async signIn(signInDto: SignInDto): Promise<TokenResponseDto> {
     const { email, password } = signInDto;
 
@@ -70,14 +74,14 @@ export class AuthService {
     }
 
     // Verify password
-    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+    const isPasswordValid = await bcrypt.compare(password, user.password_hash);
 
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
     // Check if user is active
-    if (!user.isActive) {
+    if (!user.is_active) {
       throw new UnauthorizedException('User account is inactive');
     }
 
@@ -93,12 +97,12 @@ export class AuthService {
       select: {
         id: true,
         email: true,
-        firstName: true,
-        lastName: true,
-        isActive: true,
-        emailVerified: true,
-        createdAt: true,
-        updatedAt: true,
+        first_name: true,
+        last_name: true,
+        is_active: true,
+        email_verified: true,
+        created_at: true,
+        updated_at: true,
       },
     });
 
@@ -131,19 +135,19 @@ export class AuthService {
       refreshTokenExpiry.getDate() + 7, // 7 days from now
     );
 
-    await this.prisma.refreshToken.create({
+    await this.prisma.refresh_token.create({
       data: {
         token: refreshToken,
-        userId,
-        expiresAt: refreshTokenExpiry,
+        user_id: userId,
+        expires_at: refreshTokenExpiry,
       },
     });
 
     return {
-      accessToken,
-      refreshToken,
-      tokenType: 'Bearer',
-      expiresIn: 3600, // 1 hour in seconds
+      access_token: accessToken,
+      refresh_token: refreshToken,
+      token_type: 'Bearer',
+      expires_in: 3600, // 1 hour in seconds
     };
   }
 
@@ -155,29 +159,29 @@ export class AuthService {
       });
 
       // Check if refresh token exists in database
-      const storedToken = await this.prisma.refreshToken.findUnique({
+      const storedToken = await this.prisma.refresh_token.findUnique({
         where: { token: refreshToken },
         include: { user: true },
       });
 
-      if (!storedToken || storedToken.revokedAt) {
+      if (!storedToken || storedToken.revoked_at) {
         throw new UnauthorizedException('Invalid refresh token');
       }
 
       // Check if token is expired
-      if (storedToken.expiresAt < new Date()) {
+      if (storedToken.expires_at < new Date()) {
         throw new UnauthorizedException('Refresh token expired');
       }
 
       // Check if user is active
-      if (!storedToken.user.isActive) {
+      if (!storedToken.user.is_active) {
         throw new UnauthorizedException('User account is inactive');
       }
 
       // Revoke old refresh token
-      await this.prisma.refreshToken.update({
+      await this.prisma.refresh_token.update({
         where: { id: storedToken.id },
-        data: { revokedAt: new Date() },
+        data: { revoked_at: new Date() },
       });
 
       // Generate new tokens
@@ -188,9 +192,9 @@ export class AuthService {
   }
 
   async logout(refreshToken: string): Promise<void> {
-    await this.prisma.refreshToken.updateMany({
+    await this.prisma.refresh_token.updateMany({
       where: { token: refreshToken },
-      data: { revokedAt: new Date() },
+      data: { revoked_at: new Date() },
     });
   }
 }

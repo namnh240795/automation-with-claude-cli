@@ -4,32 +4,32 @@ const path = require('path');
 
 /** @type {import('@rspack/cli').Configuration} */
 const config = {
-  context: path.resolve(__dirname, 'apps/auth'),
+  context: path.resolve(__dirname),
   target: 'node',
   mode: 'development',
   entry: {
     main: ['./src/main.ts'],
   },
   output: {
-    path: path.resolve(__dirname, 'apps/auth/dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     clean: true,
   },
   resolve: {
     extensions: ['...', '.ts', '.tsx', '.jsx', '.js'],
     alias: {
-      '@app/common': path.resolve(__dirname, 'libs/common/src'),
-      '@app/common/*': path.resolve(__dirname, 'libs/common/src/*'),
-      '@app/app-logger': path.resolve(__dirname, 'libs/app-logger/src'),
-      '@app/app-logger/*': path.resolve(__dirname, 'libs/app-logger/src/*'),
-      '@app/auth-utilities': path.resolve(__dirname, 'libs/auth-utilities/src'),
-      '@app/auth-utilities/*': path.resolve(__dirname, 'libs/auth-utilities/src/*'),
-      '@app/caching': path.resolve(__dirname, 'libs/caching/src'),
-      '@app/caching/*': path.resolve(__dirname, 'libs/caching/src/*'),
-      '@app/health': path.resolve(__dirname, 'libs/health/src'),
-      '@app/health/*': path.resolve(__dirname, 'libs/health/src/*'),
-      '@auth/prisma-client': path.resolve(__dirname, 'packages/auth-prisma-client/src'),
-      '@auth/prisma-client/*': path.resolve(__dirname, 'packages/auth-prisma-client/src/*'),
+      '@app/common': path.resolve(__dirname, '../../libs/common/src'),
+      '@app/common/*': path.resolve(__dirname, '../../libs/common/src/*'),
+      '@app/app-logger': path.resolve(__dirname, '../../libs/app-logger/src'),
+      '@app/app-logger/*': path.resolve(__dirname, '../../libs/app-logger/src/*'),
+      '@app/auth-utilities': path.resolve(__dirname, '../../libs/auth-utilities/src'),
+      '@app/auth-utilities/*': path.resolve(__dirname, '../../libs/auth-utilities/src/*'),
+      '@app/caching': path.resolve(__dirname, '../../libs/caching/src'),
+      '@app/caching/*': path.resolve(__dirname, '../../libs/caching/src/*'),
+      '@app/health': path.resolve(__dirname, '../../libs/health/src'),
+      '@app/health/*': path.resolve(__dirname, '../../libs/health/src/*'),
+      '@auth/prisma-client': path.resolve(__dirname, '../../packages/auth-prisma-client/src'),
+      '@auth/prisma-client/*': path.resolve(__dirname, '../../packages/auth-prisma-client/src/*'),
     },
   },
   module: {
@@ -63,8 +63,7 @@ const config = {
     !process.env.BUILD &&
       new RunScriptWebpackPlugin({
         name: 'main.js',
-        autoRestart: true,
-        nodeArgs: ['--inspect'],
+        autoRestart: false,
       }),
   ].filter(Boolean),
   devServer: {

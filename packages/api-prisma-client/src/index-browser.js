@@ -120,17 +120,17 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UserProfileScalarFieldEnum = {
+exports.Prisma.User_profileScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  user_id: 'user_id',
   bio: 'bio',
-  avatarUrl: 'avatarUrl',
-  dateOfBirth: 'dateOfBirth',
-  phoneNumber: 'phoneNumber',
+  avatar_url: 'avatar_url',
+  date_of_birth: 'date_of_birth',
+  phone_number: 'phone_number',
   location: 'location',
   website: 'website',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.PostScalarFieldEnum = {
@@ -139,19 +139,19 @@ exports.Prisma.PostScalarFieldEnum = {
   slug: 'slug',
   content: 'content',
   published: 'published',
-  authorId: 'authorId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  author_id: 'author_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.CommentScalarFieldEnum = {
   id: 'id',
   content: 'content',
-  postId: 'postId',
-  authorId: 'authorId',
-  parentId: 'parentId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  post_id: 'post_id',
+  author_id: 'author_id',
+  parent_id: 'parent_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.CategoryScalarFieldEnum = {
@@ -159,25 +159,25 @@ exports.Prisma.CategoryScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
   description: 'description',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
-exports.Prisma.PostCategoryScalarFieldEnum = {
-  postId: 'postId',
-  categoryId: 'categoryId'
+exports.Prisma.Post_categoryScalarFieldEnum = {
+  post_id: 'post_id',
+  category_id: 'category_id'
 };
 
 exports.Prisma.TagScalarFieldEnum = {
   id: 'id',
   name: 'name',
   slug: 'slug',
-  createdAt: 'createdAt'
+  created_at: 'created_at'
 };
 
-exports.Prisma.PostTagScalarFieldEnum = {
-  postId: 'postId',
-  tagId: 'tagId'
+exports.Prisma.Post_tagScalarFieldEnum = {
+  post_id: 'post_id',
+  tag_id: 'tag_id'
 };
 
 exports.Prisma.SortOrder = {
@@ -197,13 +197,13 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  UserProfile: 'UserProfile',
-  Post: 'Post',
-  Comment: 'Comment',
-  Category: 'Category',
-  PostCategory: 'PostCategory',
-  Tag: 'Tag',
-  PostTag: 'PostTag'
+  user_profile: 'user_profile',
+  post: 'post',
+  comment: 'comment',
+  category: 'category',
+  post_category: 'post_category',
+  tag: 'tag',
+  post_tag: 'post_tag'
 };
 
 /**

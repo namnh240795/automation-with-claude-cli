@@ -123,54 +123,54 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  passwordHash: 'passwordHash',
-  firstName: 'firstName',
-  lastName: 'lastName',
-  isActive: 'isActive',
-  emailVerified: 'emailVerified',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  password_hash: 'password_hash',
+  first_name: 'first_name',
+  last_name: 'last_name',
+  is_active: 'is_active',
+  email_verified: 'email_verified',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
-exports.Prisma.OAuthClientScalarFieldEnum = {
+exports.Prisma.Oauth_clientScalarFieldEnum = {
   id: 'id',
-  clientId: 'clientId',
-  clientSecret: 'clientSecret',
+  client_id: 'client_id',
+  client_secret: 'client_secret',
   name: 'name',
-  redirectUris: 'redirectUris',
+  redirect_uris: 'redirect_uris',
   scopes: 'scopes',
-  grantTypes: 'grantTypes',
-  isActive: 'isActive',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  grant_types: 'grant_types',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
-exports.Prisma.OAuthTokenScalarFieldEnum = {
+exports.Prisma.Oauth_tokenScalarFieldEnum = {
   id: 'id',
   token: 'token',
-  userId: 'userId',
-  clientId: 'clientId',
+  user_id: 'user_id',
+  client_id: 'client_id',
   scope: 'scope',
-  expiresAt: 'expiresAt',
-  createdAt: 'createdAt'
+  expires_at: 'expires_at',
+  created_at: 'created_at'
 };
 
-exports.Prisma.RefreshTokenScalarFieldEnum = {
+exports.Prisma.Refresh_tokenScalarFieldEnum = {
   id: 'id',
   token: 'token',
-  userId: 'userId',
-  expiresAt: 'expiresAt',
-  revokedAt: 'revokedAt',
-  createdAt: 'createdAt'
+  user_id: 'user_id',
+  expires_at: 'expires_at',
+  revoked_at: 'revoked_at',
+  created_at: 'created_at'
 };
 
-exports.Prisma.VerificationTokenScalarFieldEnum = {
+exports.Prisma.Verification_tokenScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  user_id: 'user_id',
   token: 'token',
   type: 'type',
-  expiresAt: 'expiresAt',
-  createdAt: 'createdAt'
+  expires_at: 'expires_at',
+  created_at: 'created_at'
 };
 
 exports.Prisma.SortOrder = {
@@ -190,11 +190,11 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User',
-  OAuthClient: 'OAuthClient',
-  OAuthToken: 'OAuthToken',
-  RefreshToken: 'RefreshToken',
-  VerificationToken: 'VerificationToken'
+  user: 'user',
+  oauth_client: 'oauth_client',
+  oauth_token: 'oauth_token',
+  refresh_token: 'refresh_token',
+  verification_token: 'verification_token'
 };
 
 /**

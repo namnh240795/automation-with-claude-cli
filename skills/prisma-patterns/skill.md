@@ -2,6 +2,76 @@
 
 A skill for database operations using Prisma ORM following traceability-backend conventions.
 
+## Naming Conventions
+
+**IMPORTANT:** This project uses specific naming conventions that differ from default Prisma behavior.
+
+### Model and Field Names
+
+- **Model names**: Use lowercase `snake_case` (e.g., `model user`, `model user_profile`, `model refresh_token`)
+- **Field names**: Use `snake_case` (e.g., `password_hash`, `first_name`, `created_at`)
+- **Table names**: Use **singular** form (not plural), explicitly set with `@@map()`
+
+```prisma
+// Example: Correct schema
+model user {
+  id                String   @id @default(uuid())
+  email             String   @unique
+  password_hash     String
+  first_name        String?
+  is_active         Boolean  @default(true)
+  created_at        DateTime @default(now())
+
+  @@map("user")  // Singular table name, not "users"
+}
+
+model user_profile {
+  id             String   @id @default(uuid())
+  user_id        String   @unique
+  avatar_url     String?
+
+  @@map("user_profile")  // Singular, not "user_profiles"
+}
+```
+
+### DTO and TypeScript Variable Conventions
+
+- **DTO properties**: Use `snake_case` (e.g., `first_name`, `access_token`, `is_active`)
+- **TypeScript variables**: Use `camelCase` (e.g., `passwordHash`, `existingUser`)
+
+```typescript
+// DTO with snake_case properties
+export class UserResponseDto {
+  id: string;
+  email: string;
+  first_name?: string;     // snake_case
+  is_active: boolean;      // snake_case
+  created_at: Date;        // snake_case
+}
+
+// Service using camelCase variables with snake_case fields
+async signUp(signUpDto: SignUpDto): Promise<UserResponseDto> {
+  const passwordHash = await bcrypt.hash(password, 10); // camelCase variable
+
+  const user = await this.prisma.user.create({
+    data: {
+      password_hash: passwordHash,  // snake_case DB field
+      first_name,
+      is_active: true,
+    },
+  });
+
+  return user; // Returns DTO with snake_case properties
+}
+```
+
+### Why These Conventions?
+
+1. **Singular table names**: More explicit, avoids pluralization confusion, matches the model name exactly
+2. **snake_case in database**: Standard SQL convention, better PostgreSQL compatibility
+3. **snake_case in DTOs**: Consistent with database fields, API responses
+4. **camelCase variables**: Standard JavaScript/TypeScript convention
+
 ## Critical Rule: ALWAYS Use Prisma Commands for Migrations
 
 **NEVER manually edit the database schema. ALWAYS use Prisma migration commands.**

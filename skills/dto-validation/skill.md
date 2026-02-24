@@ -2,6 +2,39 @@
 
 A skill for creating Data Transfer Objects and validation following traceability-backend API conventions.
 
+## Naming Convention: snake_case Properties
+
+**IMPORTANT:** All DTO properties use `snake_case` naming (not camelCase).
+
+This convention ensures consistency with:
+- Database field names (also `snake_case`)
+- API response/request format
+- Frontend integration
+
+```typescript
+// Correct - snake_case properties
+export class UserResponseDto {
+  id: string;
+  email: string;
+  first_name?: string;     // ✅ snake_case
+  last_name?: string;      // ✅ snake_case
+  is_active: boolean;      // ✅ snake_case
+  email_verified: boolean; // ✅ snake_case
+  created_at: Date;        // ✅ snake_case
+  updated_at: Date;        // ✅ snake_case
+}
+
+// Incorrect - camelCase properties
+export class UserResponseDto {
+  firstName?: string;      // ❌ Don't use camelCase
+  isActive: boolean;       // ❌ Don't use camelCase
+  emailVerified: boolean;  // ❌ Don't use camelCase
+  createdAt: Date;         // ❌ Don't use camelCase
+}
+```
+
+**Note:** TypeScript variables in service code still use `camelCase` (standard JS convention), but DTO properties are `snake_case`.
+
 ## DTO Structure
 
 Place DTOs in `dto/` subfolder within each feature:

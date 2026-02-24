@@ -28,6 +28,56 @@ libs/
 └── [other-libs]         # Additional shared libraries
 ```
 
+## Naming Conventions
+
+This project follows these naming conventions:
+
+### DTO Properties
+- **Use `snake_case`** for all DTO properties (API response/request)
+- Matches database field naming for consistency
+- Examples: `first_name`, `access_token`, `is_active`, `created_at`
+
+```typescript
+// Request DTO
+export class SignUpDto {
+  email: string;
+  password: string;
+  first_name?: string;   // snake_case
+  last_name?: string;    // snake_case
+}
+
+// Response DTO
+export class UserResponseDto {
+  id: string;
+  email: string;
+  first_name?: string;     // snake_case
+  last_name?: string;      // snake_case
+  is_active: boolean;      // snake_case
+  email_verified: boolean; // snake_case
+  created_at: Date;        // snake_case
+  updated_at: Date;        // snake_case
+}
+```
+
+### TypeScript Variables
+- **Use `camelCase`** for all variables and parameters (standard JS convention)
+- Examples: `passwordHash`, `existingUser`, `storedToken`
+
+```typescript
+async signUp(signUpDto: SignUpDto): Promise<UserResponseDto> {
+  const passwordHash = await bcrypt.hash(password, 10); // camelCase
+  const existingUser = await this.prisma.user.findUnique({ where: { email } }); // camelCase
+
+  return user; // DTO has snake_case properties
+}
+```
+
+### Database Fields (Prisma)
+- **Use `snake_case`** for all database fields
+- **Use singular table names** (set explicitly with `@@map()`)
+
+See **prisma-patterns** skill for database naming conventions.
+
 ## Core Patterns
 
 ### 1. Fastify Adapter Setup

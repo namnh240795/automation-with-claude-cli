@@ -14,30 +14,30 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model User
+ * Model user
  * 
  */
-export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+export type user = $Result.DefaultSelection<Prisma.$userPayload>
 /**
- * Model OAuthClient
+ * Model oauth_client
  * 
  */
-export type OAuthClient = $Result.DefaultSelection<Prisma.$OAuthClientPayload>
+export type oauth_client = $Result.DefaultSelection<Prisma.$oauth_clientPayload>
 /**
- * Model OAuthToken
+ * Model oauth_token
  * 
  */
-export type OAuthToken = $Result.DefaultSelection<Prisma.$OAuthTokenPayload>
+export type oauth_token = $Result.DefaultSelection<Prisma.$oauth_tokenPayload>
 /**
- * Model RefreshToken
+ * Model refresh_token
  * 
  */
-export type RefreshToken = $Result.DefaultSelection<Prisma.$RefreshTokenPayload>
+export type refresh_token = $Result.DefaultSelection<Prisma.$refresh_tokenPayload>
 /**
- * Model VerificationToken
+ * Model verification_token
  * 
  */
-export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTokenPayload>
+export type verification_token = $Result.DefaultSelection<Prisma.$verification_tokenPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -157,54 +157,54 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.user`: Exposes CRUD operations for the **User** model.
+   * `prisma.user`: Exposes CRUD operations for the **user** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Users
     * const users = await prisma.user.findMany()
     * ```
     */
-  get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+  get user(): Prisma.userDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.oAuthClient`: Exposes CRUD operations for the **OAuthClient** model.
+   * `prisma.oauth_client`: Exposes CRUD operations for the **oauth_client** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more OAuthClients
-    * const oAuthClients = await prisma.oAuthClient.findMany()
+    * // Fetch zero or more Oauth_clients
+    * const oauth_clients = await prisma.oauth_client.findMany()
     * ```
     */
-  get oAuthClient(): Prisma.OAuthClientDelegate<ExtArgs, ClientOptions>;
+  get oauth_client(): Prisma.oauth_clientDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.oAuthToken`: Exposes CRUD operations for the **OAuthToken** model.
+   * `prisma.oauth_token`: Exposes CRUD operations for the **oauth_token** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more OAuthTokens
-    * const oAuthTokens = await prisma.oAuthToken.findMany()
+    * // Fetch zero or more Oauth_tokens
+    * const oauth_tokens = await prisma.oauth_token.findMany()
     * ```
     */
-  get oAuthToken(): Prisma.OAuthTokenDelegate<ExtArgs, ClientOptions>;
+  get oauth_token(): Prisma.oauth_tokenDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.refreshToken`: Exposes CRUD operations for the **RefreshToken** model.
+   * `prisma.refresh_token`: Exposes CRUD operations for the **refresh_token** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more RefreshTokens
-    * const refreshTokens = await prisma.refreshToken.findMany()
+    * // Fetch zero or more Refresh_tokens
+    * const refresh_tokens = await prisma.refresh_token.findMany()
     * ```
     */
-  get refreshToken(): Prisma.RefreshTokenDelegate<ExtArgs, ClientOptions>;
+  get refresh_token(): Prisma.refresh_tokenDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.verificationToken`: Exposes CRUD operations for the **VerificationToken** model.
+   * `prisma.verification_token`: Exposes CRUD operations for the **verification_token** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more VerificationTokens
-    * const verificationTokens = await prisma.verificationToken.findMany()
+    * // Fetch zero or more Verification_tokens
+    * const verification_tokens = await prisma.verification_token.findMany()
     * ```
     */
-  get verificationToken(): Prisma.VerificationTokenDelegate<ExtArgs, ClientOptions>;
+  get verification_token(): Prisma.verification_tokenDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -639,11 +639,11 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    User: 'User',
-    OAuthClient: 'OAuthClient',
-    OAuthToken: 'OAuthToken',
-    RefreshToken: 'RefreshToken',
-    VerificationToken: 'VerificationToken'
+    user: 'user',
+    oauth_client: 'oauth_client',
+    oauth_token: 'oauth_token',
+    refresh_token: 'refresh_token',
+    verification_token: 'verification_token'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -659,377 +659,377 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "oAuthClient" | "oAuthToken" | "refreshToken" | "verificationToken"
+      modelProps: "user" | "oauth_client" | "oauth_token" | "refresh_token" | "verification_token"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      User: {
-        payload: Prisma.$UserPayload<ExtArgs>
-        fields: Prisma.UserFieldRefs
+      user: {
+        payload: Prisma.$userPayload<ExtArgs>
+        fields: Prisma.userFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.UserFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+            args: Prisma.userFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.userFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userPayload>
           }
           findFirst: {
-            args: Prisma.UserFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+            args: Prisma.userFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.userFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userPayload>
           }
           findMany: {
-            args: Prisma.UserFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+            args: Prisma.userFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userPayload>[]
           }
           create: {
-            args: Prisma.UserCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.userCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userPayload>
           }
           createMany: {
-            args: Prisma.UserCreateManyArgs<ExtArgs>
+            args: Prisma.userCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+            args: Prisma.userCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userPayload>[]
           }
           delete: {
-            args: Prisma.UserDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.userDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userPayload>
           }
           update: {
-            args: Prisma.UserUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.userUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userPayload>
           }
           deleteMany: {
-            args: Prisma.UserDeleteManyArgs<ExtArgs>
+            args: Prisma.userDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.UserUpdateManyArgs<ExtArgs>
+            args: Prisma.userUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+            args: Prisma.userUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userPayload>[]
           }
           upsert: {
-            args: Prisma.UserUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.userUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userPayload>
           }
           aggregate: {
             args: Prisma.UserAggregateArgs<ExtArgs>
             result: $Utils.Optional<AggregateUser>
           }
           groupBy: {
-            args: Prisma.UserGroupByArgs<ExtArgs>
+            args: Prisma.userGroupByArgs<ExtArgs>
             result: $Utils.Optional<UserGroupByOutputType>[]
           }
           count: {
-            args: Prisma.UserCountArgs<ExtArgs>
+            args: Prisma.userCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
           }
         }
       }
-      OAuthClient: {
-        payload: Prisma.$OAuthClientPayload<ExtArgs>
-        fields: Prisma.OAuthClientFieldRefs
+      oauth_client: {
+        payload: Prisma.$oauth_clientPayload<ExtArgs>
+        fields: Prisma.oauth_clientFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.OAuthClientFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthClientPayload> | null
+            args: Prisma.oauth_clientFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_clientPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.OAuthClientFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthClientPayload>
+            args: Prisma.oauth_clientFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_clientPayload>
           }
           findFirst: {
-            args: Prisma.OAuthClientFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthClientPayload> | null
+            args: Prisma.oauth_clientFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_clientPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.OAuthClientFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthClientPayload>
+            args: Prisma.oauth_clientFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_clientPayload>
           }
           findMany: {
-            args: Prisma.OAuthClientFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthClientPayload>[]
+            args: Prisma.oauth_clientFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_clientPayload>[]
           }
           create: {
-            args: Prisma.OAuthClientCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthClientPayload>
+            args: Prisma.oauth_clientCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_clientPayload>
           }
           createMany: {
-            args: Prisma.OAuthClientCreateManyArgs<ExtArgs>
+            args: Prisma.oauth_clientCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.OAuthClientCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthClientPayload>[]
+            args: Prisma.oauth_clientCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_clientPayload>[]
           }
           delete: {
-            args: Prisma.OAuthClientDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthClientPayload>
+            args: Prisma.oauth_clientDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_clientPayload>
           }
           update: {
-            args: Prisma.OAuthClientUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthClientPayload>
+            args: Prisma.oauth_clientUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_clientPayload>
           }
           deleteMany: {
-            args: Prisma.OAuthClientDeleteManyArgs<ExtArgs>
+            args: Prisma.oauth_clientDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.OAuthClientUpdateManyArgs<ExtArgs>
+            args: Prisma.oauth_clientUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.OAuthClientUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthClientPayload>[]
+            args: Prisma.oauth_clientUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_clientPayload>[]
           }
           upsert: {
-            args: Prisma.OAuthClientUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthClientPayload>
+            args: Prisma.oauth_clientUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_clientPayload>
           }
           aggregate: {
-            args: Prisma.OAuthClientAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateOAuthClient>
+            args: Prisma.Oauth_clientAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOauth_client>
           }
           groupBy: {
-            args: Prisma.OAuthClientGroupByArgs<ExtArgs>
-            result: $Utils.Optional<OAuthClientGroupByOutputType>[]
+            args: Prisma.oauth_clientGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Oauth_clientGroupByOutputType>[]
           }
           count: {
-            args: Prisma.OAuthClientCountArgs<ExtArgs>
-            result: $Utils.Optional<OAuthClientCountAggregateOutputType> | number
+            args: Prisma.oauth_clientCountArgs<ExtArgs>
+            result: $Utils.Optional<Oauth_clientCountAggregateOutputType> | number
           }
         }
       }
-      OAuthToken: {
-        payload: Prisma.$OAuthTokenPayload<ExtArgs>
-        fields: Prisma.OAuthTokenFieldRefs
+      oauth_token: {
+        payload: Prisma.$oauth_tokenPayload<ExtArgs>
+        fields: Prisma.oauth_tokenFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.OAuthTokenFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthTokenPayload> | null
+            args: Prisma.oauth_tokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_tokenPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.OAuthTokenFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthTokenPayload>
+            args: Prisma.oauth_tokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_tokenPayload>
           }
           findFirst: {
-            args: Prisma.OAuthTokenFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthTokenPayload> | null
+            args: Prisma.oauth_tokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_tokenPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.OAuthTokenFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthTokenPayload>
+            args: Prisma.oauth_tokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_tokenPayload>
           }
           findMany: {
-            args: Prisma.OAuthTokenFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthTokenPayload>[]
+            args: Prisma.oauth_tokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_tokenPayload>[]
           }
           create: {
-            args: Prisma.OAuthTokenCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthTokenPayload>
+            args: Prisma.oauth_tokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_tokenPayload>
           }
           createMany: {
-            args: Prisma.OAuthTokenCreateManyArgs<ExtArgs>
+            args: Prisma.oauth_tokenCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.OAuthTokenCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthTokenPayload>[]
+            args: Prisma.oauth_tokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_tokenPayload>[]
           }
           delete: {
-            args: Prisma.OAuthTokenDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthTokenPayload>
+            args: Prisma.oauth_tokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_tokenPayload>
           }
           update: {
-            args: Prisma.OAuthTokenUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthTokenPayload>
+            args: Prisma.oauth_tokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_tokenPayload>
           }
           deleteMany: {
-            args: Prisma.OAuthTokenDeleteManyArgs<ExtArgs>
+            args: Prisma.oauth_tokenDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.OAuthTokenUpdateManyArgs<ExtArgs>
+            args: Prisma.oauth_tokenUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.OAuthTokenUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthTokenPayload>[]
+            args: Prisma.oauth_tokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_tokenPayload>[]
           }
           upsert: {
-            args: Prisma.OAuthTokenUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthTokenPayload>
+            args: Prisma.oauth_tokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$oauth_tokenPayload>
           }
           aggregate: {
-            args: Prisma.OAuthTokenAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateOAuthToken>
+            args: Prisma.Oauth_tokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOauth_token>
           }
           groupBy: {
-            args: Prisma.OAuthTokenGroupByArgs<ExtArgs>
-            result: $Utils.Optional<OAuthTokenGroupByOutputType>[]
+            args: Prisma.oauth_tokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Oauth_tokenGroupByOutputType>[]
           }
           count: {
-            args: Prisma.OAuthTokenCountArgs<ExtArgs>
-            result: $Utils.Optional<OAuthTokenCountAggregateOutputType> | number
+            args: Prisma.oauth_tokenCountArgs<ExtArgs>
+            result: $Utils.Optional<Oauth_tokenCountAggregateOutputType> | number
           }
         }
       }
-      RefreshToken: {
-        payload: Prisma.$RefreshTokenPayload<ExtArgs>
-        fields: Prisma.RefreshTokenFieldRefs
+      refresh_token: {
+        payload: Prisma.$refresh_tokenPayload<ExtArgs>
+        fields: Prisma.refresh_tokenFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.RefreshTokenFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
+            args: Prisma.refresh_tokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$refresh_tokenPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.RefreshTokenFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+            args: Prisma.refresh_tokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$refresh_tokenPayload>
           }
           findFirst: {
-            args: Prisma.RefreshTokenFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
+            args: Prisma.refresh_tokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$refresh_tokenPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.RefreshTokenFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+            args: Prisma.refresh_tokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$refresh_tokenPayload>
           }
           findMany: {
-            args: Prisma.RefreshTokenFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+            args: Prisma.refresh_tokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$refresh_tokenPayload>[]
           }
           create: {
-            args: Prisma.RefreshTokenCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+            args: Prisma.refresh_tokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$refresh_tokenPayload>
           }
           createMany: {
-            args: Prisma.RefreshTokenCreateManyArgs<ExtArgs>
+            args: Prisma.refresh_tokenCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.RefreshTokenCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+            args: Prisma.refresh_tokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$refresh_tokenPayload>[]
           }
           delete: {
-            args: Prisma.RefreshTokenDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+            args: Prisma.refresh_tokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$refresh_tokenPayload>
           }
           update: {
-            args: Prisma.RefreshTokenUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+            args: Prisma.refresh_tokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$refresh_tokenPayload>
           }
           deleteMany: {
-            args: Prisma.RefreshTokenDeleteManyArgs<ExtArgs>
+            args: Prisma.refresh_tokenDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.RefreshTokenUpdateManyArgs<ExtArgs>
+            args: Prisma.refresh_tokenUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.RefreshTokenUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+            args: Prisma.refresh_tokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$refresh_tokenPayload>[]
           }
           upsert: {
-            args: Prisma.RefreshTokenUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+            args: Prisma.refresh_tokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$refresh_tokenPayload>
           }
           aggregate: {
-            args: Prisma.RefreshTokenAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateRefreshToken>
+            args: Prisma.Refresh_tokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRefresh_token>
           }
           groupBy: {
-            args: Prisma.RefreshTokenGroupByArgs<ExtArgs>
-            result: $Utils.Optional<RefreshTokenGroupByOutputType>[]
+            args: Prisma.refresh_tokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Refresh_tokenGroupByOutputType>[]
           }
           count: {
-            args: Prisma.RefreshTokenCountArgs<ExtArgs>
-            result: $Utils.Optional<RefreshTokenCountAggregateOutputType> | number
+            args: Prisma.refresh_tokenCountArgs<ExtArgs>
+            result: $Utils.Optional<Refresh_tokenCountAggregateOutputType> | number
           }
         }
       }
-      VerificationToken: {
-        payload: Prisma.$VerificationTokenPayload<ExtArgs>
-        fields: Prisma.VerificationTokenFieldRefs
+      verification_token: {
+        payload: Prisma.$verification_tokenPayload<ExtArgs>
+        fields: Prisma.verification_tokenFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.VerificationTokenFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationTokenPayload> | null
+            args: Prisma.verification_tokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$verification_tokenPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.VerificationTokenFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationTokenPayload>
+            args: Prisma.verification_tokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$verification_tokenPayload>
           }
           findFirst: {
-            args: Prisma.VerificationTokenFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationTokenPayload> | null
+            args: Prisma.verification_tokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$verification_tokenPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.VerificationTokenFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationTokenPayload>
+            args: Prisma.verification_tokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$verification_tokenPayload>
           }
           findMany: {
-            args: Prisma.VerificationTokenFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationTokenPayload>[]
+            args: Prisma.verification_tokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$verification_tokenPayload>[]
           }
           create: {
-            args: Prisma.VerificationTokenCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationTokenPayload>
+            args: Prisma.verification_tokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$verification_tokenPayload>
           }
           createMany: {
-            args: Prisma.VerificationTokenCreateManyArgs<ExtArgs>
+            args: Prisma.verification_tokenCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.VerificationTokenCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationTokenPayload>[]
+            args: Prisma.verification_tokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$verification_tokenPayload>[]
           }
           delete: {
-            args: Prisma.VerificationTokenDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationTokenPayload>
+            args: Prisma.verification_tokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$verification_tokenPayload>
           }
           update: {
-            args: Prisma.VerificationTokenUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationTokenPayload>
+            args: Prisma.verification_tokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$verification_tokenPayload>
           }
           deleteMany: {
-            args: Prisma.VerificationTokenDeleteManyArgs<ExtArgs>
+            args: Prisma.verification_tokenDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.VerificationTokenUpdateManyArgs<ExtArgs>
+            args: Prisma.verification_tokenUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.VerificationTokenUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationTokenPayload>[]
+            args: Prisma.verification_tokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$verification_tokenPayload>[]
           }
           upsert: {
-            args: Prisma.VerificationTokenUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationTokenPayload>
+            args: Prisma.verification_tokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$verification_tokenPayload>
           }
           aggregate: {
-            args: Prisma.VerificationTokenAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateVerificationToken>
+            args: Prisma.Verification_tokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVerification_token>
           }
           groupBy: {
-            args: Prisma.VerificationTokenGroupByArgs<ExtArgs>
-            result: $Utils.Optional<VerificationTokenGroupByOutputType>[]
+            args: Prisma.verification_tokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Verification_tokenGroupByOutputType>[]
           }
           count: {
-            args: Prisma.VerificationTokenCountArgs<ExtArgs>
-            result: $Utils.Optional<VerificationTokenCountAggregateOutputType> | number
+            args: Prisma.verification_tokenCountArgs<ExtArgs>
+            result: $Utils.Optional<Verification_tokenCountAggregateOutputType> | number
           }
         }
       }
@@ -1141,11 +1141,11 @@ export namespace Prisma {
     comments?: runtime.SqlCommenterPlugin[]
   }
   export type GlobalOmitConfig = {
-    user?: UserOmit
-    oAuthClient?: OAuthClientOmit
-    oAuthToken?: OAuthTokenOmit
-    refreshToken?: RefreshTokenOmit
-    verificationToken?: VerificationTokenOmit
+    user?: userOmit
+    oauth_client?: oauth_clientOmit
+    oauth_token?: oauth_tokenOmit
+    refresh_token?: refresh_tokenOmit
+    verification_token?: verification_tokenOmit
   }
 
   /* Types for Logging */
@@ -1226,13 +1226,13 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    oauthTokens: number
-    refreshTokens: number
+    oauth_tokens: number
+    refresh_tokens: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    oauthTokens?: boolean | UserCountOutputTypeCountOauthTokensArgs
-    refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
+    oauth_tokens?: boolean | UserCountOutputTypeCountOauth_tokensArgs
+    refresh_tokens?: boolean | UserCountOutputTypeCountRefresh_tokensArgs
   }
 
   // Custom InputTypes
@@ -1249,46 +1249,46 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountOauthTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OAuthTokenWhereInput
+  export type UserCountOutputTypeCountOauth_tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: oauth_tokenWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountRefreshTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RefreshTokenWhereInput
+  export type UserCountOutputTypeCountRefresh_tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: refresh_tokenWhereInput
   }
 
 
   /**
-   * Count Type OAuthClientCountOutputType
+   * Count Type Oauth_clientCountOutputType
    */
 
-  export type OAuthClientCountOutputType = {
-    oauthTokens: number
+  export type Oauth_clientCountOutputType = {
+    oauth_tokens: number
   }
 
-  export type OAuthClientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    oauthTokens?: boolean | OAuthClientCountOutputTypeCountOauthTokensArgs
+  export type Oauth_clientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    oauth_tokens?: boolean | Oauth_clientCountOutputTypeCountOauth_tokensArgs
   }
 
   // Custom InputTypes
   /**
-   * OAuthClientCountOutputType without action
+   * Oauth_clientCountOutputType without action
    */
-  export type OAuthClientCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Oauth_clientCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthClientCountOutputType
+     * Select specific fields to fetch from the Oauth_clientCountOutputType
      */
-    select?: OAuthClientCountOutputTypeSelect<ExtArgs> | null
+    select?: Oauth_clientCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * OAuthClientCountOutputType without action
+   * Oauth_clientCountOutputType without action
    */
-  export type OAuthClientCountOutputTypeCountOauthTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OAuthTokenWhereInput
+  export type Oauth_clientCountOutputTypeCountOauth_tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: oauth_tokenWhereInput
   }
 
 
@@ -1297,7 +1297,7 @@ export namespace Prisma {
    */
 
   /**
-   * Model User
+   * Model user
    */
 
   export type AggregateUser = {
@@ -1309,37 +1309,37 @@ export namespace Prisma {
   export type UserMinAggregateOutputType = {
     id: string | null
     email: string | null
-    passwordHash: string | null
-    firstName: string | null
-    lastName: string | null
-    isActive: boolean | null
-    emailVerified: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
+    password_hash: string | null
+    first_name: string | null
+    last_name: string | null
+    is_active: boolean | null
+    email_verified: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: string | null
     email: string | null
-    passwordHash: string | null
-    firstName: string | null
-    lastName: string | null
-    isActive: boolean | null
-    emailVerified: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
+    password_hash: string | null
+    first_name: string | null
+    last_name: string | null
+    is_active: boolean | null
+    email_verified: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     email: number
-    passwordHash: number
-    firstName: number
-    lastName: number
-    isActive: number
-    emailVerified: number
-    createdAt: number
-    updatedAt: number
+    password_hash: number
+    first_name: number
+    last_name: number
+    is_active: number
+    email_verified: number
+    created_at: number
+    updated_at: number
     _all: number
   }
 
@@ -1347,73 +1347,73 @@ export namespace Prisma {
   export type UserMinAggregateInputType = {
     id?: true
     email?: true
-    passwordHash?: true
-    firstName?: true
-    lastName?: true
-    isActive?: true
-    emailVerified?: true
-    createdAt?: true
-    updatedAt?: true
+    password_hash?: true
+    first_name?: true
+    last_name?: true
+    is_active?: true
+    email_verified?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     email?: true
-    passwordHash?: true
-    firstName?: true
-    lastName?: true
-    isActive?: true
-    emailVerified?: true
-    createdAt?: true
-    updatedAt?: true
+    password_hash?: true
+    first_name?: true
+    last_name?: true
+    is_active?: true
+    email_verified?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     email?: true
-    passwordHash?: true
-    firstName?: true
-    lastName?: true
-    isActive?: true
-    emailVerified?: true
-    createdAt?: true
-    updatedAt?: true
+    password_hash?: true
+    first_name?: true
+    last_name?: true
+    is_active?: true
+    email_verified?: true
+    created_at?: true
+    updated_at?: true
     _all?: true
   }
 
   export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which User to aggregate.
+     * Filter which user to aggregate.
      */
-    where?: UserWhereInput
+    where?: userWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of users to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: userOrderByWithRelationInput | userOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: userWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Users
+     * Count returned users
     **/
     _count?: true | UserCountAggregateInputType
     /**
@@ -1441,11 +1441,11 @@ export namespace Prisma {
 
 
 
-  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
+  export type userGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: userWhereInput
+    orderBy?: userOrderByWithAggregationInput | userOrderByWithAggregationInput[]
     by: UserScalarFieldEnum[] | UserScalarFieldEnum
-    having?: UserScalarWhereWithAggregatesInput
+    having?: userScalarWhereWithAggregatesInput
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
@@ -1456,19 +1456,19 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: string
     email: string
-    passwordHash: string
-    firstName: string | null
-    lastName: string | null
-    isActive: boolean
-    emailVerified: boolean
-    createdAt: Date
-    updatedAt: Date
+    password_hash: string
+    first_name: string | null
+    last_name: string | null
+    is_active: boolean
+    email_verified: boolean
+    created_at: Date
+    updated_at: Date
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
 
-  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+  type GetUserGroupByPayload<T extends userGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickEnumerable<UserGroupByOutputType, T['by']> &
         {
@@ -1482,98 +1482,98 @@ export namespace Prisma {
     >
 
 
-  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type userSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    passwordHash?: boolean
-    firstName?: boolean
-    lastName?: boolean
-    isActive?: boolean
-    emailVerified?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    oauthTokens?: boolean | User$oauthTokensArgs<ExtArgs>
-    refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
+    password_hash?: boolean
+    first_name?: boolean
+    last_name?: boolean
+    is_active?: boolean
+    email_verified?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    oauth_tokens?: boolean | user$oauth_tokensArgs<ExtArgs>
+    refresh_tokens?: boolean | user$refresh_tokensArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
-  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type userSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    passwordHash?: boolean
-    firstName?: boolean
-    lastName?: boolean
-    isActive?: boolean
-    emailVerified?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
+    password_hash?: boolean
+    first_name?: boolean
+    last_name?: boolean
+    is_active?: boolean
+    email_verified?: boolean
+    created_at?: boolean
+    updated_at?: boolean
   }, ExtArgs["result"]["user"]>
 
-  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type userSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    passwordHash?: boolean
-    firstName?: boolean
-    lastName?: boolean
-    isActive?: boolean
-    emailVerified?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
+    password_hash?: boolean
+    first_name?: boolean
+    last_name?: boolean
+    is_active?: boolean
+    email_verified?: boolean
+    created_at?: boolean
+    updated_at?: boolean
   }, ExtArgs["result"]["user"]>
 
-  export type UserSelectScalar = {
+  export type userSelectScalar = {
     id?: boolean
     email?: boolean
-    passwordHash?: boolean
-    firstName?: boolean
-    lastName?: boolean
-    isActive?: boolean
-    emailVerified?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
+    password_hash?: boolean
+    first_name?: boolean
+    last_name?: boolean
+    is_active?: boolean
+    email_verified?: boolean
+    created_at?: boolean
+    updated_at?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "firstName" | "lastName" | "isActive" | "emailVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
-  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    oauthTokens?: boolean | User$oauthTokensArgs<ExtArgs>
-    refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
+  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password_hash" | "first_name" | "last_name" | "is_active" | "email_verified" | "created_at" | "updated_at", ExtArgs["result"]["user"]>
+  export type userInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    oauth_tokens?: boolean | user$oauth_tokensArgs<ExtArgs>
+    refresh_tokens?: boolean | user$refresh_tokensArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type userIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type userIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "User"
+  export type $userPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "user"
     objects: {
-      oauthTokens: Prisma.$OAuthTokenPayload<ExtArgs>[]
-      refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
+      oauth_tokens: Prisma.$oauth_tokenPayload<ExtArgs>[]
+      refresh_tokens: Prisma.$refresh_tokenPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
-      passwordHash: string
-      firstName: string | null
-      lastName: string | null
-      isActive: boolean
-      emailVerified: boolean
-      createdAt: Date
-      updatedAt: Date
+      password_hash: string
+      first_name: string | null
+      last_name: string | null
+      is_active: boolean
+      email_verified: boolean
+      created_at: Date
+      updated_at: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
 
-  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
+  type userGetPayload<S extends boolean | null | undefined | userDefaultArgs> = $Result.GetResult<Prisma.$userPayload, S>
 
-  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+  type userCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<userFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: UserCountAggregateInputType | true
     }
 
-  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
+  export interface userDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['user'], meta: { name: 'user' } }
     /**
      * Find zero or one User that matches the filter.
-     * @param {UserFindUniqueArgs} args - Arguments to find a User
+     * @param {userFindUniqueArgs} args - Arguments to find a User
      * @example
      * // Get one User
      * const user = await prisma.user.findUnique({
@@ -1582,12 +1582,12 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends userFindUniqueArgs>(args: SelectSubset<T, userFindUniqueArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one User that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @param {userFindUniqueOrThrowArgs} args - Arguments to find a User
      * @example
      * // Get one User
      * const user = await prisma.user.findUniqueOrThrow({
@@ -1596,13 +1596,13 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends userFindUniqueOrThrowArgs>(args: SelectSubset<T, userFindUniqueOrThrowArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first User that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstArgs} args - Arguments to find a User
+     * @param {userFindFirstArgs} args - Arguments to find a User
      * @example
      * // Get one User
      * const user = await prisma.user.findFirst({
@@ -1611,14 +1611,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends userFindFirstArgs>(args?: SelectSubset<T, userFindFirstArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first User that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @param {userFindFirstOrThrowArgs} args - Arguments to find a User
      * @example
      * // Get one User
      * const user = await prisma.user.findFirstOrThrow({
@@ -1627,13 +1627,13 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends userFindFirstOrThrowArgs>(args?: SelectSubset<T, userFindFirstOrThrowArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Users that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {userFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Users
      * const users = await prisma.user.findMany()
@@ -1645,11 +1645,11 @@ export namespace Prisma {
      * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends userFindManyArgs>(args?: SelectSubset<T, userFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a User.
-     * @param {UserCreateArgs} args - Arguments to create a User.
+     * @param {userCreateArgs} args - Arguments to create a User.
      * @example
      * // Create one User
      * const User = await prisma.user.create({
@@ -1659,11 +1659,11 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends userCreateArgs>(args: SelectSubset<T, userCreateArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Users.
-     * @param {UserCreateManyArgs} args - Arguments to create many Users.
+     * @param {userCreateManyArgs} args - Arguments to create many Users.
      * @example
      * // Create many Users
      * const user = await prisma.user.createMany({
@@ -1673,11 +1673,11 @@ export namespace Prisma {
      * })
      *     
      */
-    createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends userCreateManyArgs>(args?: SelectSubset<T, userCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create many Users and returns the data saved in the database.
-     * @param {UserCreateManyAndReturnArgs} args - Arguments to create many Users.
+     * @param {userCreateManyAndReturnArgs} args - Arguments to create many Users.
      * @example
      * // Create many Users
      * const user = await prisma.user.createManyAndReturn({
@@ -1697,11 +1697,11 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends userCreateManyAndReturnArgs>(args?: SelectSubset<T, userCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a User.
-     * @param {UserDeleteArgs} args - Arguments to delete one User.
+     * @param {userDeleteArgs} args - Arguments to delete one User.
      * @example
      * // Delete one User
      * const User = await prisma.user.delete({
@@ -1711,11 +1711,11 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends userDeleteArgs>(args: SelectSubset<T, userDeleteArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one User.
-     * @param {UserUpdateArgs} args - Arguments to update one User.
+     * @param {userUpdateArgs} args - Arguments to update one User.
      * @example
      * // Update one User
      * const user = await prisma.user.update({
@@ -1728,11 +1728,11 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends userUpdateArgs>(args: SelectSubset<T, userUpdateArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Users.
-     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
+     * @param {userDeleteManyArgs} args - Arguments to filter Users to delete.
      * @example
      * // Delete a few Users
      * const { count } = await prisma.user.deleteMany({
@@ -1742,13 +1742,13 @@ export namespace Prisma {
      * })
      * 
      */
-    deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends userDeleteManyArgs>(args?: SelectSubset<T, userDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Users.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {userUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Users
      * const user = await prisma.user.updateMany({
@@ -1761,11 +1761,11 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends userUpdateManyArgs>(args: SelectSubset<T, userUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Users and returns the data updated in the database.
-     * @param {UserUpdateManyAndReturnArgs} args - Arguments to update many Users.
+     * @param {userUpdateManyAndReturnArgs} args - Arguments to update many Users.
      * @example
      * // Update many Users
      * const user = await prisma.user.updateManyAndReturn({
@@ -1791,11 +1791,11 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends userUpdateManyAndReturnArgs>(args: SelectSubset<T, userUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one User.
-     * @param {UserUpsertArgs} args - Arguments to update or create a User.
+     * @param {userUpsertArgs} args - Arguments to update or create a User.
      * @example
      * // Update or create a User
      * const user = await prisma.user.upsert({
@@ -1810,14 +1810,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends userUpsertArgs>(args: SelectSubset<T, userUpsertArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
      * Count the number of Users.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserCountArgs} args - Arguments to filter Users to count.
+     * @param {userCountArgs} args - Arguments to filter Users to count.
      * @example
      * // Count the number of Users
      * const count = await prisma.user.count({
@@ -1826,8 +1826,8 @@ export namespace Prisma {
      *   }
      * })
     **/
-    count<T extends UserCountArgs>(
-      args?: Subset<T, UserCountArgs>,
+    count<T extends userCountArgs>(
+      args?: Subset<T, userCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -1866,7 +1866,7 @@ export namespace Prisma {
      * Group by User.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserGroupByArgs} args - Group by arguments.
+     * @param {userGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -1881,14 +1881,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends UserGroupByArgs,
+      T extends userGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserGroupByArgs['orderBy'] }
-        : { orderBy?: UserGroupByArgs['orderBy'] },
+        ? { orderBy: userGroupByArgs['orderBy'] }
+        : { orderBy?: userGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -1937,23 +1937,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, userGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the User model
+   * Fields of the user model
    */
-  readonly fields: UserFieldRefs;
+  readonly fields: userFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for User.
+   * The delegate class that acts as a "Promise-like" for user.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__userClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    oauthTokens<T extends User$oauthTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$oauthTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    refreshTokens<T extends User$refreshTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    oauth_tokens<T extends user$oauth_tokensArgs<ExtArgs> = {}>(args?: Subset<T, user$oauth_tokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$oauth_tokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    refresh_tokens<T extends user$refresh_tokensArgs<ExtArgs> = {}>(args?: Subset<T, user$refresh_tokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$refresh_tokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1980,873 +1980,873 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the User model
+   * Fields of the user model
    */
-  interface UserFieldRefs {
-    readonly id: FieldRef<"User", 'String'>
-    readonly email: FieldRef<"User", 'String'>
-    readonly passwordHash: FieldRef<"User", 'String'>
-    readonly firstName: FieldRef<"User", 'String'>
-    readonly lastName: FieldRef<"User", 'String'>
-    readonly isActive: FieldRef<"User", 'Boolean'>
-    readonly emailVerified: FieldRef<"User", 'Boolean'>
-    readonly createdAt: FieldRef<"User", 'DateTime'>
-    readonly updatedAt: FieldRef<"User", 'DateTime'>
+  interface userFieldRefs {
+    readonly id: FieldRef<"user", 'String'>
+    readonly email: FieldRef<"user", 'String'>
+    readonly password_hash: FieldRef<"user", 'String'>
+    readonly first_name: FieldRef<"user", 'String'>
+    readonly last_name: FieldRef<"user", 'String'>
+    readonly is_active: FieldRef<"user", 'Boolean'>
+    readonly email_verified: FieldRef<"user", 'Boolean'>
+    readonly created_at: FieldRef<"user", 'DateTime'>
+    readonly updated_at: FieldRef<"user", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * User findUnique
+   * user findUnique
    */
-  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the user
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: userSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the user
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: userOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: userInclude<ExtArgs> | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which user to fetch.
      */
-    where: UserWhereUniqueInput
+    where: userWhereUniqueInput
   }
 
   /**
-   * User findUniqueOrThrow
+   * user findUniqueOrThrow
    */
-  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the user
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: userSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the user
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: userOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: userInclude<ExtArgs> | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which user to fetch.
      */
-    where: UserWhereUniqueInput
+    where: userWhereUniqueInput
   }
 
   /**
-   * User findFirst
+   * user findFirst
    */
-  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the user
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: userSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the user
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: userOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: userInclude<ExtArgs> | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which user to fetch.
      */
-    where?: UserWhereInput
+    where?: userWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of users to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: userOrderByWithRelationInput | userOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Users.
+     * Sets the position for searching for users.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: userWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Users.
+     * Filter by unique combinations of users.
      */
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
-   * User findFirstOrThrow
+   * user findFirstOrThrow
    */
-  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the user
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: userSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the user
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: userOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: userInclude<ExtArgs> | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which user to fetch.
      */
-    where?: UserWhereInput
+    where?: userWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of users to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: userOrderByWithRelationInput | userOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Users.
+     * Sets the position for searching for users.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: userWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Users.
+     * Filter by unique combinations of users.
      */
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
-   * User findMany
+   * user findMany
    */
-  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the user
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: userSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the user
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: userOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: userInclude<ExtArgs> | null
     /**
-     * Filter, which Users to fetch.
+     * Filter, which users to fetch.
      */
-    where?: UserWhereInput
+    where?: userWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of users to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: userOrderByWithRelationInput | userOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Users.
+     * Sets the position for listing users.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: userWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` users.
      */
     skip?: number
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
-   * User create
+   * user create
    */
-  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the user
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: userSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the user
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: userOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: userInclude<ExtArgs> | null
     /**
-     * The data needed to create a User.
+     * The data needed to create a user.
      */
-    data: XOR<UserCreateInput, UserUncheckedCreateInput>
+    data: XOR<userCreateInput, userUncheckedCreateInput>
   }
 
   /**
-   * User createMany
+   * user createMany
    */
-  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Users.
+     * The data used to create many users.
      */
-    data: UserCreateManyInput | UserCreateManyInput[]
+    data: userCreateManyInput | userCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * User createManyAndReturn
+   * user createManyAndReturn
    */
-  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the user
      */
-    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
+    select?: userSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the user
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: userOmit<ExtArgs> | null
     /**
-     * The data used to create many Users.
+     * The data used to create many users.
      */
-    data: UserCreateManyInput | UserCreateManyInput[]
+    data: userCreateManyInput | userCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * User update
+   * user update
    */
-  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the user
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: userSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the user
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: userOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: userInclude<ExtArgs> | null
     /**
-     * The data needed to update a User.
+     * The data needed to update a user.
      */
-    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    data: XOR<userUpdateInput, userUncheckedUpdateInput>
     /**
-     * Choose, which User to update.
+     * Choose, which user to update.
      */
-    where: UserWhereUniqueInput
+    where: userWhereUniqueInput
   }
 
   /**
-   * User updateMany
+   * user updateMany
    */
-  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Users.
+     * The data used to update users.
      */
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    data: XOR<userUpdateManyMutationInput, userUncheckedUpdateManyInput>
     /**
-     * Filter which Users to update
+     * Filter which users to update
      */
-    where?: UserWhereInput
+    where?: userWhereInput
     /**
-     * Limit how many Users to update.
+     * Limit how many users to update.
      */
     limit?: number
   }
 
   /**
-   * User updateManyAndReturn
+   * user updateManyAndReturn
    */
-  export type UserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the user
      */
-    select?: UserSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: userSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the user
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: userOmit<ExtArgs> | null
     /**
-     * The data used to update Users.
+     * The data used to update users.
      */
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    data: XOR<userUpdateManyMutationInput, userUncheckedUpdateManyInput>
     /**
-     * Filter which Users to update
+     * Filter which users to update
      */
-    where?: UserWhereInput
+    where?: userWhereInput
     /**
-     * Limit how many Users to update.
+     * Limit how many users to update.
      */
     limit?: number
   }
 
   /**
-   * User upsert
+   * user upsert
    */
-  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the user
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: userSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the user
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: userOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: userInclude<ExtArgs> | null
     /**
-     * The filter to search for the User to update in case it exists.
+     * The filter to search for the user to update in case it exists.
      */
-    where: UserWhereUniqueInput
+    where: userWhereUniqueInput
     /**
-     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
+     * In case the user found by the `where` argument doesn't exist, create a new user with this data.
      */
-    create: XOR<UserCreateInput, UserUncheckedCreateInput>
+    create: XOR<userCreateInput, userUncheckedCreateInput>
     /**
-     * In case the User was found with the provided `where` argument, update it with this data.
+     * In case the user was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    update: XOR<userUpdateInput, userUncheckedUpdateInput>
   }
 
   /**
-   * User delete
+   * user delete
    */
-  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the user
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: userSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the user
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: userOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: userInclude<ExtArgs> | null
     /**
-     * Filter which User to delete.
+     * Filter which user to delete.
      */
-    where: UserWhereUniqueInput
+    where: userWhereUniqueInput
   }
 
   /**
-   * User deleteMany
+   * user deleteMany
    */
-  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Users to delete
+     * Filter which users to delete
      */
-    where?: UserWhereInput
+    where?: userWhereInput
     /**
-     * Limit how many Users to delete.
+     * Limit how many users to delete.
      */
     limit?: number
   }
 
   /**
-   * User.oauthTokens
+   * user.oauth_tokens
    */
-  export type User$oauthTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type user$oauth_tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelect<ExtArgs> | null
+    select?: oauth_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenInclude<ExtArgs> | null
-    where?: OAuthTokenWhereInput
-    orderBy?: OAuthTokenOrderByWithRelationInput | OAuthTokenOrderByWithRelationInput[]
-    cursor?: OAuthTokenWhereUniqueInput
+    include?: oauth_tokenInclude<ExtArgs> | null
+    where?: oauth_tokenWhereInput
+    orderBy?: oauth_tokenOrderByWithRelationInput | oauth_tokenOrderByWithRelationInput[]
+    cursor?: oauth_tokenWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: OAuthTokenScalarFieldEnum | OAuthTokenScalarFieldEnum[]
+    distinct?: Oauth_tokenScalarFieldEnum | Oauth_tokenScalarFieldEnum[]
   }
 
   /**
-   * User.refreshTokens
+   * user.refresh_tokens
    */
-  export type User$refreshTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type user$refresh_tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the refresh_token
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: refresh_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the refresh_token
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: refresh_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
-    where?: RefreshTokenWhereInput
-    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
-    cursor?: RefreshTokenWhereUniqueInput
+    include?: refresh_tokenInclude<ExtArgs> | null
+    where?: refresh_tokenWhereInput
+    orderBy?: refresh_tokenOrderByWithRelationInput | refresh_tokenOrderByWithRelationInput[]
+    cursor?: refresh_tokenWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+    distinct?: Refresh_tokenScalarFieldEnum | Refresh_tokenScalarFieldEnum[]
   }
 
   /**
-   * User without action
+   * user without action
    */
-  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type userDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the user
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: userSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the user
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: userOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: userInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model OAuthClient
+   * Model oauth_client
    */
 
-  export type AggregateOAuthClient = {
-    _count: OAuthClientCountAggregateOutputType | null
-    _min: OAuthClientMinAggregateOutputType | null
-    _max: OAuthClientMaxAggregateOutputType | null
+  export type AggregateOauth_client = {
+    _count: Oauth_clientCountAggregateOutputType | null
+    _min: Oauth_clientMinAggregateOutputType | null
+    _max: Oauth_clientMaxAggregateOutputType | null
   }
 
-  export type OAuthClientMinAggregateOutputType = {
+  export type Oauth_clientMinAggregateOutputType = {
     id: string | null
-    clientId: string | null
-    clientSecret: string | null
+    client_id: string | null
+    client_secret: string | null
     name: string | null
-    redirectUris: string | null
+    redirect_uris: string | null
     scopes: string | null
-    grantTypes: string | null
-    isActive: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
+    grant_types: string | null
+    is_active: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
-  export type OAuthClientMaxAggregateOutputType = {
+  export type Oauth_clientMaxAggregateOutputType = {
     id: string | null
-    clientId: string | null
-    clientSecret: string | null
+    client_id: string | null
+    client_secret: string | null
     name: string | null
-    redirectUris: string | null
+    redirect_uris: string | null
     scopes: string | null
-    grantTypes: string | null
-    isActive: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
+    grant_types: string | null
+    is_active: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
-  export type OAuthClientCountAggregateOutputType = {
+  export type Oauth_clientCountAggregateOutputType = {
     id: number
-    clientId: number
-    clientSecret: number
+    client_id: number
+    client_secret: number
     name: number
-    redirectUris: number
+    redirect_uris: number
     scopes: number
-    grantTypes: number
-    isActive: number
-    createdAt: number
-    updatedAt: number
+    grant_types: number
+    is_active: number
+    created_at: number
+    updated_at: number
     _all: number
   }
 
 
-  export type OAuthClientMinAggregateInputType = {
+  export type Oauth_clientMinAggregateInputType = {
     id?: true
-    clientId?: true
-    clientSecret?: true
+    client_id?: true
+    client_secret?: true
     name?: true
-    redirectUris?: true
+    redirect_uris?: true
     scopes?: true
-    grantTypes?: true
-    isActive?: true
-    createdAt?: true
-    updatedAt?: true
+    grant_types?: true
+    is_active?: true
+    created_at?: true
+    updated_at?: true
   }
 
-  export type OAuthClientMaxAggregateInputType = {
+  export type Oauth_clientMaxAggregateInputType = {
     id?: true
-    clientId?: true
-    clientSecret?: true
+    client_id?: true
+    client_secret?: true
     name?: true
-    redirectUris?: true
+    redirect_uris?: true
     scopes?: true
-    grantTypes?: true
-    isActive?: true
-    createdAt?: true
-    updatedAt?: true
+    grant_types?: true
+    is_active?: true
+    created_at?: true
+    updated_at?: true
   }
 
-  export type OAuthClientCountAggregateInputType = {
+  export type Oauth_clientCountAggregateInputType = {
     id?: true
-    clientId?: true
-    clientSecret?: true
+    client_id?: true
+    client_secret?: true
     name?: true
-    redirectUris?: true
+    redirect_uris?: true
     scopes?: true
-    grantTypes?: true
-    isActive?: true
-    createdAt?: true
-    updatedAt?: true
+    grant_types?: true
+    is_active?: true
+    created_at?: true
+    updated_at?: true
     _all?: true
   }
 
-  export type OAuthClientAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Oauth_clientAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which OAuthClient to aggregate.
+     * Filter which oauth_client to aggregate.
      */
-    where?: OAuthClientWhereInput
+    where?: oauth_clientWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of OAuthClients to fetch.
+     * Determine the order of oauth_clients to fetch.
      */
-    orderBy?: OAuthClientOrderByWithRelationInput | OAuthClientOrderByWithRelationInput[]
+    orderBy?: oauth_clientOrderByWithRelationInput | oauth_clientOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: OAuthClientWhereUniqueInput
+    cursor?: oauth_clientWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` OAuthClients from the position of the cursor.
+     * Take `±n` oauth_clients from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` OAuthClients.
+     * Skip the first `n` oauth_clients.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned OAuthClients
+     * Count returned oauth_clients
     **/
-    _count?: true | OAuthClientCountAggregateInputType
+    _count?: true | Oauth_clientCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: OAuthClientMinAggregateInputType
+    _min?: Oauth_clientMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: OAuthClientMaxAggregateInputType
+    _max?: Oauth_clientMaxAggregateInputType
   }
 
-  export type GetOAuthClientAggregateType<T extends OAuthClientAggregateArgs> = {
-        [P in keyof T & keyof AggregateOAuthClient]: P extends '_count' | 'count'
+  export type GetOauth_clientAggregateType<T extends Oauth_clientAggregateArgs> = {
+        [P in keyof T & keyof AggregateOauth_client]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateOAuthClient[P]>
-      : GetScalarType<T[P], AggregateOAuthClient[P]>
+        : GetScalarType<T[P], AggregateOauth_client[P]>
+      : GetScalarType<T[P], AggregateOauth_client[P]>
   }
 
 
 
 
-  export type OAuthClientGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OAuthClientWhereInput
-    orderBy?: OAuthClientOrderByWithAggregationInput | OAuthClientOrderByWithAggregationInput[]
-    by: OAuthClientScalarFieldEnum[] | OAuthClientScalarFieldEnum
-    having?: OAuthClientScalarWhereWithAggregatesInput
+  export type oauth_clientGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: oauth_clientWhereInput
+    orderBy?: oauth_clientOrderByWithAggregationInput | oauth_clientOrderByWithAggregationInput[]
+    by: Oauth_clientScalarFieldEnum[] | Oauth_clientScalarFieldEnum
+    having?: oauth_clientScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: OAuthClientCountAggregateInputType | true
-    _min?: OAuthClientMinAggregateInputType
-    _max?: OAuthClientMaxAggregateInputType
+    _count?: Oauth_clientCountAggregateInputType | true
+    _min?: Oauth_clientMinAggregateInputType
+    _max?: Oauth_clientMaxAggregateInputType
   }
 
-  export type OAuthClientGroupByOutputType = {
+  export type Oauth_clientGroupByOutputType = {
     id: string
-    clientId: string
-    clientSecret: string
+    client_id: string
+    client_secret: string
     name: string
-    redirectUris: string
+    redirect_uris: string
     scopes: string
-    grantTypes: string
-    isActive: boolean
-    createdAt: Date
-    updatedAt: Date
-    _count: OAuthClientCountAggregateOutputType | null
-    _min: OAuthClientMinAggregateOutputType | null
-    _max: OAuthClientMaxAggregateOutputType | null
+    grant_types: string
+    is_active: boolean
+    created_at: Date
+    updated_at: Date
+    _count: Oauth_clientCountAggregateOutputType | null
+    _min: Oauth_clientMinAggregateOutputType | null
+    _max: Oauth_clientMaxAggregateOutputType | null
   }
 
-  type GetOAuthClientGroupByPayload<T extends OAuthClientGroupByArgs> = Prisma.PrismaPromise<
+  type GetOauth_clientGroupByPayload<T extends oauth_clientGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<OAuthClientGroupByOutputType, T['by']> &
+      PickEnumerable<Oauth_clientGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof OAuthClientGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof Oauth_clientGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], OAuthClientGroupByOutputType[P]>
-            : GetScalarType<T[P], OAuthClientGroupByOutputType[P]>
+              : GetScalarType<T[P], Oauth_clientGroupByOutputType[P]>
+            : GetScalarType<T[P], Oauth_clientGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type OAuthClientSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type oauth_clientSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    clientId?: boolean
-    clientSecret?: boolean
+    client_id?: boolean
+    client_secret?: boolean
     name?: boolean
-    redirectUris?: boolean
+    redirect_uris?: boolean
     scopes?: boolean
-    grantTypes?: boolean
-    isActive?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    oauthTokens?: boolean | OAuthClient$oauthTokensArgs<ExtArgs>
-    _count?: boolean | OAuthClientCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["oAuthClient"]>
+    grant_types?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    oauth_tokens?: boolean | oauth_client$oauth_tokensArgs<ExtArgs>
+    _count?: boolean | Oauth_clientCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["oauth_client"]>
 
-  export type OAuthClientSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type oauth_clientSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    clientId?: boolean
-    clientSecret?: boolean
+    client_id?: boolean
+    client_secret?: boolean
     name?: boolean
-    redirectUris?: boolean
+    redirect_uris?: boolean
     scopes?: boolean
-    grantTypes?: boolean
-    isActive?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["oAuthClient"]>
+    grant_types?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["oauth_client"]>
 
-  export type OAuthClientSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type oauth_clientSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    clientId?: boolean
-    clientSecret?: boolean
+    client_id?: boolean
+    client_secret?: boolean
     name?: boolean
-    redirectUris?: boolean
+    redirect_uris?: boolean
     scopes?: boolean
-    grantTypes?: boolean
-    isActive?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["oAuthClient"]>
+    grant_types?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["oauth_client"]>
 
-  export type OAuthClientSelectScalar = {
+  export type oauth_clientSelectScalar = {
     id?: boolean
-    clientId?: boolean
-    clientSecret?: boolean
+    client_id?: boolean
+    client_secret?: boolean
     name?: boolean
-    redirectUris?: boolean
+    redirect_uris?: boolean
     scopes?: boolean
-    grantTypes?: boolean
-    isActive?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
+    grant_types?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
   }
 
-  export type OAuthClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "clientSecret" | "name" | "redirectUris" | "scopes" | "grantTypes" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["oAuthClient"]>
-  export type OAuthClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    oauthTokens?: boolean | OAuthClient$oauthTokensArgs<ExtArgs>
-    _count?: boolean | OAuthClientCountOutputTypeDefaultArgs<ExtArgs>
+  export type oauth_clientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "client_id" | "client_secret" | "name" | "redirect_uris" | "scopes" | "grant_types" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["oauth_client"]>
+  export type oauth_clientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    oauth_tokens?: boolean | oauth_client$oauth_tokensArgs<ExtArgs>
+    _count?: boolean | Oauth_clientCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type OAuthClientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type OAuthClientIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type oauth_clientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type oauth_clientIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $OAuthClientPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "OAuthClient"
+  export type $oauth_clientPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "oauth_client"
     objects: {
-      oauthTokens: Prisma.$OAuthTokenPayload<ExtArgs>[]
+      oauth_tokens: Prisma.$oauth_tokenPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      clientId: string
-      clientSecret: string
+      client_id: string
+      client_secret: string
       name: string
-      redirectUris: string
+      redirect_uris: string
       scopes: string
-      grantTypes: string
-      isActive: boolean
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["oAuthClient"]>
+      grant_types: string
+      is_active: boolean
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["oauth_client"]>
     composites: {}
   }
 
-  type OAuthClientGetPayload<S extends boolean | null | undefined | OAuthClientDefaultArgs> = $Result.GetResult<Prisma.$OAuthClientPayload, S>
+  type oauth_clientGetPayload<S extends boolean | null | undefined | oauth_clientDefaultArgs> = $Result.GetResult<Prisma.$oauth_clientPayload, S>
 
-  type OAuthClientCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<OAuthClientFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: OAuthClientCountAggregateInputType | true
+  type oauth_clientCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<oauth_clientFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Oauth_clientCountAggregateInputType | true
     }
 
-  export interface OAuthClientDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OAuthClient'], meta: { name: 'OAuthClient' } }
+  export interface oauth_clientDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['oauth_client'], meta: { name: 'oauth_client' } }
     /**
-     * Find zero or one OAuthClient that matches the filter.
-     * @param {OAuthClientFindUniqueArgs} args - Arguments to find a OAuthClient
+     * Find zero or one Oauth_client that matches the filter.
+     * @param {oauth_clientFindUniqueArgs} args - Arguments to find a Oauth_client
      * @example
-     * // Get one OAuthClient
-     * const oAuthClient = await prisma.oAuthClient.findUnique({
+     * // Get one Oauth_client
+     * const oauth_client = await prisma.oauth_client.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends OAuthClientFindUniqueArgs>(args: SelectSubset<T, OAuthClientFindUniqueArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends oauth_clientFindUniqueArgs>(args: SelectSubset<T, oauth_clientFindUniqueArgs<ExtArgs>>): Prisma__oauth_clientClient<$Result.GetResult<Prisma.$oauth_clientPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one OAuthClient that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Oauth_client that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {OAuthClientFindUniqueOrThrowArgs} args - Arguments to find a OAuthClient
+     * @param {oauth_clientFindUniqueOrThrowArgs} args - Arguments to find a Oauth_client
      * @example
-     * // Get one OAuthClient
-     * const oAuthClient = await prisma.oAuthClient.findUniqueOrThrow({
+     * // Get one Oauth_client
+     * const oauth_client = await prisma.oauth_client.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends OAuthClientFindUniqueOrThrowArgs>(args: SelectSubset<T, OAuthClientFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends oauth_clientFindUniqueOrThrowArgs>(args: SelectSubset<T, oauth_clientFindUniqueOrThrowArgs<ExtArgs>>): Prisma__oauth_clientClient<$Result.GetResult<Prisma.$oauth_clientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first OAuthClient that matches the filter.
+     * Find the first Oauth_client that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthClientFindFirstArgs} args - Arguments to find a OAuthClient
+     * @param {oauth_clientFindFirstArgs} args - Arguments to find a Oauth_client
      * @example
-     * // Get one OAuthClient
-     * const oAuthClient = await prisma.oAuthClient.findFirst({
+     * // Get one Oauth_client
+     * const oauth_client = await prisma.oauth_client.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends OAuthClientFindFirstArgs>(args?: SelectSubset<T, OAuthClientFindFirstArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends oauth_clientFindFirstArgs>(args?: SelectSubset<T, oauth_clientFindFirstArgs<ExtArgs>>): Prisma__oauth_clientClient<$Result.GetResult<Prisma.$oauth_clientPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first OAuthClient that matches the filter or
+     * Find the first Oauth_client that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthClientFindFirstOrThrowArgs} args - Arguments to find a OAuthClient
+     * @param {oauth_clientFindFirstOrThrowArgs} args - Arguments to find a Oauth_client
      * @example
-     * // Get one OAuthClient
-     * const oAuthClient = await prisma.oAuthClient.findFirstOrThrow({
+     * // Get one Oauth_client
+     * const oauth_client = await prisma.oauth_client.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends OAuthClientFindFirstOrThrowArgs>(args?: SelectSubset<T, OAuthClientFindFirstOrThrowArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends oauth_clientFindFirstOrThrowArgs>(args?: SelectSubset<T, oauth_clientFindFirstOrThrowArgs<ExtArgs>>): Prisma__oauth_clientClient<$Result.GetResult<Prisma.$oauth_clientPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more OAuthClients that matches the filter.
+     * Find zero or more Oauth_clients that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthClientFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {oauth_clientFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all OAuthClients
-     * const oAuthClients = await prisma.oAuthClient.findMany()
+     * // Get all Oauth_clients
+     * const oauth_clients = await prisma.oauth_client.findMany()
      * 
-     * // Get first 10 OAuthClients
-     * const oAuthClients = await prisma.oAuthClient.findMany({ take: 10 })
+     * // Get first 10 Oauth_clients
+     * const oauth_clients = await prisma.oauth_client.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const oAuthClientWithIdOnly = await prisma.oAuthClient.findMany({ select: { id: true } })
+     * const oauth_clientWithIdOnly = await prisma.oauth_client.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends OAuthClientFindManyArgs>(args?: SelectSubset<T, OAuthClientFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends oauth_clientFindManyArgs>(args?: SelectSubset<T, oauth_clientFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$oauth_clientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a OAuthClient.
-     * @param {OAuthClientCreateArgs} args - Arguments to create a OAuthClient.
+     * Create a Oauth_client.
+     * @param {oauth_clientCreateArgs} args - Arguments to create a Oauth_client.
      * @example
-     * // Create one OAuthClient
-     * const OAuthClient = await prisma.oAuthClient.create({
+     * // Create one Oauth_client
+     * const Oauth_client = await prisma.oauth_client.create({
      *   data: {
-     *     // ... data to create a OAuthClient
+     *     // ... data to create a Oauth_client
      *   }
      * })
      * 
      */
-    create<T extends OAuthClientCreateArgs>(args: SelectSubset<T, OAuthClientCreateArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends oauth_clientCreateArgs>(args: SelectSubset<T, oauth_clientCreateArgs<ExtArgs>>): Prisma__oauth_clientClient<$Result.GetResult<Prisma.$oauth_clientPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many OAuthClients.
-     * @param {OAuthClientCreateManyArgs} args - Arguments to create many OAuthClients.
+     * Create many Oauth_clients.
+     * @param {oauth_clientCreateManyArgs} args - Arguments to create many Oauth_clients.
      * @example
-     * // Create many OAuthClients
-     * const oAuthClient = await prisma.oAuthClient.createMany({
+     * // Create many Oauth_clients
+     * const oauth_client = await prisma.oauth_client.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends OAuthClientCreateManyArgs>(args?: SelectSubset<T, OAuthClientCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends oauth_clientCreateManyArgs>(args?: SelectSubset<T, oauth_clientCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many OAuthClients and returns the data saved in the database.
-     * @param {OAuthClientCreateManyAndReturnArgs} args - Arguments to create many OAuthClients.
+     * Create many Oauth_clients and returns the data saved in the database.
+     * @param {oauth_clientCreateManyAndReturnArgs} args - Arguments to create many Oauth_clients.
      * @example
-     * // Create many OAuthClients
-     * const oAuthClient = await prisma.oAuthClient.createManyAndReturn({
+     * // Create many Oauth_clients
+     * const oauth_client = await prisma.oauth_client.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many OAuthClients and only return the `id`
-     * const oAuthClientWithIdOnly = await prisma.oAuthClient.createManyAndReturn({
+     * // Create many Oauth_clients and only return the `id`
+     * const oauth_clientWithIdOnly = await prisma.oauth_client.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -2856,28 +2856,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends OAuthClientCreateManyAndReturnArgs>(args?: SelectSubset<T, OAuthClientCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends oauth_clientCreateManyAndReturnArgs>(args?: SelectSubset<T, oauth_clientCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$oauth_clientPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a OAuthClient.
-     * @param {OAuthClientDeleteArgs} args - Arguments to delete one OAuthClient.
+     * Delete a Oauth_client.
+     * @param {oauth_clientDeleteArgs} args - Arguments to delete one Oauth_client.
      * @example
-     * // Delete one OAuthClient
-     * const OAuthClient = await prisma.oAuthClient.delete({
+     * // Delete one Oauth_client
+     * const Oauth_client = await prisma.oauth_client.delete({
      *   where: {
-     *     // ... filter to delete one OAuthClient
+     *     // ... filter to delete one Oauth_client
      *   }
      * })
      * 
      */
-    delete<T extends OAuthClientDeleteArgs>(args: SelectSubset<T, OAuthClientDeleteArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends oauth_clientDeleteArgs>(args: SelectSubset<T, oauth_clientDeleteArgs<ExtArgs>>): Prisma__oauth_clientClient<$Result.GetResult<Prisma.$oauth_clientPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one OAuthClient.
-     * @param {OAuthClientUpdateArgs} args - Arguments to update one OAuthClient.
+     * Update one Oauth_client.
+     * @param {oauth_clientUpdateArgs} args - Arguments to update one Oauth_client.
      * @example
-     * // Update one OAuthClient
-     * const oAuthClient = await prisma.oAuthClient.update({
+     * // Update one Oauth_client
+     * const oauth_client = await prisma.oauth_client.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2887,30 +2887,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends OAuthClientUpdateArgs>(args: SelectSubset<T, OAuthClientUpdateArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends oauth_clientUpdateArgs>(args: SelectSubset<T, oauth_clientUpdateArgs<ExtArgs>>): Prisma__oauth_clientClient<$Result.GetResult<Prisma.$oauth_clientPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more OAuthClients.
-     * @param {OAuthClientDeleteManyArgs} args - Arguments to filter OAuthClients to delete.
+     * Delete zero or more Oauth_clients.
+     * @param {oauth_clientDeleteManyArgs} args - Arguments to filter Oauth_clients to delete.
      * @example
-     * // Delete a few OAuthClients
-     * const { count } = await prisma.oAuthClient.deleteMany({
+     * // Delete a few Oauth_clients
+     * const { count } = await prisma.oauth_client.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends OAuthClientDeleteManyArgs>(args?: SelectSubset<T, OAuthClientDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends oauth_clientDeleteManyArgs>(args?: SelectSubset<T, oauth_clientDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more OAuthClients.
+     * Update zero or more Oauth_clients.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthClientUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {oauth_clientUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many OAuthClients
-     * const oAuthClient = await prisma.oAuthClient.updateMany({
+     * // Update many Oauth_clients
+     * const oauth_client = await prisma.oauth_client.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2920,14 +2920,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends OAuthClientUpdateManyArgs>(args: SelectSubset<T, OAuthClientUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends oauth_clientUpdateManyArgs>(args: SelectSubset<T, oauth_clientUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more OAuthClients and returns the data updated in the database.
-     * @param {OAuthClientUpdateManyAndReturnArgs} args - Arguments to update many OAuthClients.
+     * Update zero or more Oauth_clients and returns the data updated in the database.
+     * @param {oauth_clientUpdateManyAndReturnArgs} args - Arguments to update many Oauth_clients.
      * @example
-     * // Update many OAuthClients
-     * const oAuthClient = await prisma.oAuthClient.updateManyAndReturn({
+     * // Update many Oauth_clients
+     * const oauth_client = await prisma.oauth_client.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2936,8 +2936,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more OAuthClients and only return the `id`
-     * const oAuthClientWithIdOnly = await prisma.oAuthClient.updateManyAndReturn({
+     * // Update zero or more Oauth_clients and only return the `id`
+     * const oauth_clientWithIdOnly = await prisma.oauth_client.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -2950,56 +2950,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends OAuthClientUpdateManyAndReturnArgs>(args: SelectSubset<T, OAuthClientUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends oauth_clientUpdateManyAndReturnArgs>(args: SelectSubset<T, oauth_clientUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$oauth_clientPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one OAuthClient.
-     * @param {OAuthClientUpsertArgs} args - Arguments to update or create a OAuthClient.
+     * Create or update one Oauth_client.
+     * @param {oauth_clientUpsertArgs} args - Arguments to update or create a Oauth_client.
      * @example
-     * // Update or create a OAuthClient
-     * const oAuthClient = await prisma.oAuthClient.upsert({
+     * // Update or create a Oauth_client
+     * const oauth_client = await prisma.oauth_client.upsert({
      *   create: {
-     *     // ... data to create a OAuthClient
+     *     // ... data to create a Oauth_client
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the OAuthClient we want to update
+     *     // ... the filter for the Oauth_client we want to update
      *   }
      * })
      */
-    upsert<T extends OAuthClientUpsertArgs>(args: SelectSubset<T, OAuthClientUpsertArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends oauth_clientUpsertArgs>(args: SelectSubset<T, oauth_clientUpsertArgs<ExtArgs>>): Prisma__oauth_clientClient<$Result.GetResult<Prisma.$oauth_clientPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of OAuthClients.
+     * Count the number of Oauth_clients.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthClientCountArgs} args - Arguments to filter OAuthClients to count.
+     * @param {oauth_clientCountArgs} args - Arguments to filter Oauth_clients to count.
      * @example
-     * // Count the number of OAuthClients
-     * const count = await prisma.oAuthClient.count({
+     * // Count the number of Oauth_clients
+     * const count = await prisma.oauth_client.count({
      *   where: {
-     *     // ... the filter for the OAuthClients we want to count
+     *     // ... the filter for the Oauth_clients we want to count
      *   }
      * })
     **/
-    count<T extends OAuthClientCountArgs>(
-      args?: Subset<T, OAuthClientCountArgs>,
+    count<T extends oauth_clientCountArgs>(
+      args?: Subset<T, oauth_clientCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], OAuthClientCountAggregateOutputType>
+          : GetScalarType<T['select'], Oauth_clientCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a OAuthClient.
+     * Allows you to perform aggregations operations on a Oauth_client.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthClientAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {Oauth_clientAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -3019,13 +3019,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends OAuthClientAggregateArgs>(args: Subset<T, OAuthClientAggregateArgs>): Prisma.PrismaPromise<GetOAuthClientAggregateType<T>>
+    aggregate<T extends Oauth_clientAggregateArgs>(args: Subset<T, Oauth_clientAggregateArgs>): Prisma.PrismaPromise<GetOauth_clientAggregateType<T>>
 
     /**
-     * Group by OAuthClient.
+     * Group by Oauth_client.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthClientGroupByArgs} args - Group by arguments.
+     * @param {oauth_clientGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -3040,14 +3040,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends OAuthClientGroupByArgs,
+      T extends oauth_clientGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: OAuthClientGroupByArgs['orderBy'] }
-        : { orderBy?: OAuthClientGroupByArgs['orderBy'] },
+        ? { orderBy: oauth_clientGroupByArgs['orderBy'] }
+        : { orderBy?: oauth_clientGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -3096,22 +3096,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, OAuthClientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOAuthClientGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, oauth_clientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOauth_clientGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the OAuthClient model
+   * Fields of the oauth_client model
    */
-  readonly fields: OAuthClientFieldRefs;
+  readonly fields: oauth_clientFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for OAuthClient.
+   * The delegate class that acts as a "Promise-like" for oauth_client.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__OAuthClientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__oauth_clientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    oauthTokens<T extends OAuthClient$oauthTokensArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClient$oauthTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    oauth_tokens<T extends oauth_client$oauth_tokensArgs<ExtArgs> = {}>(args?: Subset<T, oauth_client$oauth_tokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$oauth_tokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3138,825 +3138,825 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the OAuthClient model
+   * Fields of the oauth_client model
    */
-  interface OAuthClientFieldRefs {
-    readonly id: FieldRef<"OAuthClient", 'String'>
-    readonly clientId: FieldRef<"OAuthClient", 'String'>
-    readonly clientSecret: FieldRef<"OAuthClient", 'String'>
-    readonly name: FieldRef<"OAuthClient", 'String'>
-    readonly redirectUris: FieldRef<"OAuthClient", 'String'>
-    readonly scopes: FieldRef<"OAuthClient", 'String'>
-    readonly grantTypes: FieldRef<"OAuthClient", 'String'>
-    readonly isActive: FieldRef<"OAuthClient", 'Boolean'>
-    readonly createdAt: FieldRef<"OAuthClient", 'DateTime'>
-    readonly updatedAt: FieldRef<"OAuthClient", 'DateTime'>
+  interface oauth_clientFieldRefs {
+    readonly id: FieldRef<"oauth_client", 'String'>
+    readonly client_id: FieldRef<"oauth_client", 'String'>
+    readonly client_secret: FieldRef<"oauth_client", 'String'>
+    readonly name: FieldRef<"oauth_client", 'String'>
+    readonly redirect_uris: FieldRef<"oauth_client", 'String'>
+    readonly scopes: FieldRef<"oauth_client", 'String'>
+    readonly grant_types: FieldRef<"oauth_client", 'String'>
+    readonly is_active: FieldRef<"oauth_client", 'Boolean'>
+    readonly created_at: FieldRef<"oauth_client", 'DateTime'>
+    readonly updated_at: FieldRef<"oauth_client", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * OAuthClient findUnique
+   * oauth_client findUnique
    */
-  export type OAuthClientFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthClient
+     * Select specific fields to fetch from the oauth_client
      */
-    select?: OAuthClientSelect<ExtArgs> | null
+    select?: oauth_clientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthClient
+     * Omit specific fields from the oauth_client
      */
-    omit?: OAuthClientOmit<ExtArgs> | null
+    omit?: oauth_clientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthClientInclude<ExtArgs> | null
+    include?: oauth_clientInclude<ExtArgs> | null
     /**
-     * Filter, which OAuthClient to fetch.
+     * Filter, which oauth_client to fetch.
      */
-    where: OAuthClientWhereUniqueInput
+    where: oauth_clientWhereUniqueInput
   }
 
   /**
-   * OAuthClient findUniqueOrThrow
+   * oauth_client findUniqueOrThrow
    */
-  export type OAuthClientFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthClient
+     * Select specific fields to fetch from the oauth_client
      */
-    select?: OAuthClientSelect<ExtArgs> | null
+    select?: oauth_clientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthClient
+     * Omit specific fields from the oauth_client
      */
-    omit?: OAuthClientOmit<ExtArgs> | null
+    omit?: oauth_clientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthClientInclude<ExtArgs> | null
+    include?: oauth_clientInclude<ExtArgs> | null
     /**
-     * Filter, which OAuthClient to fetch.
+     * Filter, which oauth_client to fetch.
      */
-    where: OAuthClientWhereUniqueInput
+    where: oauth_clientWhereUniqueInput
   }
 
   /**
-   * OAuthClient findFirst
+   * oauth_client findFirst
    */
-  export type OAuthClientFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthClient
+     * Select specific fields to fetch from the oauth_client
      */
-    select?: OAuthClientSelect<ExtArgs> | null
+    select?: oauth_clientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthClient
+     * Omit specific fields from the oauth_client
      */
-    omit?: OAuthClientOmit<ExtArgs> | null
+    omit?: oauth_clientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthClientInclude<ExtArgs> | null
+    include?: oauth_clientInclude<ExtArgs> | null
     /**
-     * Filter, which OAuthClient to fetch.
+     * Filter, which oauth_client to fetch.
      */
-    where?: OAuthClientWhereInput
+    where?: oauth_clientWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of OAuthClients to fetch.
+     * Determine the order of oauth_clients to fetch.
      */
-    orderBy?: OAuthClientOrderByWithRelationInput | OAuthClientOrderByWithRelationInput[]
+    orderBy?: oauth_clientOrderByWithRelationInput | oauth_clientOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for OAuthClients.
+     * Sets the position for searching for oauth_clients.
      */
-    cursor?: OAuthClientWhereUniqueInput
+    cursor?: oauth_clientWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` OAuthClients from the position of the cursor.
+     * Take `±n` oauth_clients from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` OAuthClients.
+     * Skip the first `n` oauth_clients.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of OAuthClients.
+     * Filter by unique combinations of oauth_clients.
      */
-    distinct?: OAuthClientScalarFieldEnum | OAuthClientScalarFieldEnum[]
+    distinct?: Oauth_clientScalarFieldEnum | Oauth_clientScalarFieldEnum[]
   }
 
   /**
-   * OAuthClient findFirstOrThrow
+   * oauth_client findFirstOrThrow
    */
-  export type OAuthClientFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthClient
+     * Select specific fields to fetch from the oauth_client
      */
-    select?: OAuthClientSelect<ExtArgs> | null
+    select?: oauth_clientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthClient
+     * Omit specific fields from the oauth_client
      */
-    omit?: OAuthClientOmit<ExtArgs> | null
+    omit?: oauth_clientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthClientInclude<ExtArgs> | null
+    include?: oauth_clientInclude<ExtArgs> | null
     /**
-     * Filter, which OAuthClient to fetch.
+     * Filter, which oauth_client to fetch.
      */
-    where?: OAuthClientWhereInput
+    where?: oauth_clientWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of OAuthClients to fetch.
+     * Determine the order of oauth_clients to fetch.
      */
-    orderBy?: OAuthClientOrderByWithRelationInput | OAuthClientOrderByWithRelationInput[]
+    orderBy?: oauth_clientOrderByWithRelationInput | oauth_clientOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for OAuthClients.
+     * Sets the position for searching for oauth_clients.
      */
-    cursor?: OAuthClientWhereUniqueInput
+    cursor?: oauth_clientWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` OAuthClients from the position of the cursor.
+     * Take `±n` oauth_clients from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` OAuthClients.
+     * Skip the first `n` oauth_clients.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of OAuthClients.
+     * Filter by unique combinations of oauth_clients.
      */
-    distinct?: OAuthClientScalarFieldEnum | OAuthClientScalarFieldEnum[]
+    distinct?: Oauth_clientScalarFieldEnum | Oauth_clientScalarFieldEnum[]
   }
 
   /**
-   * OAuthClient findMany
+   * oauth_client findMany
    */
-  export type OAuthClientFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthClient
+     * Select specific fields to fetch from the oauth_client
      */
-    select?: OAuthClientSelect<ExtArgs> | null
+    select?: oauth_clientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthClient
+     * Omit specific fields from the oauth_client
      */
-    omit?: OAuthClientOmit<ExtArgs> | null
+    omit?: oauth_clientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthClientInclude<ExtArgs> | null
+    include?: oauth_clientInclude<ExtArgs> | null
     /**
-     * Filter, which OAuthClients to fetch.
+     * Filter, which oauth_clients to fetch.
      */
-    where?: OAuthClientWhereInput
+    where?: oauth_clientWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of OAuthClients to fetch.
+     * Determine the order of oauth_clients to fetch.
      */
-    orderBy?: OAuthClientOrderByWithRelationInput | OAuthClientOrderByWithRelationInput[]
+    orderBy?: oauth_clientOrderByWithRelationInput | oauth_clientOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing OAuthClients.
+     * Sets the position for listing oauth_clients.
      */
-    cursor?: OAuthClientWhereUniqueInput
+    cursor?: oauth_clientWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` OAuthClients from the position of the cursor.
+     * Take `±n` oauth_clients from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` OAuthClients.
+     * Skip the first `n` oauth_clients.
      */
     skip?: number
-    distinct?: OAuthClientScalarFieldEnum | OAuthClientScalarFieldEnum[]
+    distinct?: Oauth_clientScalarFieldEnum | Oauth_clientScalarFieldEnum[]
   }
 
   /**
-   * OAuthClient create
+   * oauth_client create
    */
-  export type OAuthClientCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthClient
+     * Select specific fields to fetch from the oauth_client
      */
-    select?: OAuthClientSelect<ExtArgs> | null
+    select?: oauth_clientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthClient
+     * Omit specific fields from the oauth_client
      */
-    omit?: OAuthClientOmit<ExtArgs> | null
+    omit?: oauth_clientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthClientInclude<ExtArgs> | null
+    include?: oauth_clientInclude<ExtArgs> | null
     /**
-     * The data needed to create a OAuthClient.
+     * The data needed to create a oauth_client.
      */
-    data: XOR<OAuthClientCreateInput, OAuthClientUncheckedCreateInput>
+    data: XOR<oauth_clientCreateInput, oauth_clientUncheckedCreateInput>
   }
 
   /**
-   * OAuthClient createMany
+   * oauth_client createMany
    */
-  export type OAuthClientCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many OAuthClients.
+     * The data used to create many oauth_clients.
      */
-    data: OAuthClientCreateManyInput | OAuthClientCreateManyInput[]
+    data: oauth_clientCreateManyInput | oauth_clientCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * OAuthClient createManyAndReturn
+   * oauth_client createManyAndReturn
    */
-  export type OAuthClientCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthClient
+     * Select specific fields to fetch from the oauth_client
      */
-    select?: OAuthClientSelectCreateManyAndReturn<ExtArgs> | null
+    select?: oauth_clientSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthClient
+     * Omit specific fields from the oauth_client
      */
-    omit?: OAuthClientOmit<ExtArgs> | null
+    omit?: oauth_clientOmit<ExtArgs> | null
     /**
-     * The data used to create many OAuthClients.
+     * The data used to create many oauth_clients.
      */
-    data: OAuthClientCreateManyInput | OAuthClientCreateManyInput[]
+    data: oauth_clientCreateManyInput | oauth_clientCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * OAuthClient update
+   * oauth_client update
    */
-  export type OAuthClientUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthClient
+     * Select specific fields to fetch from the oauth_client
      */
-    select?: OAuthClientSelect<ExtArgs> | null
+    select?: oauth_clientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthClient
+     * Omit specific fields from the oauth_client
      */
-    omit?: OAuthClientOmit<ExtArgs> | null
+    omit?: oauth_clientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthClientInclude<ExtArgs> | null
+    include?: oauth_clientInclude<ExtArgs> | null
     /**
-     * The data needed to update a OAuthClient.
+     * The data needed to update a oauth_client.
      */
-    data: XOR<OAuthClientUpdateInput, OAuthClientUncheckedUpdateInput>
+    data: XOR<oauth_clientUpdateInput, oauth_clientUncheckedUpdateInput>
     /**
-     * Choose, which OAuthClient to update.
+     * Choose, which oauth_client to update.
      */
-    where: OAuthClientWhereUniqueInput
+    where: oauth_clientWhereUniqueInput
   }
 
   /**
-   * OAuthClient updateMany
+   * oauth_client updateMany
    */
-  export type OAuthClientUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update OAuthClients.
+     * The data used to update oauth_clients.
      */
-    data: XOR<OAuthClientUpdateManyMutationInput, OAuthClientUncheckedUpdateManyInput>
+    data: XOR<oauth_clientUpdateManyMutationInput, oauth_clientUncheckedUpdateManyInput>
     /**
-     * Filter which OAuthClients to update
+     * Filter which oauth_clients to update
      */
-    where?: OAuthClientWhereInput
+    where?: oauth_clientWhereInput
     /**
-     * Limit how many OAuthClients to update.
+     * Limit how many oauth_clients to update.
      */
     limit?: number
   }
 
   /**
-   * OAuthClient updateManyAndReturn
+   * oauth_client updateManyAndReturn
    */
-  export type OAuthClientUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthClient
+     * Select specific fields to fetch from the oauth_client
      */
-    select?: OAuthClientSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: oauth_clientSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthClient
+     * Omit specific fields from the oauth_client
      */
-    omit?: OAuthClientOmit<ExtArgs> | null
+    omit?: oauth_clientOmit<ExtArgs> | null
     /**
-     * The data used to update OAuthClients.
+     * The data used to update oauth_clients.
      */
-    data: XOR<OAuthClientUpdateManyMutationInput, OAuthClientUncheckedUpdateManyInput>
+    data: XOR<oauth_clientUpdateManyMutationInput, oauth_clientUncheckedUpdateManyInput>
     /**
-     * Filter which OAuthClients to update
+     * Filter which oauth_clients to update
      */
-    where?: OAuthClientWhereInput
+    where?: oauth_clientWhereInput
     /**
-     * Limit how many OAuthClients to update.
+     * Limit how many oauth_clients to update.
      */
     limit?: number
   }
 
   /**
-   * OAuthClient upsert
+   * oauth_client upsert
    */
-  export type OAuthClientUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthClient
+     * Select specific fields to fetch from the oauth_client
      */
-    select?: OAuthClientSelect<ExtArgs> | null
+    select?: oauth_clientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthClient
+     * Omit specific fields from the oauth_client
      */
-    omit?: OAuthClientOmit<ExtArgs> | null
+    omit?: oauth_clientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthClientInclude<ExtArgs> | null
+    include?: oauth_clientInclude<ExtArgs> | null
     /**
-     * The filter to search for the OAuthClient to update in case it exists.
+     * The filter to search for the oauth_client to update in case it exists.
      */
-    where: OAuthClientWhereUniqueInput
+    where: oauth_clientWhereUniqueInput
     /**
-     * In case the OAuthClient found by the `where` argument doesn't exist, create a new OAuthClient with this data.
+     * In case the oauth_client found by the `where` argument doesn't exist, create a new oauth_client with this data.
      */
-    create: XOR<OAuthClientCreateInput, OAuthClientUncheckedCreateInput>
+    create: XOR<oauth_clientCreateInput, oauth_clientUncheckedCreateInput>
     /**
-     * In case the OAuthClient was found with the provided `where` argument, update it with this data.
+     * In case the oauth_client was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<OAuthClientUpdateInput, OAuthClientUncheckedUpdateInput>
+    update: XOR<oauth_clientUpdateInput, oauth_clientUncheckedUpdateInput>
   }
 
   /**
-   * OAuthClient delete
+   * oauth_client delete
    */
-  export type OAuthClientDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthClient
+     * Select specific fields to fetch from the oauth_client
      */
-    select?: OAuthClientSelect<ExtArgs> | null
+    select?: oauth_clientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthClient
+     * Omit specific fields from the oauth_client
      */
-    omit?: OAuthClientOmit<ExtArgs> | null
+    omit?: oauth_clientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthClientInclude<ExtArgs> | null
+    include?: oauth_clientInclude<ExtArgs> | null
     /**
-     * Filter which OAuthClient to delete.
+     * Filter which oauth_client to delete.
      */
-    where: OAuthClientWhereUniqueInput
+    where: oauth_clientWhereUniqueInput
   }
 
   /**
-   * OAuthClient deleteMany
+   * oauth_client deleteMany
    */
-  export type OAuthClientDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which OAuthClients to delete
+     * Filter which oauth_clients to delete
      */
-    where?: OAuthClientWhereInput
+    where?: oauth_clientWhereInput
     /**
-     * Limit how many OAuthClients to delete.
+     * Limit how many oauth_clients to delete.
      */
     limit?: number
   }
 
   /**
-   * OAuthClient.oauthTokens
+   * oauth_client.oauth_tokens
    */
-  export type OAuthClient$oauthTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_client$oauth_tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelect<ExtArgs> | null
+    select?: oauth_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenInclude<ExtArgs> | null
-    where?: OAuthTokenWhereInput
-    orderBy?: OAuthTokenOrderByWithRelationInput | OAuthTokenOrderByWithRelationInput[]
-    cursor?: OAuthTokenWhereUniqueInput
+    include?: oauth_tokenInclude<ExtArgs> | null
+    where?: oauth_tokenWhereInput
+    orderBy?: oauth_tokenOrderByWithRelationInput | oauth_tokenOrderByWithRelationInput[]
+    cursor?: oauth_tokenWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: OAuthTokenScalarFieldEnum | OAuthTokenScalarFieldEnum[]
+    distinct?: Oauth_tokenScalarFieldEnum | Oauth_tokenScalarFieldEnum[]
   }
 
   /**
-   * OAuthClient without action
+   * oauth_client without action
    */
-  export type OAuthClientDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_clientDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthClient
+     * Select specific fields to fetch from the oauth_client
      */
-    select?: OAuthClientSelect<ExtArgs> | null
+    select?: oauth_clientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthClient
+     * Omit specific fields from the oauth_client
      */
-    omit?: OAuthClientOmit<ExtArgs> | null
+    omit?: oauth_clientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthClientInclude<ExtArgs> | null
+    include?: oauth_clientInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model OAuthToken
+   * Model oauth_token
    */
 
-  export type AggregateOAuthToken = {
-    _count: OAuthTokenCountAggregateOutputType | null
-    _min: OAuthTokenMinAggregateOutputType | null
-    _max: OAuthTokenMaxAggregateOutputType | null
+  export type AggregateOauth_token = {
+    _count: Oauth_tokenCountAggregateOutputType | null
+    _min: Oauth_tokenMinAggregateOutputType | null
+    _max: Oauth_tokenMaxAggregateOutputType | null
   }
 
-  export type OAuthTokenMinAggregateOutputType = {
+  export type Oauth_tokenMinAggregateOutputType = {
     id: string | null
     token: string | null
-    userId: string | null
-    clientId: string | null
+    user_id: string | null
+    client_id: string | null
     scope: string | null
-    expiresAt: Date | null
-    createdAt: Date | null
+    expires_at: Date | null
+    created_at: Date | null
   }
 
-  export type OAuthTokenMaxAggregateOutputType = {
+  export type Oauth_tokenMaxAggregateOutputType = {
     id: string | null
     token: string | null
-    userId: string | null
-    clientId: string | null
+    user_id: string | null
+    client_id: string | null
     scope: string | null
-    expiresAt: Date | null
-    createdAt: Date | null
+    expires_at: Date | null
+    created_at: Date | null
   }
 
-  export type OAuthTokenCountAggregateOutputType = {
+  export type Oauth_tokenCountAggregateOutputType = {
     id: number
     token: number
-    userId: number
-    clientId: number
+    user_id: number
+    client_id: number
     scope: number
-    expiresAt: number
-    createdAt: number
+    expires_at: number
+    created_at: number
     _all: number
   }
 
 
-  export type OAuthTokenMinAggregateInputType = {
+  export type Oauth_tokenMinAggregateInputType = {
     id?: true
     token?: true
-    userId?: true
-    clientId?: true
+    user_id?: true
+    client_id?: true
     scope?: true
-    expiresAt?: true
-    createdAt?: true
+    expires_at?: true
+    created_at?: true
   }
 
-  export type OAuthTokenMaxAggregateInputType = {
+  export type Oauth_tokenMaxAggregateInputType = {
     id?: true
     token?: true
-    userId?: true
-    clientId?: true
+    user_id?: true
+    client_id?: true
     scope?: true
-    expiresAt?: true
-    createdAt?: true
+    expires_at?: true
+    created_at?: true
   }
 
-  export type OAuthTokenCountAggregateInputType = {
+  export type Oauth_tokenCountAggregateInputType = {
     id?: true
     token?: true
-    userId?: true
-    clientId?: true
+    user_id?: true
+    client_id?: true
     scope?: true
-    expiresAt?: true
-    createdAt?: true
+    expires_at?: true
+    created_at?: true
     _all?: true
   }
 
-  export type OAuthTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Oauth_tokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which OAuthToken to aggregate.
+     * Filter which oauth_token to aggregate.
      */
-    where?: OAuthTokenWhereInput
+    where?: oauth_tokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of OAuthTokens to fetch.
+     * Determine the order of oauth_tokens to fetch.
      */
-    orderBy?: OAuthTokenOrderByWithRelationInput | OAuthTokenOrderByWithRelationInput[]
+    orderBy?: oauth_tokenOrderByWithRelationInput | oauth_tokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: OAuthTokenWhereUniqueInput
+    cursor?: oauth_tokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` OAuthTokens from the position of the cursor.
+     * Take `±n` oauth_tokens from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` OAuthTokens.
+     * Skip the first `n` oauth_tokens.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned OAuthTokens
+     * Count returned oauth_tokens
     **/
-    _count?: true | OAuthTokenCountAggregateInputType
+    _count?: true | Oauth_tokenCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: OAuthTokenMinAggregateInputType
+    _min?: Oauth_tokenMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: OAuthTokenMaxAggregateInputType
+    _max?: Oauth_tokenMaxAggregateInputType
   }
 
-  export type GetOAuthTokenAggregateType<T extends OAuthTokenAggregateArgs> = {
-        [P in keyof T & keyof AggregateOAuthToken]: P extends '_count' | 'count'
+  export type GetOauth_tokenAggregateType<T extends Oauth_tokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateOauth_token]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateOAuthToken[P]>
-      : GetScalarType<T[P], AggregateOAuthToken[P]>
+        : GetScalarType<T[P], AggregateOauth_token[P]>
+      : GetScalarType<T[P], AggregateOauth_token[P]>
   }
 
 
 
 
-  export type OAuthTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OAuthTokenWhereInput
-    orderBy?: OAuthTokenOrderByWithAggregationInput | OAuthTokenOrderByWithAggregationInput[]
-    by: OAuthTokenScalarFieldEnum[] | OAuthTokenScalarFieldEnum
-    having?: OAuthTokenScalarWhereWithAggregatesInput
+  export type oauth_tokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: oauth_tokenWhereInput
+    orderBy?: oauth_tokenOrderByWithAggregationInput | oauth_tokenOrderByWithAggregationInput[]
+    by: Oauth_tokenScalarFieldEnum[] | Oauth_tokenScalarFieldEnum
+    having?: oauth_tokenScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: OAuthTokenCountAggregateInputType | true
-    _min?: OAuthTokenMinAggregateInputType
-    _max?: OAuthTokenMaxAggregateInputType
+    _count?: Oauth_tokenCountAggregateInputType | true
+    _min?: Oauth_tokenMinAggregateInputType
+    _max?: Oauth_tokenMaxAggregateInputType
   }
 
-  export type OAuthTokenGroupByOutputType = {
+  export type Oauth_tokenGroupByOutputType = {
     id: string
     token: string
-    userId: string
-    clientId: string
+    user_id: string
+    client_id: string
     scope: string | null
-    expiresAt: Date | null
-    createdAt: Date
-    _count: OAuthTokenCountAggregateOutputType | null
-    _min: OAuthTokenMinAggregateOutputType | null
-    _max: OAuthTokenMaxAggregateOutputType | null
+    expires_at: Date | null
+    created_at: Date
+    _count: Oauth_tokenCountAggregateOutputType | null
+    _min: Oauth_tokenMinAggregateOutputType | null
+    _max: Oauth_tokenMaxAggregateOutputType | null
   }
 
-  type GetOAuthTokenGroupByPayload<T extends OAuthTokenGroupByArgs> = Prisma.PrismaPromise<
+  type GetOauth_tokenGroupByPayload<T extends oauth_tokenGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<OAuthTokenGroupByOutputType, T['by']> &
+      PickEnumerable<Oauth_tokenGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof OAuthTokenGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof Oauth_tokenGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], OAuthTokenGroupByOutputType[P]>
-            : GetScalarType<T[P], OAuthTokenGroupByOutputType[P]>
+              : GetScalarType<T[P], Oauth_tokenGroupByOutputType[P]>
+            : GetScalarType<T[P], Oauth_tokenGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type OAuthTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type oauth_tokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     token?: boolean
-    userId?: boolean
-    clientId?: boolean
+    user_id?: boolean
+    client_id?: boolean
     scope?: boolean
-    expiresAt?: boolean
-    createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["oAuthToken"]>
+    expires_at?: boolean
+    created_at?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+    client?: boolean | oauth_clientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["oauth_token"]>
 
-  export type OAuthTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type oauth_tokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     token?: boolean
-    userId?: boolean
-    clientId?: boolean
+    user_id?: boolean
+    client_id?: boolean
     scope?: boolean
-    expiresAt?: boolean
-    createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["oAuthToken"]>
+    expires_at?: boolean
+    created_at?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+    client?: boolean | oauth_clientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["oauth_token"]>
 
-  export type OAuthTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type oauth_tokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     token?: boolean
-    userId?: boolean
-    clientId?: boolean
+    user_id?: boolean
+    client_id?: boolean
     scope?: boolean
-    expiresAt?: boolean
-    createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["oAuthToken"]>
+    expires_at?: boolean
+    created_at?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+    client?: boolean | oauth_clientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["oauth_token"]>
 
-  export type OAuthTokenSelectScalar = {
+  export type oauth_tokenSelectScalar = {
     id?: boolean
     token?: boolean
-    userId?: boolean
-    clientId?: boolean
+    user_id?: boolean
+    client_id?: boolean
     scope?: boolean
-    expiresAt?: boolean
-    createdAt?: boolean
+    expires_at?: boolean
+    created_at?: boolean
   }
 
-  export type OAuthTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "userId" | "clientId" | "scope" | "expiresAt" | "createdAt", ExtArgs["result"]["oAuthToken"]>
-  export type OAuthTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+  export type oauth_tokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "user_id" | "client_id" | "scope" | "expires_at" | "created_at", ExtArgs["result"]["oauth_token"]>
+  export type oauth_tokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+    client?: boolean | oauth_clientDefaultArgs<ExtArgs>
   }
-  export type OAuthTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+  export type oauth_tokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+    client?: boolean | oauth_clientDefaultArgs<ExtArgs>
   }
-  export type OAuthTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+  export type oauth_tokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+    client?: boolean | oauth_clientDefaultArgs<ExtArgs>
   }
 
-  export type $OAuthTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "OAuthToken"
+  export type $oauth_tokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "oauth_token"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      client: Prisma.$OAuthClientPayload<ExtArgs>
+      user: Prisma.$userPayload<ExtArgs>
+      client: Prisma.$oauth_clientPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       token: string
-      userId: string
-      clientId: string
+      user_id: string
+      client_id: string
       scope: string | null
-      expiresAt: Date | null
-      createdAt: Date
-    }, ExtArgs["result"]["oAuthToken"]>
+      expires_at: Date | null
+      created_at: Date
+    }, ExtArgs["result"]["oauth_token"]>
     composites: {}
   }
 
-  type OAuthTokenGetPayload<S extends boolean | null | undefined | OAuthTokenDefaultArgs> = $Result.GetResult<Prisma.$OAuthTokenPayload, S>
+  type oauth_tokenGetPayload<S extends boolean | null | undefined | oauth_tokenDefaultArgs> = $Result.GetResult<Prisma.$oauth_tokenPayload, S>
 
-  type OAuthTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<OAuthTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: OAuthTokenCountAggregateInputType | true
+  type oauth_tokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<oauth_tokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Oauth_tokenCountAggregateInputType | true
     }
 
-  export interface OAuthTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OAuthToken'], meta: { name: 'OAuthToken' } }
+  export interface oauth_tokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['oauth_token'], meta: { name: 'oauth_token' } }
     /**
-     * Find zero or one OAuthToken that matches the filter.
-     * @param {OAuthTokenFindUniqueArgs} args - Arguments to find a OAuthToken
+     * Find zero or one Oauth_token that matches the filter.
+     * @param {oauth_tokenFindUniqueArgs} args - Arguments to find a Oauth_token
      * @example
-     * // Get one OAuthToken
-     * const oAuthToken = await prisma.oAuthToken.findUnique({
+     * // Get one Oauth_token
+     * const oauth_token = await prisma.oauth_token.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends OAuthTokenFindUniqueArgs>(args: SelectSubset<T, OAuthTokenFindUniqueArgs<ExtArgs>>): Prisma__OAuthTokenClient<$Result.GetResult<Prisma.$OAuthTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends oauth_tokenFindUniqueArgs>(args: SelectSubset<T, oauth_tokenFindUniqueArgs<ExtArgs>>): Prisma__oauth_tokenClient<$Result.GetResult<Prisma.$oauth_tokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one OAuthToken that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Oauth_token that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {OAuthTokenFindUniqueOrThrowArgs} args - Arguments to find a OAuthToken
+     * @param {oauth_tokenFindUniqueOrThrowArgs} args - Arguments to find a Oauth_token
      * @example
-     * // Get one OAuthToken
-     * const oAuthToken = await prisma.oAuthToken.findUniqueOrThrow({
+     * // Get one Oauth_token
+     * const oauth_token = await prisma.oauth_token.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends OAuthTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, OAuthTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OAuthTokenClient<$Result.GetResult<Prisma.$OAuthTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends oauth_tokenFindUniqueOrThrowArgs>(args: SelectSubset<T, oauth_tokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__oauth_tokenClient<$Result.GetResult<Prisma.$oauth_tokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first OAuthToken that matches the filter.
+     * Find the first Oauth_token that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthTokenFindFirstArgs} args - Arguments to find a OAuthToken
+     * @param {oauth_tokenFindFirstArgs} args - Arguments to find a Oauth_token
      * @example
-     * // Get one OAuthToken
-     * const oAuthToken = await prisma.oAuthToken.findFirst({
+     * // Get one Oauth_token
+     * const oauth_token = await prisma.oauth_token.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends OAuthTokenFindFirstArgs>(args?: SelectSubset<T, OAuthTokenFindFirstArgs<ExtArgs>>): Prisma__OAuthTokenClient<$Result.GetResult<Prisma.$OAuthTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends oauth_tokenFindFirstArgs>(args?: SelectSubset<T, oauth_tokenFindFirstArgs<ExtArgs>>): Prisma__oauth_tokenClient<$Result.GetResult<Prisma.$oauth_tokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first OAuthToken that matches the filter or
+     * Find the first Oauth_token that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthTokenFindFirstOrThrowArgs} args - Arguments to find a OAuthToken
+     * @param {oauth_tokenFindFirstOrThrowArgs} args - Arguments to find a Oauth_token
      * @example
-     * // Get one OAuthToken
-     * const oAuthToken = await prisma.oAuthToken.findFirstOrThrow({
+     * // Get one Oauth_token
+     * const oauth_token = await prisma.oauth_token.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends OAuthTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, OAuthTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__OAuthTokenClient<$Result.GetResult<Prisma.$OAuthTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends oauth_tokenFindFirstOrThrowArgs>(args?: SelectSubset<T, oauth_tokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__oauth_tokenClient<$Result.GetResult<Prisma.$oauth_tokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more OAuthTokens that matches the filter.
+     * Find zero or more Oauth_tokens that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {oauth_tokenFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all OAuthTokens
-     * const oAuthTokens = await prisma.oAuthToken.findMany()
+     * // Get all Oauth_tokens
+     * const oauth_tokens = await prisma.oauth_token.findMany()
      * 
-     * // Get first 10 OAuthTokens
-     * const oAuthTokens = await prisma.oAuthToken.findMany({ take: 10 })
+     * // Get first 10 Oauth_tokens
+     * const oauth_tokens = await prisma.oauth_token.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const oAuthTokenWithIdOnly = await prisma.oAuthToken.findMany({ select: { id: true } })
+     * const oauth_tokenWithIdOnly = await prisma.oauth_token.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends OAuthTokenFindManyArgs>(args?: SelectSubset<T, OAuthTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends oauth_tokenFindManyArgs>(args?: SelectSubset<T, oauth_tokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$oauth_tokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a OAuthToken.
-     * @param {OAuthTokenCreateArgs} args - Arguments to create a OAuthToken.
+     * Create a Oauth_token.
+     * @param {oauth_tokenCreateArgs} args - Arguments to create a Oauth_token.
      * @example
-     * // Create one OAuthToken
-     * const OAuthToken = await prisma.oAuthToken.create({
+     * // Create one Oauth_token
+     * const Oauth_token = await prisma.oauth_token.create({
      *   data: {
-     *     // ... data to create a OAuthToken
+     *     // ... data to create a Oauth_token
      *   }
      * })
      * 
      */
-    create<T extends OAuthTokenCreateArgs>(args: SelectSubset<T, OAuthTokenCreateArgs<ExtArgs>>): Prisma__OAuthTokenClient<$Result.GetResult<Prisma.$OAuthTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends oauth_tokenCreateArgs>(args: SelectSubset<T, oauth_tokenCreateArgs<ExtArgs>>): Prisma__oauth_tokenClient<$Result.GetResult<Prisma.$oauth_tokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many OAuthTokens.
-     * @param {OAuthTokenCreateManyArgs} args - Arguments to create many OAuthTokens.
+     * Create many Oauth_tokens.
+     * @param {oauth_tokenCreateManyArgs} args - Arguments to create many Oauth_tokens.
      * @example
-     * // Create many OAuthTokens
-     * const oAuthToken = await prisma.oAuthToken.createMany({
+     * // Create many Oauth_tokens
+     * const oauth_token = await prisma.oauth_token.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends OAuthTokenCreateManyArgs>(args?: SelectSubset<T, OAuthTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends oauth_tokenCreateManyArgs>(args?: SelectSubset<T, oauth_tokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many OAuthTokens and returns the data saved in the database.
-     * @param {OAuthTokenCreateManyAndReturnArgs} args - Arguments to create many OAuthTokens.
+     * Create many Oauth_tokens and returns the data saved in the database.
+     * @param {oauth_tokenCreateManyAndReturnArgs} args - Arguments to create many Oauth_tokens.
      * @example
-     * // Create many OAuthTokens
-     * const oAuthToken = await prisma.oAuthToken.createManyAndReturn({
+     * // Create many Oauth_tokens
+     * const oauth_token = await prisma.oauth_token.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many OAuthTokens and only return the `id`
-     * const oAuthTokenWithIdOnly = await prisma.oAuthToken.createManyAndReturn({
+     * // Create many Oauth_tokens and only return the `id`
+     * const oauth_tokenWithIdOnly = await prisma.oauth_token.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -3966,28 +3966,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends OAuthTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, OAuthTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends oauth_tokenCreateManyAndReturnArgs>(args?: SelectSubset<T, oauth_tokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$oauth_tokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a OAuthToken.
-     * @param {OAuthTokenDeleteArgs} args - Arguments to delete one OAuthToken.
+     * Delete a Oauth_token.
+     * @param {oauth_tokenDeleteArgs} args - Arguments to delete one Oauth_token.
      * @example
-     * // Delete one OAuthToken
-     * const OAuthToken = await prisma.oAuthToken.delete({
+     * // Delete one Oauth_token
+     * const Oauth_token = await prisma.oauth_token.delete({
      *   where: {
-     *     // ... filter to delete one OAuthToken
+     *     // ... filter to delete one Oauth_token
      *   }
      * })
      * 
      */
-    delete<T extends OAuthTokenDeleteArgs>(args: SelectSubset<T, OAuthTokenDeleteArgs<ExtArgs>>): Prisma__OAuthTokenClient<$Result.GetResult<Prisma.$OAuthTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends oauth_tokenDeleteArgs>(args: SelectSubset<T, oauth_tokenDeleteArgs<ExtArgs>>): Prisma__oauth_tokenClient<$Result.GetResult<Prisma.$oauth_tokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one OAuthToken.
-     * @param {OAuthTokenUpdateArgs} args - Arguments to update one OAuthToken.
+     * Update one Oauth_token.
+     * @param {oauth_tokenUpdateArgs} args - Arguments to update one Oauth_token.
      * @example
-     * // Update one OAuthToken
-     * const oAuthToken = await prisma.oAuthToken.update({
+     * // Update one Oauth_token
+     * const oauth_token = await prisma.oauth_token.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3997,30 +3997,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends OAuthTokenUpdateArgs>(args: SelectSubset<T, OAuthTokenUpdateArgs<ExtArgs>>): Prisma__OAuthTokenClient<$Result.GetResult<Prisma.$OAuthTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends oauth_tokenUpdateArgs>(args: SelectSubset<T, oauth_tokenUpdateArgs<ExtArgs>>): Prisma__oauth_tokenClient<$Result.GetResult<Prisma.$oauth_tokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more OAuthTokens.
-     * @param {OAuthTokenDeleteManyArgs} args - Arguments to filter OAuthTokens to delete.
+     * Delete zero or more Oauth_tokens.
+     * @param {oauth_tokenDeleteManyArgs} args - Arguments to filter Oauth_tokens to delete.
      * @example
-     * // Delete a few OAuthTokens
-     * const { count } = await prisma.oAuthToken.deleteMany({
+     * // Delete a few Oauth_tokens
+     * const { count } = await prisma.oauth_token.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends OAuthTokenDeleteManyArgs>(args?: SelectSubset<T, OAuthTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends oauth_tokenDeleteManyArgs>(args?: SelectSubset<T, oauth_tokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more OAuthTokens.
+     * Update zero or more Oauth_tokens.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {oauth_tokenUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many OAuthTokens
-     * const oAuthToken = await prisma.oAuthToken.updateMany({
+     * // Update many Oauth_tokens
+     * const oauth_token = await prisma.oauth_token.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4030,14 +4030,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends OAuthTokenUpdateManyArgs>(args: SelectSubset<T, OAuthTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends oauth_tokenUpdateManyArgs>(args: SelectSubset<T, oauth_tokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more OAuthTokens and returns the data updated in the database.
-     * @param {OAuthTokenUpdateManyAndReturnArgs} args - Arguments to update many OAuthTokens.
+     * Update zero or more Oauth_tokens and returns the data updated in the database.
+     * @param {oauth_tokenUpdateManyAndReturnArgs} args - Arguments to update many Oauth_tokens.
      * @example
-     * // Update many OAuthTokens
-     * const oAuthToken = await prisma.oAuthToken.updateManyAndReturn({
+     * // Update many Oauth_tokens
+     * const oauth_token = await prisma.oauth_token.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4046,8 +4046,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more OAuthTokens and only return the `id`
-     * const oAuthTokenWithIdOnly = await prisma.oAuthToken.updateManyAndReturn({
+     * // Update zero or more Oauth_tokens and only return the `id`
+     * const oauth_tokenWithIdOnly = await prisma.oauth_token.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -4060,56 +4060,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends OAuthTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, OAuthTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends oauth_tokenUpdateManyAndReturnArgs>(args: SelectSubset<T, oauth_tokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$oauth_tokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one OAuthToken.
-     * @param {OAuthTokenUpsertArgs} args - Arguments to update or create a OAuthToken.
+     * Create or update one Oauth_token.
+     * @param {oauth_tokenUpsertArgs} args - Arguments to update or create a Oauth_token.
      * @example
-     * // Update or create a OAuthToken
-     * const oAuthToken = await prisma.oAuthToken.upsert({
+     * // Update or create a Oauth_token
+     * const oauth_token = await prisma.oauth_token.upsert({
      *   create: {
-     *     // ... data to create a OAuthToken
+     *     // ... data to create a Oauth_token
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the OAuthToken we want to update
+     *     // ... the filter for the Oauth_token we want to update
      *   }
      * })
      */
-    upsert<T extends OAuthTokenUpsertArgs>(args: SelectSubset<T, OAuthTokenUpsertArgs<ExtArgs>>): Prisma__OAuthTokenClient<$Result.GetResult<Prisma.$OAuthTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends oauth_tokenUpsertArgs>(args: SelectSubset<T, oauth_tokenUpsertArgs<ExtArgs>>): Prisma__oauth_tokenClient<$Result.GetResult<Prisma.$oauth_tokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of OAuthTokens.
+     * Count the number of Oauth_tokens.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthTokenCountArgs} args - Arguments to filter OAuthTokens to count.
+     * @param {oauth_tokenCountArgs} args - Arguments to filter Oauth_tokens to count.
      * @example
-     * // Count the number of OAuthTokens
-     * const count = await prisma.oAuthToken.count({
+     * // Count the number of Oauth_tokens
+     * const count = await prisma.oauth_token.count({
      *   where: {
-     *     // ... the filter for the OAuthTokens we want to count
+     *     // ... the filter for the Oauth_tokens we want to count
      *   }
      * })
     **/
-    count<T extends OAuthTokenCountArgs>(
-      args?: Subset<T, OAuthTokenCountArgs>,
+    count<T extends oauth_tokenCountArgs>(
+      args?: Subset<T, oauth_tokenCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], OAuthTokenCountAggregateOutputType>
+          : GetScalarType<T['select'], Oauth_tokenCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a OAuthToken.
+     * Allows you to perform aggregations operations on a Oauth_token.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {Oauth_tokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -4129,13 +4129,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends OAuthTokenAggregateArgs>(args: Subset<T, OAuthTokenAggregateArgs>): Prisma.PrismaPromise<GetOAuthTokenAggregateType<T>>
+    aggregate<T extends Oauth_tokenAggregateArgs>(args: Subset<T, Oauth_tokenAggregateArgs>): Prisma.PrismaPromise<GetOauth_tokenAggregateType<T>>
 
     /**
-     * Group by OAuthToken.
+     * Group by Oauth_token.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthTokenGroupByArgs} args - Group by arguments.
+     * @param {oauth_tokenGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -4150,14 +4150,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends OAuthTokenGroupByArgs,
+      T extends oauth_tokenGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: OAuthTokenGroupByArgs['orderBy'] }
-        : { orderBy?: OAuthTokenGroupByArgs['orderBy'] },
+        ? { orderBy: oauth_tokenGroupByArgs['orderBy'] }
+        : { orderBy?: oauth_tokenGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -4206,23 +4206,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, OAuthTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOAuthTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, oauth_tokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOauth_tokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the OAuthToken model
+   * Fields of the oauth_token model
    */
-  readonly fields: OAuthTokenFieldRefs;
+  readonly fields: oauth_tokenFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for OAuthToken.
+   * The delegate class that acts as a "Promise-like" for oauth_token.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__OAuthTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__oauth_tokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    client<T extends OAuthClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClientDefaultArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    client<T extends oauth_clientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, oauth_clientDefaultArgs<ExtArgs>>): Prisma__oauth_clientClient<$Result.GetResult<Prisma.$oauth_clientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4249,787 +4249,787 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the OAuthToken model
+   * Fields of the oauth_token model
    */
-  interface OAuthTokenFieldRefs {
-    readonly id: FieldRef<"OAuthToken", 'String'>
-    readonly token: FieldRef<"OAuthToken", 'String'>
-    readonly userId: FieldRef<"OAuthToken", 'String'>
-    readonly clientId: FieldRef<"OAuthToken", 'String'>
-    readonly scope: FieldRef<"OAuthToken", 'String'>
-    readonly expiresAt: FieldRef<"OAuthToken", 'DateTime'>
-    readonly createdAt: FieldRef<"OAuthToken", 'DateTime'>
+  interface oauth_tokenFieldRefs {
+    readonly id: FieldRef<"oauth_token", 'String'>
+    readonly token: FieldRef<"oauth_token", 'String'>
+    readonly user_id: FieldRef<"oauth_token", 'String'>
+    readonly client_id: FieldRef<"oauth_token", 'String'>
+    readonly scope: FieldRef<"oauth_token", 'String'>
+    readonly expires_at: FieldRef<"oauth_token", 'DateTime'>
+    readonly created_at: FieldRef<"oauth_token", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * OAuthToken findUnique
+   * oauth_token findUnique
    */
-  export type OAuthTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelect<ExtArgs> | null
+    select?: oauth_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenInclude<ExtArgs> | null
+    include?: oauth_tokenInclude<ExtArgs> | null
     /**
-     * Filter, which OAuthToken to fetch.
+     * Filter, which oauth_token to fetch.
      */
-    where: OAuthTokenWhereUniqueInput
+    where: oauth_tokenWhereUniqueInput
   }
 
   /**
-   * OAuthToken findUniqueOrThrow
+   * oauth_token findUniqueOrThrow
    */
-  export type OAuthTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelect<ExtArgs> | null
+    select?: oauth_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenInclude<ExtArgs> | null
+    include?: oauth_tokenInclude<ExtArgs> | null
     /**
-     * Filter, which OAuthToken to fetch.
+     * Filter, which oauth_token to fetch.
      */
-    where: OAuthTokenWhereUniqueInput
+    where: oauth_tokenWhereUniqueInput
   }
 
   /**
-   * OAuthToken findFirst
+   * oauth_token findFirst
    */
-  export type OAuthTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelect<ExtArgs> | null
+    select?: oauth_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenInclude<ExtArgs> | null
+    include?: oauth_tokenInclude<ExtArgs> | null
     /**
-     * Filter, which OAuthToken to fetch.
+     * Filter, which oauth_token to fetch.
      */
-    where?: OAuthTokenWhereInput
+    where?: oauth_tokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of OAuthTokens to fetch.
+     * Determine the order of oauth_tokens to fetch.
      */
-    orderBy?: OAuthTokenOrderByWithRelationInput | OAuthTokenOrderByWithRelationInput[]
+    orderBy?: oauth_tokenOrderByWithRelationInput | oauth_tokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for OAuthTokens.
+     * Sets the position for searching for oauth_tokens.
      */
-    cursor?: OAuthTokenWhereUniqueInput
+    cursor?: oauth_tokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` OAuthTokens from the position of the cursor.
+     * Take `±n` oauth_tokens from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` OAuthTokens.
+     * Skip the first `n` oauth_tokens.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of OAuthTokens.
+     * Filter by unique combinations of oauth_tokens.
      */
-    distinct?: OAuthTokenScalarFieldEnum | OAuthTokenScalarFieldEnum[]
+    distinct?: Oauth_tokenScalarFieldEnum | Oauth_tokenScalarFieldEnum[]
   }
 
   /**
-   * OAuthToken findFirstOrThrow
+   * oauth_token findFirstOrThrow
    */
-  export type OAuthTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelect<ExtArgs> | null
+    select?: oauth_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenInclude<ExtArgs> | null
+    include?: oauth_tokenInclude<ExtArgs> | null
     /**
-     * Filter, which OAuthToken to fetch.
+     * Filter, which oauth_token to fetch.
      */
-    where?: OAuthTokenWhereInput
+    where?: oauth_tokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of OAuthTokens to fetch.
+     * Determine the order of oauth_tokens to fetch.
      */
-    orderBy?: OAuthTokenOrderByWithRelationInput | OAuthTokenOrderByWithRelationInput[]
+    orderBy?: oauth_tokenOrderByWithRelationInput | oauth_tokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for OAuthTokens.
+     * Sets the position for searching for oauth_tokens.
      */
-    cursor?: OAuthTokenWhereUniqueInput
+    cursor?: oauth_tokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` OAuthTokens from the position of the cursor.
+     * Take `±n` oauth_tokens from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` OAuthTokens.
+     * Skip the first `n` oauth_tokens.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of OAuthTokens.
+     * Filter by unique combinations of oauth_tokens.
      */
-    distinct?: OAuthTokenScalarFieldEnum | OAuthTokenScalarFieldEnum[]
+    distinct?: Oauth_tokenScalarFieldEnum | Oauth_tokenScalarFieldEnum[]
   }
 
   /**
-   * OAuthToken findMany
+   * oauth_token findMany
    */
-  export type OAuthTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelect<ExtArgs> | null
+    select?: oauth_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenInclude<ExtArgs> | null
+    include?: oauth_tokenInclude<ExtArgs> | null
     /**
-     * Filter, which OAuthTokens to fetch.
+     * Filter, which oauth_tokens to fetch.
      */
-    where?: OAuthTokenWhereInput
+    where?: oauth_tokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of OAuthTokens to fetch.
+     * Determine the order of oauth_tokens to fetch.
      */
-    orderBy?: OAuthTokenOrderByWithRelationInput | OAuthTokenOrderByWithRelationInput[]
+    orderBy?: oauth_tokenOrderByWithRelationInput | oauth_tokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing OAuthTokens.
+     * Sets the position for listing oauth_tokens.
      */
-    cursor?: OAuthTokenWhereUniqueInput
+    cursor?: oauth_tokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` OAuthTokens from the position of the cursor.
+     * Take `±n` oauth_tokens from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` OAuthTokens.
+     * Skip the first `n` oauth_tokens.
      */
     skip?: number
-    distinct?: OAuthTokenScalarFieldEnum | OAuthTokenScalarFieldEnum[]
+    distinct?: Oauth_tokenScalarFieldEnum | Oauth_tokenScalarFieldEnum[]
   }
 
   /**
-   * OAuthToken create
+   * oauth_token create
    */
-  export type OAuthTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelect<ExtArgs> | null
+    select?: oauth_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenInclude<ExtArgs> | null
+    include?: oauth_tokenInclude<ExtArgs> | null
     /**
-     * The data needed to create a OAuthToken.
+     * The data needed to create a oauth_token.
      */
-    data: XOR<OAuthTokenCreateInput, OAuthTokenUncheckedCreateInput>
+    data: XOR<oauth_tokenCreateInput, oauth_tokenUncheckedCreateInput>
   }
 
   /**
-   * OAuthToken createMany
+   * oauth_token createMany
    */
-  export type OAuthTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many OAuthTokens.
+     * The data used to create many oauth_tokens.
      */
-    data: OAuthTokenCreateManyInput | OAuthTokenCreateManyInput[]
+    data: oauth_tokenCreateManyInput | oauth_tokenCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * OAuthToken createManyAndReturn
+   * oauth_token createManyAndReturn
    */
-  export type OAuthTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelectCreateManyAndReturn<ExtArgs> | null
+    select?: oauth_tokenSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
-     * The data used to create many OAuthTokens.
+     * The data used to create many oauth_tokens.
      */
-    data: OAuthTokenCreateManyInput | OAuthTokenCreateManyInput[]
+    data: oauth_tokenCreateManyInput | oauth_tokenCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: oauth_tokenIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * OAuthToken update
+   * oauth_token update
    */
-  export type OAuthTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelect<ExtArgs> | null
+    select?: oauth_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenInclude<ExtArgs> | null
+    include?: oauth_tokenInclude<ExtArgs> | null
     /**
-     * The data needed to update a OAuthToken.
+     * The data needed to update a oauth_token.
      */
-    data: XOR<OAuthTokenUpdateInput, OAuthTokenUncheckedUpdateInput>
+    data: XOR<oauth_tokenUpdateInput, oauth_tokenUncheckedUpdateInput>
     /**
-     * Choose, which OAuthToken to update.
+     * Choose, which oauth_token to update.
      */
-    where: OAuthTokenWhereUniqueInput
+    where: oauth_tokenWhereUniqueInput
   }
 
   /**
-   * OAuthToken updateMany
+   * oauth_token updateMany
    */
-  export type OAuthTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update OAuthTokens.
+     * The data used to update oauth_tokens.
      */
-    data: XOR<OAuthTokenUpdateManyMutationInput, OAuthTokenUncheckedUpdateManyInput>
+    data: XOR<oauth_tokenUpdateManyMutationInput, oauth_tokenUncheckedUpdateManyInput>
     /**
-     * Filter which OAuthTokens to update
+     * Filter which oauth_tokens to update
      */
-    where?: OAuthTokenWhereInput
+    where?: oauth_tokenWhereInput
     /**
-     * Limit how many OAuthTokens to update.
+     * Limit how many oauth_tokens to update.
      */
     limit?: number
   }
 
   /**
-   * OAuthToken updateManyAndReturn
+   * oauth_token updateManyAndReturn
    */
-  export type OAuthTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: oauth_tokenSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
-     * The data used to update OAuthTokens.
+     * The data used to update oauth_tokens.
      */
-    data: XOR<OAuthTokenUpdateManyMutationInput, OAuthTokenUncheckedUpdateManyInput>
+    data: XOR<oauth_tokenUpdateManyMutationInput, oauth_tokenUncheckedUpdateManyInput>
     /**
-     * Filter which OAuthTokens to update
+     * Filter which oauth_tokens to update
      */
-    where?: OAuthTokenWhereInput
+    where?: oauth_tokenWhereInput
     /**
-     * Limit how many OAuthTokens to update.
+     * Limit how many oauth_tokens to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: oauth_tokenIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * OAuthToken upsert
+   * oauth_token upsert
    */
-  export type OAuthTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelect<ExtArgs> | null
+    select?: oauth_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenInclude<ExtArgs> | null
+    include?: oauth_tokenInclude<ExtArgs> | null
     /**
-     * The filter to search for the OAuthToken to update in case it exists.
+     * The filter to search for the oauth_token to update in case it exists.
      */
-    where: OAuthTokenWhereUniqueInput
+    where: oauth_tokenWhereUniqueInput
     /**
-     * In case the OAuthToken found by the `where` argument doesn't exist, create a new OAuthToken with this data.
+     * In case the oauth_token found by the `where` argument doesn't exist, create a new oauth_token with this data.
      */
-    create: XOR<OAuthTokenCreateInput, OAuthTokenUncheckedCreateInput>
+    create: XOR<oauth_tokenCreateInput, oauth_tokenUncheckedCreateInput>
     /**
-     * In case the OAuthToken was found with the provided `where` argument, update it with this data.
+     * In case the oauth_token was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<OAuthTokenUpdateInput, OAuthTokenUncheckedUpdateInput>
+    update: XOR<oauth_tokenUpdateInput, oauth_tokenUncheckedUpdateInput>
   }
 
   /**
-   * OAuthToken delete
+   * oauth_token delete
    */
-  export type OAuthTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelect<ExtArgs> | null
+    select?: oauth_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenInclude<ExtArgs> | null
+    include?: oauth_tokenInclude<ExtArgs> | null
     /**
-     * Filter which OAuthToken to delete.
+     * Filter which oauth_token to delete.
      */
-    where: OAuthTokenWhereUniqueInput
+    where: oauth_tokenWhereUniqueInput
   }
 
   /**
-   * OAuthToken deleteMany
+   * oauth_token deleteMany
    */
-  export type OAuthTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which OAuthTokens to delete
+     * Filter which oauth_tokens to delete
      */
-    where?: OAuthTokenWhereInput
+    where?: oauth_tokenWhereInput
     /**
-     * Limit how many OAuthTokens to delete.
+     * Limit how many oauth_tokens to delete.
      */
     limit?: number
   }
 
   /**
-   * OAuthToken without action
+   * oauth_token without action
    */
-  export type OAuthTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type oauth_tokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OAuthToken
+     * Select specific fields to fetch from the oauth_token
      */
-    select?: OAuthTokenSelect<ExtArgs> | null
+    select?: oauth_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the OAuthToken
+     * Omit specific fields from the oauth_token
      */
-    omit?: OAuthTokenOmit<ExtArgs> | null
+    omit?: oauth_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OAuthTokenInclude<ExtArgs> | null
+    include?: oauth_tokenInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model RefreshToken
+   * Model refresh_token
    */
 
-  export type AggregateRefreshToken = {
-    _count: RefreshTokenCountAggregateOutputType | null
-    _min: RefreshTokenMinAggregateOutputType | null
-    _max: RefreshTokenMaxAggregateOutputType | null
+  export type AggregateRefresh_token = {
+    _count: Refresh_tokenCountAggregateOutputType | null
+    _min: Refresh_tokenMinAggregateOutputType | null
+    _max: Refresh_tokenMaxAggregateOutputType | null
   }
 
-  export type RefreshTokenMinAggregateOutputType = {
+  export type Refresh_tokenMinAggregateOutputType = {
     id: string | null
     token: string | null
-    userId: string | null
-    expiresAt: Date | null
-    revokedAt: Date | null
-    createdAt: Date | null
+    user_id: string | null
+    expires_at: Date | null
+    revoked_at: Date | null
+    created_at: Date | null
   }
 
-  export type RefreshTokenMaxAggregateOutputType = {
+  export type Refresh_tokenMaxAggregateOutputType = {
     id: string | null
     token: string | null
-    userId: string | null
-    expiresAt: Date | null
-    revokedAt: Date | null
-    createdAt: Date | null
+    user_id: string | null
+    expires_at: Date | null
+    revoked_at: Date | null
+    created_at: Date | null
   }
 
-  export type RefreshTokenCountAggregateOutputType = {
+  export type Refresh_tokenCountAggregateOutputType = {
     id: number
     token: number
-    userId: number
-    expiresAt: number
-    revokedAt: number
-    createdAt: number
+    user_id: number
+    expires_at: number
+    revoked_at: number
+    created_at: number
     _all: number
   }
 
 
-  export type RefreshTokenMinAggregateInputType = {
+  export type Refresh_tokenMinAggregateInputType = {
     id?: true
     token?: true
-    userId?: true
-    expiresAt?: true
-    revokedAt?: true
-    createdAt?: true
+    user_id?: true
+    expires_at?: true
+    revoked_at?: true
+    created_at?: true
   }
 
-  export type RefreshTokenMaxAggregateInputType = {
+  export type Refresh_tokenMaxAggregateInputType = {
     id?: true
     token?: true
-    userId?: true
-    expiresAt?: true
-    revokedAt?: true
-    createdAt?: true
+    user_id?: true
+    expires_at?: true
+    revoked_at?: true
+    created_at?: true
   }
 
-  export type RefreshTokenCountAggregateInputType = {
+  export type Refresh_tokenCountAggregateInputType = {
     id?: true
     token?: true
-    userId?: true
-    expiresAt?: true
-    revokedAt?: true
-    createdAt?: true
+    user_id?: true
+    expires_at?: true
+    revoked_at?: true
+    created_at?: true
     _all?: true
   }
 
-  export type RefreshTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Refresh_tokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which RefreshToken to aggregate.
+     * Filter which refresh_token to aggregate.
      */
-    where?: RefreshTokenWhereInput
+    where?: refresh_tokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of RefreshTokens to fetch.
+     * Determine the order of refresh_tokens to fetch.
      */
-    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    orderBy?: refresh_tokenOrderByWithRelationInput | refresh_tokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: RefreshTokenWhereUniqueInput
+    cursor?: refresh_tokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` RefreshTokens from the position of the cursor.
+     * Take `±n` refresh_tokens from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` RefreshTokens.
+     * Skip the first `n` refresh_tokens.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned RefreshTokens
+     * Count returned refresh_tokens
     **/
-    _count?: true | RefreshTokenCountAggregateInputType
+    _count?: true | Refresh_tokenCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: RefreshTokenMinAggregateInputType
+    _min?: Refresh_tokenMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: RefreshTokenMaxAggregateInputType
+    _max?: Refresh_tokenMaxAggregateInputType
   }
 
-  export type GetRefreshTokenAggregateType<T extends RefreshTokenAggregateArgs> = {
-        [P in keyof T & keyof AggregateRefreshToken]: P extends '_count' | 'count'
+  export type GetRefresh_tokenAggregateType<T extends Refresh_tokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateRefresh_token]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateRefreshToken[P]>
-      : GetScalarType<T[P], AggregateRefreshToken[P]>
+        : GetScalarType<T[P], AggregateRefresh_token[P]>
+      : GetScalarType<T[P], AggregateRefresh_token[P]>
   }
 
 
 
 
-  export type RefreshTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RefreshTokenWhereInput
-    orderBy?: RefreshTokenOrderByWithAggregationInput | RefreshTokenOrderByWithAggregationInput[]
-    by: RefreshTokenScalarFieldEnum[] | RefreshTokenScalarFieldEnum
-    having?: RefreshTokenScalarWhereWithAggregatesInput
+  export type refresh_tokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: refresh_tokenWhereInput
+    orderBy?: refresh_tokenOrderByWithAggregationInput | refresh_tokenOrderByWithAggregationInput[]
+    by: Refresh_tokenScalarFieldEnum[] | Refresh_tokenScalarFieldEnum
+    having?: refresh_tokenScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: RefreshTokenCountAggregateInputType | true
-    _min?: RefreshTokenMinAggregateInputType
-    _max?: RefreshTokenMaxAggregateInputType
+    _count?: Refresh_tokenCountAggregateInputType | true
+    _min?: Refresh_tokenMinAggregateInputType
+    _max?: Refresh_tokenMaxAggregateInputType
   }
 
-  export type RefreshTokenGroupByOutputType = {
+  export type Refresh_tokenGroupByOutputType = {
     id: string
     token: string
-    userId: string
-    expiresAt: Date
-    revokedAt: Date | null
-    createdAt: Date
-    _count: RefreshTokenCountAggregateOutputType | null
-    _min: RefreshTokenMinAggregateOutputType | null
-    _max: RefreshTokenMaxAggregateOutputType | null
+    user_id: string
+    expires_at: Date
+    revoked_at: Date | null
+    created_at: Date
+    _count: Refresh_tokenCountAggregateOutputType | null
+    _min: Refresh_tokenMinAggregateOutputType | null
+    _max: Refresh_tokenMaxAggregateOutputType | null
   }
 
-  type GetRefreshTokenGroupByPayload<T extends RefreshTokenGroupByArgs> = Prisma.PrismaPromise<
+  type GetRefresh_tokenGroupByPayload<T extends refresh_tokenGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<RefreshTokenGroupByOutputType, T['by']> &
+      PickEnumerable<Refresh_tokenGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof RefreshTokenGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof Refresh_tokenGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], RefreshTokenGroupByOutputType[P]>
-            : GetScalarType<T[P], RefreshTokenGroupByOutputType[P]>
+              : GetScalarType<T[P], Refresh_tokenGroupByOutputType[P]>
+            : GetScalarType<T[P], Refresh_tokenGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type RefreshTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type refresh_tokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     token?: boolean
-    userId?: boolean
-    expiresAt?: boolean
-    revokedAt?: boolean
-    createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["refreshToken"]>
+    user_id?: boolean
+    expires_at?: boolean
+    revoked_at?: boolean
+    created_at?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refresh_token"]>
 
-  export type RefreshTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type refresh_tokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     token?: boolean
-    userId?: boolean
-    expiresAt?: boolean
-    revokedAt?: boolean
-    createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["refreshToken"]>
+    user_id?: boolean
+    expires_at?: boolean
+    revoked_at?: boolean
+    created_at?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refresh_token"]>
 
-  export type RefreshTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type refresh_tokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     token?: boolean
-    userId?: boolean
-    expiresAt?: boolean
-    revokedAt?: boolean
-    createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["refreshToken"]>
+    user_id?: boolean
+    expires_at?: boolean
+    revoked_at?: boolean
+    created_at?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refresh_token"]>
 
-  export type RefreshTokenSelectScalar = {
+  export type refresh_tokenSelectScalar = {
     id?: boolean
     token?: boolean
-    userId?: boolean
-    expiresAt?: boolean
-    revokedAt?: boolean
-    createdAt?: boolean
+    user_id?: boolean
+    expires_at?: boolean
+    revoked_at?: boolean
+    created_at?: boolean
   }
 
-  export type RefreshTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "userId" | "expiresAt" | "revokedAt" | "createdAt", ExtArgs["result"]["refreshToken"]>
-  export type RefreshTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+  export type refresh_tokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "user_id" | "expires_at" | "revoked_at" | "created_at", ExtArgs["result"]["refresh_token"]>
+  export type refresh_tokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
   }
-  export type RefreshTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+  export type refresh_tokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
   }
-  export type RefreshTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+  export type refresh_tokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
   }
 
-  export type $RefreshTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "RefreshToken"
+  export type $refresh_tokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "refresh_token"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
+      user: Prisma.$userPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       token: string
-      userId: string
-      expiresAt: Date
-      revokedAt: Date | null
-      createdAt: Date
-    }, ExtArgs["result"]["refreshToken"]>
+      user_id: string
+      expires_at: Date
+      revoked_at: Date | null
+      created_at: Date
+    }, ExtArgs["result"]["refresh_token"]>
     composites: {}
   }
 
-  type RefreshTokenGetPayload<S extends boolean | null | undefined | RefreshTokenDefaultArgs> = $Result.GetResult<Prisma.$RefreshTokenPayload, S>
+  type refresh_tokenGetPayload<S extends boolean | null | undefined | refresh_tokenDefaultArgs> = $Result.GetResult<Prisma.$refresh_tokenPayload, S>
 
-  type RefreshTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<RefreshTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: RefreshTokenCountAggregateInputType | true
+  type refresh_tokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<refresh_tokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Refresh_tokenCountAggregateInputType | true
     }
 
-  export interface RefreshTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RefreshToken'], meta: { name: 'RefreshToken' } }
+  export interface refresh_tokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['refresh_token'], meta: { name: 'refresh_token' } }
     /**
-     * Find zero or one RefreshToken that matches the filter.
-     * @param {RefreshTokenFindUniqueArgs} args - Arguments to find a RefreshToken
+     * Find zero or one Refresh_token that matches the filter.
+     * @param {refresh_tokenFindUniqueArgs} args - Arguments to find a Refresh_token
      * @example
-     * // Get one RefreshToken
-     * const refreshToken = await prisma.refreshToken.findUnique({
+     * // Get one Refresh_token
+     * const refresh_token = await prisma.refresh_token.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends RefreshTokenFindUniqueArgs>(args: SelectSubset<T, RefreshTokenFindUniqueArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends refresh_tokenFindUniqueArgs>(args: SelectSubset<T, refresh_tokenFindUniqueArgs<ExtArgs>>): Prisma__refresh_tokenClient<$Result.GetResult<Prisma.$refresh_tokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one RefreshToken that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Refresh_token that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {RefreshTokenFindUniqueOrThrowArgs} args - Arguments to find a RefreshToken
+     * @param {refresh_tokenFindUniqueOrThrowArgs} args - Arguments to find a Refresh_token
      * @example
-     * // Get one RefreshToken
-     * const refreshToken = await prisma.refreshToken.findUniqueOrThrow({
+     * // Get one Refresh_token
+     * const refresh_token = await prisma.refresh_token.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends RefreshTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, RefreshTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends refresh_tokenFindUniqueOrThrowArgs>(args: SelectSubset<T, refresh_tokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__refresh_tokenClient<$Result.GetResult<Prisma.$refresh_tokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first RefreshToken that matches the filter.
+     * Find the first Refresh_token that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenFindFirstArgs} args - Arguments to find a RefreshToken
+     * @param {refresh_tokenFindFirstArgs} args - Arguments to find a Refresh_token
      * @example
-     * // Get one RefreshToken
-     * const refreshToken = await prisma.refreshToken.findFirst({
+     * // Get one Refresh_token
+     * const refresh_token = await prisma.refresh_token.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends RefreshTokenFindFirstArgs>(args?: SelectSubset<T, RefreshTokenFindFirstArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends refresh_tokenFindFirstArgs>(args?: SelectSubset<T, refresh_tokenFindFirstArgs<ExtArgs>>): Prisma__refresh_tokenClient<$Result.GetResult<Prisma.$refresh_tokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first RefreshToken that matches the filter or
+     * Find the first Refresh_token that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenFindFirstOrThrowArgs} args - Arguments to find a RefreshToken
+     * @param {refresh_tokenFindFirstOrThrowArgs} args - Arguments to find a Refresh_token
      * @example
-     * // Get one RefreshToken
-     * const refreshToken = await prisma.refreshToken.findFirstOrThrow({
+     * // Get one Refresh_token
+     * const refresh_token = await prisma.refresh_token.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends RefreshTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, RefreshTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends refresh_tokenFindFirstOrThrowArgs>(args?: SelectSubset<T, refresh_tokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__refresh_tokenClient<$Result.GetResult<Prisma.$refresh_tokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more RefreshTokens that matches the filter.
+     * Find zero or more Refresh_tokens that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {refresh_tokenFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all RefreshTokens
-     * const refreshTokens = await prisma.refreshToken.findMany()
+     * // Get all Refresh_tokens
+     * const refresh_tokens = await prisma.refresh_token.findMany()
      * 
-     * // Get first 10 RefreshTokens
-     * const refreshTokens = await prisma.refreshToken.findMany({ take: 10 })
+     * // Get first 10 Refresh_tokens
+     * const refresh_tokens = await prisma.refresh_token.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const refreshTokenWithIdOnly = await prisma.refreshToken.findMany({ select: { id: true } })
+     * const refresh_tokenWithIdOnly = await prisma.refresh_token.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends RefreshTokenFindManyArgs>(args?: SelectSubset<T, RefreshTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends refresh_tokenFindManyArgs>(args?: SelectSubset<T, refresh_tokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$refresh_tokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a RefreshToken.
-     * @param {RefreshTokenCreateArgs} args - Arguments to create a RefreshToken.
+     * Create a Refresh_token.
+     * @param {refresh_tokenCreateArgs} args - Arguments to create a Refresh_token.
      * @example
-     * // Create one RefreshToken
-     * const RefreshToken = await prisma.refreshToken.create({
+     * // Create one Refresh_token
+     * const Refresh_token = await prisma.refresh_token.create({
      *   data: {
-     *     // ... data to create a RefreshToken
+     *     // ... data to create a Refresh_token
      *   }
      * })
      * 
      */
-    create<T extends RefreshTokenCreateArgs>(args: SelectSubset<T, RefreshTokenCreateArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends refresh_tokenCreateArgs>(args: SelectSubset<T, refresh_tokenCreateArgs<ExtArgs>>): Prisma__refresh_tokenClient<$Result.GetResult<Prisma.$refresh_tokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many RefreshTokens.
-     * @param {RefreshTokenCreateManyArgs} args - Arguments to create many RefreshTokens.
+     * Create many Refresh_tokens.
+     * @param {refresh_tokenCreateManyArgs} args - Arguments to create many Refresh_tokens.
      * @example
-     * // Create many RefreshTokens
-     * const refreshToken = await prisma.refreshToken.createMany({
+     * // Create many Refresh_tokens
+     * const refresh_token = await prisma.refresh_token.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends RefreshTokenCreateManyArgs>(args?: SelectSubset<T, RefreshTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends refresh_tokenCreateManyArgs>(args?: SelectSubset<T, refresh_tokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many RefreshTokens and returns the data saved in the database.
-     * @param {RefreshTokenCreateManyAndReturnArgs} args - Arguments to create many RefreshTokens.
+     * Create many Refresh_tokens and returns the data saved in the database.
+     * @param {refresh_tokenCreateManyAndReturnArgs} args - Arguments to create many Refresh_tokens.
      * @example
-     * // Create many RefreshTokens
-     * const refreshToken = await prisma.refreshToken.createManyAndReturn({
+     * // Create many Refresh_tokens
+     * const refresh_token = await prisma.refresh_token.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many RefreshTokens and only return the `id`
-     * const refreshTokenWithIdOnly = await prisma.refreshToken.createManyAndReturn({
+     * // Create many Refresh_tokens and only return the `id`
+     * const refresh_tokenWithIdOnly = await prisma.refresh_token.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -5039,28 +5039,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends RefreshTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, RefreshTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends refresh_tokenCreateManyAndReturnArgs>(args?: SelectSubset<T, refresh_tokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$refresh_tokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a RefreshToken.
-     * @param {RefreshTokenDeleteArgs} args - Arguments to delete one RefreshToken.
+     * Delete a Refresh_token.
+     * @param {refresh_tokenDeleteArgs} args - Arguments to delete one Refresh_token.
      * @example
-     * // Delete one RefreshToken
-     * const RefreshToken = await prisma.refreshToken.delete({
+     * // Delete one Refresh_token
+     * const Refresh_token = await prisma.refresh_token.delete({
      *   where: {
-     *     // ... filter to delete one RefreshToken
+     *     // ... filter to delete one Refresh_token
      *   }
      * })
      * 
      */
-    delete<T extends RefreshTokenDeleteArgs>(args: SelectSubset<T, RefreshTokenDeleteArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends refresh_tokenDeleteArgs>(args: SelectSubset<T, refresh_tokenDeleteArgs<ExtArgs>>): Prisma__refresh_tokenClient<$Result.GetResult<Prisma.$refresh_tokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one RefreshToken.
-     * @param {RefreshTokenUpdateArgs} args - Arguments to update one RefreshToken.
+     * Update one Refresh_token.
+     * @param {refresh_tokenUpdateArgs} args - Arguments to update one Refresh_token.
      * @example
-     * // Update one RefreshToken
-     * const refreshToken = await prisma.refreshToken.update({
+     * // Update one Refresh_token
+     * const refresh_token = await prisma.refresh_token.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5070,30 +5070,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends RefreshTokenUpdateArgs>(args: SelectSubset<T, RefreshTokenUpdateArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends refresh_tokenUpdateArgs>(args: SelectSubset<T, refresh_tokenUpdateArgs<ExtArgs>>): Prisma__refresh_tokenClient<$Result.GetResult<Prisma.$refresh_tokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more RefreshTokens.
-     * @param {RefreshTokenDeleteManyArgs} args - Arguments to filter RefreshTokens to delete.
+     * Delete zero or more Refresh_tokens.
+     * @param {refresh_tokenDeleteManyArgs} args - Arguments to filter Refresh_tokens to delete.
      * @example
-     * // Delete a few RefreshTokens
-     * const { count } = await prisma.refreshToken.deleteMany({
+     * // Delete a few Refresh_tokens
+     * const { count } = await prisma.refresh_token.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends RefreshTokenDeleteManyArgs>(args?: SelectSubset<T, RefreshTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends refresh_tokenDeleteManyArgs>(args?: SelectSubset<T, refresh_tokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more RefreshTokens.
+     * Update zero or more Refresh_tokens.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {refresh_tokenUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many RefreshTokens
-     * const refreshToken = await prisma.refreshToken.updateMany({
+     * // Update many Refresh_tokens
+     * const refresh_token = await prisma.refresh_token.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5103,14 +5103,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends RefreshTokenUpdateManyArgs>(args: SelectSubset<T, RefreshTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends refresh_tokenUpdateManyArgs>(args: SelectSubset<T, refresh_tokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more RefreshTokens and returns the data updated in the database.
-     * @param {RefreshTokenUpdateManyAndReturnArgs} args - Arguments to update many RefreshTokens.
+     * Update zero or more Refresh_tokens and returns the data updated in the database.
+     * @param {refresh_tokenUpdateManyAndReturnArgs} args - Arguments to update many Refresh_tokens.
      * @example
-     * // Update many RefreshTokens
-     * const refreshToken = await prisma.refreshToken.updateManyAndReturn({
+     * // Update many Refresh_tokens
+     * const refresh_token = await prisma.refresh_token.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5119,8 +5119,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more RefreshTokens and only return the `id`
-     * const refreshTokenWithIdOnly = await prisma.refreshToken.updateManyAndReturn({
+     * // Update zero or more Refresh_tokens and only return the `id`
+     * const refresh_tokenWithIdOnly = await prisma.refresh_token.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -5133,56 +5133,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends RefreshTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, RefreshTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends refresh_tokenUpdateManyAndReturnArgs>(args: SelectSubset<T, refresh_tokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$refresh_tokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one RefreshToken.
-     * @param {RefreshTokenUpsertArgs} args - Arguments to update or create a RefreshToken.
+     * Create or update one Refresh_token.
+     * @param {refresh_tokenUpsertArgs} args - Arguments to update or create a Refresh_token.
      * @example
-     * // Update or create a RefreshToken
-     * const refreshToken = await prisma.refreshToken.upsert({
+     * // Update or create a Refresh_token
+     * const refresh_token = await prisma.refresh_token.upsert({
      *   create: {
-     *     // ... data to create a RefreshToken
+     *     // ... data to create a Refresh_token
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the RefreshToken we want to update
+     *     // ... the filter for the Refresh_token we want to update
      *   }
      * })
      */
-    upsert<T extends RefreshTokenUpsertArgs>(args: SelectSubset<T, RefreshTokenUpsertArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends refresh_tokenUpsertArgs>(args: SelectSubset<T, refresh_tokenUpsertArgs<ExtArgs>>): Prisma__refresh_tokenClient<$Result.GetResult<Prisma.$refresh_tokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of RefreshTokens.
+     * Count the number of Refresh_tokens.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenCountArgs} args - Arguments to filter RefreshTokens to count.
+     * @param {refresh_tokenCountArgs} args - Arguments to filter Refresh_tokens to count.
      * @example
-     * // Count the number of RefreshTokens
-     * const count = await prisma.refreshToken.count({
+     * // Count the number of Refresh_tokens
+     * const count = await prisma.refresh_token.count({
      *   where: {
-     *     // ... the filter for the RefreshTokens we want to count
+     *     // ... the filter for the Refresh_tokens we want to count
      *   }
      * })
     **/
-    count<T extends RefreshTokenCountArgs>(
-      args?: Subset<T, RefreshTokenCountArgs>,
+    count<T extends refresh_tokenCountArgs>(
+      args?: Subset<T, refresh_tokenCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], RefreshTokenCountAggregateOutputType>
+          : GetScalarType<T['select'], Refresh_tokenCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a RefreshToken.
+     * Allows you to perform aggregations operations on a Refresh_token.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {Refresh_tokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -5202,13 +5202,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends RefreshTokenAggregateArgs>(args: Subset<T, RefreshTokenAggregateArgs>): Prisma.PrismaPromise<GetRefreshTokenAggregateType<T>>
+    aggregate<T extends Refresh_tokenAggregateArgs>(args: Subset<T, Refresh_tokenAggregateArgs>): Prisma.PrismaPromise<GetRefresh_tokenAggregateType<T>>
 
     /**
-     * Group by RefreshToken.
+     * Group by Refresh_token.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RefreshTokenGroupByArgs} args - Group by arguments.
+     * @param {refresh_tokenGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -5223,14 +5223,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends RefreshTokenGroupByArgs,
+      T extends refresh_tokenGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: RefreshTokenGroupByArgs['orderBy'] }
-        : { orderBy?: RefreshTokenGroupByArgs['orderBy'] },
+        ? { orderBy: refresh_tokenGroupByArgs['orderBy'] }
+        : { orderBy?: refresh_tokenGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -5279,22 +5279,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, RefreshTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRefreshTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, refresh_tokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRefresh_tokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the RefreshToken model
+   * Fields of the refresh_token model
    */
-  readonly fields: RefreshTokenFieldRefs;
+  readonly fields: refresh_tokenFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for RefreshToken.
+   * The delegate class that acts as a "Promise-like" for refresh_token.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__RefreshTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__refresh_tokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5321,772 +5321,772 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the RefreshToken model
+   * Fields of the refresh_token model
    */
-  interface RefreshTokenFieldRefs {
-    readonly id: FieldRef<"RefreshToken", 'String'>
-    readonly token: FieldRef<"RefreshToken", 'String'>
-    readonly userId: FieldRef<"RefreshToken", 'String'>
-    readonly expiresAt: FieldRef<"RefreshToken", 'DateTime'>
-    readonly revokedAt: FieldRef<"RefreshToken", 'DateTime'>
-    readonly createdAt: FieldRef<"RefreshToken", 'DateTime'>
+  interface refresh_tokenFieldRefs {
+    readonly id: FieldRef<"refresh_token", 'String'>
+    readonly token: FieldRef<"refresh_token", 'String'>
+    readonly user_id: FieldRef<"refresh_token", 'String'>
+    readonly expires_at: FieldRef<"refresh_token", 'DateTime'>
+    readonly revoked_at: FieldRef<"refresh_token", 'DateTime'>
+    readonly created_at: FieldRef<"refresh_token", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * RefreshToken findUnique
+   * refresh_token findUnique
    */
-  export type RefreshTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the refresh_token
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: refresh_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the refresh_token
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: refresh_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: refresh_tokenInclude<ExtArgs> | null
     /**
-     * Filter, which RefreshToken to fetch.
+     * Filter, which refresh_token to fetch.
      */
-    where: RefreshTokenWhereUniqueInput
+    where: refresh_tokenWhereUniqueInput
   }
 
   /**
-   * RefreshToken findUniqueOrThrow
+   * refresh_token findUniqueOrThrow
    */
-  export type RefreshTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the refresh_token
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: refresh_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the refresh_token
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: refresh_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: refresh_tokenInclude<ExtArgs> | null
     /**
-     * Filter, which RefreshToken to fetch.
+     * Filter, which refresh_token to fetch.
      */
-    where: RefreshTokenWhereUniqueInput
+    where: refresh_tokenWhereUniqueInput
   }
 
   /**
-   * RefreshToken findFirst
+   * refresh_token findFirst
    */
-  export type RefreshTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the refresh_token
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: refresh_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the refresh_token
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: refresh_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: refresh_tokenInclude<ExtArgs> | null
     /**
-     * Filter, which RefreshToken to fetch.
+     * Filter, which refresh_token to fetch.
      */
-    where?: RefreshTokenWhereInput
+    where?: refresh_tokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of RefreshTokens to fetch.
+     * Determine the order of refresh_tokens to fetch.
      */
-    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    orderBy?: refresh_tokenOrderByWithRelationInput | refresh_tokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for RefreshTokens.
+     * Sets the position for searching for refresh_tokens.
      */
-    cursor?: RefreshTokenWhereUniqueInput
+    cursor?: refresh_tokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` RefreshTokens from the position of the cursor.
+     * Take `±n` refresh_tokens from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` RefreshTokens.
+     * Skip the first `n` refresh_tokens.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of RefreshTokens.
+     * Filter by unique combinations of refresh_tokens.
      */
-    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+    distinct?: Refresh_tokenScalarFieldEnum | Refresh_tokenScalarFieldEnum[]
   }
 
   /**
-   * RefreshToken findFirstOrThrow
+   * refresh_token findFirstOrThrow
    */
-  export type RefreshTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the refresh_token
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: refresh_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the refresh_token
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: refresh_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: refresh_tokenInclude<ExtArgs> | null
     /**
-     * Filter, which RefreshToken to fetch.
+     * Filter, which refresh_token to fetch.
      */
-    where?: RefreshTokenWhereInput
+    where?: refresh_tokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of RefreshTokens to fetch.
+     * Determine the order of refresh_tokens to fetch.
      */
-    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    orderBy?: refresh_tokenOrderByWithRelationInput | refresh_tokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for RefreshTokens.
+     * Sets the position for searching for refresh_tokens.
      */
-    cursor?: RefreshTokenWhereUniqueInput
+    cursor?: refresh_tokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` RefreshTokens from the position of the cursor.
+     * Take `±n` refresh_tokens from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` RefreshTokens.
+     * Skip the first `n` refresh_tokens.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of RefreshTokens.
+     * Filter by unique combinations of refresh_tokens.
      */
-    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+    distinct?: Refresh_tokenScalarFieldEnum | Refresh_tokenScalarFieldEnum[]
   }
 
   /**
-   * RefreshToken findMany
+   * refresh_token findMany
    */
-  export type RefreshTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the refresh_token
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: refresh_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the refresh_token
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: refresh_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: refresh_tokenInclude<ExtArgs> | null
     /**
-     * Filter, which RefreshTokens to fetch.
+     * Filter, which refresh_tokens to fetch.
      */
-    where?: RefreshTokenWhereInput
+    where?: refresh_tokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of RefreshTokens to fetch.
+     * Determine the order of refresh_tokens to fetch.
      */
-    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    orderBy?: refresh_tokenOrderByWithRelationInput | refresh_tokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing RefreshTokens.
+     * Sets the position for listing refresh_tokens.
      */
-    cursor?: RefreshTokenWhereUniqueInput
+    cursor?: refresh_tokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` RefreshTokens from the position of the cursor.
+     * Take `±n` refresh_tokens from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` RefreshTokens.
+     * Skip the first `n` refresh_tokens.
      */
     skip?: number
-    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+    distinct?: Refresh_tokenScalarFieldEnum | Refresh_tokenScalarFieldEnum[]
   }
 
   /**
-   * RefreshToken create
+   * refresh_token create
    */
-  export type RefreshTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the refresh_token
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: refresh_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the refresh_token
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: refresh_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: refresh_tokenInclude<ExtArgs> | null
     /**
-     * The data needed to create a RefreshToken.
+     * The data needed to create a refresh_token.
      */
-    data: XOR<RefreshTokenCreateInput, RefreshTokenUncheckedCreateInput>
+    data: XOR<refresh_tokenCreateInput, refresh_tokenUncheckedCreateInput>
   }
 
   /**
-   * RefreshToken createMany
+   * refresh_token createMany
    */
-  export type RefreshTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many RefreshTokens.
+     * The data used to create many refresh_tokens.
      */
-    data: RefreshTokenCreateManyInput | RefreshTokenCreateManyInput[]
+    data: refresh_tokenCreateManyInput | refresh_tokenCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * RefreshToken createManyAndReturn
+   * refresh_token createManyAndReturn
    */
-  export type RefreshTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the refresh_token
      */
-    select?: RefreshTokenSelectCreateManyAndReturn<ExtArgs> | null
+    select?: refresh_tokenSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the refresh_token
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: refresh_tokenOmit<ExtArgs> | null
     /**
-     * The data used to create many RefreshTokens.
+     * The data used to create many refresh_tokens.
      */
-    data: RefreshTokenCreateManyInput | RefreshTokenCreateManyInput[]
+    data: refresh_tokenCreateManyInput | refresh_tokenCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: refresh_tokenIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * RefreshToken update
+   * refresh_token update
    */
-  export type RefreshTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the refresh_token
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: refresh_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the refresh_token
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: refresh_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: refresh_tokenInclude<ExtArgs> | null
     /**
-     * The data needed to update a RefreshToken.
+     * The data needed to update a refresh_token.
      */
-    data: XOR<RefreshTokenUpdateInput, RefreshTokenUncheckedUpdateInput>
+    data: XOR<refresh_tokenUpdateInput, refresh_tokenUncheckedUpdateInput>
     /**
-     * Choose, which RefreshToken to update.
+     * Choose, which refresh_token to update.
      */
-    where: RefreshTokenWhereUniqueInput
+    where: refresh_tokenWhereUniqueInput
   }
 
   /**
-   * RefreshToken updateMany
+   * refresh_token updateMany
    */
-  export type RefreshTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update RefreshTokens.
+     * The data used to update refresh_tokens.
      */
-    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyInput>
+    data: XOR<refresh_tokenUpdateManyMutationInput, refresh_tokenUncheckedUpdateManyInput>
     /**
-     * Filter which RefreshTokens to update
+     * Filter which refresh_tokens to update
      */
-    where?: RefreshTokenWhereInput
+    where?: refresh_tokenWhereInput
     /**
-     * Limit how many RefreshTokens to update.
+     * Limit how many refresh_tokens to update.
      */
     limit?: number
   }
 
   /**
-   * RefreshToken updateManyAndReturn
+   * refresh_token updateManyAndReturn
    */
-  export type RefreshTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the refresh_token
      */
-    select?: RefreshTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: refresh_tokenSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the refresh_token
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: refresh_tokenOmit<ExtArgs> | null
     /**
-     * The data used to update RefreshTokens.
+     * The data used to update refresh_tokens.
      */
-    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyInput>
+    data: XOR<refresh_tokenUpdateManyMutationInput, refresh_tokenUncheckedUpdateManyInput>
     /**
-     * Filter which RefreshTokens to update
+     * Filter which refresh_tokens to update
      */
-    where?: RefreshTokenWhereInput
+    where?: refresh_tokenWhereInput
     /**
-     * Limit how many RefreshTokens to update.
+     * Limit how many refresh_tokens to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: refresh_tokenIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * RefreshToken upsert
+   * refresh_token upsert
    */
-  export type RefreshTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the refresh_token
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: refresh_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the refresh_token
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: refresh_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: refresh_tokenInclude<ExtArgs> | null
     /**
-     * The filter to search for the RefreshToken to update in case it exists.
+     * The filter to search for the refresh_token to update in case it exists.
      */
-    where: RefreshTokenWhereUniqueInput
+    where: refresh_tokenWhereUniqueInput
     /**
-     * In case the RefreshToken found by the `where` argument doesn't exist, create a new RefreshToken with this data.
+     * In case the refresh_token found by the `where` argument doesn't exist, create a new refresh_token with this data.
      */
-    create: XOR<RefreshTokenCreateInput, RefreshTokenUncheckedCreateInput>
+    create: XOR<refresh_tokenCreateInput, refresh_tokenUncheckedCreateInput>
     /**
-     * In case the RefreshToken was found with the provided `where` argument, update it with this data.
+     * In case the refresh_token was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<RefreshTokenUpdateInput, RefreshTokenUncheckedUpdateInput>
+    update: XOR<refresh_tokenUpdateInput, refresh_tokenUncheckedUpdateInput>
   }
 
   /**
-   * RefreshToken delete
+   * refresh_token delete
    */
-  export type RefreshTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the refresh_token
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: refresh_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the refresh_token
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: refresh_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: refresh_tokenInclude<ExtArgs> | null
     /**
-     * Filter which RefreshToken to delete.
+     * Filter which refresh_token to delete.
      */
-    where: RefreshTokenWhereUniqueInput
+    where: refresh_tokenWhereUniqueInput
   }
 
   /**
-   * RefreshToken deleteMany
+   * refresh_token deleteMany
    */
-  export type RefreshTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which RefreshTokens to delete
+     * Filter which refresh_tokens to delete
      */
-    where?: RefreshTokenWhereInput
+    where?: refresh_tokenWhereInput
     /**
-     * Limit how many RefreshTokens to delete.
+     * Limit how many refresh_tokens to delete.
      */
     limit?: number
   }
 
   /**
-   * RefreshToken without action
+   * refresh_token without action
    */
-  export type RefreshTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type refresh_tokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RefreshToken
+     * Select specific fields to fetch from the refresh_token
      */
-    select?: RefreshTokenSelect<ExtArgs> | null
+    select?: refresh_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RefreshToken
+     * Omit specific fields from the refresh_token
      */
-    omit?: RefreshTokenOmit<ExtArgs> | null
+    omit?: refresh_tokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RefreshTokenInclude<ExtArgs> | null
+    include?: refresh_tokenInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model VerificationToken
+   * Model verification_token
    */
 
-  export type AggregateVerificationToken = {
-    _count: VerificationTokenCountAggregateOutputType | null
-    _min: VerificationTokenMinAggregateOutputType | null
-    _max: VerificationTokenMaxAggregateOutputType | null
+  export type AggregateVerification_token = {
+    _count: Verification_tokenCountAggregateOutputType | null
+    _min: Verification_tokenMinAggregateOutputType | null
+    _max: Verification_tokenMaxAggregateOutputType | null
   }
 
-  export type VerificationTokenMinAggregateOutputType = {
+  export type Verification_tokenMinAggregateOutputType = {
     id: string | null
-    userId: string | null
+    user_id: string | null
     token: string | null
     type: string | null
-    expiresAt: Date | null
-    createdAt: Date | null
+    expires_at: Date | null
+    created_at: Date | null
   }
 
-  export type VerificationTokenMaxAggregateOutputType = {
+  export type Verification_tokenMaxAggregateOutputType = {
     id: string | null
-    userId: string | null
+    user_id: string | null
     token: string | null
     type: string | null
-    expiresAt: Date | null
-    createdAt: Date | null
+    expires_at: Date | null
+    created_at: Date | null
   }
 
-  export type VerificationTokenCountAggregateOutputType = {
+  export type Verification_tokenCountAggregateOutputType = {
     id: number
-    userId: number
+    user_id: number
     token: number
     type: number
-    expiresAt: number
-    createdAt: number
+    expires_at: number
+    created_at: number
     _all: number
   }
 
 
-  export type VerificationTokenMinAggregateInputType = {
+  export type Verification_tokenMinAggregateInputType = {
     id?: true
-    userId?: true
+    user_id?: true
     token?: true
     type?: true
-    expiresAt?: true
-    createdAt?: true
+    expires_at?: true
+    created_at?: true
   }
 
-  export type VerificationTokenMaxAggregateInputType = {
+  export type Verification_tokenMaxAggregateInputType = {
     id?: true
-    userId?: true
+    user_id?: true
     token?: true
     type?: true
-    expiresAt?: true
-    createdAt?: true
+    expires_at?: true
+    created_at?: true
   }
 
-  export type VerificationTokenCountAggregateInputType = {
+  export type Verification_tokenCountAggregateInputType = {
     id?: true
-    userId?: true
+    user_id?: true
     token?: true
     type?: true
-    expiresAt?: true
-    createdAt?: true
+    expires_at?: true
+    created_at?: true
     _all?: true
   }
 
-  export type VerificationTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Verification_tokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which VerificationToken to aggregate.
+     * Filter which verification_token to aggregate.
      */
-    where?: VerificationTokenWhereInput
+    where?: verification_tokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of VerificationTokens to fetch.
+     * Determine the order of verification_tokens to fetch.
      */
-    orderBy?: VerificationTokenOrderByWithRelationInput | VerificationTokenOrderByWithRelationInput[]
+    orderBy?: verification_tokenOrderByWithRelationInput | verification_tokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: VerificationTokenWhereUniqueInput
+    cursor?: verification_tokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` VerificationTokens from the position of the cursor.
+     * Take `±n` verification_tokens from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` VerificationTokens.
+     * Skip the first `n` verification_tokens.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned VerificationTokens
+     * Count returned verification_tokens
     **/
-    _count?: true | VerificationTokenCountAggregateInputType
+    _count?: true | Verification_tokenCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: VerificationTokenMinAggregateInputType
+    _min?: Verification_tokenMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: VerificationTokenMaxAggregateInputType
+    _max?: Verification_tokenMaxAggregateInputType
   }
 
-  export type GetVerificationTokenAggregateType<T extends VerificationTokenAggregateArgs> = {
-        [P in keyof T & keyof AggregateVerificationToken]: P extends '_count' | 'count'
+  export type GetVerification_tokenAggregateType<T extends Verification_tokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateVerification_token]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateVerificationToken[P]>
-      : GetScalarType<T[P], AggregateVerificationToken[P]>
+        : GetScalarType<T[P], AggregateVerification_token[P]>
+      : GetScalarType<T[P], AggregateVerification_token[P]>
   }
 
 
 
 
-  export type VerificationTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VerificationTokenWhereInput
-    orderBy?: VerificationTokenOrderByWithAggregationInput | VerificationTokenOrderByWithAggregationInput[]
-    by: VerificationTokenScalarFieldEnum[] | VerificationTokenScalarFieldEnum
-    having?: VerificationTokenScalarWhereWithAggregatesInput
+  export type verification_tokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: verification_tokenWhereInput
+    orderBy?: verification_tokenOrderByWithAggregationInput | verification_tokenOrderByWithAggregationInput[]
+    by: Verification_tokenScalarFieldEnum[] | Verification_tokenScalarFieldEnum
+    having?: verification_tokenScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: VerificationTokenCountAggregateInputType | true
-    _min?: VerificationTokenMinAggregateInputType
-    _max?: VerificationTokenMaxAggregateInputType
+    _count?: Verification_tokenCountAggregateInputType | true
+    _min?: Verification_tokenMinAggregateInputType
+    _max?: Verification_tokenMaxAggregateInputType
   }
 
-  export type VerificationTokenGroupByOutputType = {
+  export type Verification_tokenGroupByOutputType = {
     id: string
-    userId: string
+    user_id: string
     token: string
     type: string
-    expiresAt: Date
-    createdAt: Date
-    _count: VerificationTokenCountAggregateOutputType | null
-    _min: VerificationTokenMinAggregateOutputType | null
-    _max: VerificationTokenMaxAggregateOutputType | null
+    expires_at: Date
+    created_at: Date
+    _count: Verification_tokenCountAggregateOutputType | null
+    _min: Verification_tokenMinAggregateOutputType | null
+    _max: Verification_tokenMaxAggregateOutputType | null
   }
 
-  type GetVerificationTokenGroupByPayload<T extends VerificationTokenGroupByArgs> = Prisma.PrismaPromise<
+  type GetVerification_tokenGroupByPayload<T extends verification_tokenGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<VerificationTokenGroupByOutputType, T['by']> &
+      PickEnumerable<Verification_tokenGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof VerificationTokenGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof Verification_tokenGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], VerificationTokenGroupByOutputType[P]>
-            : GetScalarType<T[P], VerificationTokenGroupByOutputType[P]>
+              : GetScalarType<T[P], Verification_tokenGroupByOutputType[P]>
+            : GetScalarType<T[P], Verification_tokenGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type VerificationTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type verification_tokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
+    user_id?: boolean
     token?: boolean
     type?: boolean
-    expiresAt?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["verificationToken"]>
+    expires_at?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["verification_token"]>
 
-  export type VerificationTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type verification_tokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
+    user_id?: boolean
     token?: boolean
     type?: boolean
-    expiresAt?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["verificationToken"]>
+    expires_at?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["verification_token"]>
 
-  export type VerificationTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type verification_tokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
+    user_id?: boolean
     token?: boolean
     type?: boolean
-    expiresAt?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["verificationToken"]>
+    expires_at?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["verification_token"]>
 
-  export type VerificationTokenSelectScalar = {
+  export type verification_tokenSelectScalar = {
     id?: boolean
-    userId?: boolean
+    user_id?: boolean
     token?: boolean
     type?: boolean
-    expiresAt?: boolean
-    createdAt?: boolean
+    expires_at?: boolean
+    created_at?: boolean
   }
 
-  export type VerificationTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "token" | "type" | "expiresAt" | "createdAt", ExtArgs["result"]["verificationToken"]>
+  export type verification_tokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "token" | "type" | "expires_at" | "created_at", ExtArgs["result"]["verification_token"]>
 
-  export type $VerificationTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "VerificationToken"
+  export type $verification_tokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "verification_token"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      userId: string
+      user_id: string
       token: string
       type: string
-      expiresAt: Date
-      createdAt: Date
-    }, ExtArgs["result"]["verificationToken"]>
+      expires_at: Date
+      created_at: Date
+    }, ExtArgs["result"]["verification_token"]>
     composites: {}
   }
 
-  type VerificationTokenGetPayload<S extends boolean | null | undefined | VerificationTokenDefaultArgs> = $Result.GetResult<Prisma.$VerificationTokenPayload, S>
+  type verification_tokenGetPayload<S extends boolean | null | undefined | verification_tokenDefaultArgs> = $Result.GetResult<Prisma.$verification_tokenPayload, S>
 
-  type VerificationTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<VerificationTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: VerificationTokenCountAggregateInputType | true
+  type verification_tokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<verification_tokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Verification_tokenCountAggregateInputType | true
     }
 
-  export interface VerificationTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VerificationToken'], meta: { name: 'VerificationToken' } }
+  export interface verification_tokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['verification_token'], meta: { name: 'verification_token' } }
     /**
-     * Find zero or one VerificationToken that matches the filter.
-     * @param {VerificationTokenFindUniqueArgs} args - Arguments to find a VerificationToken
+     * Find zero or one Verification_token that matches the filter.
+     * @param {verification_tokenFindUniqueArgs} args - Arguments to find a Verification_token
      * @example
-     * // Get one VerificationToken
-     * const verificationToken = await prisma.verificationToken.findUnique({
+     * // Get one Verification_token
+     * const verification_token = await prisma.verification_token.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends VerificationTokenFindUniqueArgs>(args: SelectSubset<T, VerificationTokenFindUniqueArgs<ExtArgs>>): Prisma__VerificationTokenClient<$Result.GetResult<Prisma.$VerificationTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends verification_tokenFindUniqueArgs>(args: SelectSubset<T, verification_tokenFindUniqueArgs<ExtArgs>>): Prisma__verification_tokenClient<$Result.GetResult<Prisma.$verification_tokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one VerificationToken that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Verification_token that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {VerificationTokenFindUniqueOrThrowArgs} args - Arguments to find a VerificationToken
+     * @param {verification_tokenFindUniqueOrThrowArgs} args - Arguments to find a Verification_token
      * @example
-     * // Get one VerificationToken
-     * const verificationToken = await prisma.verificationToken.findUniqueOrThrow({
+     * // Get one Verification_token
+     * const verification_token = await prisma.verification_token.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends VerificationTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, VerificationTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VerificationTokenClient<$Result.GetResult<Prisma.$VerificationTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends verification_tokenFindUniqueOrThrowArgs>(args: SelectSubset<T, verification_tokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__verification_tokenClient<$Result.GetResult<Prisma.$verification_tokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first VerificationToken that matches the filter.
+     * Find the first Verification_token that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenFindFirstArgs} args - Arguments to find a VerificationToken
+     * @param {verification_tokenFindFirstArgs} args - Arguments to find a Verification_token
      * @example
-     * // Get one VerificationToken
-     * const verificationToken = await prisma.verificationToken.findFirst({
+     * // Get one Verification_token
+     * const verification_token = await prisma.verification_token.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends VerificationTokenFindFirstArgs>(args?: SelectSubset<T, VerificationTokenFindFirstArgs<ExtArgs>>): Prisma__VerificationTokenClient<$Result.GetResult<Prisma.$VerificationTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends verification_tokenFindFirstArgs>(args?: SelectSubset<T, verification_tokenFindFirstArgs<ExtArgs>>): Prisma__verification_tokenClient<$Result.GetResult<Prisma.$verification_tokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first VerificationToken that matches the filter or
+     * Find the first Verification_token that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenFindFirstOrThrowArgs} args - Arguments to find a VerificationToken
+     * @param {verification_tokenFindFirstOrThrowArgs} args - Arguments to find a Verification_token
      * @example
-     * // Get one VerificationToken
-     * const verificationToken = await prisma.verificationToken.findFirstOrThrow({
+     * // Get one Verification_token
+     * const verification_token = await prisma.verification_token.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends VerificationTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, VerificationTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__VerificationTokenClient<$Result.GetResult<Prisma.$VerificationTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends verification_tokenFindFirstOrThrowArgs>(args?: SelectSubset<T, verification_tokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__verification_tokenClient<$Result.GetResult<Prisma.$verification_tokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more VerificationTokens that matches the filter.
+     * Find zero or more Verification_tokens that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {verification_tokenFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all VerificationTokens
-     * const verificationTokens = await prisma.verificationToken.findMany()
+     * // Get all Verification_tokens
+     * const verification_tokens = await prisma.verification_token.findMany()
      * 
-     * // Get first 10 VerificationTokens
-     * const verificationTokens = await prisma.verificationToken.findMany({ take: 10 })
+     * // Get first 10 Verification_tokens
+     * const verification_tokens = await prisma.verification_token.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const verificationTokenWithIdOnly = await prisma.verificationToken.findMany({ select: { id: true } })
+     * const verification_tokenWithIdOnly = await prisma.verification_token.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends VerificationTokenFindManyArgs>(args?: SelectSubset<T, VerificationTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends verification_tokenFindManyArgs>(args?: SelectSubset<T, verification_tokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$verification_tokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a VerificationToken.
-     * @param {VerificationTokenCreateArgs} args - Arguments to create a VerificationToken.
+     * Create a Verification_token.
+     * @param {verification_tokenCreateArgs} args - Arguments to create a Verification_token.
      * @example
-     * // Create one VerificationToken
-     * const VerificationToken = await prisma.verificationToken.create({
+     * // Create one Verification_token
+     * const Verification_token = await prisma.verification_token.create({
      *   data: {
-     *     // ... data to create a VerificationToken
+     *     // ... data to create a Verification_token
      *   }
      * })
      * 
      */
-    create<T extends VerificationTokenCreateArgs>(args: SelectSubset<T, VerificationTokenCreateArgs<ExtArgs>>): Prisma__VerificationTokenClient<$Result.GetResult<Prisma.$VerificationTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends verification_tokenCreateArgs>(args: SelectSubset<T, verification_tokenCreateArgs<ExtArgs>>): Prisma__verification_tokenClient<$Result.GetResult<Prisma.$verification_tokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many VerificationTokens.
-     * @param {VerificationTokenCreateManyArgs} args - Arguments to create many VerificationTokens.
+     * Create many Verification_tokens.
+     * @param {verification_tokenCreateManyArgs} args - Arguments to create many Verification_tokens.
      * @example
-     * // Create many VerificationTokens
-     * const verificationToken = await prisma.verificationToken.createMany({
+     * // Create many Verification_tokens
+     * const verification_token = await prisma.verification_token.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends VerificationTokenCreateManyArgs>(args?: SelectSubset<T, VerificationTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends verification_tokenCreateManyArgs>(args?: SelectSubset<T, verification_tokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many VerificationTokens and returns the data saved in the database.
-     * @param {VerificationTokenCreateManyAndReturnArgs} args - Arguments to create many VerificationTokens.
+     * Create many Verification_tokens and returns the data saved in the database.
+     * @param {verification_tokenCreateManyAndReturnArgs} args - Arguments to create many Verification_tokens.
      * @example
-     * // Create many VerificationTokens
-     * const verificationToken = await prisma.verificationToken.createManyAndReturn({
+     * // Create many Verification_tokens
+     * const verification_token = await prisma.verification_token.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many VerificationTokens and only return the `id`
-     * const verificationTokenWithIdOnly = await prisma.verificationToken.createManyAndReturn({
+     * // Create many Verification_tokens and only return the `id`
+     * const verification_tokenWithIdOnly = await prisma.verification_token.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -6096,28 +6096,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends VerificationTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, VerificationTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends verification_tokenCreateManyAndReturnArgs>(args?: SelectSubset<T, verification_tokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$verification_tokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a VerificationToken.
-     * @param {VerificationTokenDeleteArgs} args - Arguments to delete one VerificationToken.
+     * Delete a Verification_token.
+     * @param {verification_tokenDeleteArgs} args - Arguments to delete one Verification_token.
      * @example
-     * // Delete one VerificationToken
-     * const VerificationToken = await prisma.verificationToken.delete({
+     * // Delete one Verification_token
+     * const Verification_token = await prisma.verification_token.delete({
      *   where: {
-     *     // ... filter to delete one VerificationToken
+     *     // ... filter to delete one Verification_token
      *   }
      * })
      * 
      */
-    delete<T extends VerificationTokenDeleteArgs>(args: SelectSubset<T, VerificationTokenDeleteArgs<ExtArgs>>): Prisma__VerificationTokenClient<$Result.GetResult<Prisma.$VerificationTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends verification_tokenDeleteArgs>(args: SelectSubset<T, verification_tokenDeleteArgs<ExtArgs>>): Prisma__verification_tokenClient<$Result.GetResult<Prisma.$verification_tokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one VerificationToken.
-     * @param {VerificationTokenUpdateArgs} args - Arguments to update one VerificationToken.
+     * Update one Verification_token.
+     * @param {verification_tokenUpdateArgs} args - Arguments to update one Verification_token.
      * @example
-     * // Update one VerificationToken
-     * const verificationToken = await prisma.verificationToken.update({
+     * // Update one Verification_token
+     * const verification_token = await prisma.verification_token.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6127,30 +6127,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends VerificationTokenUpdateArgs>(args: SelectSubset<T, VerificationTokenUpdateArgs<ExtArgs>>): Prisma__VerificationTokenClient<$Result.GetResult<Prisma.$VerificationTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends verification_tokenUpdateArgs>(args: SelectSubset<T, verification_tokenUpdateArgs<ExtArgs>>): Prisma__verification_tokenClient<$Result.GetResult<Prisma.$verification_tokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more VerificationTokens.
-     * @param {VerificationTokenDeleteManyArgs} args - Arguments to filter VerificationTokens to delete.
+     * Delete zero or more Verification_tokens.
+     * @param {verification_tokenDeleteManyArgs} args - Arguments to filter Verification_tokens to delete.
      * @example
-     * // Delete a few VerificationTokens
-     * const { count } = await prisma.verificationToken.deleteMany({
+     * // Delete a few Verification_tokens
+     * const { count } = await prisma.verification_token.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends VerificationTokenDeleteManyArgs>(args?: SelectSubset<T, VerificationTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends verification_tokenDeleteManyArgs>(args?: SelectSubset<T, verification_tokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more VerificationTokens.
+     * Update zero or more Verification_tokens.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {verification_tokenUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many VerificationTokens
-     * const verificationToken = await prisma.verificationToken.updateMany({
+     * // Update many Verification_tokens
+     * const verification_token = await prisma.verification_token.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6160,14 +6160,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends VerificationTokenUpdateManyArgs>(args: SelectSubset<T, VerificationTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends verification_tokenUpdateManyArgs>(args: SelectSubset<T, verification_tokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more VerificationTokens and returns the data updated in the database.
-     * @param {VerificationTokenUpdateManyAndReturnArgs} args - Arguments to update many VerificationTokens.
+     * Update zero or more Verification_tokens and returns the data updated in the database.
+     * @param {verification_tokenUpdateManyAndReturnArgs} args - Arguments to update many Verification_tokens.
      * @example
-     * // Update many VerificationTokens
-     * const verificationToken = await prisma.verificationToken.updateManyAndReturn({
+     * // Update many Verification_tokens
+     * const verification_token = await prisma.verification_token.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6176,8 +6176,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more VerificationTokens and only return the `id`
-     * const verificationTokenWithIdOnly = await prisma.verificationToken.updateManyAndReturn({
+     * // Update zero or more Verification_tokens and only return the `id`
+     * const verification_tokenWithIdOnly = await prisma.verification_token.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -6190,56 +6190,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends VerificationTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, VerificationTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends verification_tokenUpdateManyAndReturnArgs>(args: SelectSubset<T, verification_tokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$verification_tokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one VerificationToken.
-     * @param {VerificationTokenUpsertArgs} args - Arguments to update or create a VerificationToken.
+     * Create or update one Verification_token.
+     * @param {verification_tokenUpsertArgs} args - Arguments to update or create a Verification_token.
      * @example
-     * // Update or create a VerificationToken
-     * const verificationToken = await prisma.verificationToken.upsert({
+     * // Update or create a Verification_token
+     * const verification_token = await prisma.verification_token.upsert({
      *   create: {
-     *     // ... data to create a VerificationToken
+     *     // ... data to create a Verification_token
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the VerificationToken we want to update
+     *     // ... the filter for the Verification_token we want to update
      *   }
      * })
      */
-    upsert<T extends VerificationTokenUpsertArgs>(args: SelectSubset<T, VerificationTokenUpsertArgs<ExtArgs>>): Prisma__VerificationTokenClient<$Result.GetResult<Prisma.$VerificationTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends verification_tokenUpsertArgs>(args: SelectSubset<T, verification_tokenUpsertArgs<ExtArgs>>): Prisma__verification_tokenClient<$Result.GetResult<Prisma.$verification_tokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of VerificationTokens.
+     * Count the number of Verification_tokens.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenCountArgs} args - Arguments to filter VerificationTokens to count.
+     * @param {verification_tokenCountArgs} args - Arguments to filter Verification_tokens to count.
      * @example
-     * // Count the number of VerificationTokens
-     * const count = await prisma.verificationToken.count({
+     * // Count the number of Verification_tokens
+     * const count = await prisma.verification_token.count({
      *   where: {
-     *     // ... the filter for the VerificationTokens we want to count
+     *     // ... the filter for the Verification_tokens we want to count
      *   }
      * })
     **/
-    count<T extends VerificationTokenCountArgs>(
-      args?: Subset<T, VerificationTokenCountArgs>,
+    count<T extends verification_tokenCountArgs>(
+      args?: Subset<T, verification_tokenCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], VerificationTokenCountAggregateOutputType>
+          : GetScalarType<T['select'], Verification_tokenCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a VerificationToken.
+     * Allows you to perform aggregations operations on a Verification_token.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {Verification_tokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -6259,13 +6259,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends VerificationTokenAggregateArgs>(args: Subset<T, VerificationTokenAggregateArgs>): Prisma.PrismaPromise<GetVerificationTokenAggregateType<T>>
+    aggregate<T extends Verification_tokenAggregateArgs>(args: Subset<T, Verification_tokenAggregateArgs>): Prisma.PrismaPromise<GetVerification_tokenAggregateType<T>>
 
     /**
-     * Group by VerificationToken.
+     * Group by Verification_token.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenGroupByArgs} args - Group by arguments.
+     * @param {verification_tokenGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -6280,14 +6280,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends VerificationTokenGroupByArgs,
+      T extends verification_tokenGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: VerificationTokenGroupByArgs['orderBy'] }
-        : { orderBy?: VerificationTokenGroupByArgs['orderBy'] },
+        ? { orderBy: verification_tokenGroupByArgs['orderBy'] }
+        : { orderBy?: verification_tokenGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -6336,20 +6336,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, VerificationTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVerificationTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, verification_tokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVerification_tokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the VerificationToken model
+   * Fields of the verification_token model
    */
-  readonly fields: VerificationTokenFieldRefs;
+  readonly fields: verification_tokenFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for VerificationToken.
+   * The delegate class that acts as a "Promise-like" for verification_token.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__VerificationTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__verification_tokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6377,378 +6377,378 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the VerificationToken model
+   * Fields of the verification_token model
    */
-  interface VerificationTokenFieldRefs {
-    readonly id: FieldRef<"VerificationToken", 'String'>
-    readonly userId: FieldRef<"VerificationToken", 'String'>
-    readonly token: FieldRef<"VerificationToken", 'String'>
-    readonly type: FieldRef<"VerificationToken", 'String'>
-    readonly expiresAt: FieldRef<"VerificationToken", 'DateTime'>
-    readonly createdAt: FieldRef<"VerificationToken", 'DateTime'>
+  interface verification_tokenFieldRefs {
+    readonly id: FieldRef<"verification_token", 'String'>
+    readonly user_id: FieldRef<"verification_token", 'String'>
+    readonly token: FieldRef<"verification_token", 'String'>
+    readonly type: FieldRef<"verification_token", 'String'>
+    readonly expires_at: FieldRef<"verification_token", 'DateTime'>
+    readonly created_at: FieldRef<"verification_token", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * VerificationToken findUnique
+   * verification_token findUnique
    */
-  export type VerificationTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VerificationToken
+     * Select specific fields to fetch from the verification_token
      */
-    select?: VerificationTokenSelect<ExtArgs> | null
+    select?: verification_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VerificationToken
+     * Omit specific fields from the verification_token
      */
-    omit?: VerificationTokenOmit<ExtArgs> | null
+    omit?: verification_tokenOmit<ExtArgs> | null
     /**
-     * Filter, which VerificationToken to fetch.
+     * Filter, which verification_token to fetch.
      */
-    where: VerificationTokenWhereUniqueInput
+    where: verification_tokenWhereUniqueInput
   }
 
   /**
-   * VerificationToken findUniqueOrThrow
+   * verification_token findUniqueOrThrow
    */
-  export type VerificationTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VerificationToken
+     * Select specific fields to fetch from the verification_token
      */
-    select?: VerificationTokenSelect<ExtArgs> | null
+    select?: verification_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VerificationToken
+     * Omit specific fields from the verification_token
      */
-    omit?: VerificationTokenOmit<ExtArgs> | null
+    omit?: verification_tokenOmit<ExtArgs> | null
     /**
-     * Filter, which VerificationToken to fetch.
+     * Filter, which verification_token to fetch.
      */
-    where: VerificationTokenWhereUniqueInput
+    where: verification_tokenWhereUniqueInput
   }
 
   /**
-   * VerificationToken findFirst
+   * verification_token findFirst
    */
-  export type VerificationTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VerificationToken
+     * Select specific fields to fetch from the verification_token
      */
-    select?: VerificationTokenSelect<ExtArgs> | null
+    select?: verification_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VerificationToken
+     * Omit specific fields from the verification_token
      */
-    omit?: VerificationTokenOmit<ExtArgs> | null
+    omit?: verification_tokenOmit<ExtArgs> | null
     /**
-     * Filter, which VerificationToken to fetch.
+     * Filter, which verification_token to fetch.
      */
-    where?: VerificationTokenWhereInput
+    where?: verification_tokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of VerificationTokens to fetch.
+     * Determine the order of verification_tokens to fetch.
      */
-    orderBy?: VerificationTokenOrderByWithRelationInput | VerificationTokenOrderByWithRelationInput[]
+    orderBy?: verification_tokenOrderByWithRelationInput | verification_tokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for VerificationTokens.
+     * Sets the position for searching for verification_tokens.
      */
-    cursor?: VerificationTokenWhereUniqueInput
+    cursor?: verification_tokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` VerificationTokens from the position of the cursor.
+     * Take `±n` verification_tokens from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` VerificationTokens.
+     * Skip the first `n` verification_tokens.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of VerificationTokens.
+     * Filter by unique combinations of verification_tokens.
      */
-    distinct?: VerificationTokenScalarFieldEnum | VerificationTokenScalarFieldEnum[]
+    distinct?: Verification_tokenScalarFieldEnum | Verification_tokenScalarFieldEnum[]
   }
 
   /**
-   * VerificationToken findFirstOrThrow
+   * verification_token findFirstOrThrow
    */
-  export type VerificationTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VerificationToken
+     * Select specific fields to fetch from the verification_token
      */
-    select?: VerificationTokenSelect<ExtArgs> | null
+    select?: verification_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VerificationToken
+     * Omit specific fields from the verification_token
      */
-    omit?: VerificationTokenOmit<ExtArgs> | null
+    omit?: verification_tokenOmit<ExtArgs> | null
     /**
-     * Filter, which VerificationToken to fetch.
+     * Filter, which verification_token to fetch.
      */
-    where?: VerificationTokenWhereInput
+    where?: verification_tokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of VerificationTokens to fetch.
+     * Determine the order of verification_tokens to fetch.
      */
-    orderBy?: VerificationTokenOrderByWithRelationInput | VerificationTokenOrderByWithRelationInput[]
+    orderBy?: verification_tokenOrderByWithRelationInput | verification_tokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for VerificationTokens.
+     * Sets the position for searching for verification_tokens.
      */
-    cursor?: VerificationTokenWhereUniqueInput
+    cursor?: verification_tokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` VerificationTokens from the position of the cursor.
+     * Take `±n` verification_tokens from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` VerificationTokens.
+     * Skip the first `n` verification_tokens.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of VerificationTokens.
+     * Filter by unique combinations of verification_tokens.
      */
-    distinct?: VerificationTokenScalarFieldEnum | VerificationTokenScalarFieldEnum[]
+    distinct?: Verification_tokenScalarFieldEnum | Verification_tokenScalarFieldEnum[]
   }
 
   /**
-   * VerificationToken findMany
+   * verification_token findMany
    */
-  export type VerificationTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VerificationToken
+     * Select specific fields to fetch from the verification_token
      */
-    select?: VerificationTokenSelect<ExtArgs> | null
+    select?: verification_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VerificationToken
+     * Omit specific fields from the verification_token
      */
-    omit?: VerificationTokenOmit<ExtArgs> | null
+    omit?: verification_tokenOmit<ExtArgs> | null
     /**
-     * Filter, which VerificationTokens to fetch.
+     * Filter, which verification_tokens to fetch.
      */
-    where?: VerificationTokenWhereInput
+    where?: verification_tokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of VerificationTokens to fetch.
+     * Determine the order of verification_tokens to fetch.
      */
-    orderBy?: VerificationTokenOrderByWithRelationInput | VerificationTokenOrderByWithRelationInput[]
+    orderBy?: verification_tokenOrderByWithRelationInput | verification_tokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing VerificationTokens.
+     * Sets the position for listing verification_tokens.
      */
-    cursor?: VerificationTokenWhereUniqueInput
+    cursor?: verification_tokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` VerificationTokens from the position of the cursor.
+     * Take `±n` verification_tokens from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` VerificationTokens.
+     * Skip the first `n` verification_tokens.
      */
     skip?: number
-    distinct?: VerificationTokenScalarFieldEnum | VerificationTokenScalarFieldEnum[]
+    distinct?: Verification_tokenScalarFieldEnum | Verification_tokenScalarFieldEnum[]
   }
 
   /**
-   * VerificationToken create
+   * verification_token create
    */
-  export type VerificationTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VerificationToken
+     * Select specific fields to fetch from the verification_token
      */
-    select?: VerificationTokenSelect<ExtArgs> | null
+    select?: verification_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VerificationToken
+     * Omit specific fields from the verification_token
      */
-    omit?: VerificationTokenOmit<ExtArgs> | null
+    omit?: verification_tokenOmit<ExtArgs> | null
     /**
-     * The data needed to create a VerificationToken.
+     * The data needed to create a verification_token.
      */
-    data: XOR<VerificationTokenCreateInput, VerificationTokenUncheckedCreateInput>
+    data: XOR<verification_tokenCreateInput, verification_tokenUncheckedCreateInput>
   }
 
   /**
-   * VerificationToken createMany
+   * verification_token createMany
    */
-  export type VerificationTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many VerificationTokens.
+     * The data used to create many verification_tokens.
      */
-    data: VerificationTokenCreateManyInput | VerificationTokenCreateManyInput[]
+    data: verification_tokenCreateManyInput | verification_tokenCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * VerificationToken createManyAndReturn
+   * verification_token createManyAndReturn
    */
-  export type VerificationTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VerificationToken
+     * Select specific fields to fetch from the verification_token
      */
-    select?: VerificationTokenSelectCreateManyAndReturn<ExtArgs> | null
+    select?: verification_tokenSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the VerificationToken
+     * Omit specific fields from the verification_token
      */
-    omit?: VerificationTokenOmit<ExtArgs> | null
+    omit?: verification_tokenOmit<ExtArgs> | null
     /**
-     * The data used to create many VerificationTokens.
+     * The data used to create many verification_tokens.
      */
-    data: VerificationTokenCreateManyInput | VerificationTokenCreateManyInput[]
+    data: verification_tokenCreateManyInput | verification_tokenCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * VerificationToken update
+   * verification_token update
    */
-  export type VerificationTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VerificationToken
+     * Select specific fields to fetch from the verification_token
      */
-    select?: VerificationTokenSelect<ExtArgs> | null
+    select?: verification_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VerificationToken
+     * Omit specific fields from the verification_token
      */
-    omit?: VerificationTokenOmit<ExtArgs> | null
+    omit?: verification_tokenOmit<ExtArgs> | null
     /**
-     * The data needed to update a VerificationToken.
+     * The data needed to update a verification_token.
      */
-    data: XOR<VerificationTokenUpdateInput, VerificationTokenUncheckedUpdateInput>
+    data: XOR<verification_tokenUpdateInput, verification_tokenUncheckedUpdateInput>
     /**
-     * Choose, which VerificationToken to update.
+     * Choose, which verification_token to update.
      */
-    where: VerificationTokenWhereUniqueInput
+    where: verification_tokenWhereUniqueInput
   }
 
   /**
-   * VerificationToken updateMany
+   * verification_token updateMany
    */
-  export type VerificationTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update VerificationTokens.
+     * The data used to update verification_tokens.
      */
-    data: XOR<VerificationTokenUpdateManyMutationInput, VerificationTokenUncheckedUpdateManyInput>
+    data: XOR<verification_tokenUpdateManyMutationInput, verification_tokenUncheckedUpdateManyInput>
     /**
-     * Filter which VerificationTokens to update
+     * Filter which verification_tokens to update
      */
-    where?: VerificationTokenWhereInput
+    where?: verification_tokenWhereInput
     /**
-     * Limit how many VerificationTokens to update.
+     * Limit how many verification_tokens to update.
      */
     limit?: number
   }
 
   /**
-   * VerificationToken updateManyAndReturn
+   * verification_token updateManyAndReturn
    */
-  export type VerificationTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VerificationToken
+     * Select specific fields to fetch from the verification_token
      */
-    select?: VerificationTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: verification_tokenSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the VerificationToken
+     * Omit specific fields from the verification_token
      */
-    omit?: VerificationTokenOmit<ExtArgs> | null
+    omit?: verification_tokenOmit<ExtArgs> | null
     /**
-     * The data used to update VerificationTokens.
+     * The data used to update verification_tokens.
      */
-    data: XOR<VerificationTokenUpdateManyMutationInput, VerificationTokenUncheckedUpdateManyInput>
+    data: XOR<verification_tokenUpdateManyMutationInput, verification_tokenUncheckedUpdateManyInput>
     /**
-     * Filter which VerificationTokens to update
+     * Filter which verification_tokens to update
      */
-    where?: VerificationTokenWhereInput
+    where?: verification_tokenWhereInput
     /**
-     * Limit how many VerificationTokens to update.
+     * Limit how many verification_tokens to update.
      */
     limit?: number
   }
 
   /**
-   * VerificationToken upsert
+   * verification_token upsert
    */
-  export type VerificationTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VerificationToken
+     * Select specific fields to fetch from the verification_token
      */
-    select?: VerificationTokenSelect<ExtArgs> | null
+    select?: verification_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VerificationToken
+     * Omit specific fields from the verification_token
      */
-    omit?: VerificationTokenOmit<ExtArgs> | null
+    omit?: verification_tokenOmit<ExtArgs> | null
     /**
-     * The filter to search for the VerificationToken to update in case it exists.
+     * The filter to search for the verification_token to update in case it exists.
      */
-    where: VerificationTokenWhereUniqueInput
+    where: verification_tokenWhereUniqueInput
     /**
-     * In case the VerificationToken found by the `where` argument doesn't exist, create a new VerificationToken with this data.
+     * In case the verification_token found by the `where` argument doesn't exist, create a new verification_token with this data.
      */
-    create: XOR<VerificationTokenCreateInput, VerificationTokenUncheckedCreateInput>
+    create: XOR<verification_tokenCreateInput, verification_tokenUncheckedCreateInput>
     /**
-     * In case the VerificationToken was found with the provided `where` argument, update it with this data.
+     * In case the verification_token was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<VerificationTokenUpdateInput, VerificationTokenUncheckedUpdateInput>
+    update: XOR<verification_tokenUpdateInput, verification_tokenUncheckedUpdateInput>
   }
 
   /**
-   * VerificationToken delete
+   * verification_token delete
    */
-  export type VerificationTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VerificationToken
+     * Select specific fields to fetch from the verification_token
      */
-    select?: VerificationTokenSelect<ExtArgs> | null
+    select?: verification_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VerificationToken
+     * Omit specific fields from the verification_token
      */
-    omit?: VerificationTokenOmit<ExtArgs> | null
+    omit?: verification_tokenOmit<ExtArgs> | null
     /**
-     * Filter which VerificationToken to delete.
+     * Filter which verification_token to delete.
      */
-    where: VerificationTokenWhereUniqueInput
+    where: verification_tokenWhereUniqueInput
   }
 
   /**
-   * VerificationToken deleteMany
+   * verification_token deleteMany
    */
-  export type VerificationTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which VerificationTokens to delete
+     * Filter which verification_tokens to delete
      */
-    where?: VerificationTokenWhereInput
+    where?: verification_tokenWhereInput
     /**
-     * Limit how many VerificationTokens to delete.
+     * Limit how many verification_tokens to delete.
      */
     limit?: number
   }
 
   /**
-   * VerificationToken without action
+   * verification_token without action
    */
-  export type VerificationTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type verification_tokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VerificationToken
+     * Select specific fields to fetch from the verification_token
      */
-    select?: VerificationTokenSelect<ExtArgs> | null
+    select?: verification_tokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VerificationToken
+     * Omit specific fields from the verification_token
      */
-    omit?: VerificationTokenOmit<ExtArgs> | null
+    omit?: verification_tokenOmit<ExtArgs> | null
   }
 
 
@@ -6769,69 +6769,69 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     email: 'email',
-    passwordHash: 'passwordHash',
-    firstName: 'firstName',
-    lastName: 'lastName',
-    isActive: 'isActive',
-    emailVerified: 'emailVerified',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    password_hash: 'password_hash',
+    first_name: 'first_name',
+    last_name: 'last_name',
+    is_active: 'is_active',
+    email_verified: 'email_verified',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-  export const OAuthClientScalarFieldEnum: {
+  export const Oauth_clientScalarFieldEnum: {
     id: 'id',
-    clientId: 'clientId',
-    clientSecret: 'clientSecret',
+    client_id: 'client_id',
+    client_secret: 'client_secret',
     name: 'name',
-    redirectUris: 'redirectUris',
+    redirect_uris: 'redirect_uris',
     scopes: 'scopes',
-    grantTypes: 'grantTypes',
-    isActive: 'isActive',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    grant_types: 'grant_types',
+    is_active: 'is_active',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
   };
 
-  export type OAuthClientScalarFieldEnum = (typeof OAuthClientScalarFieldEnum)[keyof typeof OAuthClientScalarFieldEnum]
+  export type Oauth_clientScalarFieldEnum = (typeof Oauth_clientScalarFieldEnum)[keyof typeof Oauth_clientScalarFieldEnum]
 
 
-  export const OAuthTokenScalarFieldEnum: {
+  export const Oauth_tokenScalarFieldEnum: {
     id: 'id',
     token: 'token',
-    userId: 'userId',
-    clientId: 'clientId',
+    user_id: 'user_id',
+    client_id: 'client_id',
     scope: 'scope',
-    expiresAt: 'expiresAt',
-    createdAt: 'createdAt'
+    expires_at: 'expires_at',
+    created_at: 'created_at'
   };
 
-  export type OAuthTokenScalarFieldEnum = (typeof OAuthTokenScalarFieldEnum)[keyof typeof OAuthTokenScalarFieldEnum]
+  export type Oauth_tokenScalarFieldEnum = (typeof Oauth_tokenScalarFieldEnum)[keyof typeof Oauth_tokenScalarFieldEnum]
 
 
-  export const RefreshTokenScalarFieldEnum: {
+  export const Refresh_tokenScalarFieldEnum: {
     id: 'id',
     token: 'token',
-    userId: 'userId',
-    expiresAt: 'expiresAt',
-    revokedAt: 'revokedAt',
-    createdAt: 'createdAt'
+    user_id: 'user_id',
+    expires_at: 'expires_at',
+    revoked_at: 'revoked_at',
+    created_at: 'created_at'
   };
 
-  export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
+  export type Refresh_tokenScalarFieldEnum = (typeof Refresh_tokenScalarFieldEnum)[keyof typeof Refresh_tokenScalarFieldEnum]
 
 
-  export const VerificationTokenScalarFieldEnum: {
+  export const Verification_tokenScalarFieldEnum: {
     id: 'id',
-    userId: 'userId',
+    user_id: 'user_id',
     token: 'token',
     type: 'type',
-    expiresAt: 'expiresAt',
-    createdAt: 'createdAt'
+    expires_at: 'expires_at',
+    created_at: 'created_at'
   };
 
-  export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
+  export type Verification_tokenScalarFieldEnum = (typeof Verification_tokenScalarFieldEnum)[keyof typeof Verification_tokenScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6915,727 +6915,727 @@ export namespace Prisma {
    */
 
 
-  export type UserWhereInput = {
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    id?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
-    passwordHash?: StringFilter<"User"> | string
-    firstName?: StringNullableFilter<"User"> | string | null
-    lastName?: StringNullableFilter<"User"> | string | null
-    isActive?: BoolFilter<"User"> | boolean
-    emailVerified?: BoolFilter<"User"> | boolean
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
-    oauthTokens?: OAuthTokenListRelationFilter
-    refreshTokens?: RefreshTokenListRelationFilter
+  export type userWhereInput = {
+    AND?: userWhereInput | userWhereInput[]
+    OR?: userWhereInput[]
+    NOT?: userWhereInput | userWhereInput[]
+    id?: StringFilter<"user"> | string
+    email?: StringFilter<"user"> | string
+    password_hash?: StringFilter<"user"> | string
+    first_name?: StringNullableFilter<"user"> | string | null
+    last_name?: StringNullableFilter<"user"> | string | null
+    is_active?: BoolFilter<"user"> | boolean
+    email_verified?: BoolFilter<"user"> | boolean
+    created_at?: DateTimeFilter<"user"> | Date | string
+    updated_at?: DateTimeFilter<"user"> | Date | string
+    oauth_tokens?: Oauth_tokenListRelationFilter
+    refresh_tokens?: Refresh_tokenListRelationFilter
   }
 
-  export type UserOrderByWithRelationInput = {
+  export type userOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
-    passwordHash?: SortOrder
-    firstName?: SortOrderInput | SortOrder
-    lastName?: SortOrderInput | SortOrder
-    isActive?: SortOrder
-    emailVerified?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    oauthTokens?: OAuthTokenOrderByRelationAggregateInput
-    refreshTokens?: RefreshTokenOrderByRelationAggregateInput
+    password_hash?: SortOrder
+    first_name?: SortOrderInput | SortOrder
+    last_name?: SortOrderInput | SortOrder
+    is_active?: SortOrder
+    email_verified?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    oauth_tokens?: oauth_tokenOrderByRelationAggregateInput
+    refresh_tokens?: refresh_tokenOrderByRelationAggregateInput
   }
 
-  export type UserWhereUniqueInput = Prisma.AtLeast<{
+  export type userWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    passwordHash?: StringFilter<"User"> | string
-    firstName?: StringNullableFilter<"User"> | string | null
-    lastName?: StringNullableFilter<"User"> | string | null
-    isActive?: BoolFilter<"User"> | boolean
-    emailVerified?: BoolFilter<"User"> | boolean
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
-    oauthTokens?: OAuthTokenListRelationFilter
-    refreshTokens?: RefreshTokenListRelationFilter
+    AND?: userWhereInput | userWhereInput[]
+    OR?: userWhereInput[]
+    NOT?: userWhereInput | userWhereInput[]
+    password_hash?: StringFilter<"user"> | string
+    first_name?: StringNullableFilter<"user"> | string | null
+    last_name?: StringNullableFilter<"user"> | string | null
+    is_active?: BoolFilter<"user"> | boolean
+    email_verified?: BoolFilter<"user"> | boolean
+    created_at?: DateTimeFilter<"user"> | Date | string
+    updated_at?: DateTimeFilter<"user"> | Date | string
+    oauth_tokens?: Oauth_tokenListRelationFilter
+    refresh_tokens?: Refresh_tokenListRelationFilter
   }, "id" | "email">
 
-  export type UserOrderByWithAggregationInput = {
+  export type userOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
-    passwordHash?: SortOrder
-    firstName?: SortOrderInput | SortOrder
-    lastName?: SortOrderInput | SortOrder
-    isActive?: SortOrder
-    emailVerified?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: UserCountOrderByAggregateInput
-    _max?: UserMaxOrderByAggregateInput
-    _min?: UserMinOrderByAggregateInput
+    password_hash?: SortOrder
+    first_name?: SortOrderInput | SortOrder
+    last_name?: SortOrderInput | SortOrder
+    is_active?: SortOrder
+    email_verified?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: userCountOrderByAggregateInput
+    _max?: userMaxOrderByAggregateInput
+    _min?: userMinOrderByAggregateInput
   }
 
-  export type UserScalarWhereWithAggregatesInput = {
-    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    OR?: UserScalarWhereWithAggregatesInput[]
-    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"User"> | string
-    email?: StringWithAggregatesFilter<"User"> | string
-    passwordHash?: StringWithAggregatesFilter<"User"> | string
-    firstName?: StringNullableWithAggregatesFilter<"User"> | string | null
-    lastName?: StringNullableWithAggregatesFilter<"User"> | string | null
-    isActive?: BoolWithAggregatesFilter<"User"> | boolean
-    emailVerified?: BoolWithAggregatesFilter<"User"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  export type userScalarWhereWithAggregatesInput = {
+    AND?: userScalarWhereWithAggregatesInput | userScalarWhereWithAggregatesInput[]
+    OR?: userScalarWhereWithAggregatesInput[]
+    NOT?: userScalarWhereWithAggregatesInput | userScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"user"> | string
+    email?: StringWithAggregatesFilter<"user"> | string
+    password_hash?: StringWithAggregatesFilter<"user"> | string
+    first_name?: StringNullableWithAggregatesFilter<"user"> | string | null
+    last_name?: StringNullableWithAggregatesFilter<"user"> | string | null
+    is_active?: BoolWithAggregatesFilter<"user"> | boolean
+    email_verified?: BoolWithAggregatesFilter<"user"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"user"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"user"> | Date | string
   }
 
-  export type OAuthClientWhereInput = {
-    AND?: OAuthClientWhereInput | OAuthClientWhereInput[]
-    OR?: OAuthClientWhereInput[]
-    NOT?: OAuthClientWhereInput | OAuthClientWhereInput[]
-    id?: StringFilter<"OAuthClient"> | string
-    clientId?: StringFilter<"OAuthClient"> | string
-    clientSecret?: StringFilter<"OAuthClient"> | string
-    name?: StringFilter<"OAuthClient"> | string
-    redirectUris?: StringFilter<"OAuthClient"> | string
-    scopes?: StringFilter<"OAuthClient"> | string
-    grantTypes?: StringFilter<"OAuthClient"> | string
-    isActive?: BoolFilter<"OAuthClient"> | boolean
-    createdAt?: DateTimeFilter<"OAuthClient"> | Date | string
-    updatedAt?: DateTimeFilter<"OAuthClient"> | Date | string
-    oauthTokens?: OAuthTokenListRelationFilter
+  export type oauth_clientWhereInput = {
+    AND?: oauth_clientWhereInput | oauth_clientWhereInput[]
+    OR?: oauth_clientWhereInput[]
+    NOT?: oauth_clientWhereInput | oauth_clientWhereInput[]
+    id?: StringFilter<"oauth_client"> | string
+    client_id?: StringFilter<"oauth_client"> | string
+    client_secret?: StringFilter<"oauth_client"> | string
+    name?: StringFilter<"oauth_client"> | string
+    redirect_uris?: StringFilter<"oauth_client"> | string
+    scopes?: StringFilter<"oauth_client"> | string
+    grant_types?: StringFilter<"oauth_client"> | string
+    is_active?: BoolFilter<"oauth_client"> | boolean
+    created_at?: DateTimeFilter<"oauth_client"> | Date | string
+    updated_at?: DateTimeFilter<"oauth_client"> | Date | string
+    oauth_tokens?: Oauth_tokenListRelationFilter
   }
 
-  export type OAuthClientOrderByWithRelationInput = {
+  export type oauth_clientOrderByWithRelationInput = {
     id?: SortOrder
-    clientId?: SortOrder
-    clientSecret?: SortOrder
+    client_id?: SortOrder
+    client_secret?: SortOrder
     name?: SortOrder
-    redirectUris?: SortOrder
+    redirect_uris?: SortOrder
     scopes?: SortOrder
-    grantTypes?: SortOrder
-    isActive?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    oauthTokens?: OAuthTokenOrderByRelationAggregateInput
+    grant_types?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    oauth_tokens?: oauth_tokenOrderByRelationAggregateInput
   }
 
-  export type OAuthClientWhereUniqueInput = Prisma.AtLeast<{
+  export type oauth_clientWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    clientId?: string
-    AND?: OAuthClientWhereInput | OAuthClientWhereInput[]
-    OR?: OAuthClientWhereInput[]
-    NOT?: OAuthClientWhereInput | OAuthClientWhereInput[]
-    clientSecret?: StringFilter<"OAuthClient"> | string
-    name?: StringFilter<"OAuthClient"> | string
-    redirectUris?: StringFilter<"OAuthClient"> | string
-    scopes?: StringFilter<"OAuthClient"> | string
-    grantTypes?: StringFilter<"OAuthClient"> | string
-    isActive?: BoolFilter<"OAuthClient"> | boolean
-    createdAt?: DateTimeFilter<"OAuthClient"> | Date | string
-    updatedAt?: DateTimeFilter<"OAuthClient"> | Date | string
-    oauthTokens?: OAuthTokenListRelationFilter
-  }, "id" | "clientId">
+    client_id?: string
+    AND?: oauth_clientWhereInput | oauth_clientWhereInput[]
+    OR?: oauth_clientWhereInput[]
+    NOT?: oauth_clientWhereInput | oauth_clientWhereInput[]
+    client_secret?: StringFilter<"oauth_client"> | string
+    name?: StringFilter<"oauth_client"> | string
+    redirect_uris?: StringFilter<"oauth_client"> | string
+    scopes?: StringFilter<"oauth_client"> | string
+    grant_types?: StringFilter<"oauth_client"> | string
+    is_active?: BoolFilter<"oauth_client"> | boolean
+    created_at?: DateTimeFilter<"oauth_client"> | Date | string
+    updated_at?: DateTimeFilter<"oauth_client"> | Date | string
+    oauth_tokens?: Oauth_tokenListRelationFilter
+  }, "id" | "client_id">
 
-  export type OAuthClientOrderByWithAggregationInput = {
+  export type oauth_clientOrderByWithAggregationInput = {
     id?: SortOrder
-    clientId?: SortOrder
-    clientSecret?: SortOrder
+    client_id?: SortOrder
+    client_secret?: SortOrder
     name?: SortOrder
-    redirectUris?: SortOrder
+    redirect_uris?: SortOrder
     scopes?: SortOrder
-    grantTypes?: SortOrder
-    isActive?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: OAuthClientCountOrderByAggregateInput
-    _max?: OAuthClientMaxOrderByAggregateInput
-    _min?: OAuthClientMinOrderByAggregateInput
+    grant_types?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: oauth_clientCountOrderByAggregateInput
+    _max?: oauth_clientMaxOrderByAggregateInput
+    _min?: oauth_clientMinOrderByAggregateInput
   }
 
-  export type OAuthClientScalarWhereWithAggregatesInput = {
-    AND?: OAuthClientScalarWhereWithAggregatesInput | OAuthClientScalarWhereWithAggregatesInput[]
-    OR?: OAuthClientScalarWhereWithAggregatesInput[]
-    NOT?: OAuthClientScalarWhereWithAggregatesInput | OAuthClientScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"OAuthClient"> | string
-    clientId?: StringWithAggregatesFilter<"OAuthClient"> | string
-    clientSecret?: StringWithAggregatesFilter<"OAuthClient"> | string
-    name?: StringWithAggregatesFilter<"OAuthClient"> | string
-    redirectUris?: StringWithAggregatesFilter<"OAuthClient"> | string
-    scopes?: StringWithAggregatesFilter<"OAuthClient"> | string
-    grantTypes?: StringWithAggregatesFilter<"OAuthClient"> | string
-    isActive?: BoolWithAggregatesFilter<"OAuthClient"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"OAuthClient"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"OAuthClient"> | Date | string
+  export type oauth_clientScalarWhereWithAggregatesInput = {
+    AND?: oauth_clientScalarWhereWithAggregatesInput | oauth_clientScalarWhereWithAggregatesInput[]
+    OR?: oauth_clientScalarWhereWithAggregatesInput[]
+    NOT?: oauth_clientScalarWhereWithAggregatesInput | oauth_clientScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"oauth_client"> | string
+    client_id?: StringWithAggregatesFilter<"oauth_client"> | string
+    client_secret?: StringWithAggregatesFilter<"oauth_client"> | string
+    name?: StringWithAggregatesFilter<"oauth_client"> | string
+    redirect_uris?: StringWithAggregatesFilter<"oauth_client"> | string
+    scopes?: StringWithAggregatesFilter<"oauth_client"> | string
+    grant_types?: StringWithAggregatesFilter<"oauth_client"> | string
+    is_active?: BoolWithAggregatesFilter<"oauth_client"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"oauth_client"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"oauth_client"> | Date | string
   }
 
-  export type OAuthTokenWhereInput = {
-    AND?: OAuthTokenWhereInput | OAuthTokenWhereInput[]
-    OR?: OAuthTokenWhereInput[]
-    NOT?: OAuthTokenWhereInput | OAuthTokenWhereInput[]
-    id?: StringFilter<"OAuthToken"> | string
-    token?: StringFilter<"OAuthToken"> | string
-    userId?: StringFilter<"OAuthToken"> | string
-    clientId?: StringFilter<"OAuthToken"> | string
-    scope?: StringNullableFilter<"OAuthToken"> | string | null
-    expiresAt?: DateTimeNullableFilter<"OAuthToken"> | Date | string | null
-    createdAt?: DateTimeFilter<"OAuthToken"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
+  export type oauth_tokenWhereInput = {
+    AND?: oauth_tokenWhereInput | oauth_tokenWhereInput[]
+    OR?: oauth_tokenWhereInput[]
+    NOT?: oauth_tokenWhereInput | oauth_tokenWhereInput[]
+    id?: StringFilter<"oauth_token"> | string
+    token?: StringFilter<"oauth_token"> | string
+    user_id?: StringFilter<"oauth_token"> | string
+    client_id?: StringFilter<"oauth_token"> | string
+    scope?: StringNullableFilter<"oauth_token"> | string | null
+    expires_at?: DateTimeNullableFilter<"oauth_token"> | Date | string | null
+    created_at?: DateTimeFilter<"oauth_token"> | Date | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+    client?: XOR<Oauth_clientScalarRelationFilter, oauth_clientWhereInput>
   }
 
-  export type OAuthTokenOrderByWithRelationInput = {
+  export type oauth_tokenOrderByWithRelationInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
-    clientId?: SortOrder
+    user_id?: SortOrder
+    client_id?: SortOrder
     scope?: SortOrderInput | SortOrder
-    expiresAt?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-    client?: OAuthClientOrderByWithRelationInput
+    expires_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    user?: userOrderByWithRelationInput
+    client?: oauth_clientOrderByWithRelationInput
   }
 
-  export type OAuthTokenWhereUniqueInput = Prisma.AtLeast<{
+  export type oauth_tokenWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     token?: string
-    AND?: OAuthTokenWhereInput | OAuthTokenWhereInput[]
-    OR?: OAuthTokenWhereInput[]
-    NOT?: OAuthTokenWhereInput | OAuthTokenWhereInput[]
-    userId?: StringFilter<"OAuthToken"> | string
-    clientId?: StringFilter<"OAuthToken"> | string
-    scope?: StringNullableFilter<"OAuthToken"> | string | null
-    expiresAt?: DateTimeNullableFilter<"OAuthToken"> | Date | string | null
-    createdAt?: DateTimeFilter<"OAuthToken"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
+    AND?: oauth_tokenWhereInput | oauth_tokenWhereInput[]
+    OR?: oauth_tokenWhereInput[]
+    NOT?: oauth_tokenWhereInput | oauth_tokenWhereInput[]
+    user_id?: StringFilter<"oauth_token"> | string
+    client_id?: StringFilter<"oauth_token"> | string
+    scope?: StringNullableFilter<"oauth_token"> | string | null
+    expires_at?: DateTimeNullableFilter<"oauth_token"> | Date | string | null
+    created_at?: DateTimeFilter<"oauth_token"> | Date | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+    client?: XOR<Oauth_clientScalarRelationFilter, oauth_clientWhereInput>
   }, "id" | "token">
 
-  export type OAuthTokenOrderByWithAggregationInput = {
+  export type oauth_tokenOrderByWithAggregationInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
-    clientId?: SortOrder
+    user_id?: SortOrder
+    client_id?: SortOrder
     scope?: SortOrderInput | SortOrder
-    expiresAt?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    _count?: OAuthTokenCountOrderByAggregateInput
-    _max?: OAuthTokenMaxOrderByAggregateInput
-    _min?: OAuthTokenMinOrderByAggregateInput
+    expires_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    _count?: oauth_tokenCountOrderByAggregateInput
+    _max?: oauth_tokenMaxOrderByAggregateInput
+    _min?: oauth_tokenMinOrderByAggregateInput
   }
 
-  export type OAuthTokenScalarWhereWithAggregatesInput = {
-    AND?: OAuthTokenScalarWhereWithAggregatesInput | OAuthTokenScalarWhereWithAggregatesInput[]
-    OR?: OAuthTokenScalarWhereWithAggregatesInput[]
-    NOT?: OAuthTokenScalarWhereWithAggregatesInput | OAuthTokenScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"OAuthToken"> | string
-    token?: StringWithAggregatesFilter<"OAuthToken"> | string
-    userId?: StringWithAggregatesFilter<"OAuthToken"> | string
-    clientId?: StringWithAggregatesFilter<"OAuthToken"> | string
-    scope?: StringNullableWithAggregatesFilter<"OAuthToken"> | string | null
-    expiresAt?: DateTimeNullableWithAggregatesFilter<"OAuthToken"> | Date | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"OAuthToken"> | Date | string
+  export type oauth_tokenScalarWhereWithAggregatesInput = {
+    AND?: oauth_tokenScalarWhereWithAggregatesInput | oauth_tokenScalarWhereWithAggregatesInput[]
+    OR?: oauth_tokenScalarWhereWithAggregatesInput[]
+    NOT?: oauth_tokenScalarWhereWithAggregatesInput | oauth_tokenScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"oauth_token"> | string
+    token?: StringWithAggregatesFilter<"oauth_token"> | string
+    user_id?: StringWithAggregatesFilter<"oauth_token"> | string
+    client_id?: StringWithAggregatesFilter<"oauth_token"> | string
+    scope?: StringNullableWithAggregatesFilter<"oauth_token"> | string | null
+    expires_at?: DateTimeNullableWithAggregatesFilter<"oauth_token"> | Date | string | null
+    created_at?: DateTimeWithAggregatesFilter<"oauth_token"> | Date | string
   }
 
-  export type RefreshTokenWhereInput = {
-    AND?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
-    OR?: RefreshTokenWhereInput[]
-    NOT?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
-    id?: StringFilter<"RefreshToken"> | string
-    token?: StringFilter<"RefreshToken"> | string
-    userId?: StringFilter<"RefreshToken"> | string
-    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    revokedAt?: DateTimeNullableFilter<"RefreshToken"> | Date | string | null
-    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  export type refresh_tokenWhereInput = {
+    AND?: refresh_tokenWhereInput | refresh_tokenWhereInput[]
+    OR?: refresh_tokenWhereInput[]
+    NOT?: refresh_tokenWhereInput | refresh_tokenWhereInput[]
+    id?: StringFilter<"refresh_token"> | string
+    token?: StringFilter<"refresh_token"> | string
+    user_id?: StringFilter<"refresh_token"> | string
+    expires_at?: DateTimeFilter<"refresh_token"> | Date | string
+    revoked_at?: DateTimeNullableFilter<"refresh_token"> | Date | string | null
+    created_at?: DateTimeFilter<"refresh_token"> | Date | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
   }
 
-  export type RefreshTokenOrderByWithRelationInput = {
+  export type refresh_tokenOrderByWithRelationInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
-    expiresAt?: SortOrder
-    revokedAt?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    user?: UserOrderByWithRelationInput
+    user_id?: SortOrder
+    expires_at?: SortOrder
+    revoked_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    user?: userOrderByWithRelationInput
   }
 
-  export type RefreshTokenWhereUniqueInput = Prisma.AtLeast<{
+  export type refresh_tokenWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     token?: string
-    AND?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
-    OR?: RefreshTokenWhereInput[]
-    NOT?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
-    userId?: StringFilter<"RefreshToken"> | string
-    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    revokedAt?: DateTimeNullableFilter<"RefreshToken"> | Date | string | null
-    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    AND?: refresh_tokenWhereInput | refresh_tokenWhereInput[]
+    OR?: refresh_tokenWhereInput[]
+    NOT?: refresh_tokenWhereInput | refresh_tokenWhereInput[]
+    user_id?: StringFilter<"refresh_token"> | string
+    expires_at?: DateTimeFilter<"refresh_token"> | Date | string
+    revoked_at?: DateTimeNullableFilter<"refresh_token"> | Date | string | null
+    created_at?: DateTimeFilter<"refresh_token"> | Date | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
   }, "id" | "token">
 
-  export type RefreshTokenOrderByWithAggregationInput = {
+  export type refresh_tokenOrderByWithAggregationInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
-    expiresAt?: SortOrder
-    revokedAt?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    _count?: RefreshTokenCountOrderByAggregateInput
-    _max?: RefreshTokenMaxOrderByAggregateInput
-    _min?: RefreshTokenMinOrderByAggregateInput
+    user_id?: SortOrder
+    expires_at?: SortOrder
+    revoked_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    _count?: refresh_tokenCountOrderByAggregateInput
+    _max?: refresh_tokenMaxOrderByAggregateInput
+    _min?: refresh_tokenMinOrderByAggregateInput
   }
 
-  export type RefreshTokenScalarWhereWithAggregatesInput = {
-    AND?: RefreshTokenScalarWhereWithAggregatesInput | RefreshTokenScalarWhereWithAggregatesInput[]
-    OR?: RefreshTokenScalarWhereWithAggregatesInput[]
-    NOT?: RefreshTokenScalarWhereWithAggregatesInput | RefreshTokenScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"RefreshToken"> | string
-    token?: StringWithAggregatesFilter<"RefreshToken"> | string
-    userId?: StringWithAggregatesFilter<"RefreshToken"> | string
-    expiresAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
-    revokedAt?: DateTimeNullableWithAggregatesFilter<"RefreshToken"> | Date | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
+  export type refresh_tokenScalarWhereWithAggregatesInput = {
+    AND?: refresh_tokenScalarWhereWithAggregatesInput | refresh_tokenScalarWhereWithAggregatesInput[]
+    OR?: refresh_tokenScalarWhereWithAggregatesInput[]
+    NOT?: refresh_tokenScalarWhereWithAggregatesInput | refresh_tokenScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"refresh_token"> | string
+    token?: StringWithAggregatesFilter<"refresh_token"> | string
+    user_id?: StringWithAggregatesFilter<"refresh_token"> | string
+    expires_at?: DateTimeWithAggregatesFilter<"refresh_token"> | Date | string
+    revoked_at?: DateTimeNullableWithAggregatesFilter<"refresh_token"> | Date | string | null
+    created_at?: DateTimeWithAggregatesFilter<"refresh_token"> | Date | string
   }
 
-  export type VerificationTokenWhereInput = {
-    AND?: VerificationTokenWhereInput | VerificationTokenWhereInput[]
-    OR?: VerificationTokenWhereInput[]
-    NOT?: VerificationTokenWhereInput | VerificationTokenWhereInput[]
-    id?: StringFilter<"VerificationToken"> | string
-    userId?: StringFilter<"VerificationToken"> | string
-    token?: StringFilter<"VerificationToken"> | string
-    type?: StringFilter<"VerificationToken"> | string
-    expiresAt?: DateTimeFilter<"VerificationToken"> | Date | string
-    createdAt?: DateTimeFilter<"VerificationToken"> | Date | string
+  export type verification_tokenWhereInput = {
+    AND?: verification_tokenWhereInput | verification_tokenWhereInput[]
+    OR?: verification_tokenWhereInput[]
+    NOT?: verification_tokenWhereInput | verification_tokenWhereInput[]
+    id?: StringFilter<"verification_token"> | string
+    user_id?: StringFilter<"verification_token"> | string
+    token?: StringFilter<"verification_token"> | string
+    type?: StringFilter<"verification_token"> | string
+    expires_at?: DateTimeFilter<"verification_token"> | Date | string
+    created_at?: DateTimeFilter<"verification_token"> | Date | string
   }
 
-  export type VerificationTokenOrderByWithRelationInput = {
+  export type verification_tokenOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    user_id?: SortOrder
     token?: SortOrder
     type?: SortOrder
-    expiresAt?: SortOrder
-    createdAt?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
   }
 
-  export type VerificationTokenWhereUniqueInput = Prisma.AtLeast<{
+  export type verification_tokenWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     token?: string
-    AND?: VerificationTokenWhereInput | VerificationTokenWhereInput[]
-    OR?: VerificationTokenWhereInput[]
-    NOT?: VerificationTokenWhereInput | VerificationTokenWhereInput[]
-    userId?: StringFilter<"VerificationToken"> | string
-    type?: StringFilter<"VerificationToken"> | string
-    expiresAt?: DateTimeFilter<"VerificationToken"> | Date | string
-    createdAt?: DateTimeFilter<"VerificationToken"> | Date | string
+    AND?: verification_tokenWhereInput | verification_tokenWhereInput[]
+    OR?: verification_tokenWhereInput[]
+    NOT?: verification_tokenWhereInput | verification_tokenWhereInput[]
+    user_id?: StringFilter<"verification_token"> | string
+    type?: StringFilter<"verification_token"> | string
+    expires_at?: DateTimeFilter<"verification_token"> | Date | string
+    created_at?: DateTimeFilter<"verification_token"> | Date | string
   }, "id" | "token">
 
-  export type VerificationTokenOrderByWithAggregationInput = {
+  export type verification_tokenOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    user_id?: SortOrder
     token?: SortOrder
     type?: SortOrder
-    expiresAt?: SortOrder
-    createdAt?: SortOrder
-    _count?: VerificationTokenCountOrderByAggregateInput
-    _max?: VerificationTokenMaxOrderByAggregateInput
-    _min?: VerificationTokenMinOrderByAggregateInput
+    expires_at?: SortOrder
+    created_at?: SortOrder
+    _count?: verification_tokenCountOrderByAggregateInput
+    _max?: verification_tokenMaxOrderByAggregateInput
+    _min?: verification_tokenMinOrderByAggregateInput
   }
 
-  export type VerificationTokenScalarWhereWithAggregatesInput = {
-    AND?: VerificationTokenScalarWhereWithAggregatesInput | VerificationTokenScalarWhereWithAggregatesInput[]
-    OR?: VerificationTokenScalarWhereWithAggregatesInput[]
-    NOT?: VerificationTokenScalarWhereWithAggregatesInput | VerificationTokenScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"VerificationToken"> | string
-    userId?: StringWithAggregatesFilter<"VerificationToken"> | string
-    token?: StringWithAggregatesFilter<"VerificationToken"> | string
-    type?: StringWithAggregatesFilter<"VerificationToken"> | string
-    expiresAt?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
-    createdAt?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
+  export type verification_tokenScalarWhereWithAggregatesInput = {
+    AND?: verification_tokenScalarWhereWithAggregatesInput | verification_tokenScalarWhereWithAggregatesInput[]
+    OR?: verification_tokenScalarWhereWithAggregatesInput[]
+    NOT?: verification_tokenScalarWhereWithAggregatesInput | verification_tokenScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"verification_token"> | string
+    user_id?: StringWithAggregatesFilter<"verification_token"> | string
+    token?: StringWithAggregatesFilter<"verification_token"> | string
+    type?: StringWithAggregatesFilter<"verification_token"> | string
+    expires_at?: DateTimeWithAggregatesFilter<"verification_token"> | Date | string
+    created_at?: DateTimeWithAggregatesFilter<"verification_token"> | Date | string
   }
 
-  export type UserCreateInput = {
+  export type userCreateInput = {
     id?: string
     email: string
-    passwordHash: string
-    firstName?: string | null
-    lastName?: string | null
-    isActive?: boolean
-    emailVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    oauthTokens?: OAuthTokenCreateNestedManyWithoutUserInput
-    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    password_hash: string
+    first_name?: string | null
+    last_name?: string | null
+    is_active?: boolean
+    email_verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    oauth_tokens?: oauth_tokenCreateNestedManyWithoutUserInput
+    refresh_tokens?: refresh_tokenCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateInput = {
+  export type userUncheckedCreateInput = {
     id?: string
     email: string
-    passwordHash: string
-    firstName?: string | null
-    lastName?: string | null
-    isActive?: boolean
-    emailVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    oauthTokens?: OAuthTokenUncheckedCreateNestedManyWithoutUserInput
-    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    password_hash: string
+    first_name?: string | null
+    last_name?: string | null
+    is_active?: boolean
+    email_verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    oauth_tokens?: oauth_tokenUncheckedCreateNestedManyWithoutUserInput
+    refresh_tokens?: refresh_tokenUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserUpdateInput = {
+  export type userUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    oauthTokens?: OAuthTokenUpdateManyWithoutUserNestedInput
-    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    password_hash?: StringFieldUpdateOperationsInput | string
+    first_name?: NullableStringFieldUpdateOperationsInput | string | null
+    last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    email_verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    oauth_tokens?: oauth_tokenUpdateManyWithoutUserNestedInput
+    refresh_tokens?: refresh_tokenUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateInput = {
+  export type userUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    oauthTokens?: OAuthTokenUncheckedUpdateManyWithoutUserNestedInput
-    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    password_hash?: StringFieldUpdateOperationsInput | string
+    first_name?: NullableStringFieldUpdateOperationsInput | string | null
+    last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    email_verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    oauth_tokens?: oauth_tokenUncheckedUpdateManyWithoutUserNestedInput
+    refresh_tokens?: refresh_tokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UserCreateManyInput = {
+  export type userCreateManyInput = {
     id?: string
     email: string
-    passwordHash: string
-    firstName?: string | null
-    lastName?: string | null
-    isActive?: boolean
-    emailVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    password_hash: string
+    first_name?: string | null
+    last_name?: string | null
+    is_active?: boolean
+    email_verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
   }
 
-  export type UserUpdateManyMutationInput = {
+  export type userUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password_hash?: StringFieldUpdateOperationsInput | string
+    first_name?: NullableStringFieldUpdateOperationsInput | string | null
+    last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    email_verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserUncheckedUpdateManyInput = {
+  export type userUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password_hash?: StringFieldUpdateOperationsInput | string
+    first_name?: NullableStringFieldUpdateOperationsInput | string | null
+    last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    email_verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OAuthClientCreateInput = {
+  export type oauth_clientCreateInput = {
     id?: string
-    clientId: string
-    clientSecret: string
+    client_id: string
+    client_secret: string
     name: string
-    redirectUris: string
+    redirect_uris: string
     scopes: string
-    grantTypes: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    oauthTokens?: OAuthTokenCreateNestedManyWithoutClientInput
+    grant_types: string
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    oauth_tokens?: oauth_tokenCreateNestedManyWithoutClientInput
   }
 
-  export type OAuthClientUncheckedCreateInput = {
+  export type oauth_clientUncheckedCreateInput = {
     id?: string
-    clientId: string
-    clientSecret: string
+    client_id: string
+    client_secret: string
     name: string
-    redirectUris: string
+    redirect_uris: string
     scopes: string
-    grantTypes: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    oauthTokens?: OAuthTokenUncheckedCreateNestedManyWithoutClientInput
+    grant_types: string
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    oauth_tokens?: oauth_tokenUncheckedCreateNestedManyWithoutClientInput
   }
 
-  export type OAuthClientUpdateInput = {
+  export type oauth_clientUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    clientSecret?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    client_secret?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    redirectUris?: StringFieldUpdateOperationsInput | string
+    redirect_uris?: StringFieldUpdateOperationsInput | string
     scopes?: StringFieldUpdateOperationsInput | string
-    grantTypes?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    oauthTokens?: OAuthTokenUpdateManyWithoutClientNestedInput
+    grant_types?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    oauth_tokens?: oauth_tokenUpdateManyWithoutClientNestedInput
   }
 
-  export type OAuthClientUncheckedUpdateInput = {
+  export type oauth_clientUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    clientSecret?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    client_secret?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    redirectUris?: StringFieldUpdateOperationsInput | string
+    redirect_uris?: StringFieldUpdateOperationsInput | string
     scopes?: StringFieldUpdateOperationsInput | string
-    grantTypes?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    oauthTokens?: OAuthTokenUncheckedUpdateManyWithoutClientNestedInput
+    grant_types?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    oauth_tokens?: oauth_tokenUncheckedUpdateManyWithoutClientNestedInput
   }
 
-  export type OAuthClientCreateManyInput = {
+  export type oauth_clientCreateManyInput = {
     id?: string
-    clientId: string
-    clientSecret: string
+    client_id: string
+    client_secret: string
     name: string
-    redirectUris: string
+    redirect_uris: string
     scopes: string
-    grantTypes: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    grant_types: string
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
   }
 
-  export type OAuthClientUpdateManyMutationInput = {
+  export type oauth_clientUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    clientSecret?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    client_secret?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    redirectUris?: StringFieldUpdateOperationsInput | string
+    redirect_uris?: StringFieldUpdateOperationsInput | string
     scopes?: StringFieldUpdateOperationsInput | string
-    grantTypes?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grant_types?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OAuthClientUncheckedUpdateManyInput = {
+  export type oauth_clientUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    clientSecret?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    client_secret?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    redirectUris?: StringFieldUpdateOperationsInput | string
+    redirect_uris?: StringFieldUpdateOperationsInput | string
     scopes?: StringFieldUpdateOperationsInput | string
-    grantTypes?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grant_types?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OAuthTokenCreateInput = {
+  export type oauth_tokenCreateInput = {
     id?: string
     token: string
     scope?: string | null
-    expiresAt?: Date | string | null
-    createdAt?: Date | string
-    user: UserCreateNestedOneWithoutOauthTokensInput
-    client: OAuthClientCreateNestedOneWithoutOauthTokensInput
+    expires_at?: Date | string | null
+    created_at?: Date | string
+    user: userCreateNestedOneWithoutOauth_tokensInput
+    client: oauth_clientCreateNestedOneWithoutOauth_tokensInput
   }
 
-  export type OAuthTokenUncheckedCreateInput = {
+  export type oauth_tokenUncheckedCreateInput = {
     id?: string
     token: string
-    userId: string
-    clientId: string
+    user_id: string
+    client_id: string
     scope?: string | null
-    expiresAt?: Date | string | null
-    createdAt?: Date | string
+    expires_at?: Date | string | null
+    created_at?: Date | string
   }
 
-  export type OAuthTokenUpdateInput = {
+  export type oauth_tokenUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     scope?: NullableStringFieldUpdateOperationsInput | string | null
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutOauthTokensNestedInput
-    client?: OAuthClientUpdateOneRequiredWithoutOauthTokensNestedInput
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: userUpdateOneRequiredWithoutOauth_tokensNestedInput
+    client?: oauth_clientUpdateOneRequiredWithoutOauth_tokensNestedInput
   }
 
-  export type OAuthTokenUncheckedUpdateInput = {
+  export type oauth_tokenUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    clientId?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
     scope?: NullableStringFieldUpdateOperationsInput | string | null
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OAuthTokenCreateManyInput = {
+  export type oauth_tokenCreateManyInput = {
     id?: string
     token: string
-    userId: string
-    clientId: string
+    user_id: string
+    client_id: string
     scope?: string | null
-    expiresAt?: Date | string | null
-    createdAt?: Date | string
+    expires_at?: Date | string | null
+    created_at?: Date | string
   }
 
-  export type OAuthTokenUpdateManyMutationInput = {
+  export type oauth_tokenUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     scope?: NullableStringFieldUpdateOperationsInput | string | null
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OAuthTokenUncheckedUpdateManyInput = {
+  export type oauth_tokenUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    clientId?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
     scope?: NullableStringFieldUpdateOperationsInput | string | null
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RefreshTokenCreateInput = {
+  export type refresh_tokenCreateInput = {
     id?: string
     token: string
-    expiresAt: Date | string
-    revokedAt?: Date | string | null
-    createdAt?: Date | string
-    user: UserCreateNestedOneWithoutRefreshTokensInput
+    expires_at: Date | string
+    revoked_at?: Date | string | null
+    created_at?: Date | string
+    user: userCreateNestedOneWithoutRefresh_tokensInput
   }
 
-  export type RefreshTokenUncheckedCreateInput = {
+  export type refresh_tokenUncheckedCreateInput = {
     id?: string
     token: string
-    userId: string
-    expiresAt: Date | string
-    revokedAt?: Date | string | null
-    createdAt?: Date | string
+    user_id: string
+    expires_at: Date | string
+    revoked_at?: Date | string | null
+    created_at?: Date | string
   }
 
-  export type RefreshTokenUpdateInput = {
+  export type refresh_tokenUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutRefreshTokensNestedInput
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: userUpdateOneRequiredWithoutRefresh_tokensNestedInput
   }
 
-  export type RefreshTokenUncheckedUpdateInput = {
+  export type refresh_tokenUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RefreshTokenCreateManyInput = {
+  export type refresh_tokenCreateManyInput = {
     id?: string
     token: string
-    userId: string
-    expiresAt: Date | string
-    revokedAt?: Date | string | null
-    createdAt?: Date | string
+    user_id: string
+    expires_at: Date | string
+    revoked_at?: Date | string | null
+    created_at?: Date | string
   }
 
-  export type RefreshTokenUpdateManyMutationInput = {
+  export type refresh_tokenUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RefreshTokenUncheckedUpdateManyInput = {
+  export type refresh_tokenUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type VerificationTokenCreateInput = {
+  export type verification_tokenCreateInput = {
     id?: string
-    userId: string
-    token: string
-    type: string
-    expiresAt: Date | string
-    createdAt?: Date | string
-  }
-
-  export type VerificationTokenUncheckedCreateInput = {
-    id?: string
-    userId: string
+    user_id: string
     token: string
     type: string
-    expiresAt: Date | string
-    createdAt?: Date | string
+    expires_at: Date | string
+    created_at?: Date | string
   }
 
-  export type VerificationTokenUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VerificationTokenUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VerificationTokenCreateManyInput = {
+  export type verification_tokenUncheckedCreateInput = {
     id?: string
-    userId: string
+    user_id: string
     token: string
     type: string
-    expiresAt: Date | string
-    createdAt?: Date | string
+    expires_at: Date | string
+    created_at?: Date | string
   }
 
-  export type VerificationTokenUpdateManyMutationInput = {
+  export type verification_tokenUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type VerificationTokenUncheckedUpdateManyInput = {
+  export type verification_tokenUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type verification_tokenCreateManyInput = {
+    id?: string
+    user_id: string
+    token: string
+    type: string
+    expires_at: Date | string
+    created_at?: Date | string
+  }
+
+  export type verification_tokenUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type verification_tokenUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -7684,16 +7684,16 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type OAuthTokenListRelationFilter = {
-    every?: OAuthTokenWhereInput
-    some?: OAuthTokenWhereInput
-    none?: OAuthTokenWhereInput
+  export type Oauth_tokenListRelationFilter = {
+    every?: oauth_tokenWhereInput
+    some?: oauth_tokenWhereInput
+    none?: oauth_tokenWhereInput
   }
 
-  export type RefreshTokenListRelationFilter = {
-    every?: RefreshTokenWhereInput
-    some?: RefreshTokenWhereInput
-    none?: RefreshTokenWhereInput
+  export type Refresh_tokenListRelationFilter = {
+    every?: refresh_tokenWhereInput
+    some?: refresh_tokenWhereInput
+    none?: refresh_tokenWhereInput
   }
 
   export type SortOrderInput = {
@@ -7701,48 +7701,48 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type OAuthTokenOrderByRelationAggregateInput = {
+  export type oauth_tokenOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type RefreshTokenOrderByRelationAggregateInput = {
+  export type refresh_tokenOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type UserCountOrderByAggregateInput = {
+  export type userCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    passwordHash?: SortOrder
-    firstName?: SortOrder
-    lastName?: SortOrder
-    isActive?: SortOrder
-    emailVerified?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    password_hash?: SortOrder
+    first_name?: SortOrder
+    last_name?: SortOrder
+    is_active?: SortOrder
+    email_verified?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
-  export type UserMaxOrderByAggregateInput = {
+  export type userMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    passwordHash?: SortOrder
-    firstName?: SortOrder
-    lastName?: SortOrder
-    isActive?: SortOrder
-    emailVerified?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    password_hash?: SortOrder
+    first_name?: SortOrder
+    last_name?: SortOrder
+    is_active?: SortOrder
+    email_verified?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
-  export type UserMinOrderByAggregateInput = {
+  export type userMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    passwordHash?: SortOrder
-    firstName?: SortOrder
-    lastName?: SortOrder
-    isActive?: SortOrder
-    emailVerified?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    password_hash?: SortOrder
+    first_name?: SortOrder
+    last_name?: SortOrder
+    is_active?: SortOrder
+    email_verified?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -7803,43 +7803,43 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type OAuthClientCountOrderByAggregateInput = {
+  export type oauth_clientCountOrderByAggregateInput = {
     id?: SortOrder
-    clientId?: SortOrder
-    clientSecret?: SortOrder
+    client_id?: SortOrder
+    client_secret?: SortOrder
     name?: SortOrder
-    redirectUris?: SortOrder
+    redirect_uris?: SortOrder
     scopes?: SortOrder
-    grantTypes?: SortOrder
-    isActive?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    grant_types?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
-  export type OAuthClientMaxOrderByAggregateInput = {
+  export type oauth_clientMaxOrderByAggregateInput = {
     id?: SortOrder
-    clientId?: SortOrder
-    clientSecret?: SortOrder
+    client_id?: SortOrder
+    client_secret?: SortOrder
     name?: SortOrder
-    redirectUris?: SortOrder
+    redirect_uris?: SortOrder
     scopes?: SortOrder
-    grantTypes?: SortOrder
-    isActive?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    grant_types?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
-  export type OAuthClientMinOrderByAggregateInput = {
+  export type oauth_clientMinOrderByAggregateInput = {
     id?: SortOrder
-    clientId?: SortOrder
-    clientSecret?: SortOrder
+    client_id?: SortOrder
+    client_secret?: SortOrder
     name?: SortOrder
-    redirectUris?: SortOrder
+    redirect_uris?: SortOrder
     scopes?: SortOrder
-    grantTypes?: SortOrder
-    isActive?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    grant_types?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -7854,43 +7854,43 @@ export namespace Prisma {
   }
 
   export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+    is?: userWhereInput
+    isNot?: userWhereInput
   }
 
-  export type OAuthClientScalarRelationFilter = {
-    is?: OAuthClientWhereInput
-    isNot?: OAuthClientWhereInput
+  export type Oauth_clientScalarRelationFilter = {
+    is?: oauth_clientWhereInput
+    isNot?: oauth_clientWhereInput
   }
 
-  export type OAuthTokenCountOrderByAggregateInput = {
+  export type oauth_tokenCountOrderByAggregateInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
-    clientId?: SortOrder
+    user_id?: SortOrder
+    client_id?: SortOrder
     scope?: SortOrder
-    expiresAt?: SortOrder
-    createdAt?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
   }
 
-  export type OAuthTokenMaxOrderByAggregateInput = {
+  export type oauth_tokenMaxOrderByAggregateInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
-    clientId?: SortOrder
+    user_id?: SortOrder
+    client_id?: SortOrder
     scope?: SortOrder
-    expiresAt?: SortOrder
-    createdAt?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
   }
 
-  export type OAuthTokenMinOrderByAggregateInput = {
+  export type oauth_tokenMinOrderByAggregateInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
-    clientId?: SortOrder
+    user_id?: SortOrder
+    client_id?: SortOrder
     scope?: SortOrder
-    expiresAt?: SortOrder
-    createdAt?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -7907,86 +7907,86 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type RefreshTokenCountOrderByAggregateInput = {
+  export type refresh_tokenCountOrderByAggregateInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
-    expiresAt?: SortOrder
-    revokedAt?: SortOrder
-    createdAt?: SortOrder
+    user_id?: SortOrder
+    expires_at?: SortOrder
+    revoked_at?: SortOrder
+    created_at?: SortOrder
   }
 
-  export type RefreshTokenMaxOrderByAggregateInput = {
+  export type refresh_tokenMaxOrderByAggregateInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
-    expiresAt?: SortOrder
-    revokedAt?: SortOrder
-    createdAt?: SortOrder
+    user_id?: SortOrder
+    expires_at?: SortOrder
+    revoked_at?: SortOrder
+    created_at?: SortOrder
   }
 
-  export type RefreshTokenMinOrderByAggregateInput = {
+  export type refresh_tokenMinOrderByAggregateInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
-    expiresAt?: SortOrder
-    revokedAt?: SortOrder
-    createdAt?: SortOrder
+    user_id?: SortOrder
+    expires_at?: SortOrder
+    revoked_at?: SortOrder
+    created_at?: SortOrder
   }
 
-  export type VerificationTokenCountOrderByAggregateInput = {
+  export type verification_tokenCountOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
-    token?: SortOrder
-    type?: SortOrder
-    expiresAt?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type VerificationTokenMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
+    user_id?: SortOrder
     token?: SortOrder
     type?: SortOrder
-    expiresAt?: SortOrder
-    createdAt?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
   }
 
-  export type VerificationTokenMinOrderByAggregateInput = {
+  export type verification_tokenMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    user_id?: SortOrder
     token?: SortOrder
     type?: SortOrder
-    expiresAt?: SortOrder
-    createdAt?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
   }
 
-  export type OAuthTokenCreateNestedManyWithoutUserInput = {
-    create?: XOR<OAuthTokenCreateWithoutUserInput, OAuthTokenUncheckedCreateWithoutUserInput> | OAuthTokenCreateWithoutUserInput[] | OAuthTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthTokenCreateOrConnectWithoutUserInput | OAuthTokenCreateOrConnectWithoutUserInput[]
-    createMany?: OAuthTokenCreateManyUserInputEnvelope
-    connect?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
+  export type verification_tokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    token?: SortOrder
+    type?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
   }
 
-  export type RefreshTokenCreateNestedManyWithoutUserInput = {
-    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
-    createMany?: RefreshTokenCreateManyUserInputEnvelope
-    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+  export type oauth_tokenCreateNestedManyWithoutUserInput = {
+    create?: XOR<oauth_tokenCreateWithoutUserInput, oauth_tokenUncheckedCreateWithoutUserInput> | oauth_tokenCreateWithoutUserInput[] | oauth_tokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: oauth_tokenCreateOrConnectWithoutUserInput | oauth_tokenCreateOrConnectWithoutUserInput[]
+    createMany?: oauth_tokenCreateManyUserInputEnvelope
+    connect?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
   }
 
-  export type OAuthTokenUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<OAuthTokenCreateWithoutUserInput, OAuthTokenUncheckedCreateWithoutUserInput> | OAuthTokenCreateWithoutUserInput[] | OAuthTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthTokenCreateOrConnectWithoutUserInput | OAuthTokenCreateOrConnectWithoutUserInput[]
-    createMany?: OAuthTokenCreateManyUserInputEnvelope
-    connect?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
+  export type refresh_tokenCreateNestedManyWithoutUserInput = {
+    create?: XOR<refresh_tokenCreateWithoutUserInput, refresh_tokenUncheckedCreateWithoutUserInput> | refresh_tokenCreateWithoutUserInput[] | refresh_tokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: refresh_tokenCreateOrConnectWithoutUserInput | refresh_tokenCreateOrConnectWithoutUserInput[]
+    createMany?: refresh_tokenCreateManyUserInputEnvelope
+    connect?: refresh_tokenWhereUniqueInput | refresh_tokenWhereUniqueInput[]
   }
 
-  export type RefreshTokenUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
-    createMany?: RefreshTokenCreateManyUserInputEnvelope
-    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+  export type oauth_tokenUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<oauth_tokenCreateWithoutUserInput, oauth_tokenUncheckedCreateWithoutUserInput> | oauth_tokenCreateWithoutUserInput[] | oauth_tokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: oauth_tokenCreateOrConnectWithoutUserInput | oauth_tokenCreateOrConnectWithoutUserInput[]
+    createMany?: oauth_tokenCreateManyUserInputEnvelope
+    connect?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+  }
+
+  export type refresh_tokenUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<refresh_tokenCreateWithoutUserInput, refresh_tokenUncheckedCreateWithoutUserInput> | refresh_tokenCreateWithoutUserInput[] | refresh_tokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: refresh_tokenCreateOrConnectWithoutUserInput | refresh_tokenCreateOrConnectWithoutUserInput[]
+    createMany?: refresh_tokenCreateManyUserInputEnvelope
+    connect?: refresh_tokenWhereUniqueInput | refresh_tokenWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8005,148 +8005,148 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type OAuthTokenUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OAuthTokenCreateWithoutUserInput, OAuthTokenUncheckedCreateWithoutUserInput> | OAuthTokenCreateWithoutUserInput[] | OAuthTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthTokenCreateOrConnectWithoutUserInput | OAuthTokenCreateOrConnectWithoutUserInput[]
-    upsert?: OAuthTokenUpsertWithWhereUniqueWithoutUserInput | OAuthTokenUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OAuthTokenCreateManyUserInputEnvelope
-    set?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    disconnect?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    delete?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    connect?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    update?: OAuthTokenUpdateWithWhereUniqueWithoutUserInput | OAuthTokenUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OAuthTokenUpdateManyWithWhereWithoutUserInput | OAuthTokenUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OAuthTokenScalarWhereInput | OAuthTokenScalarWhereInput[]
+  export type oauth_tokenUpdateManyWithoutUserNestedInput = {
+    create?: XOR<oauth_tokenCreateWithoutUserInput, oauth_tokenUncheckedCreateWithoutUserInput> | oauth_tokenCreateWithoutUserInput[] | oauth_tokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: oauth_tokenCreateOrConnectWithoutUserInput | oauth_tokenCreateOrConnectWithoutUserInput[]
+    upsert?: oauth_tokenUpsertWithWhereUniqueWithoutUserInput | oauth_tokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: oauth_tokenCreateManyUserInputEnvelope
+    set?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    disconnect?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    delete?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    connect?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    update?: oauth_tokenUpdateWithWhereUniqueWithoutUserInput | oauth_tokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: oauth_tokenUpdateManyWithWhereWithoutUserInput | oauth_tokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: oauth_tokenScalarWhereInput | oauth_tokenScalarWhereInput[]
   }
 
-  export type RefreshTokenUpdateManyWithoutUserNestedInput = {
-    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
-    upsert?: RefreshTokenUpsertWithWhereUniqueWithoutUserInput | RefreshTokenUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: RefreshTokenCreateManyUserInputEnvelope
-    set?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
-    disconnect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
-    delete?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
-    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
-    update?: RefreshTokenUpdateWithWhereUniqueWithoutUserInput | RefreshTokenUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: RefreshTokenUpdateManyWithWhereWithoutUserInput | RefreshTokenUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+  export type refresh_tokenUpdateManyWithoutUserNestedInput = {
+    create?: XOR<refresh_tokenCreateWithoutUserInput, refresh_tokenUncheckedCreateWithoutUserInput> | refresh_tokenCreateWithoutUserInput[] | refresh_tokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: refresh_tokenCreateOrConnectWithoutUserInput | refresh_tokenCreateOrConnectWithoutUserInput[]
+    upsert?: refresh_tokenUpsertWithWhereUniqueWithoutUserInput | refresh_tokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: refresh_tokenCreateManyUserInputEnvelope
+    set?: refresh_tokenWhereUniqueInput | refresh_tokenWhereUniqueInput[]
+    disconnect?: refresh_tokenWhereUniqueInput | refresh_tokenWhereUniqueInput[]
+    delete?: refresh_tokenWhereUniqueInput | refresh_tokenWhereUniqueInput[]
+    connect?: refresh_tokenWhereUniqueInput | refresh_tokenWhereUniqueInput[]
+    update?: refresh_tokenUpdateWithWhereUniqueWithoutUserInput | refresh_tokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: refresh_tokenUpdateManyWithWhereWithoutUserInput | refresh_tokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: refresh_tokenScalarWhereInput | refresh_tokenScalarWhereInput[]
   }
 
-  export type OAuthTokenUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OAuthTokenCreateWithoutUserInput, OAuthTokenUncheckedCreateWithoutUserInput> | OAuthTokenCreateWithoutUserInput[] | OAuthTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthTokenCreateOrConnectWithoutUserInput | OAuthTokenCreateOrConnectWithoutUserInput[]
-    upsert?: OAuthTokenUpsertWithWhereUniqueWithoutUserInput | OAuthTokenUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OAuthTokenCreateManyUserInputEnvelope
-    set?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    disconnect?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    delete?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    connect?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    update?: OAuthTokenUpdateWithWhereUniqueWithoutUserInput | OAuthTokenUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OAuthTokenUpdateManyWithWhereWithoutUserInput | OAuthTokenUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OAuthTokenScalarWhereInput | OAuthTokenScalarWhereInput[]
+  export type oauth_tokenUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<oauth_tokenCreateWithoutUserInput, oauth_tokenUncheckedCreateWithoutUserInput> | oauth_tokenCreateWithoutUserInput[] | oauth_tokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: oauth_tokenCreateOrConnectWithoutUserInput | oauth_tokenCreateOrConnectWithoutUserInput[]
+    upsert?: oauth_tokenUpsertWithWhereUniqueWithoutUserInput | oauth_tokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: oauth_tokenCreateManyUserInputEnvelope
+    set?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    disconnect?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    delete?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    connect?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    update?: oauth_tokenUpdateWithWhereUniqueWithoutUserInput | oauth_tokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: oauth_tokenUpdateManyWithWhereWithoutUserInput | oauth_tokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: oauth_tokenScalarWhereInput | oauth_tokenScalarWhereInput[]
   }
 
-  export type RefreshTokenUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
-    upsert?: RefreshTokenUpsertWithWhereUniqueWithoutUserInput | RefreshTokenUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: RefreshTokenCreateManyUserInputEnvelope
-    set?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
-    disconnect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
-    delete?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
-    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
-    update?: RefreshTokenUpdateWithWhereUniqueWithoutUserInput | RefreshTokenUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: RefreshTokenUpdateManyWithWhereWithoutUserInput | RefreshTokenUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+  export type refresh_tokenUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<refresh_tokenCreateWithoutUserInput, refresh_tokenUncheckedCreateWithoutUserInput> | refresh_tokenCreateWithoutUserInput[] | refresh_tokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: refresh_tokenCreateOrConnectWithoutUserInput | refresh_tokenCreateOrConnectWithoutUserInput[]
+    upsert?: refresh_tokenUpsertWithWhereUniqueWithoutUserInput | refresh_tokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: refresh_tokenCreateManyUserInputEnvelope
+    set?: refresh_tokenWhereUniqueInput | refresh_tokenWhereUniqueInput[]
+    disconnect?: refresh_tokenWhereUniqueInput | refresh_tokenWhereUniqueInput[]
+    delete?: refresh_tokenWhereUniqueInput | refresh_tokenWhereUniqueInput[]
+    connect?: refresh_tokenWhereUniqueInput | refresh_tokenWhereUniqueInput[]
+    update?: refresh_tokenUpdateWithWhereUniqueWithoutUserInput | refresh_tokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: refresh_tokenUpdateManyWithWhereWithoutUserInput | refresh_tokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: refresh_tokenScalarWhereInput | refresh_tokenScalarWhereInput[]
   }
 
-  export type OAuthTokenCreateNestedManyWithoutClientInput = {
-    create?: XOR<OAuthTokenCreateWithoutClientInput, OAuthTokenUncheckedCreateWithoutClientInput> | OAuthTokenCreateWithoutClientInput[] | OAuthTokenUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: OAuthTokenCreateOrConnectWithoutClientInput | OAuthTokenCreateOrConnectWithoutClientInput[]
-    createMany?: OAuthTokenCreateManyClientInputEnvelope
-    connect?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
+  export type oauth_tokenCreateNestedManyWithoutClientInput = {
+    create?: XOR<oauth_tokenCreateWithoutClientInput, oauth_tokenUncheckedCreateWithoutClientInput> | oauth_tokenCreateWithoutClientInput[] | oauth_tokenUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: oauth_tokenCreateOrConnectWithoutClientInput | oauth_tokenCreateOrConnectWithoutClientInput[]
+    createMany?: oauth_tokenCreateManyClientInputEnvelope
+    connect?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
   }
 
-  export type OAuthTokenUncheckedCreateNestedManyWithoutClientInput = {
-    create?: XOR<OAuthTokenCreateWithoutClientInput, OAuthTokenUncheckedCreateWithoutClientInput> | OAuthTokenCreateWithoutClientInput[] | OAuthTokenUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: OAuthTokenCreateOrConnectWithoutClientInput | OAuthTokenCreateOrConnectWithoutClientInput[]
-    createMany?: OAuthTokenCreateManyClientInputEnvelope
-    connect?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
+  export type oauth_tokenUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<oauth_tokenCreateWithoutClientInput, oauth_tokenUncheckedCreateWithoutClientInput> | oauth_tokenCreateWithoutClientInput[] | oauth_tokenUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: oauth_tokenCreateOrConnectWithoutClientInput | oauth_tokenCreateOrConnectWithoutClientInput[]
+    createMany?: oauth_tokenCreateManyClientInputEnvelope
+    connect?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
   }
 
-  export type OAuthTokenUpdateManyWithoutClientNestedInput = {
-    create?: XOR<OAuthTokenCreateWithoutClientInput, OAuthTokenUncheckedCreateWithoutClientInput> | OAuthTokenCreateWithoutClientInput[] | OAuthTokenUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: OAuthTokenCreateOrConnectWithoutClientInput | OAuthTokenCreateOrConnectWithoutClientInput[]
-    upsert?: OAuthTokenUpsertWithWhereUniqueWithoutClientInput | OAuthTokenUpsertWithWhereUniqueWithoutClientInput[]
-    createMany?: OAuthTokenCreateManyClientInputEnvelope
-    set?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    disconnect?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    delete?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    connect?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    update?: OAuthTokenUpdateWithWhereUniqueWithoutClientInput | OAuthTokenUpdateWithWhereUniqueWithoutClientInput[]
-    updateMany?: OAuthTokenUpdateManyWithWhereWithoutClientInput | OAuthTokenUpdateManyWithWhereWithoutClientInput[]
-    deleteMany?: OAuthTokenScalarWhereInput | OAuthTokenScalarWhereInput[]
+  export type oauth_tokenUpdateManyWithoutClientNestedInput = {
+    create?: XOR<oauth_tokenCreateWithoutClientInput, oauth_tokenUncheckedCreateWithoutClientInput> | oauth_tokenCreateWithoutClientInput[] | oauth_tokenUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: oauth_tokenCreateOrConnectWithoutClientInput | oauth_tokenCreateOrConnectWithoutClientInput[]
+    upsert?: oauth_tokenUpsertWithWhereUniqueWithoutClientInput | oauth_tokenUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: oauth_tokenCreateManyClientInputEnvelope
+    set?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    disconnect?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    delete?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    connect?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    update?: oauth_tokenUpdateWithWhereUniqueWithoutClientInput | oauth_tokenUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: oauth_tokenUpdateManyWithWhereWithoutClientInput | oauth_tokenUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: oauth_tokenScalarWhereInput | oauth_tokenScalarWhereInput[]
   }
 
-  export type OAuthTokenUncheckedUpdateManyWithoutClientNestedInput = {
-    create?: XOR<OAuthTokenCreateWithoutClientInput, OAuthTokenUncheckedCreateWithoutClientInput> | OAuthTokenCreateWithoutClientInput[] | OAuthTokenUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: OAuthTokenCreateOrConnectWithoutClientInput | OAuthTokenCreateOrConnectWithoutClientInput[]
-    upsert?: OAuthTokenUpsertWithWhereUniqueWithoutClientInput | OAuthTokenUpsertWithWhereUniqueWithoutClientInput[]
-    createMany?: OAuthTokenCreateManyClientInputEnvelope
-    set?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    disconnect?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    delete?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    connect?: OAuthTokenWhereUniqueInput | OAuthTokenWhereUniqueInput[]
-    update?: OAuthTokenUpdateWithWhereUniqueWithoutClientInput | OAuthTokenUpdateWithWhereUniqueWithoutClientInput[]
-    updateMany?: OAuthTokenUpdateManyWithWhereWithoutClientInput | OAuthTokenUpdateManyWithWhereWithoutClientInput[]
-    deleteMany?: OAuthTokenScalarWhereInput | OAuthTokenScalarWhereInput[]
+  export type oauth_tokenUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<oauth_tokenCreateWithoutClientInput, oauth_tokenUncheckedCreateWithoutClientInput> | oauth_tokenCreateWithoutClientInput[] | oauth_tokenUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: oauth_tokenCreateOrConnectWithoutClientInput | oauth_tokenCreateOrConnectWithoutClientInput[]
+    upsert?: oauth_tokenUpsertWithWhereUniqueWithoutClientInput | oauth_tokenUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: oauth_tokenCreateManyClientInputEnvelope
+    set?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    disconnect?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    delete?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    connect?: oauth_tokenWhereUniqueInput | oauth_tokenWhereUniqueInput[]
+    update?: oauth_tokenUpdateWithWhereUniqueWithoutClientInput | oauth_tokenUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: oauth_tokenUpdateManyWithWhereWithoutClientInput | oauth_tokenUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: oauth_tokenScalarWhereInput | oauth_tokenScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutOauthTokensInput = {
-    create?: XOR<UserCreateWithoutOauthTokensInput, UserUncheckedCreateWithoutOauthTokensInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOauthTokensInput
-    connect?: UserWhereUniqueInput
+  export type userCreateNestedOneWithoutOauth_tokensInput = {
+    create?: XOR<userCreateWithoutOauth_tokensInput, userUncheckedCreateWithoutOauth_tokensInput>
+    connectOrCreate?: userCreateOrConnectWithoutOauth_tokensInput
+    connect?: userWhereUniqueInput
   }
 
-  export type OAuthClientCreateNestedOneWithoutOauthTokensInput = {
-    create?: XOR<OAuthClientCreateWithoutOauthTokensInput, OAuthClientUncheckedCreateWithoutOauthTokensInput>
-    connectOrCreate?: OAuthClientCreateOrConnectWithoutOauthTokensInput
-    connect?: OAuthClientWhereUniqueInput
+  export type oauth_clientCreateNestedOneWithoutOauth_tokensInput = {
+    create?: XOR<oauth_clientCreateWithoutOauth_tokensInput, oauth_clientUncheckedCreateWithoutOauth_tokensInput>
+    connectOrCreate?: oauth_clientCreateOrConnectWithoutOauth_tokensInput
+    connect?: oauth_clientWhereUniqueInput
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
   }
 
-  export type UserUpdateOneRequiredWithoutOauthTokensNestedInput = {
-    create?: XOR<UserCreateWithoutOauthTokensInput, UserUncheckedCreateWithoutOauthTokensInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOauthTokensInput
-    upsert?: UserUpsertWithoutOauthTokensInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOauthTokensInput, UserUpdateWithoutOauthTokensInput>, UserUncheckedUpdateWithoutOauthTokensInput>
+  export type userUpdateOneRequiredWithoutOauth_tokensNestedInput = {
+    create?: XOR<userCreateWithoutOauth_tokensInput, userUncheckedCreateWithoutOauth_tokensInput>
+    connectOrCreate?: userCreateOrConnectWithoutOauth_tokensInput
+    upsert?: userUpsertWithoutOauth_tokensInput
+    connect?: userWhereUniqueInput
+    update?: XOR<XOR<userUpdateToOneWithWhereWithoutOauth_tokensInput, userUpdateWithoutOauth_tokensInput>, userUncheckedUpdateWithoutOauth_tokensInput>
   }
 
-  export type OAuthClientUpdateOneRequiredWithoutOauthTokensNestedInput = {
-    create?: XOR<OAuthClientCreateWithoutOauthTokensInput, OAuthClientUncheckedCreateWithoutOauthTokensInput>
-    connectOrCreate?: OAuthClientCreateOrConnectWithoutOauthTokensInput
-    upsert?: OAuthClientUpsertWithoutOauthTokensInput
-    connect?: OAuthClientWhereUniqueInput
-    update?: XOR<XOR<OAuthClientUpdateToOneWithWhereWithoutOauthTokensInput, OAuthClientUpdateWithoutOauthTokensInput>, OAuthClientUncheckedUpdateWithoutOauthTokensInput>
+  export type oauth_clientUpdateOneRequiredWithoutOauth_tokensNestedInput = {
+    create?: XOR<oauth_clientCreateWithoutOauth_tokensInput, oauth_clientUncheckedCreateWithoutOauth_tokensInput>
+    connectOrCreate?: oauth_clientCreateOrConnectWithoutOauth_tokensInput
+    upsert?: oauth_clientUpsertWithoutOauth_tokensInput
+    connect?: oauth_clientWhereUniqueInput
+    update?: XOR<XOR<oauth_clientUpdateToOneWithWhereWithoutOauth_tokensInput, oauth_clientUpdateWithoutOauth_tokensInput>, oauth_clientUncheckedUpdateWithoutOauth_tokensInput>
   }
 
-  export type UserCreateNestedOneWithoutRefreshTokensInput = {
-    create?: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
-    connectOrCreate?: UserCreateOrConnectWithoutRefreshTokensInput
-    connect?: UserWhereUniqueInput
+  export type userCreateNestedOneWithoutRefresh_tokensInput = {
+    create?: XOR<userCreateWithoutRefresh_tokensInput, userUncheckedCreateWithoutRefresh_tokensInput>
+    connectOrCreate?: userCreateOrConnectWithoutRefresh_tokensInput
+    connect?: userWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutRefreshTokensNestedInput = {
-    create?: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
-    connectOrCreate?: UserCreateOrConnectWithoutRefreshTokensInput
-    upsert?: UserUpsertWithoutRefreshTokensInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRefreshTokensInput, UserUpdateWithoutRefreshTokensInput>, UserUncheckedUpdateWithoutRefreshTokensInput>
+  export type userUpdateOneRequiredWithoutRefresh_tokensNestedInput = {
+    create?: XOR<userCreateWithoutRefresh_tokensInput, userUncheckedCreateWithoutRefresh_tokensInput>
+    connectOrCreate?: userCreateOrConnectWithoutRefresh_tokensInput
+    upsert?: userUpsertWithoutRefresh_tokensInput
+    connect?: userWhereUniqueInput
+    update?: XOR<XOR<userUpdateToOneWithWhereWithoutRefresh_tokensInput, userUpdateWithoutRefresh_tokensInput>, userUncheckedUpdateWithoutRefresh_tokensInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8296,467 +8296,467 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type OAuthTokenCreateWithoutUserInput = {
+  export type oauth_tokenCreateWithoutUserInput = {
     id?: string
     token: string
     scope?: string | null
-    expiresAt?: Date | string | null
-    createdAt?: Date | string
-    client: OAuthClientCreateNestedOneWithoutOauthTokensInput
+    expires_at?: Date | string | null
+    created_at?: Date | string
+    client: oauth_clientCreateNestedOneWithoutOauth_tokensInput
   }
 
-  export type OAuthTokenUncheckedCreateWithoutUserInput = {
+  export type oauth_tokenUncheckedCreateWithoutUserInput = {
     id?: string
     token: string
-    clientId: string
+    client_id: string
     scope?: string | null
-    expiresAt?: Date | string | null
-    createdAt?: Date | string
+    expires_at?: Date | string | null
+    created_at?: Date | string
   }
 
-  export type OAuthTokenCreateOrConnectWithoutUserInput = {
-    where: OAuthTokenWhereUniqueInput
-    create: XOR<OAuthTokenCreateWithoutUserInput, OAuthTokenUncheckedCreateWithoutUserInput>
+  export type oauth_tokenCreateOrConnectWithoutUserInput = {
+    where: oauth_tokenWhereUniqueInput
+    create: XOR<oauth_tokenCreateWithoutUserInput, oauth_tokenUncheckedCreateWithoutUserInput>
   }
 
-  export type OAuthTokenCreateManyUserInputEnvelope = {
-    data: OAuthTokenCreateManyUserInput | OAuthTokenCreateManyUserInput[]
+  export type oauth_tokenCreateManyUserInputEnvelope = {
+    data: oauth_tokenCreateManyUserInput | oauth_tokenCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type RefreshTokenCreateWithoutUserInput = {
+  export type refresh_tokenCreateWithoutUserInput = {
     id?: string
     token: string
-    expiresAt: Date | string
-    revokedAt?: Date | string | null
-    createdAt?: Date | string
+    expires_at: Date | string
+    revoked_at?: Date | string | null
+    created_at?: Date | string
   }
 
-  export type RefreshTokenUncheckedCreateWithoutUserInput = {
+  export type refresh_tokenUncheckedCreateWithoutUserInput = {
     id?: string
     token: string
-    expiresAt: Date | string
-    revokedAt?: Date | string | null
-    createdAt?: Date | string
+    expires_at: Date | string
+    revoked_at?: Date | string | null
+    created_at?: Date | string
   }
 
-  export type RefreshTokenCreateOrConnectWithoutUserInput = {
-    where: RefreshTokenWhereUniqueInput
-    create: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput>
+  export type refresh_tokenCreateOrConnectWithoutUserInput = {
+    where: refresh_tokenWhereUniqueInput
+    create: XOR<refresh_tokenCreateWithoutUserInput, refresh_tokenUncheckedCreateWithoutUserInput>
   }
 
-  export type RefreshTokenCreateManyUserInputEnvelope = {
-    data: RefreshTokenCreateManyUserInput | RefreshTokenCreateManyUserInput[]
+  export type refresh_tokenCreateManyUserInputEnvelope = {
+    data: refresh_tokenCreateManyUserInput | refresh_tokenCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type OAuthTokenUpsertWithWhereUniqueWithoutUserInput = {
-    where: OAuthTokenWhereUniqueInput
-    update: XOR<OAuthTokenUpdateWithoutUserInput, OAuthTokenUncheckedUpdateWithoutUserInput>
-    create: XOR<OAuthTokenCreateWithoutUserInput, OAuthTokenUncheckedCreateWithoutUserInput>
+  export type oauth_tokenUpsertWithWhereUniqueWithoutUserInput = {
+    where: oauth_tokenWhereUniqueInput
+    update: XOR<oauth_tokenUpdateWithoutUserInput, oauth_tokenUncheckedUpdateWithoutUserInput>
+    create: XOR<oauth_tokenCreateWithoutUserInput, oauth_tokenUncheckedCreateWithoutUserInput>
   }
 
-  export type OAuthTokenUpdateWithWhereUniqueWithoutUserInput = {
-    where: OAuthTokenWhereUniqueInput
-    data: XOR<OAuthTokenUpdateWithoutUserInput, OAuthTokenUncheckedUpdateWithoutUserInput>
+  export type oauth_tokenUpdateWithWhereUniqueWithoutUserInput = {
+    where: oauth_tokenWhereUniqueInput
+    data: XOR<oauth_tokenUpdateWithoutUserInput, oauth_tokenUncheckedUpdateWithoutUserInput>
   }
 
-  export type OAuthTokenUpdateManyWithWhereWithoutUserInput = {
-    where: OAuthTokenScalarWhereInput
-    data: XOR<OAuthTokenUpdateManyMutationInput, OAuthTokenUncheckedUpdateManyWithoutUserInput>
+  export type oauth_tokenUpdateManyWithWhereWithoutUserInput = {
+    where: oauth_tokenScalarWhereInput
+    data: XOR<oauth_tokenUpdateManyMutationInput, oauth_tokenUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type OAuthTokenScalarWhereInput = {
-    AND?: OAuthTokenScalarWhereInput | OAuthTokenScalarWhereInput[]
-    OR?: OAuthTokenScalarWhereInput[]
-    NOT?: OAuthTokenScalarWhereInput | OAuthTokenScalarWhereInput[]
-    id?: StringFilter<"OAuthToken"> | string
-    token?: StringFilter<"OAuthToken"> | string
-    userId?: StringFilter<"OAuthToken"> | string
-    clientId?: StringFilter<"OAuthToken"> | string
-    scope?: StringNullableFilter<"OAuthToken"> | string | null
-    expiresAt?: DateTimeNullableFilter<"OAuthToken"> | Date | string | null
-    createdAt?: DateTimeFilter<"OAuthToken"> | Date | string
+  export type oauth_tokenScalarWhereInput = {
+    AND?: oauth_tokenScalarWhereInput | oauth_tokenScalarWhereInput[]
+    OR?: oauth_tokenScalarWhereInput[]
+    NOT?: oauth_tokenScalarWhereInput | oauth_tokenScalarWhereInput[]
+    id?: StringFilter<"oauth_token"> | string
+    token?: StringFilter<"oauth_token"> | string
+    user_id?: StringFilter<"oauth_token"> | string
+    client_id?: StringFilter<"oauth_token"> | string
+    scope?: StringNullableFilter<"oauth_token"> | string | null
+    expires_at?: DateTimeNullableFilter<"oauth_token"> | Date | string | null
+    created_at?: DateTimeFilter<"oauth_token"> | Date | string
   }
 
-  export type RefreshTokenUpsertWithWhereUniqueWithoutUserInput = {
-    where: RefreshTokenWhereUniqueInput
-    update: XOR<RefreshTokenUpdateWithoutUserInput, RefreshTokenUncheckedUpdateWithoutUserInput>
-    create: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput>
+  export type refresh_tokenUpsertWithWhereUniqueWithoutUserInput = {
+    where: refresh_tokenWhereUniqueInput
+    update: XOR<refresh_tokenUpdateWithoutUserInput, refresh_tokenUncheckedUpdateWithoutUserInput>
+    create: XOR<refresh_tokenCreateWithoutUserInput, refresh_tokenUncheckedCreateWithoutUserInput>
   }
 
-  export type RefreshTokenUpdateWithWhereUniqueWithoutUserInput = {
-    where: RefreshTokenWhereUniqueInput
-    data: XOR<RefreshTokenUpdateWithoutUserInput, RefreshTokenUncheckedUpdateWithoutUserInput>
+  export type refresh_tokenUpdateWithWhereUniqueWithoutUserInput = {
+    where: refresh_tokenWhereUniqueInput
+    data: XOR<refresh_tokenUpdateWithoutUserInput, refresh_tokenUncheckedUpdateWithoutUserInput>
   }
 
-  export type RefreshTokenUpdateManyWithWhereWithoutUserInput = {
-    where: RefreshTokenScalarWhereInput
-    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyWithoutUserInput>
+  export type refresh_tokenUpdateManyWithWhereWithoutUserInput = {
+    where: refresh_tokenScalarWhereInput
+    data: XOR<refresh_tokenUpdateManyMutationInput, refresh_tokenUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type RefreshTokenScalarWhereInput = {
-    AND?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
-    OR?: RefreshTokenScalarWhereInput[]
-    NOT?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
-    id?: StringFilter<"RefreshToken"> | string
-    token?: StringFilter<"RefreshToken"> | string
-    userId?: StringFilter<"RefreshToken"> | string
-    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
-    revokedAt?: DateTimeNullableFilter<"RefreshToken"> | Date | string | null
-    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
+  export type refresh_tokenScalarWhereInput = {
+    AND?: refresh_tokenScalarWhereInput | refresh_tokenScalarWhereInput[]
+    OR?: refresh_tokenScalarWhereInput[]
+    NOT?: refresh_tokenScalarWhereInput | refresh_tokenScalarWhereInput[]
+    id?: StringFilter<"refresh_token"> | string
+    token?: StringFilter<"refresh_token"> | string
+    user_id?: StringFilter<"refresh_token"> | string
+    expires_at?: DateTimeFilter<"refresh_token"> | Date | string
+    revoked_at?: DateTimeNullableFilter<"refresh_token"> | Date | string | null
+    created_at?: DateTimeFilter<"refresh_token"> | Date | string
   }
 
-  export type OAuthTokenCreateWithoutClientInput = {
+  export type oauth_tokenCreateWithoutClientInput = {
     id?: string
     token: string
     scope?: string | null
-    expiresAt?: Date | string | null
-    createdAt?: Date | string
-    user: UserCreateNestedOneWithoutOauthTokensInput
+    expires_at?: Date | string | null
+    created_at?: Date | string
+    user: userCreateNestedOneWithoutOauth_tokensInput
   }
 
-  export type OAuthTokenUncheckedCreateWithoutClientInput = {
+  export type oauth_tokenUncheckedCreateWithoutClientInput = {
     id?: string
     token: string
-    userId: string
+    user_id: string
     scope?: string | null
-    expiresAt?: Date | string | null
-    createdAt?: Date | string
+    expires_at?: Date | string | null
+    created_at?: Date | string
   }
 
-  export type OAuthTokenCreateOrConnectWithoutClientInput = {
-    where: OAuthTokenWhereUniqueInput
-    create: XOR<OAuthTokenCreateWithoutClientInput, OAuthTokenUncheckedCreateWithoutClientInput>
+  export type oauth_tokenCreateOrConnectWithoutClientInput = {
+    where: oauth_tokenWhereUniqueInput
+    create: XOR<oauth_tokenCreateWithoutClientInput, oauth_tokenUncheckedCreateWithoutClientInput>
   }
 
-  export type OAuthTokenCreateManyClientInputEnvelope = {
-    data: OAuthTokenCreateManyClientInput | OAuthTokenCreateManyClientInput[]
+  export type oauth_tokenCreateManyClientInputEnvelope = {
+    data: oauth_tokenCreateManyClientInput | oauth_tokenCreateManyClientInput[]
     skipDuplicates?: boolean
   }
 
-  export type OAuthTokenUpsertWithWhereUniqueWithoutClientInput = {
-    where: OAuthTokenWhereUniqueInput
-    update: XOR<OAuthTokenUpdateWithoutClientInput, OAuthTokenUncheckedUpdateWithoutClientInput>
-    create: XOR<OAuthTokenCreateWithoutClientInput, OAuthTokenUncheckedCreateWithoutClientInput>
+  export type oauth_tokenUpsertWithWhereUniqueWithoutClientInput = {
+    where: oauth_tokenWhereUniqueInput
+    update: XOR<oauth_tokenUpdateWithoutClientInput, oauth_tokenUncheckedUpdateWithoutClientInput>
+    create: XOR<oauth_tokenCreateWithoutClientInput, oauth_tokenUncheckedCreateWithoutClientInput>
   }
 
-  export type OAuthTokenUpdateWithWhereUniqueWithoutClientInput = {
-    where: OAuthTokenWhereUniqueInput
-    data: XOR<OAuthTokenUpdateWithoutClientInput, OAuthTokenUncheckedUpdateWithoutClientInput>
+  export type oauth_tokenUpdateWithWhereUniqueWithoutClientInput = {
+    where: oauth_tokenWhereUniqueInput
+    data: XOR<oauth_tokenUpdateWithoutClientInput, oauth_tokenUncheckedUpdateWithoutClientInput>
   }
 
-  export type OAuthTokenUpdateManyWithWhereWithoutClientInput = {
-    where: OAuthTokenScalarWhereInput
-    data: XOR<OAuthTokenUpdateManyMutationInput, OAuthTokenUncheckedUpdateManyWithoutClientInput>
+  export type oauth_tokenUpdateManyWithWhereWithoutClientInput = {
+    where: oauth_tokenScalarWhereInput
+    data: XOR<oauth_tokenUpdateManyMutationInput, oauth_tokenUncheckedUpdateManyWithoutClientInput>
   }
 
-  export type UserCreateWithoutOauthTokensInput = {
+  export type userCreateWithoutOauth_tokensInput = {
     id?: string
     email: string
-    passwordHash: string
-    firstName?: string | null
-    lastName?: string | null
-    isActive?: boolean
-    emailVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    password_hash: string
+    first_name?: string | null
+    last_name?: string | null
+    is_active?: boolean
+    email_verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    refresh_tokens?: refresh_tokenCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutOauthTokensInput = {
+  export type userUncheckedCreateWithoutOauth_tokensInput = {
     id?: string
     email: string
-    passwordHash: string
-    firstName?: string | null
-    lastName?: string | null
-    isActive?: boolean
-    emailVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    password_hash: string
+    first_name?: string | null
+    last_name?: string | null
+    is_active?: boolean
+    email_verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    refresh_tokens?: refresh_tokenUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutOauthTokensInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutOauthTokensInput, UserUncheckedCreateWithoutOauthTokensInput>
+  export type userCreateOrConnectWithoutOauth_tokensInput = {
+    where: userWhereUniqueInput
+    create: XOR<userCreateWithoutOauth_tokensInput, userUncheckedCreateWithoutOauth_tokensInput>
   }
 
-  export type OAuthClientCreateWithoutOauthTokensInput = {
+  export type oauth_clientCreateWithoutOauth_tokensInput = {
     id?: string
-    clientId: string
-    clientSecret: string
+    client_id: string
+    client_secret: string
     name: string
-    redirectUris: string
+    redirect_uris: string
     scopes: string
-    grantTypes: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    grant_types: string
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
   }
 
-  export type OAuthClientUncheckedCreateWithoutOauthTokensInput = {
+  export type oauth_clientUncheckedCreateWithoutOauth_tokensInput = {
     id?: string
-    clientId: string
-    clientSecret: string
+    client_id: string
+    client_secret: string
     name: string
-    redirectUris: string
+    redirect_uris: string
     scopes: string
-    grantTypes: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    grant_types: string
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
   }
 
-  export type OAuthClientCreateOrConnectWithoutOauthTokensInput = {
-    where: OAuthClientWhereUniqueInput
-    create: XOR<OAuthClientCreateWithoutOauthTokensInput, OAuthClientUncheckedCreateWithoutOauthTokensInput>
+  export type oauth_clientCreateOrConnectWithoutOauth_tokensInput = {
+    where: oauth_clientWhereUniqueInput
+    create: XOR<oauth_clientCreateWithoutOauth_tokensInput, oauth_clientUncheckedCreateWithoutOauth_tokensInput>
   }
 
-  export type UserUpsertWithoutOauthTokensInput = {
-    update: XOR<UserUpdateWithoutOauthTokensInput, UserUncheckedUpdateWithoutOauthTokensInput>
-    create: XOR<UserCreateWithoutOauthTokensInput, UserUncheckedCreateWithoutOauthTokensInput>
-    where?: UserWhereInput
+  export type userUpsertWithoutOauth_tokensInput = {
+    update: XOR<userUpdateWithoutOauth_tokensInput, userUncheckedUpdateWithoutOauth_tokensInput>
+    create: XOR<userCreateWithoutOauth_tokensInput, userUncheckedCreateWithoutOauth_tokensInput>
+    where?: userWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutOauthTokensInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutOauthTokensInput, UserUncheckedUpdateWithoutOauthTokensInput>
+  export type userUpdateToOneWithWhereWithoutOauth_tokensInput = {
+    where?: userWhereInput
+    data: XOR<userUpdateWithoutOauth_tokensInput, userUncheckedUpdateWithoutOauth_tokensInput>
   }
 
-  export type UserUpdateWithoutOauthTokensInput = {
+  export type userUpdateWithoutOauth_tokensInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    password_hash?: StringFieldUpdateOperationsInput | string
+    first_name?: NullableStringFieldUpdateOperationsInput | string | null
+    last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    email_verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    refresh_tokens?: refresh_tokenUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutOauthTokensInput = {
+  export type userUncheckedUpdateWithoutOauth_tokensInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    password_hash?: StringFieldUpdateOperationsInput | string
+    first_name?: NullableStringFieldUpdateOperationsInput | string | null
+    last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    email_verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    refresh_tokens?: refresh_tokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type OAuthClientUpsertWithoutOauthTokensInput = {
-    update: XOR<OAuthClientUpdateWithoutOauthTokensInput, OAuthClientUncheckedUpdateWithoutOauthTokensInput>
-    create: XOR<OAuthClientCreateWithoutOauthTokensInput, OAuthClientUncheckedCreateWithoutOauthTokensInput>
-    where?: OAuthClientWhereInput
+  export type oauth_clientUpsertWithoutOauth_tokensInput = {
+    update: XOR<oauth_clientUpdateWithoutOauth_tokensInput, oauth_clientUncheckedUpdateWithoutOauth_tokensInput>
+    create: XOR<oauth_clientCreateWithoutOauth_tokensInput, oauth_clientUncheckedCreateWithoutOauth_tokensInput>
+    where?: oauth_clientWhereInput
   }
 
-  export type OAuthClientUpdateToOneWithWhereWithoutOauthTokensInput = {
-    where?: OAuthClientWhereInput
-    data: XOR<OAuthClientUpdateWithoutOauthTokensInput, OAuthClientUncheckedUpdateWithoutOauthTokensInput>
+  export type oauth_clientUpdateToOneWithWhereWithoutOauth_tokensInput = {
+    where?: oauth_clientWhereInput
+    data: XOR<oauth_clientUpdateWithoutOauth_tokensInput, oauth_clientUncheckedUpdateWithoutOauth_tokensInput>
   }
 
-  export type OAuthClientUpdateWithoutOauthTokensInput = {
+  export type oauth_clientUpdateWithoutOauth_tokensInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    clientSecret?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    client_secret?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    redirectUris?: StringFieldUpdateOperationsInput | string
+    redirect_uris?: StringFieldUpdateOperationsInput | string
     scopes?: StringFieldUpdateOperationsInput | string
-    grantTypes?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grant_types?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OAuthClientUncheckedUpdateWithoutOauthTokensInput = {
+  export type oauth_clientUncheckedUpdateWithoutOauth_tokensInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    clientSecret?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    client_secret?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    redirectUris?: StringFieldUpdateOperationsInput | string
+    redirect_uris?: StringFieldUpdateOperationsInput | string
     scopes?: StringFieldUpdateOperationsInput | string
-    grantTypes?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grant_types?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserCreateWithoutRefreshTokensInput = {
+  export type userCreateWithoutRefresh_tokensInput = {
     id?: string
     email: string
-    passwordHash: string
-    firstName?: string | null
-    lastName?: string | null
-    isActive?: boolean
-    emailVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    oauthTokens?: OAuthTokenCreateNestedManyWithoutUserInput
+    password_hash: string
+    first_name?: string | null
+    last_name?: string | null
+    is_active?: boolean
+    email_verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    oauth_tokens?: oauth_tokenCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutRefreshTokensInput = {
+  export type userUncheckedCreateWithoutRefresh_tokensInput = {
     id?: string
     email: string
-    passwordHash: string
-    firstName?: string | null
-    lastName?: string | null
-    isActive?: boolean
-    emailVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    oauthTokens?: OAuthTokenUncheckedCreateNestedManyWithoutUserInput
+    password_hash: string
+    first_name?: string | null
+    last_name?: string | null
+    is_active?: boolean
+    email_verified?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    oauth_tokens?: oauth_tokenUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutRefreshTokensInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+  export type userCreateOrConnectWithoutRefresh_tokensInput = {
+    where: userWhereUniqueInput
+    create: XOR<userCreateWithoutRefresh_tokensInput, userUncheckedCreateWithoutRefresh_tokensInput>
   }
 
-  export type UserUpsertWithoutRefreshTokensInput = {
-    update: XOR<UserUpdateWithoutRefreshTokensInput, UserUncheckedUpdateWithoutRefreshTokensInput>
-    create: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
-    where?: UserWhereInput
+  export type userUpsertWithoutRefresh_tokensInput = {
+    update: XOR<userUpdateWithoutRefresh_tokensInput, userUncheckedUpdateWithoutRefresh_tokensInput>
+    create: XOR<userCreateWithoutRefresh_tokensInput, userUncheckedCreateWithoutRefresh_tokensInput>
+    where?: userWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutRefreshTokensInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutRefreshTokensInput, UserUncheckedUpdateWithoutRefreshTokensInput>
+  export type userUpdateToOneWithWhereWithoutRefresh_tokensInput = {
+    where?: userWhereInput
+    data: XOR<userUpdateWithoutRefresh_tokensInput, userUncheckedUpdateWithoutRefresh_tokensInput>
   }
 
-  export type UserUpdateWithoutRefreshTokensInput = {
+  export type userUpdateWithoutRefresh_tokensInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    oauthTokens?: OAuthTokenUpdateManyWithoutUserNestedInput
+    password_hash?: StringFieldUpdateOperationsInput | string
+    first_name?: NullableStringFieldUpdateOperationsInput | string | null
+    last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    email_verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    oauth_tokens?: oauth_tokenUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutRefreshTokensInput = {
+  export type userUncheckedUpdateWithoutRefresh_tokensInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: NullableStringFieldUpdateOperationsInput | string | null
-    lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    oauthTokens?: OAuthTokenUncheckedUpdateManyWithoutUserNestedInput
+    password_hash?: StringFieldUpdateOperationsInput | string
+    first_name?: NullableStringFieldUpdateOperationsInput | string | null
+    last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    email_verified?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    oauth_tokens?: oauth_tokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type OAuthTokenCreateManyUserInput = {
+  export type oauth_tokenCreateManyUserInput = {
     id?: string
     token: string
-    clientId: string
+    client_id: string
     scope?: string | null
-    expiresAt?: Date | string | null
-    createdAt?: Date | string
+    expires_at?: Date | string | null
+    created_at?: Date | string
   }
 
-  export type RefreshTokenCreateManyUserInput = {
+  export type refresh_tokenCreateManyUserInput = {
     id?: string
     token: string
-    expiresAt: Date | string
-    revokedAt?: Date | string | null
-    createdAt?: Date | string
+    expires_at: Date | string
+    revoked_at?: Date | string | null
+    created_at?: Date | string
   }
 
-  export type OAuthTokenUpdateWithoutUserInput = {
+  export type oauth_tokenUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     scope?: NullableStringFieldUpdateOperationsInput | string | null
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: OAuthClientUpdateOneRequiredWithoutOauthTokensNestedInput
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: oauth_clientUpdateOneRequiredWithoutOauth_tokensNestedInput
   }
 
-  export type OAuthTokenUncheckedUpdateWithoutUserInput = {
+  export type oauth_tokenUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    clientId?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
     scope?: NullableStringFieldUpdateOperationsInput | string | null
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OAuthTokenUncheckedUpdateManyWithoutUserInput = {
+  export type oauth_tokenUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    clientId?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
     scope?: NullableStringFieldUpdateOperationsInput | string | null
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RefreshTokenUpdateWithoutUserInput = {
+  export type refresh_tokenUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RefreshTokenUncheckedUpdateWithoutUserInput = {
+  export type refresh_tokenUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RefreshTokenUncheckedUpdateManyWithoutUserInput = {
+  export type refresh_tokenUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OAuthTokenCreateManyClientInput = {
+  export type oauth_tokenCreateManyClientInput = {
     id?: string
     token: string
-    userId: string
+    user_id: string
     scope?: string | null
-    expiresAt?: Date | string | null
-    createdAt?: Date | string
+    expires_at?: Date | string | null
+    created_at?: Date | string
   }
 
-  export type OAuthTokenUpdateWithoutClientInput = {
+  export type oauth_tokenUpdateWithoutClientInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     scope?: NullableStringFieldUpdateOperationsInput | string | null
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutOauthTokensNestedInput
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: userUpdateOneRequiredWithoutOauth_tokensNestedInput
   }
 
-  export type OAuthTokenUncheckedUpdateWithoutClientInput = {
+  export type oauth_tokenUncheckedUpdateWithoutClientInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
     scope?: NullableStringFieldUpdateOperationsInput | string | null
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OAuthTokenUncheckedUpdateManyWithoutClientInput = {
+  export type oauth_tokenUncheckedUpdateManyWithoutClientInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
     scope?: NullableStringFieldUpdateOperationsInput | string | null
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

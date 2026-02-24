@@ -1,19 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { LogActivity } from '@app/app-logger';
 import { HelloResponseDto, HealthResponseDto } from './dto';
 
 @Injectable()
 export class AppService {
   constructor(private configService: ConfigService) {}
 
+  @LogActivity()
   getHello(): HelloResponseDto {
     return {
       message: 'Hello from API!',
       timestamp: new Date(),
-      requestId: crypto.randomUUID(),
+      request_id: crypto.randomUUID(),
     };
   }
 
+  @LogActivity()
   getHealth(): HealthResponseDto {
     return {
       status: 'ok',

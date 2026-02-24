@@ -18,36 +18,36 @@ export class UserResponseDto {
     example: 'John',
     required: false,
   })
-  firstName?: string;
+  first_name?: string;
 
   @ApiProperty({
     description: "User's last name",
     example: 'Doe',
     required: false,
   })
-  lastName?: string;
+  last_name?: string;
 
   @ApiProperty({
     description: 'Whether the user account is active',
     example: true,
   })
-  isActive: boolean;
+  is_active: boolean;
 
   @ApiProperty({
     description: 'Whether the email has been verified',
     example: false,
   })
-  emailVerified: boolean;
+  email_verified: boolean;
 
   @ApiProperty({
     description: 'Account creation timestamp',
     example: '2024-02-24T12:00:00.000Z',
   })
-  createdAt: Date;
+  created_at: Date;
 
   @ApiProperty({
     description: 'Last update timestamp',
     example: '2024-02-24T12:00:00.000Z',
   })
-  updatedAt: Date;
+  updated_at: Date;
 }

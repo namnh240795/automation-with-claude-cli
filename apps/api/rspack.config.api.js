@@ -28,6 +28,8 @@ const config = {
       '@app/caching/*': path.resolve(__dirname, 'libs/caching/src/*'),
       '@app/health': path.resolve(__dirname, 'libs/health/src'),
       '@app/health/*': path.resolve(__dirname, 'libs/health/src/*'),
+      '@api/prisma-client': path.resolve(__dirname, 'packages/api-prisma-client/src'),
+      '@api/prisma-client/*': path.resolve(__dirname, 'packages/api-prisma-client/src/*'),
     },
   },
   module: {
@@ -54,7 +56,7 @@ const config = {
     ],
   },
   optimization: {
-    minimize: false, // Disable minification for dev to avoid issues
+    minimize: false,
   },
   externalsType: 'commonjs',
   plugins: [
@@ -70,8 +72,7 @@ const config = {
     },
   },
   externals: [
-    // Externalize all node_modules
-    /^(@nestjs|@fastify|rxjs|reflect-metadata|class-validator|class-transformer|@scalar|ioredis|axios)/,
+    /^(@nestjs|@fastify|@prisma|@scalar|rxjs|reflect-metadata|class-validator|class-transformer|ioredis|axios|pg|dotenv)/,
     function (obj, callback) {
       const resource = obj.request;
       const lazyImports = [

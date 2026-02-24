@@ -11,86 +11,86 @@ datasource db {
 }
 
 // User model for authentication
-model User {
+model user {
   id                String   @id @default(uuid())
   email             String   @unique
-  passwordHash      String   @map("password_hash")
-  firstName         String?
-  lastName          String?
-  isActive          Boolean  @default(true)
-  emailVerified     Boolean  @default(false)
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  password_hash     String
+  first_name        String?
+  last_name         String?
+  is_active         Boolean  @default(true)
+  email_verified    Boolean  @default(false)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
 
   // Relations
-  oauthTokens       OAuthToken[]
-  refreshTokens     RefreshToken[]
+  oauth_tokens      oauth_token[]
+  refresh_tokens    refresh_token[]
 
-  @@map("users")
+  @@map("user")
 }
 
 // OAuth 2.0 Client
-model OAuthClient {
+model oauth_client {
   id                String   @id @default(uuid())
-  clientId          String   @unique @map("client_id")
-  clientSecret      String   @map("client_secret")
+  client_id         String   @unique
+  client_secret     String
   name              String
-  redirectUris      String   @map("redirect_uris") // JSON array of strings
+  redirect_uris     String   // JSON array of strings
   scopes            String   // JSON array of strings
-  grantTypes        String   @map("grant_types") // JSON array of strings
-  isActive          Boolean  @default(true) @map("is_active")
-  createdAt         DateTime @default(now()) @map("created_at")
-  updatedAt         DateTime @updatedAt @map("updated_at")
+  grant_types       String   // JSON array of strings
+  is_active         Boolean  @default(true)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
 
   // Relations
-  oauthTokens       OAuthToken[]
+  oauth_tokens      oauth_token[]
 
-  @@map("oauth_clients")
+  @@map("oauth_client")
 }
 
 // OAuth 2.0 Access Token
-model OAuthToken {
+model oauth_token {
   id                String   @id @default(uuid())
   token             String   @unique
-  userId            String   @map("user_id")
-  clientId          String   @map("client_id")
+  user_id           String
+  client_id         String
   scope             String?
-  expiresAt         DateTime? @map("expires_at")
-  createdAt         DateTime @default(now()) @map("created_at")
+  expires_at        DateTime?
+  created_at        DateTime @default(now())
 
   // Relations
-  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  client            OAuthClient @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  user              user     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  client            oauth_client @relation(fields: [client_id], references: [id], onDelete: Cascade)
 
-  @@index([userId])
-  @@map("oauth_tokens")
+  @@index([user_id])
+  @@map("oauth_token")
 }
 
 // Refresh Token (for token rotation)
-model RefreshToken {
+model refresh_token {
   id                String   @id @default(uuid())
   token             String   @unique
-  userId            String   @map("user_id")
-  expiresAt         DateTime @map("expires_at")
-  revokedAt         DateTime? @map("revoked_at")
-  createdAt         DateTime @default(now()) @map("created_at")
+  user_id           String
+  expires_at        DateTime
+  revoked_at        DateTime?
+  created_at        DateTime @default(now())
 
   // Relations
-  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              user     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
-  @@index([userId])
-  @@map("refresh_tokens")
+  @@index([user_id])
+  @@map("refresh_token")
 }
 
 // Verification Token for email verification
-model VerificationToken {
+model verification_token {
   id                String   @id @default(uuid())
-  userId            String   @map("user_id")
+  user_id           String
   token             String   @unique
   type              String   // 'email', 'password_reset', etc.
-  expiresAt         DateTime @map("expires_at")
-  createdAt         DateTime @default(now()) @map("created_at")
+  expires_at        DateTime
+  created_at        DateTime @default(now())
 
-  @@index([userId])
-  @@map("verification_tokens")
+  @@index([user_id])
+  @@map("verification_token")
 }

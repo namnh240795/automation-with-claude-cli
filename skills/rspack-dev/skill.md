@@ -2,6 +2,26 @@
 
 A skill for fast development using Rspack in a NestJS monorepo environment.
 
+## IMPORTANT: Always Use Rspack for Development
+
+**CRITICAL RULE:** When developing services in this monorepo, **ALWAYS use Rspack** for running services, not `nest start` or `nest build`.
+
+**Why Rspack?**
+- 10-100x faster build times than standard TypeScript compilation
+- Hot Module Replacement (HMR) for instant feedback
+- Proper handling of monorepo path aliases
+- Faster development iteration cycle
+
+**What NOT to do:**
+- ❌ Don't use `pnpm start:dev` (uses slow NestJS TypeScript compiler)
+- ❌ Don't use `nest build` (takes too long for development)
+- ❌ Don't use `nest start --watch` (slow rebuild times)
+
+**What to do instead:**
+- ✅ Use `pnpm rspack:api` for API service development
+- ✅ Use `pnpm rspack:auth` for Auth service development
+- ✅ Use `pnpm dev` as shorthand for `pnpm rspack:api`
+
 ## Overview
 
 Rspack provides significantly faster build times compared to standard TypeScript compilation, making it ideal for development mode with hot reloading.
@@ -13,17 +33,40 @@ Rspack provides significantly faster build times compared to standard TypeScript
 
 ## Quick Start Commands
 
-### Start API Service with Rspack
-```bash
-pnpm rspack:api
-# or
-pnpm dev
-```
-
 ### Start Auth Service with Rspack
 ```bash
-pnpm rspack:auth
+# From root directory
+pnpm --filter auth exec rspack serve -c rspack.config.js
+
+# Auth service runs on port 3001
+# Sign-up test: curl -X POST http://localhost:3001/auth/signup -H "Content-Type: application/json" \
+#   -d '{"email":"test@example.com","password":"Test1234","first_name":"Test","last_name":"User"}'
 ```
+
+### Start API Service with Rspack
+```bash
+# From root directory
+pnpm --filter api exec rspack serve -c rspack.config.js
+
+# API service runs on port 3000
+# Note: Compiles successfully but has routing issues with Fastify adapter
+# Use standard nest build instead: cd apps/api && pnpm start:dev
+```
+
+### Alternative: Standard NestJS (Slower but Reliable)
+```bash
+# Auth service
+cd apps/auth && pnpm start:dev
+
+# API service
+cd apps/api && pnpm start:dev
+```
+
+## Current Status
+- ✅ **Auth service** works perfectly with Rspack (port 3001, compiles in ~22ms)
+- ⚠️ **API service** has routing issues with Rspack (use NestJS build instead)
+- ✅ Both services use **singular table names** and **snake_case** DTOs
+- ✅ **@LogActivity() decorator** working with JSON logging
 
 ### Build for Production
 ```bash
@@ -32,8 +75,9 @@ pnpm build:rspack
 
 ## Rspack Configuration Files
 
-- `rspack.config.api.js` - API service configuration
-- `rspack.config.auth.js` - Auth service configuration
+Config files are located in each app directory:
+- `apps/api/rspack.config.js` - API service configuration
+- `apps/auth/rspack.config.js` - Auth service configuration
 
 ## Key Features
 
