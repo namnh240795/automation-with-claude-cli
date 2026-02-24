@@ -1,0 +1,22 @@
+// This is your Prisma schema file for API Service
+// Learn more about https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../packages/api-prisma-client/src"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Add your API service models here
+// Example:
+// model User {
+//   id        String   @id @default(uuid())
+//   email     String   @unique
+//   name      String?
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+

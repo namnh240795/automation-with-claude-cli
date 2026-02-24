@@ -1,0 +1,9 @@
+{
+  "name": "@auth/prisma-client",
+  "version": "0.0.1",
+  "description": "Auth Service Prisma Client",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "private": true,
+  "license": "MIT"
+}

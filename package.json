@@ -8,12 +8,21 @@
   "workspaces": [
     "apps/*",
     "libs/*",
+    "packages/*",
     "tools"
   ],
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build api",
+    "build:api": "cd apps/api && pnpm build",
+    "build:auth": "cd apps/auth && pnpm build",
     "build:rspack": "BUILD=1 node node_modules/.pnpm/@rspack+cli@*/node_modules/@rspack/cli/bin/rspack.js build",
+    "dev": "pnpm rspack:api",
+    "rspack:api": "rspack serve -c rspack.config.api.js",
+    "rspack:auth": "rspack serve -c rspack.config.auth.js",
+    "dev:nest": "pnpm dev:api",
+    "dev:api": "cd apps/api && pnpm start:dev",
+    "dev:auth": "cd apps/auth && pnpm start:dev",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start api",
     "start:dev": "node node_modules/.pnpm/@rspack+cli@*/node_modules/@rspack/cli/bin/rspack.js serve",

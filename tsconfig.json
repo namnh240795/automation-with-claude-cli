@@ -48,6 +48,18 @@
       ],
       "@app/health/*": [
         "libs/health/src/*"
+      ],
+      "@api/prisma-client": [
+        "packages/api-prisma-client/src"
+      ],
+      "@api/prisma-client/*": [
+        "packages/api-prisma-client/src/*"
+      ],
+      "@auth/prisma-client": [
+        "packages/auth-prisma-client/src"
+      ],
+      "@auth/prisma-client/*": [
+        "packages/auth-prisma-client/src/*"
       ]
     }
   }

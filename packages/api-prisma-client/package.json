@@ -1,0 +1,9 @@
+{
+  "name": "@api/prisma-client",
+  "version": "0.0.1",
+  "description": "API Service Prisma Client",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "private": true,
+  "license": "MIT"
+}

@@ -1,77 +1,43 @@
-# Docker Development Environment for Node.js with Claude CLI
+# Docker Setup
 
-## Quick Start
+This directory contains Docker configurations for running the project services.
 
-### Build and start the container:
+## Services
 
-```bash
-cd docker
-docker-compose up -d --build
-```
+### PostgreSQL Database
+Single PostgreSQL instance running on port `5432` with separate databases and admin credentials for each service:
 
-### Enter the container:
+| Service | Database | Admin User | Password |
+|---------|----------|------------|----------|
+| API | `api_db` | `api_admin` | `api_admin_password_change_this` |
+| Auth | `auth_db` | `auth_admin` | `auth_admin_password_change_this` |
 
-```bash
-docker-compose exec nodejs-dev sh
-```
-
-Or use docker directly:
-
-```bash
-docker exec -it claude-nodejs-dev sh
-```
+Each service's admin user has full privileges only on their respective database.
 
 ## Usage
 
-Once inside the container, you can:
-
-- **Run Node.js commands**: `node`, `npm`, `npx`, etc.
-- **Use Claude CLI**: `claude` commands are available
-- **Develop projects**: Your code is mounted at `/workspace`
-
-### Example workflow:
-
+Start PostgreSQL:
 ```bash
-# Enter the container
-docker-compose exec nodejs-dev sh
-
-# Create a new Node.js project
-cd /workspace
-npm init -y
-
-# Use Claude to help with development
-claude "Help me create a simple Express server"
+cd docker
+docker-compose up -d postgres
 ```
 
-## Stopping the container
-
+Stop PostgreSQL:
 ```bash
 docker-compose down
 ```
 
-## Shared Skills Folder
+## Initialization
 
-Custom Claude skills can be placed in the `../skills/` folder (outside the docker directory). These are automatically available inside the container at `/home/nodejs/.claude/skills`.
+The `init-postgres.sh` script runs automatically on first startup to:
+1. Create separate databases for each service (`api_db`, `auth_db`)
+2. Create admin users for each service with full privileges on their database
+3. Grant appropriate schema and table privileges
 
-### Adding Custom Skills
+## Database Credentials
 
-1. Create a new folder in `skills/` with your skill files
-2. Skills are mounted read-only and available immediately
-3. See `skills/README.md` for skill structure examples
+**IMPORTANT**: Change the default passwords in:
+- `docker/init-postgres.sh` - for database initialization
+- `apps/api/.env` - for API service connection
+- `apps/auth/.env` - for Auth service connection
 
-### Example Skill Structure
-
-```
-skills/
-├── my-custom-skill/
-│   └── skill.md
-└── another-skill/
-    └── skill.md
-```
-
-## Notes
-
-- Your projects in the parent directory are mounted to `/workspace`
-- Claude CLI cache and config are persisted in Docker volumes
-- Custom skills from `../skills/` are mounted at `/home/nodejs/.claude/skills`
-- The container stays running until you stop it with `docker-compose down`
