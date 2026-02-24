@@ -1,79 +1,100 @@
 # NestJS Fastify Monorepo
 
-A production-ready NestJS monorepo with Fastify, Docker development environment, and Claude CLI skills for enterprise patterns.
+A production-ready NestJS monorepo with separate API and Auth services, Fastify, PostgreSQL, Prisma 7, and Rspack for fast development.
 
 ## Table of Contents
 
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Quick Start](#quick-start)
+- [Database Setup](#database-setup)
 - [Development](#development)
+- [Services](#services)
 - [Available Scripts](#available-scripts)
 - [API Endpoints](#api-endpoints)
 - [Skills](#skills)
-- [Configuration](#configuration)
+- [Libraries](#libraries)
 - [Testing](#testing)
-- [Docker Development](#docker-development)
 
 ## Features
 
 - ✅ **NestJS 11.1** - Latest NestJS framework
 - ✅ **Fastify 5.x** - High-performance HTTP adapter
 - ✅ **Monorepo** - Apps and libs with pnpm workspaces
-- ✅ **Service Prefix** - Multi-service routing (`/backend`, `/station`, `/admin`)
-- ✅ **Swagger Documentation** - Auto-generated API docs at `/backend/api`
-- ✅ **Unit Tests** - 100% coverage with Jest
-- ✅ **Shared Libraries** - Reusable libs from traceability-backend
+- ✅ **Separate Services** - API and Auth with isolated databases
+- ✅ **PostgreSQL** - Each service has its own database
+- ✅ **Prisma 7** - Modern ORM with driver adapters
+- ✅ **Rspack** - Super-fast development builds with watch mode
+- ✅ **Swagger Documentation** - Auto-generated API docs with Scalar UI
+- ✅ **Scoped Prisma Clients** - No conflicts between services
+- ✅ **Shared Libraries** - Reusable libs across services
 - ✅ **Claude Skills** - Enterprise patterns for NestJS development
-- ✅ **Docker Environment** - Containerized development with Claude CLI
 
 ## Project Structure
 
 ```
 automation-with-claude-cli/
-├── apps/
-│   └── api/                         # Backend API application
+├── apps/                           # Application services
+│   ├── api/                        # API Service (port 3000)
+│   │   ├── src/
+│   │   │   ├── main.ts             # Fastify setup with Scalar docs
+│   │   │   ├── app.module.ts       # ConfigModule with .env loading
+│   │   │   ├── app.controller.ts   # Controller with versioning
+│   │   │   ├── app.service.ts      # Service layer
+│   │   │   ├── prisma/            # Prisma schema and config
+│   │   │   ├── dto/                # Data Transfer Objects
+│   │   │   └── common/             # Service-specific utilities
+│   │   ├── prisma/                # Prisma schema files
+│   │   ├── package.json
+│   │   ├── nest-cli.json
+│   │   └── .env                   # Service environment variables
+│   │
+│   └── auth/                       # Auth Service (port 3001)
 │       ├── src/
-│       │   ├── main.ts              # Fastify setup with service prefix
-│       │   ├── app.module.ts        # App module with ConfigModule
-│       │   ├── app.controller.ts    # Controller with versioning
-│       │   ├── app.service.ts       # Service
-│       │   ├── common/              # Shared utilities
-│       │   │   └── enum/             # Environment constants
-│       │   ├── *.spec.ts            # Unit tests (100% coverage)
-│       │   └── dto/                 # DTOs folder
-│       ├── test/                    # E2E tests
+│       │   ├── main.ts
+│       │   ├── app.module.ts
+│       │   ├── app.controller.ts
+│       │   ├── app.service.ts
+│       │   ├── prisma/            # Prisma module
+│       │   ├── dto/
+│       │   └── common/
+│       ├── prisma/
 │       ├── package.json
-│       └── tsconfig.app.json
+│       ├── nest-cli.json
+│       └── .env
+│
+├── packages/                       # Scoped packages
+│   ├── api-prisma-client/         # @api/prisma-client
+│   └── auth-prisma-client/        # @auth/prisma-client
 │
 ├── libs/                           # Shared libraries
-│   ├── app-logger/                 # @LogActivity() decorator
-│   ├── auth-utilities/             # @AuthUser(), @Roles(), JWT
-│   ├── caching/                    # Cache manager
-│   ├── common/                     # Common utilities
-│   └── health/                     # Health checks
+│   ├── app-logger/                # @LogActivity() decorator
+│   ├── auth-utilities/            # @AuthUser(), @Roles(), JWT
+│   ├── caching/                   # Cache manager
+│   ├── common/                    # Common utilities
+│   └── health/                    # Health checks
 │
-├── skills/                         # Claude CLI skills (shared)
-│   ├── README.md
-│   ├── nestjs-unit-testing/        # Unit testing guide
-│   ├── nestjs-conventions/         # General conventions
-│   ├── nestjs-helper/              # Quick reference
-│   ├── auth-guard-patterns/        # Auth & security
-│   ├── dto-validation/             # DTO & validation
-│   ├── prisma-integration/         # Prisma setup
-│   ├── prisma-patterns/            # Database patterns
-│   └── multi-service-routing/      # Service prefixes
+├── docker/                         # Docker services
+│   ├── docker-compose.yml         # PostgreSQL service
+│   ├── init-postgres.sh           # Database initialization
+│   └── README.md
 │
-├── docker/                         # Docker environment
-│   ├── Dockerfile                  # Non-root user, Claude CLI
-│   ├── docker-compose.yml          # Container setup
-│   └── .dockerignore
+├── skills/                         # Claude CLI skills
+│   ├── rspack-dev/                # Rspack development guide
+│   ├── nestjs-unit-testing/
+│   ├── nestjs-conventions/
+│   ├── nestjs-helper/
+│   ├── auth-guard-patterns/
+│   ├── dto-validation/
+│   ├── prisma-integration/
+│   ├── prisma-patterns/
+│   └── multi-service-routing/
 │
-├── nest-cli.json                  # Monorepo configuration
+├── rspack.config.api.js           # Rspack config for API
+├── rspack.config.auth.js          # Rspack config for Auth
+├── pnpm-workspace.yaml            # Workspace configuration
 ├── tsconfig.json                  # Path aliases
-├── pnpm-workspace.yaml            # Workspace config
-├── .env                           # Environment variables
-└── package.json                   # Root package.json
+└── package.json                   # Root scripts
 ```
 
 ## Quick Start
@@ -84,238 +105,200 @@ automation-with-claude-cli/
 pnpm install
 ```
 
-### 2. Start Development Server
+### 2. Start PostgreSQL
 
 ```bash
-pnpm run build && node dist/apps/api/main.js
+cd docker
+docker-compose up -d postgres
 ```
 
-Server starts at:
-- **API**: http://localhost:3000/backend/v1
-- **Health**: http://localhost:3000/backend/v1/health
-- **Swagger**: http://localhost:3000/backend/api
+This creates:
+- `api_db` database with `api_admin` user
+- `auth_db` database with `auth_admin` user
 
-### 3. Run Tests
+### 3. Generate Prisma Clients
 
 ```bash
-# Run all tests
-pnpm test
-
-# Run with coverage
-pnpm run test:cov
+cd apps/api && pnpm prisma:generate
+cd apps/auth && pnpm prisma:generate
 ```
+
+### 4. Start Development Server
+
+**API Service (port 3000):**
+```bash
+pnpm rspack:api
+```
+
+**Auth Service (port 3001):**
+```bash
+pnpm rspack:auth
+```
+
+### Access Points
+
+| Service | URL | Documentation |
+|---------|-----|--------------|
+| API | http://localhost:3000/backend/v1 | http://localhost:3000/reference |
+| Auth | http://localhost:3001/auth/v1 | http://localhost:3001/reference |
+
+## Database Setup
+
+### PostgreSQL Services
+
+Each service has its own database and admin credentials:
+
+| Service | Database | User | Password |
+|---------|----------|------|----------|
+| API | `api_db` | `api_admin` | `api_admin_password_change_this` |
+| Auth | `auth_db` | `auth_admin` | `auth_admin_password_change_this` |
+
+### Connection Strings
+
+**API Service** (`apps/api/.env`):
+```env
+DATABASE_URL="postgresql://api_admin:api_admin_password_change_this@localhost:5432/api_db?schema=public"
+```
+
+**Auth Service** (`apps/auth/.env`):
+```env
+DATABASE_URL="postgresql://auth_admin:auth_admin_password_change_this@localhost:5432/auth_db?schema=public"
+```
+
+### Prisma Configuration
+
+Each service uses Prisma 7 with:
+- **Scoped packages**: `@api/prisma-client` and `@auth/prisma-client`
+- **Driver adapters**: Direct PostgreSQL connection via `@prisma/adapter-pg`
+- **Separate schemas**: Each service has its own Prisma schema
+- **No conflicts**: Generated clients are in separate directories
 
 ## Development
 
-### Service Prefix Configuration
+### Rspack Watch Mode
 
-The service prefix is controlled by the `SERVICE_PREFIX` environment variable (default: `backend`):
+The project uses Rspack for super-fast development:
 
+- **Compilation**: ~47ms for initial build
+- **Watch Mode**: Auto-recompiles on file changes
+- **Auto-restart**: NestJS app restarts automatically
+- **Hot Reload**: Changes appear immediately
+
+**Start API with watch mode:**
 ```bash
-# Run as backend service
-SERVICE_PREFIX=backend pnpm run build && node dist/apps/api/main.js
-
-# Run as station service
-SERVICE_PREFIX=station pnpm run build && node dist/apps/api/main.js
-
-# Run as admin service
-SERVICE_PREFIX=admin pnpm run build && node dist/apps/api/main.js
+pnpm rspack:api
 ```
 
-### Generate New Resources
+**Start Auth with watch mode:**
+```bash
+pnpm rspack:auth
+```
+
+### Using NestJS CLI
 
 ```bash
-# Generate a module
-nest g module users --project api
+# Generate resources for API service
+cd apps/api
+nest g module users
+nest g controller users
+nest g service users
 
-# Generate a controller
-nest g controller users --project api
-
-# Generate a service
-nest g service users --project api
+# Generate resources for Auth service
+cd apps/auth
+nest g module auth
+nest g controller auth
+nest g service auth
 ```
+
+## Services
+
+### API Service
+
+- **Port**: 3000
+- **Database**: `api_db`
+- **Prisma Client**: `@api/prisma-client`
+- **Purpose**: Core API functionality
+
+### Auth Service
+
+- **Port**: 3001
+- **Database**: `auth_db`
+- **Prisma Client**: `@auth/prisma-client`
+- **Purpose**: Authentication and authorization
 
 ## Available Scripts
 
+### Root Level Scripts
+
 ```bash
-# Development
-pnpm run start:dev        # Start with watch
-pnpm run start:debug      # Start with debug mode
-pnpm run start:prod       # Start production build
+# Development (Rspack)
+pnpm rspack:api              # Start API service (default)
+pnpm rspack:auth             # Start Auth service
+
+# Alternative (NestJS watch mode)
+pnpm dev:nest                 # Alias for rspack:api
+pnpm dev:api                  # API with NestJS watch
+pnpm dev:auth                 # Auth with NestJS watch
 
 # Building
-pnpm run build            # Build the project
-pnpm run prebuild         # Clean dist folder
+pnpm build:api                # Build API service
+pnpm build:auth               # Build Auth service
+pnpm build:rspack             # Build all with Rspack
+```
 
-# Testing
-pnpm test                 # Run unit tests
-pnpm run test:watch       # Watch mode
-pnpm run test:cov         # Generate coverage report
-pnpm run test:e2e         # Run E2E tests
-pnpm run test:debug       # Debug tests
+### Service-Level Scripts
 
-# Code Quality
-pnpm run lint             # Run ESLint
-pnpm run format           # Format with Prettier
+```bash
+# From apps/api or apps/auth
+pnpm start:dev               # NestJS watch mode
+pnpm start:debug             # With debug mode
+pnpm build                   # Build for production
+pnpm prisma:generate         # Generate Prisma client
+pnpm prisma:migrate          # Run migrations
+pnpm prisma:studio           # Open Prisma Studio
 ```
 
 ## API Endpoints
 
-### Base URL
-- **Production**: `http://localhost:3000/backend/v1`
-- **Swagger**: `http://localhost:3000/backend/api`
-
-### Endpoints
+### API Service (port 3000)
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/backend/v1` | Hello message |
 | GET | `/backend/v1/health` | Health check |
 
-### Response Examples
+### Auth Service (port 3001)
 
-**Health Check:**
-```json
-{
-  "status": "ok",
-  "timestamp": "2026-02-04T10:47:46.715Z"
-}
-```
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/auth/v1` | Hello message |
+| GET | `/auth/v1/health` | Health check |
 
 ## Skills
 
-This project includes Claude CLI skills that provide enterprise patterns:
+This project includes Claude CLI skills for accelerated development:
 
 ### Available Skills
 
 | Skill | Description |
 |-------|-------------|
-| **nestjs-unit-testing** | Unit testing patterns with 100% coverage |
-| **nestjs-conventions** | General NestJS conventions and structure |
+| **rspack-dev** | Rspack development and watch mode |
+| **nestjs-unit-testing** | Unit testing patterns |
+| **nestjs-conventions** | General NestJS conventions |
 | **auth-guard-patterns** | Authentication and authorization |
 | **dto-validation** | DTO creation and validation |
-| **prisma-integration** | Prisma ORM setup and configuration |
+| **prisma-integration** | Prisma ORM setup |
 | **prisma-patterns** | Database query patterns |
 | **multi-service-routing** | Service prefix configuration |
 
 ### Using Skills
 
 Tell Claude:
-> "Create a users module with CRUD operations using traceability-patterns"
+> "Create a users module with CRUD operations using prisma-patterns"
 
 or
 
 > "Add authentication to the API using auth-guard-patterns"
-
-## Configuration
-
-### Environment Variables
-
-See [`.env.example`](.env.example) for all available variables:
-
-```bash
-# Service
-SERVICE_PREFIX=backend
-PORT=3000
-
-# CORS
-CORS_ORIGIN=http://localhost:3000,http://localhost:4200
-CORS_ORIGIN_REGEX=^https://.*\.example\.com$
-
-# JWT
-JWT_SECRET=your-jwt-secret-key
-JWT_EXPIRES_IN=1h
-JWT_REFRESH_SECRET=your-refresh-secret-key
-JWT_REFRESH_EXPIRES_IN=7d
-```
-
-### Path Aliases
-
-```typescript
-import { CommonModule } from '@app/common';
-import { AppLogger } from '@app/app-logger';
-import { AuthUser, JwtPayloadDto } from '@app/auth-utilities';
-import { CachingService } from '@app/caching';
-```
-
-## Testing
-
-### Test Coverage
-
-Current coverage for `apps/api/src`:
-- **100%** Statements
-- **100%** Functions
-- **100%** Lines
-
-### Test Structure
-
-```
-feature/
-├── feature.controller.ts
-├── feature.controller.spec.ts    # Controller tests
-├── feature.service.ts
-├── feature.service.spec.ts       # Service tests
-└── dto/
-    ├── create-feature.dto.ts
-    └── create-feature.dto.spec.ts # DTO validation tests
-```
-
-### Testing Patterns
-
-```typescript
-// Service test with mocked Prisma
-const mockPrismaService = {
-  myModel: {
-    findMany: jest.fn(),
-    findUnique: jest.fn(),
-    create: jest.fn(),
-    update: jest.fn(),
-  },
-};
-
-// Controller test with mocked service
-const mockService = {
-  findAll: jest.fn(),
-  findOne: jest.fn(),
-};
-```
-
-See **skills/nestjs-unit-testing** for comprehensive testing guide.
-
-## Docker Development
-
-### Docker Environment
-
-A Docker container with Node.js, pnpm, and Claude CLI pre-installed.
-
-### Start Container
-
-```bash
-cd docker
-docker-compose up -d --build
-```
-
-### Enter Container
-
-```bash
-docker exec -it claude-nodejs-dev sh
-```
-
-### Container Features
-
-- **User**: Non-root user (nodejs)
-- **Workspace**: Mounted at `/workspace`
-- **Skills**: Mounted at `/home/nodejs/.claude/skills`
-- **API Key**: Pre-configured for z.ai
-
-### Persistent Volumes
-
-- `claude-cache` - Claude CLI cache
-- `claude-config` - Claude CLI configuration
-
-### Skills in Container
-
-The `skills/` folder is mounted into the container and available to Claude CLI automatically.
 
 ## Libraries
 
@@ -374,22 +357,68 @@ export class MyService {
 }
 ```
 
+## Common Service Structure Rule
+
+Every API service in this monorepo follows the same structure pattern:
+
+### Standard Structure
+
+```
+apps/[service-name]/
+├── src/
+│   ├── main.ts                 # Fastify + Swagger setup
+│   ├── app.module.ts           # Root module with ConfigModule
+│   ├── app.controller.ts       # Controllers with versioning
+│   ├── app.service.ts          # Service layer
+│   ├── prisma/                # Prisma module and service
+│   ├── dto/                    # Data Transfer Objects
+│   └── common/                 # Service-specific utilities
+├── prisma/
+│   ├── schema.prisma          # Database schema
+│   └── prisma.config.ts       # Prisma 7 config
+├── package.json
+├── nest-cli.json
+├── tsconfig.app.json
+└── .env                        # Service environment variables
+```
+
+### Key Patterns
+
+1. **Modular Architecture** - Separation of concerns with modules
+2. **Centralized Configuration** - ConfigModule with .env loading
+3. **Swagger Documentation** - Auto-generated with Scalar reference UI
+4. **Health Check Endpoints** - `/health` endpoint for monitoring
+5. **API Versioning** - URI-based versioning (v1, v2, etc.)
+6. **Global Validation** - ValidationPipe with transform
+7. **CORS Configuration** - Environment-aware CORS with regex support
+
+### Adding a New Service
+
+1. Create service directory following the standard structure
+2. Set up Prisma with scoped package (`@service/prisma-client`)
+3. Configure unique database and credentials
+4. Add Rspack configuration
+5. Update root package.json scripts
+6. Update pnpm-workspace.yaml
+
 ## License
 
 MIT
 
-## Summary of Setup
+---
 
-This project includes:
+## Summary
+
+This monorepo includes:
 
 - ✅ NestJS 11.1 with Fastify 5.x
-- ✅ Monorepo with pnpm workspaces
-- ✅ Service prefix routing (`/backend`, `/station`, `/admin`)
-- ✅ Swagger documentation at `/backend/api`
-- ✅ 100% unit test coverage
-- ✅ Shared libraries (auth-utilities, app-logger, caching, health)
-- ✅ Claude CLI skills for enterprise patterns
-- ✅ Docker development environment
-- ✅ API versioning (v1)
-- ✅ Global validation pipe
-- ✅ CORS with regex pattern support
+- ✅ Separate API and Auth services
+- ✅ PostgreSQL with isolated databases
+- ✅ Prisma 7 with driver adapters
+- ✅ Scoped Prisma clients (no conflicts)
+- ✅ Rspack for fast development
+- ✅ Watch mode with auto-restart
+- ✅ Shared libraries across services
+- ✅ Claude CLI skills for patterns
+- ✅ API versioning and documentation
+- ✅ Global validation and CORS
