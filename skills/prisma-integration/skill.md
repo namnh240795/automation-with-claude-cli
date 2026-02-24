@@ -448,21 +448,67 @@ async findWithOrg(id: string) {
   - `organizationId` → `organizationId`
   - `created_at` → `created_at`
 
-## Migration Workflow
+## Migration Workflow (Prisma 7+)
+
+**CRITICAL: Always use Prisma commands for migrations - never manually edit the database.**
 
 ```bash
-# 1. Create/update prisma.config.ts (if not exists)
-# 2. Create migration
-npx prisma migrate dev --name init
+# 1. Create prisma.config.ts in BOTH locations:
+#    - apps/[service]/prisma.config.ts (for root-level migrations)
+#    - apps/[service]/prisma/prisma.config.ts (for schema-level operations)
 
-# 3. Generate client
+# 2. Ensure DATABASE_URL is set in .env or passed explicitly
+
+# 3. Create migration (must be run from service directory)
+cd apps/[service]
+DATABASE_URL="postgresql://..." npx prisma migrate dev --name migration_name
+
+# 4. Generate client
 npx prisma generate
-
-# 4. View database in Prisma Studio
-npx prisma studio
 
 # 5. Deploy migrations to production
 npx prisma migrate deploy
+```
+
+### Prisma 7+ Configuration Requirements
+
+**CRITICAL: prisma.config.ts MUST exist in the service root directory for migrations to work.**
+
+```
+apps/[service]/
+├── prisma.config.ts          # REQUIRED in root for migrations
+├── prisma/
+│   ├── schema.prisma
+│   └── prisma.config.ts      # Optional, for schema-level operations
+└── .env                      # DATABASE_URL must be set here
+```
+
+**Root-level prisma.config.ts (REQUIRED for migrations):**
+```typescript
+// apps/[service]/prisma.config.ts
+import 'dotenv/config';
+import { defineConfig, env } from 'prisma/config';
+
+export default defineConfig({
+  schema: './prisma/schema.prisma',  // Relative to service root
+  datasource: {
+    url: env('DATABASE_URL'),
+  },
+});
+```
+
+**Schema-level prisma.config.ts (optional):**
+```typescript
+// apps/[service]/prisma/prisma.config.ts
+import 'dotenv/config';
+import { defineConfig, env } from 'prisma/config';
+
+export default defineConfig({
+  schema: './schema.prisma',  // Relative to prisma directory
+  datasource: {
+    url: env('DATABASE_URL'),
+  },
+});
 ```
 
 ## Best Practices
@@ -477,6 +523,126 @@ npx prisma migrate deploy
 8. **Use `@LogActivity()` decorator** on service methods
 
 ## Common Errors
+
+### Prisma 7+ Migration Errors
+
+#### Error 1: "The datasource property `url` is no longer supported in schema files"
+
+**Cause:** Prisma 7+ removed the `url` property from datasource blocks in schema.prisma files.
+
+**Solution:** Remove `url` from schema.prisma and create prisma.config.ts:
+```prisma
+// WRONG (Prisma 7+):
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")  // ❌ Not supported in Prisma 7+
+}
+
+// CORRECT (Prisma 7+):
+datasource db {
+  provider = "postgresql"
+  // No url property here
+}
+```
+
+Then create `prisma.config.ts`:
+```typescript
+import 'dotenv/config';
+import { defineConfig, env } from 'prisma/config';
+
+export default defineConfig({
+  schema: './prisma/schema.prisma',
+  datasource: {
+    url: env('DATABASE_URL'),  // ← URL goes here
+  },
+});
+```
+
+#### Error 2: "Module '"@prisma/client"' has no exported member 'defineConfig'"
+
+**Cause:** Wrong import path for Prisma 7+ configuration.
+
+**Solution:** Import from `'prisma/config'` not `'@prisma/client'`:
+```typescript
+// WRONG:
+import { defineConfig, env } from '@prisma/client';
+
+// CORRECT:
+import { defineConfig, env } from 'prisma/config';
+```
+
+#### Error 3: "The datasource.url property is required when using prisma migrate dev"
+
+**Cause:** The prisma.config.ts file is not in the correct location or not being read.
+
+**Solution:** Ensure prisma.config.ts exists in the service root directory:
+```bash
+# Correct structure:
+apps/auth/
+├── prisma.config.ts          # ← Must be here for migrations
+├── prisma/
+│   ├── schema.prisma
+│   └── prisma.config.ts      # ← Optional, schema-level
+└── .env
+
+# Then run migration from service root:
+cd apps/auth
+DATABASE_URL="postgresql://..." npx prisma migrate dev --name init
+```
+
+#### Error 4: Password Authentication Failed (Docker PostgreSQL)
+
+**Cause:** User passwords created in Docker init script may not work from host machine due to SCRAM-SHA-256 authentication.
+
+**Solution:** Reset passwords explicitly:
+```bash
+docker exec claude-postgres psql -U postgres -c \
+  "ALTER USER auth_admin WITH PASSWORD 'auth_admin_password_change_this';"
+
+docker exec claude-postgres psql -U postgres -c \
+  "ALTER USER api_admin WITH PASSWORD 'api_admin_password_change_this';"
+```
+
+#### Error 5: "Prisma Migrate detected that it was invoked by Claude Code"
+
+**Cause:** Prisma has safety guards against AI agents running dangerous operations.
+
+**Solution:** Use explicit user consent environment variable:
+```bash
+PRISMA_USER_CONSENT_FOR_DANGEROUS_AI_ACTION="user's exact consent message" \
+npx prisma migrate reset --force
+```
+
+#### Error 6: Missing Opposite Relation Field
+
+**Cause:** Prisma relations require back-relation fields on both models.
+
+**Solution:** Add back-relation arrays:
+```prisma
+// WRONG:
+model Post {
+  id       String   @id
+  authorId String
+  author   UserProfile @relation(fields: [authorId], references: [id])
+}
+
+model UserProfile {
+  id String @id
+  // Missing posts relation
+}
+
+// CORRECT:
+model Post {
+  id       String   @id
+  authorId String
+  author   UserProfile @relation(fields: [authorId], references: [id])
+}
+
+model UserProfile {
+  id    String @id
+  posts Post[]  // ← Add back-relation
+}
+```
 
 ### P2002 - Unique Constraint
 ```typescript

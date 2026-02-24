@@ -76,7 +76,26 @@ The following packages are externalized (not bundled) for performance and compat
 - `rxjs`, `reflect-metadata`
 - `class-validator`, `class-transformer`
 - `pg`, `dotenv`
+- **`bcrypt`** - Native modules MUST be externalized
+- **`@nestjs/jwt`**, **`@nestjs/passport`**, **`passport`**, **`passport-jwt`** - Auth modules
 - And NestJS lazy-loaded modules
+
+### Critical: Native Modules
+
+**Native Node.js modules like `bcrypt` MUST be in the externals list.**
+
+If you get an error like:
+```
+Error: No native build was found for platform=darwin arch=arm64
+```
+
+Add the module to the externals regex in your Rspack config:
+```javascript
+externals: [
+  /^(@nestjs|@fastify|@prisma|@scalar|rxjs|reflect-metadata|class-validator|class-transformer|ioredis|axios|pg|dotenv|bcrypt|@nestjs\/jwt|@nestjs\/passport|passport|passport-jwt)/,
+  // ... rest of config
+]
+```
 
 ## Debugging
 

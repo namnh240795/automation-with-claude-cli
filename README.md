@@ -24,6 +24,8 @@ A production-ready NestJS monorepo with separate API and Auth services, Fastify,
 - ✅ **Separate Services** - API and Auth with isolated databases
 - ✅ **PostgreSQL** - Each service has its own database
 - ✅ **Prisma 7** - Modern ORM with driver adapters
+- ✅ **OAuth 2.x Authentication** - JWT-based auth with refresh tokens
+- ✅ **Password Hashing** - bcrypt for secure password storage
 - ✅ **Rspack** - Super-fast development builds with watch mode
 - ✅ **Swagger Documentation** - Auto-generated API docs with Scalar UI
 - ✅ **Scoped Prisma Clients** - No conflicts between services
@@ -55,8 +57,12 @@ automation-with-claude-cli/
 │       │   ├── app.module.ts
 │       │   ├── app.controller.ts
 │       │   ├── app.service.ts
+│       │   ├── auth/               # Auth module
+│       │   │   ├── auth.module.ts
+│       │   │   ├── auth.controller.ts
+│       │   │   └── auth.service.ts
 │       │   ├── prisma/            # Prisma module
-│       │   ├── dto/
+│       │   ├── dto/               # DTOs for auth
 │       │   └── common/
 │       ├── prisma/
 │       ├── package.json
@@ -225,6 +231,79 @@ nest g service auth
 - **Database**: `auth_db`
 - **Prisma Client**: `@auth/prisma-client`
 - **Purpose**: Authentication and authorization
+- **Features**:
+  - User registration with password hashing
+  - JWT access tokens (1 hour expiry)
+  - JWT refresh tokens (7 day expiry)
+  - Token revocation on logout
+  - Email verification support
+
+## Authentication Examples
+
+### Sign Up
+
+```bash
+curl -X POST http://localhost:3001/auth/signup \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "SecurePass123!",
+    "firstName": "John",
+    "lastName": "Doe"
+  }'
+```
+
+**Response:**
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "email": "user@example.com",
+  "firstName": "John",
+  "lastName": "Doe",
+  "isActive": true,
+  "emailVerified": false,
+  "createdAt": "2026-02-24T12:00:00.000Z",
+  "updatedAt": "2026-02-24T12:00:00.000Z"
+}
+```
+
+### Sign In
+
+```bash
+curl -X POST http://localhost:3001/auth/signin \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "SecurePass123!"
+  }'
+```
+
+**Response:**
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "tokenType": "Bearer",
+  "expiresIn": 3600
+}
+```
+
+### Refresh Token
+
+```bash
+curl -X POST http://localhost:3001/auth/refresh \
+  -H "Content-Type: application/json" \
+  -d '{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }'
+```
+
+### Get Profile (with JWT)
+
+```bash
+curl -X GET http://localhost:3001/auth/profile \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+```
 
 ## Available Scripts
 
@@ -269,10 +348,22 @@ pnpm prisma:studio           # Open Prisma Studio
 
 ### Auth Service (port 3001)
 
+#### OAuth 2.x Authentication
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/auth/v1` | Hello message |
-| GET | `/auth/v1/health` | Health check |
+| POST | `/auth/signup` | Register new user |
+| POST | `/auth/signin` | Sign in with email/password |
+| POST | `/auth/refresh` | Refresh access token |
+| POST | `/auth/logout` | Revoke refresh token |
+| GET | `/auth/profile` | Get current user profile (requires JWT) |
+
+#### System Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/auth` | Hello message |
+| GET | `/auth/health` | Health check |
 
 ## Skills
 
@@ -415,6 +506,8 @@ This monorepo includes:
 - ✅ Separate API and Auth services
 - ✅ PostgreSQL with isolated databases
 - ✅ Prisma 7 with driver adapters
+- ✅ OAuth 2.x authentication (JWT + refresh tokens)
+- ✅ Password hashing with bcrypt
 - ✅ Scoped Prisma clients (no conflicts)
 - ✅ Rspack for fast development
 - ✅ Watch mode with auto-restart

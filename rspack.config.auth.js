@@ -73,7 +73,7 @@ const config = {
     },
   },
   externals: [
-    /^(@nestjs|@fastify|@prisma|@scalar|rxjs|reflect-metadata|class-validator|class-transformer|ioredis|axios|pg|dotenv)/,
+    /^(@nestjs|@fastify|@prisma|@scalar|rxjs|reflect-metadata|class-validator|class-transformer|ioredis|axios|pg|dotenv|bcrypt|@nestjs\/jwt|@nestjs\/passport|passport|passport-jwt)/,
     function (obj, callback) {
       const resource = obj.request;
       const lazyImports = [

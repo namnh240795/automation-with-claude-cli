@@ -2,6 +2,31 @@
 
 A skill for database operations using Prisma ORM following traceability-backend conventions.
 
+## Critical Rule: ALWAYS Use Prisma Commands for Migrations
+
+**NEVER manually edit the database schema. ALWAYS use Prisma migration commands.**
+
+```bash
+# Always work from the service directory
+cd apps/[service]
+
+# Always pass DATABASE_URL explicitly or ensure .env is loaded
+DATABASE_URL="postgresql://user:pass@host:5432/db?schema=public" \
+  npx prisma migrate dev --name descriptive_migration_name
+
+# Generate client after migration
+npx prisma generate
+
+# For production
+npx prisma migrate deploy
+```
+
+**Why?** Manual schema edits create drift and break migration tracking. Prisma commands ensure:
+- Schema version control
+- Rollback capability
+- Team synchronization
+- Production deployment safety
+
 ## Related Skill
 
 For Prisma setup and installation, see **prisma-integration**.
@@ -215,6 +240,27 @@ const count = await this.prisma.my_model.count({
 ```
 
 ## Error Handling Patterns
+
+### Prisma 7+ Quick Troubleshooting
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `datasource url not supported` | Using Prisma 6 syntax | Remove url from schema.prisma, use prisma.config.ts |
+| `defineConfig not found` | Wrong import | Import from 'prisma/config' not '@prisma/client' |
+| `datasource.url required` | Config file missing/wrong location | Create prisma.config.ts in service root |
+| `password auth failed` | Docker user password issue | Reset with `ALTER USER` command |
+| `AI detected` | Safety guard | Use `PRISMA_USER_CONSENT_FOR_DANGEROUS_AI_ACTION` |
+| `missing opposite relation` | Incomplete relation | Add back-relation field array |
+
+### Migration Checklist
+
+Before running migrations:
+- [ ] `prisma.config.ts` exists in service root
+- [ ] Schema has no `url` property in datasource
+- [ ] `defineConfig` imported from `'prisma/config'`
+- [ ] DATABASE_URL set in .env or passed explicitly
+- [ ] All relations have back-relation fields
+- [ ] Running from service directory: `cd apps/[service]`
 
 ### Unique Constraint Validation
 ```typescript

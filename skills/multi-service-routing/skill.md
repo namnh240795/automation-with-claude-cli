@@ -302,6 +302,32 @@ export class UsersController {
 **Results with SERVICE_PREFIX=station**:
 - Endpoint: `http://localhost:3000/station/v1/users`
 
+### ⚠️ Critical: Avoid Duplicate Prefixes
+
+**DO NOT add the service prefix in the controller decorator.**
+
+**WRONG - Causes duplicate prefix:**
+```typescript
+// SERVICE_PREFIX=auth in .env
+@Controller('auth')  // ❌ WRONG - Creates /auth/auth/signup
+export class AuthController {
+  @Post('signup')
+  async signUp() {}
+}
+```
+
+**CORRECT - No duplicate:**
+```typescript
+// SERVICE_PREFIX=auth in .env
+@Controller()  // ✅ CORRECT - Creates /auth/signup
+export class AuthController {
+  @Post('signup')
+  async signUp() {}
+}
+```
+
+**Why?** The global prefix (`SERVICE_PREFIX`) is automatically prepended by `setGlobalPrefix()` in main.ts. Adding it again in `@Controller()` creates a duplicate path.
+
 ## Config Service Pattern
 
 Create an enum for environment variables:

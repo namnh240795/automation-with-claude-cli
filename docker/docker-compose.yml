@@ -30,6 +30,13 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - default
 
 volumes:
   postgres-data:
+
+networks:
+  default:
+    name: claude-network
+    driver: bridge
