@@ -86,38 +86,23 @@ export class AuthService {
     }
 
     // Generate tokens
-    const tokens = await this.generateTokens(user.id, user.email);
+    const tokens = await this.generateTokens(user.id, user.email, user.first_name, user.last_name);
 
     return tokens;
-  }
-
-  async getUserById(userId: string): Promise<UserResponseDto> {
-    const user = await this.prisma.user.findUnique({
-      where: { id: userId },
-      select: {
-        id: true,
-        email: true,
-        first_name: true,
-        last_name: true,
-        is_active: true,
-        email_verified: true,
-        created_at: true,
-        updated_at: true,
-      },
-    });
-
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-
-    return user;
   }
 
   private async generateTokens(
     userId: string,
     email: string,
+    first_name?: string,
+    last_name?: string,
   ): Promise<TokenResponseDto> {
-    const payload = { sub: userId, email };
+    const payload = {
+      sub: userId,
+      email,
+      first_name,
+      last_name,
+    };
 
     const accessToken = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_SECRET,
@@ -184,8 +169,13 @@ export class AuthService {
         data: { revoked_at: new Date() },
       });
 
-      // Generate new tokens
-      return this.generateTokens(payload.sub, payload.email);
+      // Generate new tokens with user info from database
+      return this.generateTokens(
+        payload.sub,
+        storedToken.user.email,
+        storedToken.user.first_name,
+        storedToken.user.last_name,
+      );
     } catch {
       throw new UnauthorizedException('Invalid refresh token');
     }

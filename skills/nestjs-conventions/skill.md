@@ -360,6 +360,146 @@ import { LogActivity } from '@app/app-logger';
 import { PrismaService } from '../path/to/prisma.service';
 ```
 
+## JWT Bearer Authentication
+
+### Adding JWT Guard to a Controller
+
+```typescript
+import { Controller, Get, UseGuards, Request, Version } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { JwtAuthGuard } from '@app/auth-utilities';
+
+@ApiTags('Feature')
+@Controller('feature')
+export class FeatureController {
+  @Get('me')
+  @Version('1')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get current user info (Protected)' })
+  @ApiResponse({ status: 200, description: 'User info retrieved' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  async getUserInfo(@Request() req) {
+    // req.user contains the decoded JWT payload: { sub, email, first_name, last_name }
+    return {
+      sub: req.user.sub,
+      email: req.user.email,
+      message: 'This is a protected endpoint',
+    };
+  }
+}
+```
+
+### Module Setup
+
+```typescript
+import { Module } from '@nestjs/common';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './strategies/jwt.strategy';
+
+@Module({
+  imports: [
+    PassportModule,
+    JwtModule.register({
+      secret: process.env.JWT_SECRET || 'your-jwt-secret-key-change-this',
+      signOptions: { expiresIn: '1h' },
+    }),
+  ],
+  providers: [JwtStrategy],
+})
+export class FeatureModule {}
+```
+
+### JWT Strategy (for services that validate tokens)
+
+**For Auth Service** (with database lookup):
+```typescript
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { BaseJwtStrategy } from '@app/auth-utilities';
+import { PrismaService } from '../prisma/prisma.service';
+
+@Injectable()
+export class JwtStrategy extends BaseJwtStrategy {
+  constructor(
+    configService: ConfigService,
+    private readonly prisma: PrismaService,
+  ) {
+    super(configService);
+  }
+
+  async getUserById(userId: string) {
+    return this.prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        first_name: true,
+        last_name: true,
+        is_active: true,
+      },
+    });
+  }
+}
+```
+
+**For Other Services** (JWT validation only, no DB lookup):
+```typescript
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { BaseJwtStrategy } from '@app/auth-utilities';
+
+@Injectable()
+export class JwtStrategy extends BaseJwtStrategy {
+  constructor(configService: ConfigService) {
+    super(configService);
+  }
+
+  async getUserById(userId: string) {
+    // In microservices, call auth service API if needed
+    return {
+      id: userId,
+      is_active: true, // Trust the token from auth service
+    };
+  }
+
+  async validate(payload: any) {
+    return {
+      sub: payload.sub,
+      email: payload.email,
+      first_name: payload.first_name,
+      last_name: payload.last_name,
+    };
+  }
+}
+```
+
+### Testing Bearer Auth
+
+```bash
+# 1. Sign in to get token
+TOKEN=$(curl -s -X POST "http://localhost:3001/auth/signin" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","password":"Test1234"}' | jq -r '.access_token')
+
+# 2. Access protected endpoint
+curl -X GET "http://localhost:3000/backend/v1/me" \
+  -H "Authorization: Bearer $TOKEN"
+
+# 3. Without token (will fail)
+curl -X GET "http://localhost:3000/backend/v1/me"
+```
+
+### Important Notes
+
+- **Auth Service**: Only the auth service should access the auth database
+- **Other Services**: Validate JWT tokens only, don't access auth database
+- **BaseJwtStrategy**: Extensible base class from `@app/auth-utilities` for reuse across services
+- **JWT Payload**: Contains `sub` (user ID), `email`, `first_name`, `last_name`
+- **Path Format**: With URI versioning: `{globalPrefix}/v{version}/{route}`
+  - Example: `/backend/v1/me` for global prefix `backend`, version `1`, route `me`
+
 ## Related Skills
 
 - **auth-guard-patterns** - Authentication and authorization

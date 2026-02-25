@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { LogActivity } from '@app/app-logger';
-import { HelloResponseDto, HealthResponseDto } from './dto';
+import { HelloResponseDto, HealthResponseDto, UserInfoResponseDto } from './dto';
+import { JwtPayloadDto } from '@app/auth-utilities';
 
 @Injectable()
 export class AppService {
@@ -24,6 +25,18 @@ export class AppService {
       service: 'backend',
       version: '1.0.0',
       uptime: process.uptime(),
+    };
+  }
+
+  @LogActivity()
+  getUserInfo(user: JwtPayloadDto): UserInfoResponseDto {
+    return {
+      sub: user.sub,
+      email: user.email,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      message: 'This is a protected endpoint - you have access!',
+      timestamp: new Date(),
     };
   }
 }

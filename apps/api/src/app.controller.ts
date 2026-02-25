@@ -1,11 +1,14 @@
-import { Controller, Get, Version } from '@nestjs/common';
+import { Controller, Get, Version, UseGuards } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
   ApiOkResponse,
+  ApiBearerAuth,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { AppService } from './app.service';
-import { HelloResponseDto, HealthResponseDto } from './dto';
+import { HelloResponseDto, HealthResponseDto, UserInfoResponseDto } from './dto';
+import { JwtAuthGuard, AuthUser, JwtPayloadDto } from '@app/auth-utilities';
 
 @ApiTags('App')
 @Controller()
@@ -32,5 +35,20 @@ export class AppController {
   })
   healthCheck(): HealthResponseDto {
     return this.appService.getHealth();
+  }
+
+  @Get('me')
+  @Version('1')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get current user info (Protected)' })
+  @ApiOkResponse({
+    description: 'User info retrieved successfully',
+    type: UserInfoResponseDto,
+  })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized - Invalid or missing token' })
+  getUserInfo(@AuthUser() user: JwtPayloadDto): UserInfoResponseDto {
+    // Extract user info directly from JWT using @AuthUser() decorator
+    return this.appService.getUserInfo(user);
   }
 }

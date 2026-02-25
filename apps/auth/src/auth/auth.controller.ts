@@ -1,7 +1,8 @@
-import { Controller, Post, Body, Get, UseGuards, Request } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { SignUpDto, SignInDto, UserResponseDto, TokenResponseDto } from '../dto';
+import { JwtAuthGuard, AuthUser, JwtPayloadDto } from '@app/auth-utilities';
 
 @ApiTags('Authentication')
 @Controller()
@@ -52,7 +53,7 @@ export class AuthController {
   }
 
   @Get('profile')
-  @UseGuards(/* TODO: Add JWT guard */)
+  @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get current user profile' })
   @ApiResponse({
@@ -61,8 +62,17 @@ export class AuthController {
     type: UserResponseDto,
   })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async getProfile(@Request() req): Promise<UserResponseDto> {
-    // JWT guard will populate req.user
-    return this.authService.getUserById(req.user.sub);
+  async getProfile(@AuthUser() user: JwtPayloadDto): Promise<UserResponseDto> {
+    // Extract user info directly from JWT using @AuthUser() decorator - no database lookup
+    return {
+      id: user.sub,
+      email: user.email,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      is_active: true,
+      email_verified: true,
+      created_at: new Date(),
+      updated_at: new Date(),
+    };
   }
 }

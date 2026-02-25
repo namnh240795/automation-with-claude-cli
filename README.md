@@ -25,6 +25,7 @@ A production-ready NestJS monorepo with separate API and Auth services, Fastify,
 - ✅ **PostgreSQL** - Each service has its own database
 - ✅ **Prisma 7** - Modern ORM with driver adapters
 - ✅ **OAuth 2.x Authentication** - JWT-based auth with refresh tokens
+- ✅ **JWT Bearer Guards** - Reusable JWT authentication across services
 - ✅ **Password Hashing** - bcrypt for secure password storage
 - ✅ **Rspack** - Super-fast development builds with watch mode
 - ✅ **Swagger Documentation** - Auto-generated API docs with Scalar UI
@@ -305,6 +306,222 @@ curl -X GET http://localhost:3001/auth/profile \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 
+## JWT Bearer Authentication
+
+### Overview
+
+This monorepo implements JWT bearer authentication with reusable guards and strategies across all services.
+
+### Architecture
+
+- **Auth Service**: Validates JWT tokens and checks user database
+- **Other Services**: Validate JWT signatures only (no database access)
+- **Shared Library**: `@app/auth-utilities` provides reusable `BaseJwtStrategy` and `JwtAuthGuard`
+
+### Protected Endpoints
+
+#### Auth Service - Profile Endpoint
+
+```bash
+curl -X GET http://localhost:3001/auth/profile \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
+
+**Response:**
+```json
+{
+  "id": "4989dcff-256d-4ac4-9b84-d527d81d6e52",
+  "email": "test@example.com",
+  "first_name": "Test",
+  "last_name": "User",
+  "is_active": true,
+  "email_verified": false,
+  "created_at": "2026-02-24T07:55:16.829Z",
+  "updated_at": "2026-02-24T07:55:16.829Z"
+}
+```
+
+#### API Service - User Info Endpoint
+
+```bash
+curl -X GET http://localhost:3000/backend/v1/me \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
+
+**Response:**
+```json
+{
+  "sub": "4989dcff-256d-4ac4-9b84-d527d81d6e52",
+  "email": "test@example.com",
+  "first_name": "Test",
+  "last_name": "User",
+  "message": "This is a protected endpoint - you have access!",
+  "timestamp": "2026-02-24T08:21:28.444Z"
+}
+```
+
+### Complete Authentication Flow
+
+```bash
+# 1. Sign in to get access token
+ACCESS_TOKEN=$(curl -s -X POST "http://localhost:3001/auth/signin" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","password":"Test1234"}' | jq -r '.access_token')
+
+# 2. Access protected endpoint on Auth service
+curl -X GET "http://localhost:3001/auth/profile" \
+  -H "Authorization: Bearer $ACCESS_TOKEN"
+
+# 3. Access protected endpoint on API service
+curl -X GET "http://localhost:3000/backend/v1/me" \
+  -H "Authorization: Bearer $ACCESS_TOKEN"
+
+# 4. Test without token (will fail with 401)
+curl -X GET "http://localhost:3000/backend/v1/me"
+```
+
+### Implementing JWT Guard in Your Controller
+
+```typescript
+import { Controller, Get, UseGuards, Request, Version } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from '@app/auth-utilities';
+
+@ApiTags('Feature')
+@Controller('feature')
+export class FeatureController {
+  @Get('protected')
+  @Version('1')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Protected endpoint' })
+  async getProtectedData(@Request() req) {
+    // req.user contains decoded JWT: { sub, email, first_name, last_name }
+    return {
+      user_id: req.user.sub,
+      email: req.user.email,
+      message: 'This is protected data',
+    };
+  }
+}
+```
+
+### JWT Strategy Implementation
+
+**For Auth Service** (with database lookup):
+```typescript
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { BaseJwtStrategy } from '@app/auth-utilities';
+import { PrismaService } from '../prisma/prisma.service';
+
+@Injectable()
+export class JwtStrategy extends BaseJwtStrategy {
+  constructor(
+    configService: ConfigService,
+    private readonly prisma: PrismaService,
+  ) {
+    super(configService);
+  }
+
+  async getUserById(userId: string) {
+    return this.prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        first_name: true,
+        last_name: true,
+        is_active: true,
+      },
+    });
+  }
+}
+```
+
+**For Other Services** (JWT validation only):
+```typescript
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { BaseJwtStrategy } from '@app/auth-utilities';
+
+@Injectable()
+export class JwtStrategy extends BaseJwtStrategy {
+  constructor(configService: ConfigService) {
+    super(configService);
+  }
+
+  async validate(payload: any) {
+    // Return user info from JWT payload
+    return {
+      sub: payload.sub,
+      email: payload.email,
+      first_name: payload.first_name,
+      last_name: payload.last_name,
+    };
+  }
+}
+```
+
+### JWT Payload Structure
+
+The JWT token contains:
+- `sub`: User ID (UUID)
+- `email`: User email
+- `iat`: Issued at timestamp
+- `exp`: Expiration timestamp
+
+**Example decoded payload:**
+```json
+{
+  "sub": "4989dcff-256d-4ac4-9b84-d527d81d6e52",
+  "email": "test@example.com",
+  "iat": 1771921034,
+  "exp": 1771924634
+}
+```
+
+### Module Configuration
+
+```typescript
+import { Module } from '@nestjs/common';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './strategies/jwt.strategy';
+
+@Module({
+  imports: [
+    PassportModule,
+    JwtModule.register({
+      secret: process.env.JWT_SECRET || 'your-jwt-secret-key-change-this',
+      signOptions: { expiresIn: '1h' },
+    }),
+  ],
+  providers: [JwtStrategy],
+})
+export class FeatureModule {}
+```
+
+### Error Responses
+
+**401 Unauthorized** (Missing or invalid token):
+```json
+{
+  "message": "Invalid or expired token",
+  "error": "Unauthorized",
+  "statusCode": 401
+}
+```
+
+**401 Unauthorized** (User inactive):
+```json
+{
+  "message": "User account is inactive",
+  "error": "Unauthorized",
+  "statusCode": 401
+}
+```
+
 ## Available Scripts
 
 ### Root Level Scripts
@@ -341,22 +558,23 @@ pnpm prisma:studio           # Open Prisma Studio
 
 ### API Service (port 3000)
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/backend/v1` | Hello message |
-| GET | `/backend/v1/health` | Health check |
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| GET | `/backend/v1` | Hello message | No |
+| GET | `/backend/v1/health` | Health check | No |
+| GET | `/backend/v1/me` | Current user info | **Yes (JWT)** |
 
 ### Auth Service (port 3001)
 
 #### OAuth 2.x Authentication
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/auth/signup` | Register new user |
-| POST | `/auth/signin` | Sign in with email/password |
-| POST | `/auth/refresh` | Refresh access token |
-| POST | `/auth/logout` | Revoke refresh token |
-| GET | `/auth/profile` | Get current user profile (requires JWT) |
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| POST | `/auth/signup` | Register new user | No |
+| POST | `/auth/signin` | Sign in with email/password | No |
+| POST | `/auth/refresh` | Refresh access token | No |
+| POST | `/auth/logout` | Revoke refresh token | No |
+| GET | `/auth/profile` | Get current user profile | **Yes (JWT)** |
 
 #### System Endpoints
 
@@ -397,15 +615,47 @@ or
 
 Authentication and authorization utilities:
 
+**JWT Authentication:**
 ```typescript
-import { AuthUser, JwtPayloadDto } from '@app/auth-utilities';
+import { JwtAuthGuard, BaseJwtStrategy } from '@app/auth-utilities';
 
 @Controller()
 export class MyController {
   @Get('profile')
-  @UseGuards(AuthGuard('jwt-token'))
-  getProfile(@AuthUser() user: JwtPayloadDto) {
-    return user;
+  @UseGuards(JwtAuthGuard)
+  getProfile(@Request() req) {
+    return req.user; // JWT payload: { sub, email, first_name, last_name }
+  }
+}
+```
+
+**Extending JWT Strategy:**
+```typescript
+import { BaseJwtStrategy } from '@app/auth-utilities';
+
+export class JwtStrategy extends BaseJwtStrategy {
+  constructor(configService: ConfigService) {
+    super(configService);
+  }
+
+  async getUserById(userId: string) {
+    // Implement user lookup or return minimal user object
+    return { id: userId, is_active: true };
+  }
+}
+```
+
+**Role-based Authorization:**
+```typescript
+import { AuthUser, JwtPayloadDto, Roles, RolesGuard } from '@app/auth-utilities';
+
+@Controller()
+@UseGuards(JwtAuthGuard, RolesGuard)
+export class AdminController {
+  @Get('admin')
+  @Roles('admin')
+  adminOnly(@AuthUser() user: JwtPayloadDto) {
+    return { message: 'Admin area', user };
   }
 }
 ```
@@ -507,6 +757,7 @@ This monorepo includes:
 - ✅ PostgreSQL with isolated databases
 - ✅ Prisma 7 with driver adapters
 - ✅ OAuth 2.x authentication (JWT + refresh tokens)
+- ✅ JWT bearer guards (reusable across services)
 - ✅ Password hashing with bcrypt
 - ✅ Scoped Prisma clients (no conflicts)
 - ✅ Rspack for fast development
