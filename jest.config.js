@@ -11,6 +11,7 @@ module.exports = {
     '**/*.(t|j)s',
     '!node_modules/**',
     '!dist/**',
+    '!**/*.d.ts',
   ],
   coverageDirectory: './coverage',
   moduleNameMapper: {
