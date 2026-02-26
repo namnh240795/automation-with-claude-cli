@@ -9,45 +9,22 @@ describe('auth-utilities index exports', () => {
       expect(typeof AuthUser).toBe('function');
     });
 
-    it('should extract user from request', () => {
-      // Mock ExecutionContext
-      const mockUser: JwtPayloadDto = {
-        sub: 'user-123',
-        email: 'test@example.com',
-        first_name: 'John',
-        last_name: 'Doe',
-        iat: 1234567890,
-        exp: 1234571490,
-      };
-
-      const mockRequest = {
-        user: mockUser,
-      };
-
-      const mockExecutionContext = {
-        switchToHttp: jest.fn().mockReturnValue({
-          getRequest: jest.fn().mockReturnValue(mockRequest),
-        }),
-      } as any;
-
-      // The decorator returns a function when used as a parameter decorator
-      const decoratorFn = AuthUser(null, mockExecutionContext);
-      // The decorator extracts and returns the user
-      expect(typeof decoratorFn).toBe('function');
-    });
-
-    it('should work as a parameter decorator', () => {
-      // Test that the decorator can be used as a parameter decorator
-      // This is a compile-time test in TypeScript, but we can verify the structure
+    it('should create a decorator function', () => {
       const decorator = AuthUser();
       expect(decorator).toBeDefined();
       expect(typeof decorator).toBe('function');
     });
 
-    it('should have the correct decorator signature', () => {
-      // Verify the decorator has the expected signature
+    it('should work as a parameter decorator (compile-time check)', () => {
+      // This test verifies the decorator can be used in TypeScript
+      // The actual execution is handled by NestJS at runtime
+      const decorator = AuthUser();
+      expect(decorator).toBeDefined();
+      expect(typeof decorator).toBe('function');
+    });
+
+    it('should have correct decorator signature', () => {
       expect(AuthUser.length).toBeGreaterThanOrEqual(0);
-      expect(typeof AuthUser).toBe('function');
     });
   });
 

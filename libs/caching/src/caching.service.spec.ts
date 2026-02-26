@@ -1,6 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CachingService } from './caching.service';
 import { ConfigService } from '@nestjs/config';
+import { ENVIRONMENT } from './environment';
+
+// Mock ioredis to avoid actual Redis connection
+jest.mock('ioredis', () => {
+  return jest.fn().mockImplementation(() => ({
+    get: jest.fn(),
+    set: jest.fn(),
+    del: jest.fn(),
+  }));
+});
+
+import Redis from 'ioredis';
 
 describe('CachingService', () => {
   let service: CachingService;
@@ -21,21 +33,104 @@ describe('CachingService', () => {
 
     service = module.get<CachingService>(CachingService);
     configService = module.get(ConfigService);
-
-    // Mock Redis methods
-    service.redis = {
-      get: jest.fn(),
-      set: jest.fn(),
-      del: jest.fn(),
-    } as any;
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  describe('constructor', () => {
+    it('should create Redis instance with TLS when REDIS_TLS is true', async () => {
+      // Arrange
+      const mockModule: TestingModule = await Test.createTestingModule({
+        providers: [
+          CachingService,
+          {
+            provide: ConfigService,
+            useValue: {
+              get: jest.fn((key: string) => {
+                if (key === ENVIRONMENT.REDIS_HOST) return 'localhost';
+                if (key === ENVIRONMENT.REDIS_PORT) return '6379';
+                if (key === ENVIRONMENT.REDIS_TLS) return 'true';
+                return undefined;
+              }),
+            },
+          },
+        ],
+      }).compile();
+
+      // Act
+      const tlsService = mockModule.get<CachingService>(CachingService);
+
+      // Assert
+      expect(Redis).toHaveBeenCalledWith({
+        host: 'localhost',
+        port: '6379',
+        tls: {},
+      });
+      expect(tlsService).toBeDefined();
+    });
+
+    it('should create Redis instance without TLS when REDIS_TLS is false', async () => {
+      // Arrange
+      const mockModule: TestingModule = await Test.createTestingModule({
+        providers: [
+          CachingService,
+          {
+            provide: ConfigService,
+            useValue: {
+              get: jest.fn((key: string) => {
+                if (key === ENVIRONMENT.REDIS_HOST) return 'localhost';
+                if (key === ENVIRONMENT.REDIS_PORT) return '6379';
+                if (key === ENVIRONMENT.REDIS_TLS) return 'false';
+                return undefined;
+              }),
+            },
+          },
+        ],
+      }).compile();
+
+      // Act
+      const noTlsService = mockModule.get<CachingService>(CachingService);
+
+      // Assert
+      expect(Redis).toHaveBeenCalledWith({
+        host: 'localhost',
+        port: '6379',
+        tls: undefined,
+      });
+      expect(noTlsService).toBeDefined();
+    });
+
+    it('should create Redis instance without TLS when REDIS_TLS is not set', async () => {
+      // Arrange
+      const mockModule: TestingModule = await Test.createTestingModule({
+        providers: [
+          CachingService,
+          {
+            provide: ConfigService,
+            useValue: {
+              get: jest.fn((key: string) => {
+                if (key === ENVIRONMENT.REDIS_HOST) return 'localhost';
+                if (key === ENVIRONMENT.REDIS_PORT) return '6379';
+                return undefined;
+              }),
+            },
+          },
+        ],
+      }).compile();
+
+      // Act
+      const noTlsService = mockModule.get<CachingService>(CachingService);
+
+      // Assert
+      expect(Redis).toHaveBeenCalledWith({
+        host: 'localhost',
+        port: '6379',
+        tls: undefined,
+      });
+      expect(noTlsService).toBeDefined();
+    });
   });
 
   describe('get', () => {

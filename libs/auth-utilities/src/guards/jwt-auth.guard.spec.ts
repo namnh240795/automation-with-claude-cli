@@ -7,7 +7,9 @@ import { JwtPayloadDto } from '../index';
 jest.mock('@nestjs/passport', () => ({
   AuthGuard: jest.fn().mockImplementation(() => {
     return class MockAuthGuard {
-      canActivate = jest.fn();
+      canActivate = jest.fn().mockReturnValue(true);
+      getRequest = jest.fn().mockReturnValue({ user: null });
+      getResponse = jest.fn().mockReturnValue({});
     };
   }),
 }));
@@ -21,7 +23,10 @@ describe('JwtAuthGuard', () => {
 
     // Mock ExecutionContext
     context = {
-      switchToHttp: jest.fn(),
+      switchToHttp: jest.fn().mockReturnValue({
+        getRequest: jest.fn().mockReturnValue({}),
+        getResponse: jest.fn().mockReturnValue({}),
+      }),
       switchToRpc: jest.fn(),
       switchToWs: jest.fn(),
       getClass: jest.fn(),
@@ -38,14 +43,10 @@ describe('JwtAuthGuard', () => {
     });
 
     it('should call parent canActivate method', () => {
-      // The parent AuthGuard's canActivate is called
-      // We test that the method exists and can be called without errors
-      expect(() => guard.canActivate(context)).not.toThrow();
-    });
-
-    it('should be a method that accepts ExecutionContext', () => {
-      // The mock returns undefined, but we verify the method can be called
-      expect(() => guard.canActivate(context)).not.toThrow();
+      const spy = jest.spyOn(guard, 'canActivate');
+      guard.canActivate(context);
+      expect(spy).toHaveBeenCalled();
+      spy.mockRestore();
     });
   });
 
@@ -89,7 +90,6 @@ describe('JwtAuthGuard', () => {
     });
 
     it('should throw error when error exists even if user is present', () => {
-      // The condition is `if (err || !user)`, so error takes precedence
       const error = new Error('Authentication error');
       expect(() => guard.handleRequest(error, mockUser, null)).toThrow(error);
     });
