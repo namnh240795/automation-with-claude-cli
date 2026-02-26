@@ -458,6 +458,45 @@ describe('AuthService', () => {
       );
     });
 
+    it('should use fallback expiration values when env vars are not set', async () => {
+      // Arrange - delete env vars to test fallback
+      const originalJwtExpiresIn = process.env.JWT_EXPIRES_IN;
+      const originalJwtRefreshExpiresIn = process.env.JWT_REFRESH_EXPIRES_IN;
+      delete process.env.JWT_EXPIRES_IN;
+      delete process.env.JWT_REFRESH_EXPIRES_IN;
+
+      prisma.user.findUnique = jest.fn().mockResolvedValue(mockUser);
+      jwtService.signAsync = jest.fn()
+        .mockResolvedValueOnce('access-token')
+        .mockResolvedValueOnce('refresh-token');
+      prisma.refresh_token.create = jest.fn().mockResolvedValue({});
+
+      const signInDto: SignInDto = { email: 'test@example.com', password: 'password' };
+
+      // Act
+      await service.signIn(signInDto);
+
+      // Restore env vars
+      if (originalJwtExpiresIn) process.env.JWT_EXPIRES_IN = originalJwtExpiresIn;
+      if (originalJwtRefreshExpiresIn) process.env.JWT_REFRESH_EXPIRES_IN = originalJwtRefreshExpiresIn;
+
+      // Assert - verify fallback values are used
+      expect(jwtService.signAsync).toHaveBeenCalledWith(
+        expect.anything(),
+        expect.objectContaining({
+          secret: process.env.JWT_SECRET,
+          expiresIn: '1h', // Fallback value
+        })
+      );
+      expect(jwtService.signAsync).toHaveBeenCalledWith(
+        expect.anything(),
+        expect.objectContaining({
+          secret: process.env.JWT_REFRESH_SECRET,
+          expiresIn: '7d', // Fallback value
+        })
+      );
+    });
+
     it('should return correct token response structure', async () => {
       // Arrange
       prisma.user.findUnique = jest.fn().mockResolvedValue(mockUser);
