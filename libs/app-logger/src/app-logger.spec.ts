@@ -1,4 +1,4 @@
-import { AppLogger, CustomLog } from './app-logger';
+import { AppLogger, CustomLog, LogActivity } from './app-logger';
 import { errorHandler } from './error-handler';
 import { responseHandler } from './response-handler';
 import { BadRequestException } from '@nestjs/common';
@@ -263,5 +263,118 @@ describe('responseHandler', () => {
   it('should return response data', () => {
     const response = { data: 'test data' } as AxiosResponse;
     expect(responseHandler(response)).toBe('test data');
+  });
+});
+
+describe('LogActivity decorator', () => {
+  let consoleLogSpy: jest.SpyInstance;
+
+  beforeEach(() => {
+    consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    consoleLogSpy.mockRestore();
+  });
+
+  it('should log successful method execution', async () => {
+    class TestService {
+      @LogActivity()
+      async testMethod(input: string) {
+        return `processed: ${input}`;
+      }
+    }
+
+    const service = new TestService();
+    const result = await service.testMethod('hello');
+
+    expect(result).toBe('processed: hello');
+    expect(consoleLogSpy).toHaveBeenCalled();
+    const logCall = JSON.parse(consoleLogSpy.mock.calls[0][0]);
+    expect(logCall.source_s).toBe('TestService.testMethod');
+    expect(logCall.input_s).toEqual(['hello']);
+    expect(logCall.output_s).toBe('processed: hello');
+    expect(logCall.error_s).toBe('');
+  });
+
+  it('should log method execution errors', async () => {
+    class TestService {
+      @LogActivity()
+      async failingMethod() {
+        throw new Error('Test error');
+      }
+    }
+
+    const service = new TestService();
+
+    await expect(service.failingMethod()).rejects.toThrow('Test error');
+    expect(consoleLogSpy).toHaveBeenCalled();
+    const logCall = JSON.parse(consoleLogSpy.mock.calls[0][0]);
+    expect(logCall.source_s).toBe('TestService.failingMethod');
+    expect(logCall.error_s).toBeDefined();
+    expect(logCall.error_s).toHaveProperty('message', 'Test error');
+  });
+
+  it('should handle methods with multiple arguments', async () => {
+    class TestService {
+      @LogActivity()
+      async multiArgMethod(a: number, b: string, c: boolean) {
+        return { a, b, c };
+      }
+    }
+
+    const service = new TestService();
+    const result = await service.multiArgMethod(1, 'test', true);
+
+    expect(result).toEqual({ a: 1, b: 'test', c: true });
+    expect(consoleLogSpy).toHaveBeenCalled();
+    const logCall = JSON.parse(consoleLogSpy.mock.calls[0][0]);
+    expect(logCall.input_s).toEqual([1, 'test', true]);
+  });
+
+  it('should handle methods with no arguments', async () => {
+    class TestService {
+      @LogActivity()
+      async noArgMethod() {
+        return 'success';
+      }
+    }
+
+    const service = new TestService();
+    const result = await service.noArgMethod();
+
+    expect(result).toBe('success');
+    expect(consoleLogSpy).toHaveBeenCalled();
+  });
+
+  it('should work with synchronous methods decorated as async', async () => {
+    class TestService {
+      @LogActivity()
+      syncMethod() {
+        return 'sync result';
+      }
+    }
+
+    const service = new TestService();
+    const result = await service.syncMethod();
+
+    expect(result).toBe('sync result');
+    expect(consoleLogSpy).toHaveBeenCalled();
+  });
+
+  it('should preserve method context (this)', async () => {
+    class TestService {
+      private value = 'context-value';
+
+      @LogActivity()
+      async contextMethod() {
+        return this.value;
+      }
+    }
+
+    const service = new TestService();
+    const result = await service.contextMethod();
+
+    expect(result).toBe('context-value');
   });
 });
