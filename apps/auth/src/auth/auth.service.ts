@@ -138,47 +138,48 @@ export class AuthService {
 
   async refreshAccessToken(refreshToken: string): Promise<TokenResponseDto> {
     // Verify refresh token
+    let payload;
     try {
-      const payload = await this.jwtService.verifyAsync(refreshToken, {
+      payload = await this.jwtService.verifyAsync(refreshToken, {
         secret: process.env.JWT_REFRESH_SECRET,
       });
-
-      // Check if refresh token exists in database
-      const storedToken = await this.prisma.refresh_token.findUnique({
-        where: { token: refreshToken },
-        include: { user: true },
-      });
-
-      if (!storedToken || storedToken.revoked_at) {
-        throw new UnauthorizedException('Invalid refresh token');
-      }
-
-      // Check if token is expired
-      if (storedToken.expires_at < new Date()) {
-        throw new UnauthorizedException('Refresh token expired');
-      }
-
-      // Check if user is active
-      if (!storedToken.user.is_active) {
-        throw new UnauthorizedException('User account is inactive');
-      }
-
-      // Revoke old refresh token
-      await this.prisma.refresh_token.update({
-        where: { id: storedToken.id },
-        data: { revoked_at: new Date() },
-      });
-
-      // Generate new tokens with user info from database
-      return this.generateTokens(
-        payload.sub,
-        storedToken.user.email,
-        storedToken.user.first_name,
-        storedToken.user.last_name,
-      );
     } catch {
       throw new UnauthorizedException('Invalid refresh token');
     }
+
+    // Check if refresh token exists in database
+    const storedToken = await this.prisma.refresh_token.findUnique({
+      where: { token: refreshToken },
+      include: { user: true },
+    });
+
+    if (!storedToken || storedToken.revoked_at) {
+      throw new UnauthorizedException('Invalid refresh token');
+    }
+
+    // Check if token is expired
+    if (storedToken.expires_at < new Date()) {
+      throw new UnauthorizedException('Refresh token expired');
+    }
+
+    // Check if user is active
+    if (!storedToken.user.is_active) {
+      throw new UnauthorizedException('User account is inactive');
+    }
+
+    // Revoke old refresh token
+    await this.prisma.refresh_token.update({
+      where: { id: storedToken.id },
+      data: { revoked_at: new Date() },
+    });
+
+    // Generate new tokens with user info from database
+    return this.generateTokens(
+      payload.sub,
+      storedToken.user.email,
+      storedToken.user.first_name,
+      storedToken.user.last_name,
+    );
   }
 
   async logout(refreshToken: string): Promise<void> {
