@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigService } from '@nestjs/config';
 import { AppService } from './app.service';
-import { JwtPayloadDto } from '@app/auth-utilities';
+import { KeycloakUserInfo } from '@app/keycloak-integration';
 
 // Mock the logger decorator to reduce console spam
 jest.mock('@app/app-logger', () => ({
@@ -184,18 +184,21 @@ describe('AppService', () => {
   });
 
   describe('getUserInfo', () => {
-    const mockJwtPayload: JwtPayloadDto = {
+    const mockKeycloakUser: KeycloakUserInfo = {
       sub: '123e4567-e89b-12d3-a456-426614174000',
       email: 'test@example.com',
-      first_name: 'John',
-      last_name: 'Doe',
+      email_verified: true,
+      given_name: 'John',
+      family_name: 'Doe',
       iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + 3600,
+      iss: 'http://localhost:8080/realms/app-realm',
+      aud: 'app-client',
     };
 
     it('should return a UserInfoResponseDto object', () => {
       // Act
-      const result = service.getUserInfo(mockJwtPayload);
+      const result = service.getUserInfo(mockKeycloakUser);
 
       // Assert
       expect(result).toBeInstanceOf(Object);
@@ -203,43 +206,43 @@ describe('AppService', () => {
 
     it('should return user sub from JWT payload', () => {
       // Act
-      const result = service.getUserInfo(mockJwtPayload);
+      const result = service.getUserInfo(mockKeycloakUser);
 
       // Assert
       expect(result).toHaveProperty('sub');
-      expect(result.sub).toBe(mockJwtPayload.sub);
+      expect(result.sub).toBe(mockKeycloakUser.sub);
     });
 
     it('should return user email from JWT payload', () => {
       // Act
-      const result = service.getUserInfo(mockJwtPayload);
+      const result = service.getUserInfo(mockKeycloakUser);
 
       // Assert
       expect(result).toHaveProperty('email');
-      expect(result.email).toBe(mockJwtPayload.email);
+      expect(result.email).toBe(mockKeycloakUser.email);
     });
 
-    it('should return first_name from JWT payload', () => {
+    it('should return first_name from Keycloak user info', () => {
       // Act
-      const result = service.getUserInfo(mockJwtPayload);
+      const result = service.getUserInfo(mockKeycloakUser);
 
       // Assert
       expect(result).toHaveProperty('first_name');
-      expect(result.first_name).toBe(mockJwtPayload.first_name);
+      expect(result.first_name).toBe(mockKeycloakUser.given_name);
     });
 
-    it('should return last_name from JWT payload', () => {
+    it('should return last_name from Keycloak user info', () => {
       // Act
-      const result = service.getUserInfo(mockJwtPayload);
+      const result = service.getUserInfo(mockKeycloakUser);
 
       // Assert
       expect(result).toHaveProperty('last_name');
-      expect(result.last_name).toBe(mockJwtPayload.last_name);
+      expect(result.last_name).toBe(mockKeycloakUser.family_name);
     });
 
     it('should return success message', () => {
       // Act
-      const result = service.getUserInfo(mockJwtPayload);
+      const result = service.getUserInfo(mockKeycloakUser);
 
       // Assert
       expect(result).toHaveProperty('message');
@@ -248,7 +251,7 @@ describe('AppService', () => {
 
     it('should return timestamp as Date object', () => {
       // Act
-      const result = service.getUserInfo(mockJwtPayload);
+      const result = service.getUserInfo(mockKeycloakUser);
 
       // Assert
       expect(result).toHaveProperty('timestamp');
@@ -257,26 +260,29 @@ describe('AppService', () => {
 
     it('should return correct response structure', () => {
       // Act
-      const result = service.getUserInfo(mockJwtPayload);
+      const result = service.getUserInfo(mockKeycloakUser);
 
       // Assert
       expect(result).toMatchObject({
-        sub: mockJwtPayload.sub,
-        email: mockJwtPayload.email,
-        first_name: mockJwtPayload.first_name,
-        last_name: mockJwtPayload.last_name,
+        sub: mockKeycloakUser.sub,
+        email: mockKeycloakUser.email,
+        first_name: mockKeycloakUser.given_name,
+        last_name: mockKeycloakUser.family_name,
         message: 'This is a protected endpoint - you have access!',
       });
       expect(result.timestamp).toBeInstanceOf(Date);
     });
 
-    it('should handle JWT payload with optional fields as undefined', () => {
+    it('should handle Keycloak user info with optional fields as undefined', () => {
       // Arrange
-      const payloadWithoutOptional: JwtPayloadDto = {
+      const payloadWithoutOptional: KeycloakUserInfo = {
         sub: '123e4567-e89b-12d3-a456-426614174000',
         email: 'test@example.com',
+        email_verified: false,
         iat: Math.floor(Date.now() / 1000),
         exp: Math.floor(Date.now() / 1000) + 3600,
+        iss: 'http://localhost:8080/realms/app-realm',
+        aud: 'app-client',
       };
 
       // Act
@@ -290,9 +296,9 @@ describe('AppService', () => {
     it('should generate unique timestamps for each call', () => {
       // Act
       jest.useFakeTimers();
-      const result1 = service.getUserInfo(mockJwtPayload);
+      const result1 = service.getUserInfo(mockKeycloakUser);
       jest.advanceTimersByTime(100);
-      const result2 = service.getUserInfo(mockJwtPayload);
+      const result2 = service.getUserInfo(mockKeycloakUser);
       jest.useRealTimers();
 
       // Assert

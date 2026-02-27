@@ -19,4 +19,5 @@ module.exports = {
     '^@api/prisma-client$': '<rootDir>/packages/api-prisma-client/src',
     '^@auth/prisma-client$': '<rootDir>/packages/auth-prisma-client/src',
   },
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };
