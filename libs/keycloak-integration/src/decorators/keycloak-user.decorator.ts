@@ -69,8 +69,8 @@ export const KeycloakRoles = createParamDecorator(
     const clientRoles: string[] = [];
 
     for (const [resource, access] of Object.entries(resourceAccess)) {
-      if (access.roles && Array.isArray(access.roles)) {
-        clientRoles.push(...access.roles);
+      if (access && typeof access === 'object' && 'roles' in access && Array.isArray(access.roles)) {
+        clientRoles.push(...(access.roles as string[]));
       }
     }
 
