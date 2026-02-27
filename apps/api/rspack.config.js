@@ -28,6 +28,8 @@ const config = {
       '@app/caching/*': path.resolve(__dirname, '../../libs/caching/src/*'),
       '@app/health': path.resolve(__dirname, '../../libs/health/src'),
       '@app/health/*': path.resolve(__dirname, '../../libs/health/src/*'),
+      '@app/keycloak-integration': path.resolve(__dirname, '../../libs/keycloak-integration/src'),
+      '@app/keycloak-integration/*': path.resolve(__dirname, '../../libs/keycloak-integration/src/*'),
       '@api/prisma-client': path.resolve(__dirname, '../../packages/api-prisma-client/src'),
       '@api/prisma-client/*': path.resolve(__dirname, '../../packages/api-prisma-client/src/*'),
     },
@@ -72,7 +74,7 @@ const config = {
     },
   },
   externals: [
-    /^(@nestjs|@fastify|@prisma|@scalar|rxjs|reflect-metadata|class-validator|class-transformer|ioredis|axios|pg|dotenv)/,
+    /^(@nestjs|@fastify|@prisma|@scalar|rxjs|reflect-metadata|class-validator|class-transformer|ioredis|axios|pg|dotenv|keycloak-connect|nest-keycloak-connect)/,
     function (obj, callback) {
       const resource = obj.request;
       const lazyImports = [
