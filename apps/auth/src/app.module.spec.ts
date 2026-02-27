@@ -10,6 +10,10 @@ describe('AppModule', () => {
   beforeEach(async () => {
     // Set required environment variables
     process.env.DATABASE_URL = 'postgresql://test:test@localhost:5432/test_db';
+    process.env.KEYCLOAK_SERVER_URL = 'http://localhost:8080';
+    process.env.KEYCLOAK_REALM = 'app-realm';
+    process.env.KEYCLOAK_CLIENT_ID = 'app-client';
+    process.env.KEYCLOAK_CLIENT_SECRET = 'test-secret';
 
     appModule = await Test.createTestingModule({
       imports: [AppModule],

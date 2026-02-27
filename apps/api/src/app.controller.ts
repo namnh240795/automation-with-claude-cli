@@ -8,7 +8,7 @@ import {
 } from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { HelloResponseDto, HealthResponseDto, UserInfoResponseDto } from './dto';
-import { JwtAuthGuard, AuthUser, JwtPayloadDto } from '@app/auth-utilities';
+import { KeycloakAuthGuard, KeycloakUser, KeycloakUserInfo } from '@app/keycloak-integration';
 
 @ApiTags('App')
 @Controller()
@@ -39,7 +39,7 @@ export class AppController {
 
   @Get('me')
   @Version('1')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(KeycloakAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get current user info (Protected)' })
   @ApiOkResponse({
@@ -47,8 +47,8 @@ export class AppController {
     type: UserInfoResponseDto,
   })
   @ApiUnauthorizedResponse({ description: 'Unauthorized - Invalid or missing token' })
-  getUserInfo(@AuthUser() user: JwtPayloadDto): UserInfoResponseDto {
-    // Extract user info directly from JWT using @AuthUser() decorator
+  getUserInfo(@KeycloakUser() user: KeycloakUserInfo): UserInfoResponseDto {
+    // Extract user info directly from Keycloak token using @KeycloakUser() decorator
     return this.appService.getUserInfo(user);
   }
 }

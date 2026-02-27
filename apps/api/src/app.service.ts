@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { LogActivity } from '@app/app-logger';
 import { HelloResponseDto, HealthResponseDto, UserInfoResponseDto } from './dto';
-import { JwtPayloadDto } from '@app/auth-utilities';
+import { KeycloakUserInfo } from '@app/keycloak-integration';
 
 @Injectable()
 export class AppService {
@@ -29,12 +29,12 @@ export class AppService {
   }
 
   @LogActivity()
-  getUserInfo(user: JwtPayloadDto): UserInfoResponseDto {
+  getUserInfo(user: KeycloakUserInfo): UserInfoResponseDto {
     return {
       sub: user.sub,
       email: user.email,
-      first_name: user.first_name,
-      last_name: user.last_name,
+      first_name: user.given_name,
+      last_name: user.family_name,
       message: 'This is a protected endpoint - you have access!',
       timestamp: new Date(),
     };

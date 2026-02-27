@@ -1,11 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './strategies/jwt.strategy';
+import { KeycloakModule } from '@app/keycloak-integration';
 import * as path from 'path';
 
 @Module({
@@ -15,13 +13,18 @@ import * as path from 'path';
       envFilePath: path.join(__dirname, '../.env'),
     }),
     PrismaModule,
-    PassportModule,
-    JwtModule.register({
-      secret: process.env.JWT_SECRET || 'your-jwt-secret-key-change-this',
-      signOptions: { expiresIn: '1h' },
+    KeycloakModule.registerAsync({
+      imports: [],
+      useFactory: (configService: ConfigService) => ({
+        authServerUrl: configService.get<string>('KEYCLOAK_SERVER_URL') || 'http://localhost:8080',
+        realm: configService.get<string>('KEYCLOAK_REALM') || 'app-realm',
+        clientId: configService.get<string>('KEYCLOAK_CLIENT_ID') || 'app-client',
+        secret: configService.get<string>('KEYCLOAK_CLIENT_SECRET') || '',
+      }),
+      inject: [ConfigService],
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, JwtStrategy],
+  providers: [AppService],
 })
 export class AppModule {}
