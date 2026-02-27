@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1772080105240" clover="3.2.0">
+  <project timestamp="1772080105240" name="All files">
+    <metrics statements="172" coveredstatements="172" conditionals="19" coveredconditionals="15" methods="23" coveredmethods="23" elements="214" coveredelements="210" complexity="0" loc="172" ncloc="172" packages="6" files="17" classes="17"/>
+    <package name="src">
+      <metrics statements="22" coveredstatements="22" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+      <file name="app.controller.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/app.controller.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="24" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="34" count="6" type="stmt"/>
+      </file>
+      <file name="app.module.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/app.module.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+      </file>
+      <file name="app.service.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/app.service.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="7" count="7" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.auth">
+      <metrics statements="76" coveredstatements="76" conditionals="17" coveredconditionals="13" methods="13" coveredmethods="13"/>
+      <file name="auth.controller.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/auth/auth.controller.ts">
+        <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="39" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="5" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="45" count="4" type="stmt"/>
+        <line num="51" count="2" type="stmt"/>
+        <line num="52" count="4" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="67" count="5" type="stmt"/>
+      </file>
+      <file name="auth.module.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/auth/auth.module.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="16" count="11" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+      </file>
+      <file name="auth.service.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/auth/auth.service.ts">
+        <metrics statements="49" coveredstatements="49" conditionals="13" coveredconditionals="11" methods="6" coveredmethods="6"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="17" count="33" type="stmt"/>
+        <line num="18" count="33" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="23" count="5" type="stmt"/>
+        <line num="26" count="5" type="stmt"/>
+        <line num="30" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="60" count="3" type="stmt"/>
+        <line num="64" count="4" type="stmt"/>
+        <line num="65" count="11" type="stmt"/>
+        <line num="68" count="11" type="stmt"/>
+        <line num="72" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="73" count="2" type="stmt"/>
+        <line num="77" count="9" type="stmt"/>
+        <line num="79" count="9" type="cond" truecount="1" falsecount="0"/>
+        <line num="80" count="2" type="stmt"/>
+        <line num="84" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="85" count="2" type="stmt"/>
+        <line num="89" count="5" type="stmt"/>
+        <line num="91" count="5" type="stmt"/>
+        <line num="100" count="7" type="stmt"/>
+        <line num="107" count="7" type="stmt"/>
+        <line num="112" count="7" type="stmt"/>
+        <line num="118" count="7" type="stmt"/>
+        <line num="119" count="7" type="stmt"/>
+        <line num="123" count="7" type="stmt"/>
+        <line num="131" count="7" type="stmt"/>
+        <line num="142" count="11" type="stmt"/>
+        <line num="143" count="11" type="stmt"/>
+        <line num="147" count="2" type="stmt"/>
+        <line num="151" count="9" type="stmt"/>
+        <line num="156" count="9" type="cond" truecount="3" falsecount="0"/>
+        <line num="157" count="3" type="stmt"/>
+        <line num="161" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="162" count="2" type="stmt"/>
+        <line num="166" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="167" count="2" type="stmt"/>
+        <line num="171" count="2" type="stmt"/>
+        <line num="177" count="2" type="stmt"/>
+        <line num="186" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.auth.strategies">
+      <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <file name="jwt.strategy.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/auth/strategies/jwt.strategy.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="32" type="stmt"/>
+        <line num="9" count="32" type="stmt"/>
+        <line num="18" count="11" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.common.enum">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="environment.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/common/enum/environment.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.dto">
+      <metrics statements="46" coveredstatements="46" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="health-response.dto.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/dto/health-response.dto.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="10" count="6" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="23" count="6" type="stmt"/>
+        <line num="29" count="6" type="stmt"/>
+        <line num="36" count="6" type="stmt"/>
+      </file>
+      <file name="hello-response.dto.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/dto/hello-response.dto.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="15" count="6" type="stmt"/>
+        <line num="23" count="6" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/dto/index.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="6" count="5" type="stmt"/>
+      </file>
+      <file name="signin.dto.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/dto/signin.dto.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
+        <line num="10" count="6" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+      </file>
+      <file name="signup.dto.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/dto/signup.dto.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
+        <line num="10" count="6" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="28" count="6" type="stmt"/>
+        <line num="37" count="6" type="stmt"/>
+      </file>
+      <file name="token-response.dto.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/dto/token-response.dto.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="14" count="6" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="26" count="6" type="stmt"/>
+      </file>
+      <file name="user-response.dto.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/dto/user-response.dto.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="14" count="6" type="stmt"/>
+        <line num="21" count="6" type="stmt"/>
+        <line num="28" count="6" type="stmt"/>
+        <line num="34" count="6" type="stmt"/>
+        <line num="40" count="6" type="stmt"/>
+        <line num="46" count="6" type="stmt"/>
+        <line num="52" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.prisma">
+      <metrics statements="19" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="prisma.module.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/prisma/prisma.module.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+      </file>
+      <file name="prisma.service.ts" path="/Users/namnguyen/Documents/GitHub/automation-with-claude-cli/apps/auth/src/prisma/prisma.service.ts">
+        <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
+        <line num="8" count="41" type="stmt"/>
+        <line num="12" count="41" type="stmt"/>
+        <line num="13" count="41" type="stmt"/>
+        <line num="14" count="41" type="stmt"/>
+        <line num="16" count="41" type="stmt"/>
+        <line num="18" count="41" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="27" count="15" type="stmt"/>
+        <line num="28" count="14" type="stmt"/>
+        <line num="29" count="14" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
