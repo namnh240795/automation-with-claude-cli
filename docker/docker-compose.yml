@@ -11,7 +11,7 @@ services:
   # PostgreSQL Database Service
   # Each service (api, auth) has its own database and admin credentials
   postgres:
-    image: postgres:16-alpine
+    image: pgvector/pgvector:pg16
     container_name: claude-postgres
     restart: unless-stopped
     environment:
@@ -30,6 +30,47 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - default
+
+  # Keycloak Identity and Access Management Service
+  # Provides OIDC authentication, social login, and role-based access control
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0
+    container_name: claude-keycloak
+    restart: unless-stopped
+    command: start-dev
+    environment:
+      # Database configuration
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak_db
+      KC_DB_USERNAME: keycloak_admin
+      KC_DB_PASSWORD: keycloak_admin_password_change_this
+      # Admin credentials
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin_change_this
+      # Hostname configuration
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT: false
+      KC_HOSTNAME_STRICT_HTTPS: false
+      # HTTP configuration
+      KC_HTTP_ENABLED: true
+      KC_HTTP_PORT: 8080
+      # Production mode (disabled for dev)
+      KC_HEALTH_ENABLED: true
+      KC_METRICS_ENABLED: true
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/localhost/8080 && echo -e 'GET /health/ready HTTP/1.1\\r\\nHost: localhost\\r\\n\\r\\n' >&3 && cat <&3 | grep -q 'UP'"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
     networks:
       - default
 
