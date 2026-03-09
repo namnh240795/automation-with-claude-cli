@@ -61,6 +61,7 @@
     "@rspack/core": "^1.7.6",
     "@rspack/dev-server": "^1.2.1",
     "@types/jest": "^29.5.0",
+    "@types/keycloak-connect": "^7.0.0",
     "@types/node": "^22.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",

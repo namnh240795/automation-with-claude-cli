@@ -12,6 +12,7 @@ A production-ready NestJS monorepo with separate API and Auth services, Fastify,
 - [Services](#services)
 - [Available Scripts](#available-scripts)
 - [API Endpoints](#api-endpoints)
+- [Keycloak Setup](#keycloak-setup)
 - [Skills](#skills)
 - [Libraries](#libraries)
 - [Testing](#testing)
@@ -25,6 +26,9 @@ A production-ready NestJS monorepo with separate API and Auth services, Fastify,
 - ✅ **PostgreSQL** - Each service has its own database
 - ✅ **Prisma 7** - Modern ORM with driver adapters
 - ✅ **OAuth 2.x Authentication** - JWT-based auth with refresh tokens
+- ✅ **Keycloak Integration** - Centralized identity and access management
+- ✅ **Social Login** - OAuth providers (Google, GitHub, Facebook)
+- ✅ **Role-Based Access Control** - RBAC with Keycloak roles
 - ✅ **JWT Bearer Guards** - Reusable JWT authentication across services
 - ✅ **Password Hashing** - bcrypt for secure password storage
 - ✅ **Rspack** - Super-fast development builds with watch mode
@@ -112,16 +116,21 @@ automation-with-claude-cli/
 pnpm install
 ```
 
-### 2. Start PostgreSQL
+### 2. Start PostgreSQL and Keycloak
 
 ```bash
 cd docker
-docker-compose up -d postgres
+docker-compose up -d
 ```
 
 This creates:
 - `api_db` database with `api_admin` user
 - `auth_db` database with `auth_admin` user
+- `discord_bot_db` database with `discord_bot_admin` user
+- `keycloak_db` database with `keycloak_admin` user
+- Keycloak service on port 8080
+
+For more information on Keycloak setup, see [Keycloak Setup](#keycloak-setup).
 
 ### 3. Generate Prisma Clients
 
@@ -159,6 +168,8 @@ Each service has its own database and admin credentials:
 |---------|----------|------|----------|
 | API | `api_db` | `api_admin` | `api_admin_password_change_this` |
 | Auth | `auth_db` | `auth_admin` | `auth_admin_password_change_this` |
+| Discord Bot | `discord_bot_db` | `discord_bot_admin` | `discord_bot_admin_password_change_this` |
+| Keycloak | `keycloak_db` | `keycloak_admin` | `keycloak_admin_password_change_this` |
 
 ### Connection Strings
 
@@ -582,6 +593,265 @@ pnpm prisma:studio           # Open Prisma Studio
 |--------|----------|-------------|
 | GET | `/auth` | Hello message |
 | GET | `/auth/health` | Health check |
+
+## Keycloak Setup
+
+### Overview
+
+This monorepo integrates **Keycloak** for centralized identity and access management (IAM). Keycloak provides:
+
+- **OIDC Authentication** - OpenID Connect protocol
+- **Social Login** - Google, GitHub, Facebook OAuth providers
+- **Role-Based Access Control (RBAC)** - Fine-grained permissions
+- **Single Sign-On (SSO)** - Cross-service authentication
+- **User Management** - Centralized user directory
+
+### Quick Start
+
+#### 1. Start Services
+
+```bash
+# Start PostgreSQL and Keycloak
+docker-compose -f docker/docker-compose.yml up -d
+
+# Verify services are running
+docker-compose -f docker/docker-compose.yml ps
+```
+
+This creates:
+- `keycloak_db` database with `keycloak_admin` user
+- Keycloak service on port 8080
+
+#### 2. Access Keycloak Admin Console
+
+- **Admin Console**: http://localhost:8080/admin
+- **Default Credentials**:
+  - Username: `admin`
+  - Password: `admin_change_this`
+
+⚠️ **Change the admin password immediately after first login!**
+
+#### 3. Configure Environment Variables
+
+Copy `.env.keycloak` to your service's `.env` file:
+
+```bash
+# For API service
+cat .env.keycloak >> apps/api/.env
+
+# For Auth service
+cat .env.keycloak >> apps/auth/.env
+```
+
+Key environment variables:
+
+```env
+KEYCLOAK_SERVER_URL=http://localhost:8080
+KEYCLOAK_REALM=app-realm
+KEYCLOAK_CLIENT_ID=app-client
+KEYCLOAK_CLIENT_SECRET=your-client-secret-here
+KEYCLOAK_ADMIN_USER=admin
+KEYCLOAK_ADMIN_PASSWORD=admin_change_this
+```
+
+### Creating Realm and Client
+
+#### Create Realm
+
+1. Log in to the admin console
+2. Hover over the dropdown in the top-left corner (default: "master")
+3. Click "Create Realm"
+4. Enter realm name: `app-realm`
+5. Click "Create"
+
+#### Create Client
+
+1. Navigate to: **Clients** → **Create Client**
+2. Configure the client:
+   - **Client type:** OpenID Connect
+   - **Client ID:** `app-client`
+   - Click **Next**
+3. Configure client authentication:
+   - **Client authentication:** ON
+   - **Authorization:** OFF (for now)
+   - Click **Next**
+4. Login settings:
+   - **Valid redirect URIs:**
+     - `http://localhost:3000/*`
+     - `http://localhost:3001/*`
+   - **Valid post logout redirect URIs:**
+     - `http://localhost:3000`
+     - `http://localhost:3001`
+   - **Web origins:**
+     - `http://localhost:3000`
+     - `http://localhost:3001`
+   - Click **Save**
+
+#### Get Client Secret
+
+1. Go to **Clients** → **app-client** → **Credentials** tab
+2. Copy the **Client secret** value
+3. Update `.env`:
+   ```bash
+   KEYCLOAK_CLIENT_SECRET=<copied-secret>
+   ```
+
+#### Configure Roles
+
+1. Navigate to: **Realm Roles** → **Create Role**
+2. Create standard roles:
+   - `admin` - Full system access
+   - `user` - Standard user access
+   - `moderator` - Content moderation access
+
+### Social Login Configuration
+
+#### Google OAuth2
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new OAuth 2.0 client ID
+3. Add authorized redirect URI:
+   - `http://localhost:8080/realms/app-realm/broker/google/endpoint`
+4. Copy Client ID and Client Secret
+
+In Keycloak:
+1. Navigate to: **Identity Providers** → **Add provider** → **Google**
+2. Enter your Google credentials
+3. Set **Redirect URI** to the value shown in Keycloak
+
+#### GitHub OAuth2
+
+1. Go to GitHub → **Settings** → **Developer settings** → **OAuth Apps**
+2. Create a new OAuth App
+3. Set Authorization callback URL:
+   - `http://localhost:8080/realms/app-realm/broker/github/endpoint`
+4. Copy Client ID and generate Client Secret
+
+In Keycloak:
+1. Navigate to: **Identity Providers** → **Add provider** → **GitHub**
+2. Enter your GitHub credentials
+
+#### Facebook OAuth2
+
+1. Go to [Meta for Developers](https://developers.facebook.com/)
+2. Create a new App
+3. Add **Facebook Login** product
+4. Set Valid OAuth Redirect URIs:
+   - `http://localhost:8080/realms/app-realm/broker/facebook/endpoint`
+5. Copy App ID and App Secret
+
+In Keycloak:
+1. Navigate to: **Identity Providers** → **Add provider** → **Facebook**
+2. Enter your Facebook credentials
+
+### Database Configuration
+
+Keycloak uses its own PostgreSQL database:
+
+| Setting | Value |
+|---------|-------|
+| Database | `keycloak_db` |
+| User | `keycloak_admin` |
+| Password | `keycloak_admin_password_change_this` |
+| JDBC URL | `jdbc:postgresql://postgres:5432/keycloak_db` |
+
+Connection string from host:
+```
+postgresql://keycloak_admin:keycloak_admin_password_change_this@localhost:5432/keycloak_db
+```
+
+### Verify Setup
+
+#### Test Health Endpoint
+
+```bash
+curl http://localhost:8080/health/ready
+```
+
+Expected response:
+```json
+{"status":"UP"}
+```
+
+#### Test Realm Discovery
+
+```bash
+curl http://localhost:8080/realms/app-realm/.well-known/openid-configuration
+```
+
+Expected response: JSON with OIDC configuration endpoints
+
+#### Get Public Key (for JWT verification)
+
+```bash
+curl http://localhost:8080/realms/app-realm/protocol/openid-connect/certs
+```
+
+### Docker Commands
+
+```bash
+# View logs
+docker-compose -f docker/docker-compose.yml logs -f keycloak
+
+# Restart Keycloak
+docker-compose -f docker/docker-compose.yml restart keycloak
+
+# Stop all services
+docker-compose -f docker/docker-compose.yml down
+
+# Remove volumes (⚠️ deletes all data)
+docker-compose -f docker/docker-compose.yml down -v
+```
+
+### Production Considerations
+
+1. **HTTPS:** Enable HTTPS in production
+   - Set `KC_HTTP_ENABLED=false`
+   - Configure SSL certificates
+
+2. **Database:** Use managed PostgreSQL
+   - Set `KC_DB_URL` to production database
+   - Use strong passwords
+
+3. **Admin Credentials:** Change defaults
+   - Set secure `KEYCLOAK_ADMIN_PASSWORD`
+   - Use secrets management (e.g., AWS Secrets Manager)
+
+4. **Hostname:** Configure proper hostname
+   - Set `KC_HOSTNAME_STRICT=true`
+   - Set `KC_HOSTNAME=<your-domain>`
+
+5. **Caching:** Configure production cache
+   - Set up Redis or infinispan for distributed caching
+
+### Troubleshooting
+
+#### Keycloak won't start
+
+```bash
+# Check logs
+docker-compose -f docker/docker-compose.yml logs keycloak
+
+# Verify PostgreSQL is ready
+docker-compose -f docker/docker-compose.yml ps
+```
+
+#### Database connection errors
+
+- Ensure PostgreSQL container is healthy
+- Verify `KC_DB_URL` matches PostgreSQL service name
+- Check database credentials match `init-postgres.sh`
+
+#### Cannot access admin console
+
+- Verify port 8080 is not in use: `lsof -i :8080`
+- Check Keycloak health: `curl http://localhost:8080/health/ready`
+
+### Documentation
+
+For detailed setup instructions, see:
+- [`docs/keycloak-setup.md`](docs/keycloak-setup.md) - Complete setup guide
+- [`docs/keycloak-knowledge-center.md`](docs/keycloak-knowledge-center.md) - Comprehensive knowledge base with scenarios, patterns, and best practices
 
 ## Skills
 

@@ -46,4 +46,47 @@ EOSQL
 
 echo "Auth service database and user created."
 
+# Discord Bot Service Database and User
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+    -- Create Discord Bot service database and admin user
+    CREATE DATABASE discord_bot_db;
+
+    -- Create admin user for Discord Bot service
+    CREATE USER discord_bot_admin WITH PASSWORD 'discord_bot_admin_password_change_this';
+
+    -- Grant all privileges on discord_bot_db to discord_bot_admin
+    GRANT ALL PRIVILEGES ON DATABASE discord_bot_db TO discord_bot_admin;
+
+    -- Connect to discord_bot_db and grant schema privileges
+    \c discord_bot_db
+    GRANT ALL ON SCHEMA public TO discord_bot_admin;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO discord_bot_admin;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO discord_bot_admin;
+
+    -- Enable pgvector extension for vector similarity search
+    CREATE EXTENSION IF NOT EXISTS vector;
+EOSQL
+
+echo "Discord Bot service database and user created."
+
+# Keycloak Service Database and User
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+    -- Create Keycloak database and admin user
+    CREATE DATABASE keycloak_db;
+
+    -- Create admin user for Keycloak
+    CREATE USER keycloak_admin WITH PASSWORD 'keycloak_admin_password_change_this';
+
+    -- Grant all privileges on keycloak_db to keycloak_admin
+    GRANT ALL PRIVILEGES ON DATABASE keycloak_db TO keycloak_admin;
+
+    -- Connect to keycloak_db and grant schema privileges
+    \c keycloak_db
+    GRANT ALL ON SCHEMA public TO keycloak_admin;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO keycloak_admin;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO keycloak_admin;
+EOSQL
+
+echo "Keycloak service database and user created."
+
 echo "Database initialization complete!"
