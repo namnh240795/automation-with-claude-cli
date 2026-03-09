@@ -849,7 +849,9 @@ docker-compose -f docker/docker-compose.yml ps
 
 ### Documentation
 
-For detailed setup instructions, see [`docs/keycloak-setup.md`](docs/keycloak-setup.md).
+For detailed setup instructions, see:
+- [`docs/keycloak-setup.md`](docs/keycloak-setup.md) - Complete setup guide
+- [`docs/keycloak-knowledge-center.md`](docs/keycloak-knowledge-center.md) - Comprehensive knowledge base with scenarios, patterns, and best practices
 
 ## Skills
 
