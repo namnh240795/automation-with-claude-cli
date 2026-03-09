@@ -49,6 +49,12 @@
       "@app/health/*": [
         "libs/health/src/*"
       ],
+      "@app/keycloak-integration": [
+        "libs/keycloak-integration/src"
+      ],
+      "@app/keycloak-integration/*": [
+        "libs/keycloak-integration/src/*"
+      ],
       "@api/prisma-client": [
         "packages/api-prisma-client/src"
       ],
