@@ -1,0 +1,99 @@
+{
+  "theme": {
+    "name": "custom",
+    "displayName": "Custom Theme",
+    "version": "1.0.0",
+    "description": "Custom Keycloak theme built with React, Vite, Tailwind CSS, and shadcn/ui"
+  },
+  "features": {
+    "darkMode": true,
+    "rtl": false,
+    "responsive": true,
+    "socialLogin": true,
+    "rememberMe": true,
+    "passwordStrength": true
+  },
+  "styles": {
+    "colors": {
+      "primary": "221.2 83.2% 53.3%",
+      "secondary": "210 40% 96.1%",
+      "accent": "210 40% 96.1%",
+      "destructive": "0 84.2% 60.2%",
+      "background": "0 0% 100%",
+      "foreground": "222.2 84% 4.9%"
+    },
+    "borderRadius": "0.5rem",
+    "fontFamily": "system-ui, -apple-system, sans-serif",
+    "fontSize": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem"
+    }
+  },
+  "pages": {
+    "login": {
+      "enabled": true,
+      "title": "Sign In",
+      "showSocialProviders": true,
+      "showRememberMe": true,
+      "showForgotPassword": true
+    },
+    "register": {
+      "enabled": true,
+      "title": "Create Account",
+      "requireEmailVerification": false,
+      "requireTermsAcceptance": true
+    },
+    "forgotPassword": {
+      "enabled": true,
+      "title": "Forgot Password"
+    },
+    "updatePassword": {
+      "enabled": true,
+      "title": "Update Password",
+      "showStrengthIndicator": true
+    },
+    "verifyEmail": {
+      "enabled": true,
+      "title": "Verify Email"
+    },
+    "terms": {
+      "enabled": true,
+      "title": "Terms & Conditions"
+    },
+    "oauthGrant": {
+      "enabled": true,
+      "title": "Authorize Access",
+      "showScopeDescriptions": true
+    },
+    "account": {
+      "enabled": true,
+      "title": "Account Console"
+    }
+  },
+  "branding": {
+    "logo": "shield",
+    "favicon": null,
+    "showLogo": true,
+    "logoPosition": "header"
+  },
+  "keycloak": {
+    "parentTheme": "keycloak",
+    "importCommon": "common/keycloak",
+    "supportedLocales": ["en"],
+    "metaTags": ["viewport"]
+  },
+  "build": {
+    "minify": true,
+    "sourcemap": false,
+    "inlineCSS": false,
+    "inlineJS": false
+  },
+  "deployment": {
+    "method": "jar",
+    "outputDirectory": "dist-jar",
+    "themeDirectory": "dist-theme/custom"
+  }
+}

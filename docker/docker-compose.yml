@@ -36,7 +36,7 @@ services:
   # Keycloak Identity and Access Management Service
   # Provides OIDC authentication, social login, and role-based access control
   keycloak:
-    image: quay.io/keycloak/keycloak:25.0
+    image: quay.io/keycloak/keycloak:26.0
     container_name: claude-keycloak
     restart: unless-stopped
     command: start-dev
@@ -60,8 +60,15 @@ services:
       # Production mode (disabled for dev)
       KC_HEALTH_ENABLED: true
       KC_METRICS_ENABLED: true
+      # Custom theme configuration (disable caching for development)
+      KC_SPI_THEME_STATIC_MAX_AGE: "-1"
+      KC_SPI_THEME_CACHE_THEMES: "false"
+      KC_SPI_THEME_CACHE_TEMPLATES: "false"
     ports:
       - "8080:8080"
+    volumes:
+      # Mount custom theme - using absolute path
+      - /Users/namnguyen/Documents/GitHub/automation-with-claude-cli/keycloak-theme-generator/dist-theme/custom:/opt/keycloak/themes/custom:ro
     depends_on:
       postgres:
         condition: service_healthy

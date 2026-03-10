@@ -1,0 +1,24 @@
+{
+  "name": "keycloak-custom-theme-generator",
+  "version": "1.0.0",
+  "description": "Custom Keycloak theme generator using React, Vite, Tailwind CSS, and shadcn/ui",
+  "private": true,
+  "scripts": {
+    "dev": "cd vite-react-app && pnpm dev",
+    "build": "cd vite-react-app && pnpm build",
+    "build:theme": "cd vite-react-app && pnpm build:theme",
+    "build:all": "pnpm build && pnpm build:theme",
+    "build:jar": "node theme-generator/create-jar.js",
+    "build:production": "pnpm build:all && pnpm build:jar"
+  },
+  "keywords": [
+    "keycloak",
+    "theme",
+    "react",
+    "vite",
+    "tailwindcss",
+    "shadcn-ui"
+  ],
+  "author": "",
+  "license": "MIT"
+}
