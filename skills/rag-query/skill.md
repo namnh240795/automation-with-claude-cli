@@ -16,7 +16,7 @@ Search and retrieve information from the RAG (Retrieval-Augmented Generation) da
 
 **Command to use:**
 ```bash
-./rag-search "user's query"
+./rag-search "user's query" [options]
 ```
 
 **Example:**
@@ -35,35 +35,12 @@ This skill enables natural language queries against the entire indexed codebase,
 - **Configuration** - Prisma schemas, Docker configs, package.json files
 - **Libraries** - Shared utilities, services, and modules
 
-## When to use it
+## Search Commands
 
-Use this skill when you need to:
-- Find how specific features are implemented in the codebase
-- Locate code patterns or conventions used in the project
-- Search for documentation on architecture, setup, or configuration
-- Retrieve relevant code examples without reading through files manually
-- Understand the project structure and dependencies
-
-## How to use it
-
-You can ask natural language questions like:
-- "Search the RAG database for JWT authentication implementation"
-- "How is Prisma 7 configured in this project?"
-- "Find code related to Fastify adapter setup"
-- "What are the naming conventions for DTOs?"
-- "Search for Keycloak integration code"
-- "Show me the RAG indexing strategy"
-- "Where is the app logger configured?"
-- "How are database migrations handled?"
-
-## Technical details
-
-### Search Commands
-
-The RAG system automatically loads environment from `.env.rag`:
+### Basic Search
 
 ```bash
-# Basic search - works from any directory
+# Simple search - works from any directory
 ./rag-search "your query"
 
 # Examples
@@ -73,7 +50,61 @@ The RAG system automatically loads environment from `.env.rag`:
 ./rag-search "Keycloak setup"
 ```
 
-### Indexing Commands
+### Advanced Options
+
+```bash
+# Limit number of results
+./rag-search "query" --limit 5
+
+# Minimum similarity threshold (0-1)
+./rag-search "query" --threshold 0.8
+
+# Alternative minimum similarity (uses higher of threshold/min-similarity)
+./rag-search "query" --min-similarity 0.9
+
+# Filter by source type
+./rag-search "query" --source-type CODEBASE_SOURCE
+
+# Filter by document type
+./rag-search "query" --doc-type TYPESCRIPT
+
+# Show full context around matches
+./rag-search "query" --context
+
+# Number of context lines (requires --context)
+./rag-search "query" --context --context-lines 5
+
+# Disable colored output
+./rag-search "query" --no-color
+```
+
+### Information Commands
+
+```bash
+# Show database statistics
+./rag-search --stats
+
+# List available filter values
+./rag-search --list-filters
+```
+
+## Output Features
+
+### Color-Coded Similarity
+- 🟢 **Green (85%+)**: High relevance - very similar to query
+- 🔵 **Cyan (75-84%)**: Good relevance - moderately similar
+- 🟡 **Yellow (<75%)**: Lower relevance - somewhat similar
+
+### Result Information
+Each result shows:
+- **Title** - Document or file name
+- **File path** - Location in codebase
+- **Similarity %** - How well it matches the query
+- **Folder** - Which folder strategy it belongs to
+- **Tags** - Tags from folder-based indexing
+- **Content preview** - Snippet of the matched content
+
+## Indexing Commands
 
 ```bash
 # Folder-based indexing (recommended)
@@ -90,7 +121,7 @@ The RAG system automatically loads environment from `.env.rag`:
 ./rag-index --folder-based --verbose
 ```
 
-### Folder Strategy
+## Folder Strategy
 
 The codebase is indexed with 13 priority levels:
 
@@ -117,7 +148,7 @@ RAG_EMBEDDING_MODEL="glm-4.7"
 RAG_EMBEDDING_DIMENSIONS="1024"
 ```
 
-## Example queries to try
+## Example Use Cases
 
 ### Implementation searches
 - "How are JWT tokens validated?"
@@ -137,19 +168,33 @@ RAG_EMBEDDING_DIMENSIONS="1024"
 - "Environment variable handling"
 - "Rspack configuration for apps"
 
-### Documentation searches
-- "Project structure overview"
-- "Authentication flow documentation"
-- "Testing guidelines"
-- "RAG system setup"
+### Filtered searches
+```bash
+# Only TypeScript files
+./rag-search "authentication" --doc-type TYPESCRIPT
+
+# Only documentation
+./rag-search "setup" --doc-type MARKDOWN
+
+# Only core codebase (not docs)
+./rag-search "API" --source-type CODEBASE_SOURCE
+
+# High similarity results only
+./rag-search "database" --threshold 0.85
+
+# Top 3 results with full context
+./rag-search "Prisma" --limit 3 --context
+```
 
 ## Troubleshooting
 
 If search doesn't work:
 1. Ensure PostgreSQL is running: `docker ps | grep postgres`
 2. Check `.env.rag` exists and has `ZHIPUAI_API_KEY` set
-3. Verify RAG database is indexed: `docker exec claude-postgres psql -U postgres -d rag_db -c "SELECT COUNT(*) FROM document;"`
-4. Re-index if needed: `./rag-index --folder-based`
+3. Verify RAG database is indexed: `./rag-search --stats`
+4. Check available filters: `./rag-search --list-filters`
+5. Try lowering threshold: `./rag-search "query" --threshold 0.3`
+6. Re-index if needed: `./rag-index --folder-based`
 
 ## Notes
 
@@ -157,3 +202,6 @@ If search doesn't work:
 - Results include similarity scores (higher % = more relevant)
 - Search works best with specific, descriptive queries
 - The index automatically skips unchanged files (incremental updates)
+- Filters help narrow down results to specific file types or sources
+- Use `--stats` to see what's currently indexed
+- Use `--list-filters` to see available filter options
