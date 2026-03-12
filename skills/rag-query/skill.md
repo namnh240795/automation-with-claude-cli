@@ -2,6 +2,31 @@
 
 Search and retrieve information from the RAG (Retrieval-Augmented Generation) database using semantic search.
 
+## IMPORTANT: When to automatically use this skill
+
+**ALWAYS use RAG search FIRST when the user asks questions about:**
+
+- Implementation details: "How does X work?", "Where is Y implemented?"
+- Code patterns: "How are controllers/guards/services implemented?"
+- Configuration: "What is the timeout setting?", "How is Prisma configured?"
+- Architecture: "What's the authentication flow?", "How do services communicate?"
+- Finding code: "Find the login page", "Where is JWT validation?"
+- Documentation: "Show me docs about X", "How do I set up Y?"
+- Any question about the codebase structure, implementation, or configuration
+
+**Command to use:**
+```bash
+./rag-search "user's query"
+```
+
+**Example:**
+User asks: "What is the timeout error?"
+You run: `./rag-search "timeout error configuration"`
+
+Do NOT try to answer from memory or read files manually - ALWAYS search RAG first for codebase questions!
+
+---
+
 ## What it does
 
 This skill enables natural language queries against the entire indexed codebase, including:
