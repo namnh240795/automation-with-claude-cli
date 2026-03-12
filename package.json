@@ -25,8 +25,6 @@
     "dev:api": "cd apps/api && pnpm start:dev",
     "dev:auth": "cd apps/auth && pnpm start:dev",
     "dev:policy-api": "cd apps/policy-api && pnpm start:dev",
-    "dev:admin": "cd apps/admin && pnpm dev",
-    "dev:frontend": "cd apps/frontend && pnpm dev",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start api",
     "start:dev": "node node_modules/.pnpm/@rspack+cli@*/node_modules/@rspack/cli/bin/rspack.js serve",
