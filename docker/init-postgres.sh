@@ -66,4 +66,22 @@ EOSQL
 
 echo "Keycloak service database and user created."
 
+# RAG Service Database and User
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+    -- Create RAG service database
+    CREATE DATABASE rag_db;
+
+    -- Connect to rag_db and enable pgvector extension
+    \c rag_db
+    CREATE EXTENSION IF NOT EXISTS vector;
+
+    -- Create vector similarity search function for cosine distance
+    CREATE OR REPLACE FUNCTION cosine_distance(vector, vector)
+    RETURNS float8 AS $$
+    SELECT 1 - (x <=> y)
+    $$ LANGUAGE sql IMMUTABLE PARALLEL SAFE STRICT;
+EOSQL
+
+echo "RAG service database created with pgvector extension."
+
 echo "Database initialization complete!"

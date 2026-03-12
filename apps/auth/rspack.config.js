@@ -32,6 +32,10 @@ const config = {
       '@app/keycloak-integration/*': path.resolve(__dirname, '../../libs/keycloak-integration/src/*'),
       '@auth/prisma-client': path.resolve(__dirname, '../../packages/auth-prisma-client/src'),
       '@auth/prisma-client/*': path.resolve(__dirname, '../../packages/auth-prisma-client/src/*'),
+      '@app/rag-utilities': path.resolve(__dirname, '../../libs/rag-utilities/src'),
+      '@app/rag-utilities/*': path.resolve(__dirname, '../../libs/rag-utilities/src/*'),
+      '@rag/prisma-client': path.resolve(__dirname, '../../packages/rag-prisma-client/src'),
+      '@rag/prisma-client/*': path.resolve(__dirname, '../../packages/rag-prisma-client/src/*'),
     },
   },
   module: {

@@ -1,0 +1,225 @@
+#!/bin/bash
+# RAG Query Tool - Search indexed content via PostgreSQL
+
+set -e
+
+# Docker configuration
+DOCKER_CONTAINER="${DOCKER_CONTAINER:-claude-postgres}"
+RAG_DB_NAME="${RAG_DB_NAME:-rag_db}"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Functions
+print_usage() {
+    cat << EOF
+RAG Query Tool - Search indexed content via PostgreSQL
+
+Usage: rag-query [OPTIONS] QUERY
+
+Options:
+    -h, --help              Show this help message
+    -l, --limit NUM         Limit results (default: 10)
+    -t, --threshold NUM     Similarity threshold 0-1 (default: 0.7)
+    -s, --source TYPE       Filter by source type
+    -d, --doctype TYPE      Filter by document type
+    --stats                 Show indexing statistics
+    --list-sources          List all source types
+    --list-doc-types        List all document types
+
+Environment Variables:
+    DOCKER_CONTAINER        Docker container name (default: claude-postgres)
+    RAG_DB_NAME             Database name (default: rag_db)
+
+Examples:
+    rag-query "JWT authentication"
+    rag-query -l 5 -t 0.8 "Prisma configuration"
+    rag-query -s DATABASE_POST "NestJS"
+    rag-query --stats
+
+EOF
+}
+
+print_stats() {
+    docker exec "$DOCKER_CONTAINER" psql -U postgres -d "$RAG_DB_NAME" << 'EOF'
+\timing off
+\pset tuples_only on
+\pset format unaligned
+
+SELECT 'Documents: ' || COUNT(*) || ' | Chunks: ' || (SELECT COUNT(*) FROM document_chunk) || ' | With Embeddings: ' || (SELECT COUNT(*) FROM document_chunk WHERE embedding IS NOT NULL) as stats
+FROM document;
+
+SELECT '---' as separator;
+
+SELECT 'By Source Type:' as label;
+SELECT source_type || ': ' || COUNT(*)
+FROM document
+GROUP BY source_type
+ORDER BY COUNT(*) DESC;
+
+SELECT '---' as separator;
+
+SELECT 'By Document Type:' as label;
+SELECT doc_type || ': ' || COUNT(*)
+FROM document
+GROUP BY doc_type
+ORDER BY COUNT(*) DESC;
+
+SELECT '---' as separator;
+
+SELECT 'Recent Jobs:' as label;
+SELECT status || ' | ' || source || ' | ' || documents_indexed || ' docs | ' || started_at::text
+FROM indexing_job
+ORDER BY started_at DESC
+LIMIT 5;
+EOF
+}
+
+list_sources() {
+    docker exec "$DOCKER_CONTAINER" psql -U postgres -d "$RAG_DB_NAME" << 'EOF'
+SELECT DISTINCT source_type FROM document ORDER BY source_type;
+EOF
+}
+
+list_doc_types() {
+    docker exec "$DOCKER_CONTAINER" psql -U postgres -d "$RAG_DB_NAME" << 'EOF'
+SELECT DISTINCT doc_type FROM document ORDER BY doc_type;
+EOF
+}
+
+# Parse arguments
+LIMIT=10
+THRESHOLD=0.7
+SOURCE_TYPE=""
+DOC_TYPE=""
+SHOW_STATS=false
+LIST_SOURCES=false
+LIST_DOC_TYPES=false
+QUERY=""
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -h|--help)
+            print_usage
+            exit 0
+            ;;
+        -l|--limit)
+            LIMIT="$2"
+            shift 2
+            ;;
+        -t|--threshold)
+            THRESHOLD="$2"
+            shift 2
+            ;;
+        -s|--source)
+            SOURCE_TYPE="$2"
+            shift 2
+            ;;
+        -d|--doctype)
+            DOC_TYPE="$2"
+            shift 2
+            ;;
+        --stats)
+            SHOW_STATS=true
+            shift
+            ;;
+        --list-sources)
+            LIST_SOURCES=true
+            shift
+            ;;
+        --list-doc-types)
+            LIST_DOC_TYPES=true
+            shift
+            ;;
+        *)
+            QUERY="$*"
+            break
+            ;;
+    esac
+done
+
+# Execute commands
+if [ "$SHOW_STATS" = true ]; then
+    print_stats
+    exit 0
+fi
+
+if [ "$LIST_SOURCES" = true ]; then
+    list_sources
+    exit 0
+fi
+
+if [ "$LIST_DOC_TYPES" = true ]; then
+    list_doc_types
+    exit 0
+fi
+
+# Require query
+if [ -z "$QUERY" ]; then
+    echo -e "${RED}Error: QUERY is required${NC}" >&2
+    echo "" >&2
+    print_usage >&2
+    exit 1
+fi
+
+# Build SQL query
+SQL="\\timing off\\pset footer off"
+
+if [ -n "$SOURCE_TYPE" ] || [ -n "$DOC_TYPE" ]; then
+    SOURCE_FILTER=""
+    if [ -n "$SOURCE_TYPE" ]; then
+        SOURCE_FILTER=" AND d.source_type = '$SOURCE_TYPE'"
+    fi
+    DOC_FILTER=""
+    if [ -n "$DOC_TYPE" ]; then
+        DOC_FILTER=" AND d.doc_type = '$DOC_TYPE'"
+    fi
+
+    SQL="$SQL
+
+SELECT
+    dc.id,
+    SUBSTRING(dc.content, 1, 200) as content_preview,
+    ROUND((1 - (dc.embedding <=> q.embedding))::numeric, 3) as similarity,
+    d.title,
+    d.file_path,
+    d.source_type,
+    d.doc_type
+FROM (SELECT '[0]'::vector || (embedding FROM generate_embedding('$QUERY')) as embedding) q,
+document_chunk dc
+INNER JOIN document d ON dc.document_id = d.id
+WHERE dc.embedding IS NOT NULL
+    AND (1 - (dc.embedding <=> q.embedding)) >= $THRESHOLD
+    $SOURCE_FILTER
+    $DOC_FILTER
+ORDER BY dc.embedding <=> q.embedding
+LIMIT $LIMIT;"
+else
+    SQL="$SQL
+
+SELECT
+    dc.id,
+    SUBSTRING(dc.content, 1, 200) as content_preview,
+    ROUND((1 - (dc.embedding <=> q.embedding))::numeric, 3) as similarity,
+    d.title,
+    d.file_path,
+    d.source_type,
+    d.doc_type
+FROM (SELECT '[0]'::vector as embedding) q,
+document_chunk dc
+INNER JOIN document d ON dc.document_id = d.id
+WHERE dc.embedding IS NOT NULL
+    AND (1 - (dc.embedding <=> q.embedding)) >= $THRESHOLD
+ORDER BY dc.embedding <=> q.embedding
+LIMIT $LIMIT;"
+fi
+
+# Execute query
+echo -e "${BLUE}Querying RAG database for:${NC} $QUERY"
+echo ""
+
+docker exec "$DOCKER_CONTAINER" psql -U postgres -d "$RAG_DB_NAME" -c "$SQL"

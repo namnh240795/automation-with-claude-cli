@@ -66,6 +66,18 @@
       ],
       "@auth/prisma-client/*": [
         "packages/auth-prisma-client/src/*"
+      ],
+      "@app/rag-utilities": [
+        "libs/rag-utilities/src"
+      ],
+      "@app/rag-utilities/*": [
+        "libs/rag-utilities/src/*"
+      ],
+      "@rag/prisma-client": [
+        "packages/rag-prisma-client/src"
+      ],
+      "@rag/prisma-client/*": [
+        "packages/rag-prisma-client/src/*"
       ]
     }
   }

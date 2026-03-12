@@ -19,10 +19,24 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
+# Environment files with secrets - NEVER commit these
 .env
-.env*.local
-.env.*.local
+.env.*
+# Keep example files for documentation
+!.env.example
+!.env.*.example
+.env.*.example
+
+# Explicitly ignore all real env files (redundant but safe)
+.env.admin
+.env.cms
+.env.frontend
+.env.keycloak
+.env.keycloak.multiclient
+.env.rag
+.env.production
+.env.staging
+.env.development
 
 # IDE
 .idea
@@ -34,3 +48,50 @@ yarn-error.log*
 # OS
 Thumbs.db
 .claude/
+
+# Test files
+test-*.js
+test-*.py
+test-*.ts
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.output
+
+# Build artifacts
+build
+.rspack
+*.tsbuildinfo
+
+# TypeScript compilation
+*.js.map
+*.d.ts.map
+*.d.ts
+!*.d.ts.ts
+
+# RSPack
+.rspack-cache
+
+# Python
+__pycache__
+*.pyc
+.pytest_cache
+*.egg-info
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Keys and secrets (redundant but explicit)
+*secret*
+*password*
+*apikey*
+-api-key*
+.private

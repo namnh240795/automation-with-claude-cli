@@ -1,0 +1,31 @@
+{
+  "name": "rag-indexer",
+  "version": "0.0.1",
+  "description": "RAG Indexer CLI Tool",
+  "private": true,
+  "license": "MIT",
+  "main": "dist/index.js",
+  "bin": {
+    "rag-index": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@api/prisma-client": "workspace:*",
+    "@app/rag-utilities": "workspace:*",
+    "@rag/prisma-client": "workspace:*",
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0",
+    "glob": "^10.3.10",
+    "ora": "^5.4.1",
+    "sharp": "0.32.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.1.3"
+  }
+}

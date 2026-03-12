@@ -1,0 +1,86 @@
+#!/usr/bin/env node
+/**
+ * RAG Query Tool - Search indexed content using GLM embeddings
+ */
+
+const { Pool } = require('pg');
+const { PrismaPg } = require('@prisma/adapter-pg');
+const { PrismaClient } = require('@rag/prisma-client');
+const { EmbeddingProviderFactory } = require('@app/rag-utilities');
+const path = require('path');
+
+// Configuration
+const RAG_DATABASE_URL = process.env.RAG_DATABASE_URL ||
+  'postgresql://postgres:postgres_root_password_change_this@localhost:5432/rag_db';
+
+async function main() {
+  const query = process.argv[2];
+
+  if (!query) {
+    console.log('Usage: rag-query-js "<your search query>"');
+    console.log('');
+    console.log('Examples:');
+    console.log('  rag-query-js "JWT authentication"');
+    console.log('  rag-query-js "Prisma configuration"');
+    console.log('  rag-query-js "NestJS controllers"');
+    process.exit(1);
+  }
+
+  console.log(`\n🔍 Searching for: "${query}"\n`);
+
+  // Create embedding provider
+  const embeddingProvider = EmbeddingProviderFactory.createFromEnv();
+
+  // Generate embedding for query
+  console.log('⏳ Generating embedding for query...');
+  const { embedding } = await embeddingProvider.generateEmbedding(query);
+
+  // Connect to database
+  const pool = new Pool({ connectionString: RAG_DATABASE_URL });
+  const adapter = new PrismaPg(pool);
+  const prisma = new PrismaClient({ adapter });
+
+  try {
+    // Convert embedding to string format for pgvector
+    const embeddingStr = `[${embedding.join(',')}]`;
+
+    // Search for similar chunks
+    const results = await prisma.$queryRaw`
+      SELECT
+        dc.id,
+        dc.content,
+        ROUND((1 - (dc.embedding <=> ${embeddingStr}::vector))::numeric, 3) as similarity,
+        d.title,
+        d.file_path,
+        d.source_type,
+        d.doc_type
+      FROM document_chunk dc
+      INNER JOIN document d ON dc.document_id = d.id
+      WHERE dc.embedding IS NOT NULL
+        AND (1 - (dc.embedding <=> ${embeddingStr}::vector)) >= 0.5
+      ORDER BY dc.embedding <=> ${embeddingStr}::vector
+      LIMIT 10
+    `;
+
+    if (results.length === 0) {
+      console.log('❌ No results found. Try indexing more content or lowering the similarity threshold.');
+      return;
+    }
+
+    console.log(`✅ Found ${results.length} similar chunks:\n`);
+
+    results.forEach((result, i) => {
+      console.log(`${i + 1}. ${result.title || path.basename(result.file_path)}`);
+      console.log(`   📄 ${result.file_path}`);
+      console.log(`   📊 Similarity: ${(result.similarity * 100).toFixed(1)}%`);
+      console.log(`   📝 ${result.content.substring(0, 150)}${result.content.length > 150 ? '...' : ''}`);
+      console.log('');
+    });
+
+  } finally {
+    await prisma.$disconnect();
+    await pool.end();
+  }
+}
+
+main().catch(console.error);

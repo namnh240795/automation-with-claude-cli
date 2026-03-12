@@ -1,0 +1,9 @@
+{
+  "name": "@rag/prisma-client",
+  "version": "0.0.1",
+  "description": "RAG Service Prisma Client",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "private": true,
+  "license": "MIT"
+}

@@ -1,0 +1,120 @@
+// This is your Prisma schema file for RAG Service
+// Learn more about https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+  output          = "../../../packages/rag-prisma-client/src"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Source types for documents
+enum source_type {
+  DATABASE_POST
+  DATABASE_COMMENT
+  DATABASE_USER
+  CODEBASE_SOURCE
+  CODEBASE_MARKDOWN
+  CODEBASE_TYPESCRIPT
+  CODEBASE_JAVASCRIPT
+  CODEBASE_PRISMA
+  CODEBASE_JSON
+}
+
+// Document types for content classification
+enum doc_type {
+  MARKDOWN
+  TYPESCRIPT
+  JAVASCRIPT
+  PRISMA_SCHEMA
+  JSON
+  YAML
+  TEXT
+}
+
+// Indexing job status
+enum job_status {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+// Document source content
+model document {
+  id             String      @id @default(uuid())
+  source_type    source_type
+  doc_type       doc_type
+  title          String
+  file_path      String      @unique
+  file_path_hash String      @unique
+  content        String      @db.Text
+  metadata       Json?
+  indexed_at     DateTime    @default(now())
+  updated_at     DateTime    @updatedAt
+
+  // Relations
+  chunks        document_chunk[]
+  indexing_jobs indexing_job[]
+
+  @@index([source_type])
+  @@index([file_path_hash])
+  @@map("document")
+}
+
+// Document chunk with embedding vector
+model document_chunk {
+  id          String                       @id @default(uuid())
+  document_id String
+  chunk_index Int
+  content     String                       @db.Text
+  embedding   Unsupported("vector(1024)")?
+  metadata    Json?
+  created_at  DateTime                     @default(now())
+
+  // Relations
+  document document @relation(fields: [document_id], references: [id], onDelete: Cascade)
+
+  @@index([document_id])
+  @@index([chunk_index])
+  @@map("document_chunk")
+}
+
+// Embedding provider configuration
+model embedding_provider {
+  id            String   @id @default(uuid())
+  name          String   @unique
+  provider_type String // 'zhipu', 'openai', 'cohere', 'ollama'
+  api_key       String?
+  api_endpoint  String?
+  model_name    String
+  dimensions    Int
+  is_active     Boolean  @default(true)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  @@index([provider_type])
+  @@index([is_active])
+  @@map("embedding_provider")
+}
+
+// Indexing job tracking
+model indexing_job {
+  id                String     @id @default(uuid())
+  status            job_status @default(PENDING)
+  source            String // 'database', 'codebase', 'full'
+  documents_indexed Int        @default(0)
+  chunks_created    Int        @default(0)
+  error_message     String?    @db.Text
+  started_at        DateTime   @default(now())
+  completed_at      DateTime?
+  documents         document[]
+
+  @@index([status])
+  @@index([source])
+  @@map("indexing_job")
+}

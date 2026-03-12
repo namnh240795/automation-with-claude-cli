@@ -1,0 +1,36 @@
+#!/bin/bash
+# RAG Search - Safe version that works from any directory
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Load environment from script directory
+ENV_FILE="$SCRIPT_DIR/.env.rag"
+
+if [ ! -f "$ENV_FILE" ]; then
+    echo "❌ Error: .env.rag file not found at: $ENV_FILE"
+    echo ""
+    echo "Please create .env.rag with your API credentials:"
+    echo "  cp .env.rag.example .env.rag"
+    echo "  # Then edit .env.rag and add your ZHIPUAI_API_KEY"
+    exit 1
+fi
+
+source "$ENV_FILE"
+
+# Validate required variables
+if [ -z "$ZHIPUAI_API_KEY" ]; then
+    echo "❌ Error: ZHIPUAI_API_KEY not set in $ENV_FILE"
+    echo "Please add your API key to .env.rag:"
+    echo "  ZHIPUAI_API_KEY=\"your_api_key_here\""
+    exit 1
+fi
+
+# Set defaults for optional variables
+export RAG_DATABASE_URL="${RAG_DATABASE_URL:-postgresql://postgres:postgres_root_password_change_this@localhost:5432/rag_db}"
+export RAG_EMBEDDING_PROVIDER="${RAG_EMBEDDING_PROVIDER:-zhipu}"
+export RAG_EMBEDDING_MODEL="${RAG_EMBEDDING_MODEL:-glm-4.7}"
+export RAG_EMBEDDING_DIMENSIONS="${RAG_EMBEDDING_DIMENSIONS:-1024}"
+
+# Run query from script directory
+(cd "$SCRIPT_DIR" && python3 tools/rag-query/bin/rag-query.py "$@")
