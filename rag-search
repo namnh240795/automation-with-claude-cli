@@ -26,8 +26,9 @@ if [ -z "$ZHIPUAI_API_KEY" ]; then
     exit 1
 fi
 
-# Set defaults for optional variables
+# Export all RAG environment variables
 export RAG_DATABASE_URL="${RAG_DATABASE_URL:-postgresql://postgres:postgres_root_password_change_this@localhost:5432/rag_db}"
+export ZHIPUAI_API_KEY="$ZHIPUAI_API_KEY"
 export RAG_EMBEDDING_PROVIDER="${RAG_EMBEDDING_PROVIDER:-zhipu}"
 export RAG_EMBEDDING_MODEL="${RAG_EMBEDDING_MODEL:-glm-4.7}"
 export RAG_EMBEDDING_DIMENSIONS="${RAG_EMBEDDING_DIMENSIONS:-1024}"
