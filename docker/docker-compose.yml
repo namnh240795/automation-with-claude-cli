@@ -67,8 +67,6 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      # Mount custom theme - using absolute path
-      - /Users/namnguyen/Documents/GitHub/automation-with-claude-cli/keycloak-theme-generator/dist-theme/custom:/opt/keycloak/themes/custom:ro
     depends_on:
       postgres:
         condition: service_healthy
