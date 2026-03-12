@@ -1,75 +1,134 @@
 # RAG Query Skill
 
-Search and retrieve information from the RAG (Retrieval-Augmented Generation) database.
+Search and retrieve information from the RAG (Retrieval-Augmented Generation) database using semantic search.
 
 ## What it does
 
-This skill enables natural language queries against indexed content from:
-- Database posts and comments
-- Source code files
-- Documentation (markdown, TypeScript, JavaScript, Prisma schemas, etc.)
+This skill enables natural language queries against the entire indexed codebase, including:
+- **Source code** - TypeScript, JavaScript, React components
+- **Documentation** - Markdown files, README guides
+- **Configuration** - Prisma schemas, Docker configs, package.json files
+- **Libraries** - Shared utilities, services, and modules
 
 ## When to use it
 
 Use this skill when you need to:
-- Find information about how something is implemented in the codebase
-- Locate specific features or patterns in the code
-- Search for documentation on specific topics
-- Retrieve relevant code examples
+- Find how specific features are implemented in the codebase
+- Locate code patterns or conventions used in the project
+- Search for documentation on architecture, setup, or configuration
+- Retrieve relevant code examples without reading through files manually
+- Understand the project structure and dependencies
 
 ## How to use it
 
-You can ask questions like:
+You can ask natural language questions like:
 - "Search the RAG database for JWT authentication implementation"
 - "How is Prisma 7 configured in this project?"
-- "Find code related to Fastify setup"
-- "What are the naming conventions used in this project?"
-- "Search for user profile implementation"
-- "Show me code about database migrations"
+- "Find code related to Fastify adapter setup"
+- "What are the naming conventions for DTOs?"
+- "Search for Keycloak integration code"
+- "Show me the RAG indexing strategy"
+- "Where is the app logger configured?"
+- "How are database migrations handled?"
 
 ## Technical details
 
-The RAG system uses:
-- PostgreSQL with pgvector extension for similarity search
-- Zhipu AI or OpenAI embeddings for semantic understanding
-- Automatic indexing of codebase and database content
+### Search Commands
 
-To access the raw query tool:
+The RAG system automatically loads environment from `.env.rag`:
+
 ```bash
-# Basic search
-pnpm rag:search "your query"
+# Basic search - works from any directory
+./rag-search "your query"
 
-# With options
-pnpm rag:search -l 5 -t 0.8 "your query"
-
-# Show statistics
-pnpm rag:search --stats
-
-# List available filters
-pnpm rag:search --list-sources
-pnpm rag:search --list-doc-types
+# Examples
+./rag-search "Prisma models"
+./rag-search "API endpoints"
+./rag-search "database configuration"
+./rag-search "Keycloak setup"
 ```
 
-## Environment variables
+### Indexing Commands
 
-- `RAG_DATABASE_URL`: PostgreSQL connection string for rag_db
-- `RAG_EMBEDDING_PROVIDER`: Embedding provider (zhipu, openai)
-- `RAG_EMBEDDING_MODEL`: Model name for embeddings
-- `RAG_EMBEDDING_DIMENSIONS`: Embedding dimensions (default: 1536)
-
-## Indexing content
-
-To index new content:
 ```bash
-# Full re-index
-pnpm rag:index:full
+# Folder-based indexing (recommended)
+./rag-index --folder-based
 
-# Index only database
-pnpm rag:index --source database
+# Full re-index (rebuilds everything)
+./rag-index --full --folder-based
 
-# Index only codebase
-pnpm rag:index --source codebase
+# Index specific sources
+./rag-index --source codebase --folder-based
+./rag-index --source database --folder-based
 
-# Check status
-pnpm rag:status
+# Verbose mode
+./rag-index --folder-based --verbose
 ```
+
+### Folder Strategy
+
+The codebase is indexed with 13 priority levels:
+
+| Priority | Folder | Description |
+|----------|--------|-------------|
+| 1 | apps/api/src | API core code |
+| 2 | apps/auth/src | Auth core code |
+| 3-6 | libs/* | Shared libraries |
+| 7 | prisma schemas | Database models |
+| 8-10 | docs/, README | Documentation |
+| 11-13 | docker/, tools/ | Infrastructure |
+
+## Environment setup
+
+Required in `.env.rag`:
+```bash
+# Required
+ZHIPUAI_API_KEY="your_api_key_here"
+
+# Optional (with defaults)
+RAG_DATABASE_URL="postgresql://postgres:postgres_root_password_change_this@localhost:5432/rag_db"
+RAG_EMBEDDING_PROVIDER="zhipu"
+RAG_EMBEDDING_MODEL="glm-4.7"
+RAG_EMBEDDING_DIMENSIONS="1024"
+```
+
+## Example queries to try
+
+### Implementation searches
+- "How are JWT tokens validated?"
+- "Find the Prisma 7 adapter configuration"
+- "Search for Fastify server setup"
+- "Where is the Keycloak service defined?"
+
+### Pattern searches
+- "Show me controller patterns used in this project"
+- "Find examples of DTO validation"
+- "How are guards implemented?"
+- "Search for decorator patterns"
+
+### Configuration searches
+- "Database configuration in this project"
+- "Docker services setup"
+- "Environment variable handling"
+- "Rspack configuration for apps"
+
+### Documentation searches
+- "Project structure overview"
+- "Authentication flow documentation"
+- "Testing guidelines"
+- "RAG system setup"
+
+## Troubleshooting
+
+If search doesn't work:
+1. Ensure PostgreSQL is running: `docker ps | grep postgres`
+2. Check `.env.rag` exists and has `ZHIPUAI_API_KEY` set
+3. Verify RAG database is indexed: `docker exec claude-postgres psql -U postgres -d rag_db -c "SELECT COUNT(*) FROM document;"`
+4. Re-index if needed: `./rag-index --folder-based`
+
+## Notes
+
+- The system uses semantic similarity search, not keyword matching
+- Results include similarity scores (higher % = more relevant)
+- Search works best with specific, descriptive queries
+- The index automatically skips unchanged files (incremental updates)
