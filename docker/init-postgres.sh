@@ -26,32 +26,13 @@ EOSQL
 
 echo "API service database and user created."
 
-# Auth Service Database and User
+# Auth Service Database and User (with Keycloak schema)
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
     -- Create Auth service database and admin user
-    CREATE DATABASE auth_db;
-
-    -- Create admin user for Auth service
-    CREATE USER auth_admin WITH PASSWORD 'auth_admin_password_change_this';
-
-    -- Grant all privileges on auth_db to auth_admin
-    GRANT ALL PRIVILEGES ON DATABASE auth_db TO auth_admin;
-
-    -- Connect to auth_db and grant schema privileges
-    \c auth_db
-    GRANT ALL ON SCHEMA public TO auth_admin;
-    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO auth_admin;
-    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO auth_admin;
-EOSQL
-
-echo "Auth service database and user created."
-
-# Keycloak Service Database and User
-psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
-    -- Create Keycloak database and admin user
+    -- This database uses Keycloak's database schema for custom auth implementation
     CREATE DATABASE keycloak_db;
 
-    -- Create admin user for Keycloak
+    -- Create admin user for Auth service (access to Keycloak schema)
     CREATE USER keycloak_admin WITH PASSWORD 'keycloak_admin_password_change_this';
 
     -- Grant all privileges on keycloak_db to keycloak_admin
@@ -62,9 +43,18 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
     GRANT ALL ON SCHEMA public TO keycloak_admin;
     ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO keycloak_admin;
     ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO keycloak_admin;
+
+    -- Also create auth_db for backwards compatibility
+    CREATE DATABASE auth_db;
+    CREATE USER auth_admin WITH PASSWORD 'auth_admin_password_change_this';
+    GRANT ALL PRIVILEGES ON DATABASE auth_db TO auth_admin;
+    \c auth_db
+    GRANT ALL ON SCHEMA public TO auth_admin;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO auth_admin;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO auth_admin;
 EOSQL
 
-echo "Keycloak service database and user created."
+echo "Auth service database created with Keycloak schema (keycloak_db) and legacy auth_db."
 
 # RAG Service Database and User
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL

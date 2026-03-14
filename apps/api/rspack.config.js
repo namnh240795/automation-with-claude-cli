@@ -28,8 +28,6 @@ const config = {
       '@app/caching/*': path.resolve(__dirname, '../../libs/caching/src/*'),
       '@app/health': path.resolve(__dirname, '../../libs/health/src'),
       '@app/health/*': path.resolve(__dirname, '../../libs/health/src/*'),
-      '@app/keycloak-integration': path.resolve(__dirname, '../../libs/keycloak-integration/src'),
-      '@app/keycloak-integration/*': path.resolve(__dirname, '../../libs/keycloak-integration/src/*'),
       '@api/prisma-client': path.resolve(__dirname, '../../packages/api-prisma-client/src'),
       '@api/prisma-client/*': path.resolve(__dirname, '../../packages/api-prisma-client/src/*'),
       '@app/rag-utilities': path.resolve(__dirname, '../../libs/rag-utilities/src'),
