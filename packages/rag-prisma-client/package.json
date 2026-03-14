@@ -5,5 +5,14 @@
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "private": true,
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.4.1",
+    "@prisma/client": "^7.4.1",
+    "@prisma/client-runtime-utils": "^7.5.0",
+    "pg": "^8.18.0"
+  },
+  "devDependencies": {
+    "prisma": "^7.4.1"
+  }
 }
