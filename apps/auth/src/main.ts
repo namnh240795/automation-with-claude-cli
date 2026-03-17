@@ -133,6 +133,15 @@ The **${servicePrefix.toUpperCase()} API** provides comprehensive Authentication
 - **Role-Based Access Control (RBAC)** - Hierarchical role and permission system
 - **Group Management** - Organize users into groups for easier management
 - **Client Management** - OAuth/OIDC client registration and configuration
+- **Session Management** - Track and manage user sessions across devices
+- **Required Actions** - Configure mandatory user actions (password reset, TOTP setup, email verification)
+
+### 🔔 Security & Compliance
+- **Event/Audit Logging** - Comprehensive audit trail for compliance
+- **Admin Events** - Administrative operation tracking
+- **Authentication Flows** - Configurable authentication flows and execution steps
+- **Identity Providers** - Social login (Google, Facebook, etc.) and SSO integration
+- **Federated Identity** - Link and manage external account connections
 
 ### 🔑 OAuth/OIDC Support
 - **OAuth 2.0** - Standard OAuth 2.0 authorization flows
@@ -280,6 +289,11 @@ The API uses URI-based versioning. The current version is \`v1\`.
     .addTag('Roles', 'Role-based access control (RBAC) endpoints')
     .addTag('Groups', 'User group management endpoints')
     .addTag('Clients', 'OAuth/OIDC client registration and management endpoints')
+    .addTag('Sessions', 'User session management and token revocation endpoints')
+    .addTag('Required Actions', 'User required actions management (password reset, email verification, etc.)')
+    .addTag('Events', 'Event and audit logging endpoints')
+    .addTag('Authentication Flows', 'Authentication flow and execution configuration endpoints')
+    .addTag('Identity Providers', 'Social login and SSO identity provider management endpoints')
     .build();
 
   const document = SwaggerModule.createDocument(app as any, config);

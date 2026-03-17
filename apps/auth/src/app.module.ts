@@ -9,6 +9,11 @@ import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { GroupsModule } from './groups/groups.module';
 import { ClientsModule } from './clients/clients.module';
+import { SessionsModule } from './sessions/sessions.module';
+import { RequiredActionsModule } from './required-actions/required-actions.module';
+import { EventsModule } from './events/events.module';
+import { AuthenticationModule } from './authentication-flows/authentication-flows.module';
+import { IdentityProvidersModule } from './identity-providers/identity-providers.module';
 import * as path from 'path';
 
 @Module({
@@ -24,6 +29,11 @@ import * as path from 'path';
     RolesModule,
     GroupsModule,
     ClientsModule,
+    SessionsModule,
+    RequiredActionsModule,
+    EventsModule,
+    AuthenticationModule,
+    IdentityProvidersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
