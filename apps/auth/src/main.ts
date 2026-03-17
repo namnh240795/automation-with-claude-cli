@@ -9,13 +9,13 @@ import { ConfigService } from '@nestjs/config';
 import { useContainer } from 'class-validator';
 import { apiReference } from '@scalar/nestjs-api-reference';
 import { AppModule } from './app.module';
-
+import { TransformInterceptor } from './common/interceptors';
 
 export async function bootstrap() {
   const fastifyAdapter = new FastifyAdapter();
 
-  // Register multipart plugin for file uploads
-  await fastifyAdapter.register(require('@fastify/multipart'), {
+  // Register multipart plugin for file uploads BEFORE creating NestJS app
+  await fastifyAdapter.getInstance().register(require('@fastify/multipart'), {
     attachFieldsToBody: false,
     limits: {
       fileSize: 20 * 1024 * 1024, // 20MB
@@ -32,6 +32,9 @@ export async function bootstrap() {
   const configService = app.get(ConfigService);
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
+  // Apply global transform interceptor for Class-Transformer serialization
+  app.useGlobalInterceptors(new TransformInterceptor());
+
   // Get service prefix from environment (default: auth)
   const servicePrefix = configService.get<string>('SERVICE_PREFIX', 'auth');
 
@@ -39,7 +42,12 @@ export async function bootstrap() {
   app.setGlobalPrefix(servicePrefix);
 
   // Enable global validation pipe with transform for DTO auto-parsing
-  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true,
+    transformOptions: {
+      enableImplicitConversion: true,
+    },
+  }));
 
   // Configure CORS
   const allowedOrigins = configService

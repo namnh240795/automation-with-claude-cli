@@ -1,7 +1,8 @@
 import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import { SignUpDto, SignInDto, UserResponseDto, TokenResponseDto } from '../dto';
+import { SignUpDto, SignInDto, TokenResponseDto, VoidResponseDto } from '../dto';
+import { SignupResponseDto } from '../dto/signup-response.dto';
 import { JwtAuthGuard, AuthUser, JwtPayloadDto } from '@app/auth-utilities';
 
 @ApiTags('Authentication')
@@ -14,10 +15,10 @@ export class AuthController {
   @ApiResponse({
     status: 201,
     description: 'User successfully registered',
-    type: UserResponseDto,
+    type: SignupResponseDto,
   })
   @ApiResponse({ status: 409, description: 'User with this email already exists' })
-  async signUp(@Body() signUpDto: SignUpDto): Promise<UserResponseDto> {
+  async signUp(@Body() signUpDto: SignUpDto): Promise<SignupResponseDto> {
     return this.authService.signUp(signUpDto);
   }
 
@@ -47,7 +48,11 @@ export class AuthController {
 
   @Post('logout')
   @ApiOperation({ summary: 'Logout user and revoke refresh token' })
-  @ApiResponse({ status: 200, description: 'Successfully logged out' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully logged out',
+    type: VoidResponseDto,
+  })
   async logout(@Body('refreshToken') refreshToken: string): Promise<void> {
     return this.authService.logout(refreshToken);
   }
@@ -59,10 +64,10 @@ export class AuthController {
   @ApiResponse({
     status: 200,
     description: 'User profile retrieved',
-    type: UserResponseDto,
+    type: SignupResponseDto,
   })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async getProfile(@AuthUser() user: JwtPayloadDto): Promise<UserResponseDto> {
+  async getProfile(@AuthUser() user: JwtPayloadDto): Promise<SignupResponseDto> {
     // Extract user info directly from JWT using @AuthUser() decorator - no database lookup
     return {
       id: user.sub,

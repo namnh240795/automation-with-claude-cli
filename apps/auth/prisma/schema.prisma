@@ -1138,3 +1138,27 @@ model web_origins {
   @@id([client_id, value], map: "constraint_web_origins")
   @@index([client_id], map: "idx_web_orig_client")
 }
+
+// Custom tables for simplified auth service (not part of Keycloak schema)
+model user {
+  id             String   @id(map: "user_pkey") @default(uuid()) @db.Uuid
+  email          String   @unique
+  password_hash  String
+  first_name     String?
+  last_name      String?
+  is_active      Boolean  @default(true)
+  email_verified Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  refresh_token  refresh_token[]
+}
+
+model refresh_token {
+  id         String   @id(map: "refresh_token_pkey") @default(uuid()) @db.Uuid
+  token      String   @unique
+  user_id    String   @db.Uuid
+  expires_at DateTime
+  revoked_at DateTime?
+  created_at DateTime @default(now())
+  user       user     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}

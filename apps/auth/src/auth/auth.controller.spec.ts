@@ -2,14 +2,14 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtPayloadDto } from '@app/auth-utilities';
-import { SignUpDto, SignInDto, UserResponseDto, TokenResponseDto } from '../dto';
+import { SignUpDto, SignInDto, SignupResponseDto, TokenResponseDto } from '../dto';
 
 describe('AuthController', () => {
   let controller: AuthController;
   let authService: AuthService;
 
   // Mock data
-  const mockUserResponse: UserResponseDto = {
+  const mockUserResponse: SignupResponseDto = {
     id: '550e8400-e29b-41d4-a716-446655440000',
     email: 'test@example.com',
     first_name: 'John',
@@ -86,7 +86,7 @@ describe('AuthController', () => {
       expect(result).toEqual(mockUserResponse);
     });
 
-    it('should return UserResponseDto on successful signup', async () => {
+    it('should return SignupResponseDto on successful signup', async () => {
       // Arrange
       authService.signUp = jest.fn().mockResolvedValue(mockUserResponse);
 
@@ -282,7 +282,7 @@ describe('AuthController', () => {
       });
     });
 
-    it('should return correct structure for UserResponseDto', async () => {
+    it('should return correct structure for SignupResponseDto', async () => {
       // Act
       const result = await controller.getProfile(mockJwtPayload);
 

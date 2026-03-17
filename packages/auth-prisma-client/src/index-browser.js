@@ -863,6 +863,27 @@ exports.Prisma.Web_originsScalarFieldEnum = {
   value: 'value'
 };
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password_hash: 'password_hash',
+  first_name: 'first_name',
+  last_name: 'last_name',
+  is_active: 'is_active',
+  email_verified: 'email_verified',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Refresh_tokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  user_id: 'user_id',
+  expires_at: 'expires_at',
+  revoked_at: 'revoked_at',
+  created_at: 'created_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -965,7 +986,9 @@ exports.Prisma.ModelName = {
   user_required_action: 'user_required_action',
   user_role_mapping: 'user_role_mapping',
   username_login_failure: 'username_login_failure',
-  web_origins: 'web_origins'
+  web_origins: 'web_origins',
+  user: 'user',
+  refresh_token: 'refresh_token'
 };
 
 /**

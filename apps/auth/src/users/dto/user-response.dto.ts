@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { TransformBigInt } from '../../common/decorators';
 
 export class UserResponseDto {
   @ApiProperty({
@@ -8,10 +9,17 @@ export class UserResponseDto {
   id: string;
 
   @ApiProperty({
-    description: 'User email address',
-    example: 'user@example.com',
+    description: 'User username',
+    example: 'john.doe',
   })
-  email: string;
+  username: string;
+
+  @ApiProperty({
+    description: 'User email address',
+    example: 'john.doe@example.com',
+    required: false,
+  })
+  email?: string;
 
   @ApiProperty({
     description: "User's first name",
@@ -28,26 +36,34 @@ export class UserResponseDto {
   last_name?: string;
 
   @ApiProperty({
-    description: 'Whether the user account is active',
+    description: 'Whether the user is enabled',
     example: true,
   })
-  is_active: boolean;
+  enabled: boolean;
 
   @ApiProperty({
-    description: 'Whether the email has been verified',
+    description: 'Whether the email is verified',
     example: false,
   })
   email_verified: boolean;
 
   @ApiProperty({
     description: 'Account creation timestamp',
-    example: '2024-02-24T12:00:00.000Z',
+    example: '1708790400000',
+    required: false,
   })
-  created_at: Date;
+  @TransformBigInt()
+  created_timestamp?: bigint;
 
   @ApiProperty({
-    description: 'Last update timestamp',
-    example: '2024-02-24T12:00:00.000Z',
+    description: 'Federation link',
+    required: false,
   })
-  updated_at: Date;
+  federation_link?: string;
+
+  @ApiProperty({
+    description: 'Service account client link',
+    required: false,
+  })
+  service_account_client_link?: string;
 }

@@ -185,21 +185,40 @@ export class ExampleDto {
 
 ## Array Types
 
+### ⚠️ IMPORTANT: Array Type Declaration
+
+**For Swagger/Scalar UI compatibility, ALWAYS use `isArray: true, type: DtoName` instead of `type: [DtoName]`**
+
+❌ **INCORRECT:**
+```typescript
+@ApiProperty({ type: [String] })        // Don't do this
+@ApiProperty({ type: [ItemDto] })       // Don't do this
+```
+
+✅ **CORRECT:**
+```typescript
+@ApiProperty({ isArray: true, type: String })   // Use this
+@ApiProperty({ isArray: true, type: ItemDto })   // Use this
+```
+
 ### Basic Arrays
 
 ```typescript
 export class ExampleDto {
-  @ApiProperty({ type: [String] })
+  @ApiProperty({ isArray: true, type: String })
   tags: string[];
 
-  @ApiProperty({ type: [Number], minItems: 1, maxItems: 10 })
+  @ApiProperty({
+    isArray: true,
+    type: Number,
+    minItems: 1,
+    maxItems: 10
+  })
   scores: number[];
 
-  @ApiProperty({ type: String, isArray: true })
-  names: string[];
-
   @ApiProperty({
-    type: [String],
+    isArray: true,
+    type: String,
     uniqueItems: true,
     example: ['admin', 'user']
   })
@@ -219,7 +238,7 @@ export class ItemDto {
 }
 
 export class ExampleDto {
-  @ApiProperty({ type: [ItemDto] })
+  @ApiProperty({ isArray: true, type: ItemDto })
   items: ItemDto[];
 }
 ```
@@ -565,6 +584,28 @@ export class ExampleDto {
 
 ### Paginated Response
 
+### ⚠️ CRITICAL: Do NOT use generic inheritance for paginated responses
+
+**Generic base classes do NOT work properly with Swagger/Scalar UI.**
+
+❌ **INCORRECT - Don't use generic inheritance:**
+```typescript
+// DON'T DO THIS - Generic base class doesn't work with Swagger/Scalar
+export class PaginatedDto<T> {
+  @ApiProperty()
+  data: T[];
+
+  @ApiProperty({ type: PaginationMetaDto })
+  meta: PaginationMetaDto;
+}
+
+export class UsersResponseDto extends PaginatedDto<UserDto> {
+  @ApiProperty({ isArray: true, type: UserDto })
+  data: UserDto[];
+}
+```
+
+✅ **CORRECT - Use standalone classes:**
 ```typescript
 export class PaginationMetaDto {
   @ApiProperty({ example: 1 })
@@ -580,18 +621,36 @@ export class PaginationMetaDto {
   totalPages: number;
 }
 
-export class PaginatedDto<T> {
-  @ApiProperty({ isArray: true })
-  data: T[];
+// Correct pattern - Standalone class without inheritance
+export class UsersPaginatedResponseDto {
+  @ApiProperty({
+    description: 'Array of users',
+    isArray: true,
+    type: UserResponseDto,
+  })
+  data: UserResponseDto[];
 
-  @ApiProperty({ type: PaginationMetaDto })
+  @ApiProperty({
+    description: 'Pagination metadata',
+    type: PaginationMetaDto,
+  })
   meta: PaginationMetaDto;
 }
 
-// Usage with generic
-export class UsersResponseDto extends PaginatedDto<UserDto> {
-  @ApiProperty({ type: [UserDto] })
-  data: UserDto[];
+// Repeat pattern for each resource
+export class RolesPaginatedResponseDto {
+  @ApiProperty({
+    description: 'Array of roles',
+    isArray: true,
+    type: RoleResponseDto,
+  })
+  data: RoleResponseDto[];
+
+  @ApiProperty({
+    description: 'Pagination metadata',
+    type: PaginationMetaDto,
+  })
+  meta: PaginationMetaDto;
 }
 ```
 
@@ -620,7 +679,8 @@ export class ErrorResponseDto {
   statusCode: number;
 
   @ApiProperty({
-    type: [ErrorFieldDto],
+    isArray: true,
+    type: ErrorFieldDto,
     required: false,
     description: 'Validation errors'
   })
@@ -753,7 +813,8 @@ export class CreateUserDto {
   isActive?: boolean;
 
   @ApiPropertyOptional({
-    type: [String],
+    isArray: true,
+    type: String,
     description: 'User tags',
     uniqueItems: true,
     example: ['developer', 'nestjs']
@@ -837,6 +898,7 @@ async uploadFiles(@UploadedFiles() files: Express.Multer.File[]) {
 5. **Document constraints**: Use `minimum`, `maximum`, `minLength`, `maxLength` in Swagger
 6. **Nullable vs Optional**: Use `nullable: true` for null values, `@ApiPropertyOptional` for optional
 7. **Use proper types**: Specify exact types instead of `any`
-8. **Document arrays**: Use `minItems`, `maxItems`, `uniqueItems`
-9. **Reference schemas**: Use `$ref` for complex nested objects
-10. **Response DTOs**: Create separate DTOs for responses vs requests
+8. **⚠️ Array types**: ALWAYS use `isArray: true, type: DtoName` instead of `type: [DtoName]` for Swagger/Scalar UI compatibility
+9. **Document arrays**: Use `minItems`, `maxItems`, `uniqueItems`
+10. **Reference schemas**: Use `$ref` for complex nested objects
+11. **Response DTOs**: Create separate DTOs for responses vs requests

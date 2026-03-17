@@ -8,8 +8,8 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { LogActivity } from '@app/app-logger';
 import { PrismaService } from '../prisma/prisma.service';
-import { SignUpDto, SignInDto } from '../dto';
-import { UserResponseDto, TokenResponseDto } from '../dto';
+import { SignUpDto, SignInDto, TokenResponseDto } from '../dto';
+import { SignupResponseDto } from '../dto/signup-response.dto';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +19,7 @@ export class AuthService {
   ) {}
 
   @LogActivity()
-  async signUp(signUpDto: SignUpDto): Promise<UserResponseDto> {
+  async signUp(signUpDto: SignUpDto): Promise<SignupResponseDto> {
     const { email, password, first_name, last_name } = signUpDto;
 
     // Check if user already exists
