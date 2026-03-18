@@ -1,0 +1,14 @@
+{
+  "name": "@app/auth-api-client",
+  "version": "1.0.0",
+  "description": "Generated TypeScript API client for Auth Service",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "generate": "swagger-typescript-api -p http://localhost:3001/api-json -o src/generated.ts -n AuthServiceClient --modular --enum",
+    "generate:local": "swagger-typescript-api -p ./api-json.json -o src/generated.ts -n AuthServiceClient --modular --enum"
+  },
+  "keywords": ["api", "client", "typescript", "swagger"],
+  "author": "",
+  "license": "MIT"
+}
