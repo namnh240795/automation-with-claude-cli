@@ -352,6 +352,8 @@ importers:
 
   packages/api-prisma-client: {}
 
+  packages/auth-api-client: {}
+
   packages/auth-prisma-client: {}
 
   packages/rag-prisma-client:

@@ -8,12 +8,11 @@ This is a **pnpm workspace monorepo** with separate NestJS services using Fastif
 
 ### Services
 
-- **apps/api** - API service (port 3000, SERVICE_PREFIX=backend)
 - **apps/auth** - Auth service (port 3001, SERVICE_PREFIX=auth)
 
 Each service has:
-- Isolated PostgreSQL database (`api_db`, `auth_db`)
-- Scoped Prisma client package (`@api/prisma-client`, `@auth/prisma-client`)
+- Isolated PostgreSQL database (`auth_db`)
+- Scoped Prisma client package (`@auth/prisma-client`)
 - Independent `.env` file for configuration
 - Rspack configuration for fast development builds
 
@@ -29,29 +28,22 @@ Each service has:
 
 ### Development (Rspack watch mode)
 ```bash
-# Start API service (auto-restarts on changes)
-pnpm rspack:api
-
-# Start Auth service
+# Start Auth service (auto-restarts on changes)
 pnpm rspack:auth
 
 # Alternative: NestJS watch mode (slower)
-pnpm dev:api
 pnpm dev:auth
 ```
 
 ### Building
 ```bash
-# Build API service
-pnpm build:api
-
 # Build Auth service
 pnpm build:auth
 ```
 
 ### Database Operations
 ```bash
-# From service directory (apps/api or apps/auth)
+# From service directory (apps/auth)
 pnpm prisma:generate    # Generate Prisma client
 pnpm prisma:migrate     # Run migrations
 pnpm prisma:studio      # Open Prisma Studio
@@ -65,7 +57,7 @@ pnpm test:watch        # Watch mode
 pnpm test:cov          # Coverage
 
 # Service-specific
-cd apps/api && pnpm test
+cd apps/auth && pnpm test
 ```
 
 ### Linting/Formatting
@@ -122,7 +114,7 @@ This project uses **Prisma 7 with driver adapters**, which requires different se
 
 **Example Migration (from service directory):**
 ```bash
-cd apps/api
+cd apps/auth
 DATABASE_URL="postgresql://..." pnpm prisma migrate dev --name migration_name
 pnpm prisma generate
 ```
@@ -186,8 +178,9 @@ When adding new libraries or updating imports, **ALWAYS update both `tsconfig.js
 - `@app/app-logger` → `libs/app-logger/src`
 - `@app/caching` → `libs/caching/src`
 - `@app/health` → `libs/health/src`
-- `@api/prisma-client` → `packages/api-prisma-client/src`
 - `@auth/prisma-client` → `packages/auth-prisma-client/src`
+- `@app/rag-utilities` → `libs/rag-utilities/src`
+- `@rag/prisma-client` → `packages/rag-prisma-client/src`
 
 ## Dependency Installation Rules (from .clinerules)
 
@@ -201,9 +194,9 @@ Examples: `@rspack/core`, `@rspack/cli`, `run-script-webpack-plugin`
 
 ### App-Specific Dependencies
 ```bash
-pnpm add --filter api <package>
+pnpm add --filter auth <package>
 # OR navigate to app first:
-cd apps/api && pnpm add <package>
+cd apps/auth && pnpm add <package>
 ```
 
 ### Critical Rspack Rules

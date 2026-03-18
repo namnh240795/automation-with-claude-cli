@@ -6,26 +6,6 @@ set -e
 
 echo "Initializing databases and users..."
 
-# API Service Database and User
-psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
-    -- Create API service database and admin user
-    CREATE DATABASE api_db;
-
-    -- Create admin user for API service
-    CREATE USER api_admin WITH PASSWORD 'api_admin_password_change_this';
-
-    -- Grant all privileges on api_db to api_admin
-    GRANT ALL PRIVILEGES ON DATABASE api_db TO api_admin;
-
-    -- Connect to api_db and grant schema privileges
-    \c api_db
-    GRANT ALL ON SCHEMA public TO api_admin;
-    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO api_admin;
-    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO api_admin;
-EOSQL
-
-echo "API service database and user created."
-
 # Auth Service Database and User (with Keycloak schema)
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
     -- Create Auth service database and admin user

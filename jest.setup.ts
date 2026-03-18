@@ -28,27 +28,27 @@ jest.mock('keycloak-connect', () => ({
   Grant: jest.fn(),
 }));
 
-// Mock @app/keycloak-integration module
-jest.mock('@app/keycloak-integration', () => {
-  const actual = jest.requireActual('@app/keycloak-integration');
-  return {
-    ...actual,
-    KeycloakModule: {
-      registerAsync: jest.fn(() => ({
-        module: jest.fn(),
-        imports: [],
-        providers: [],
-        exports: [],
-      })),
-      register: jest.fn(() => ({
-        module: jest.fn(),
-        imports: [],
-        providers: [],
-        exports: [],
-      })),
-    },
-    KeycloakAuthGuard: jest.fn().mockImplementation(() => ({
-      canActivate: jest.fn(() => true),
+// Mock @app/keycloak-integration module (doesn't exist yet, provide full mock)
+// Temporarily disabled - module doesn't exist yet
+// TODO: Uncomment when keycloak-integration library is created
+/*
+jest.mock('@app/keycloak-integration', () => ({
+  KeycloakModule: {
+    registerAsync: jest.fn(() => ({
+      module: jest.fn(),
+      imports: [],
+      providers: [],
+      exports: [],
     })),
-  };
-});
+    register: jest.fn(() => ({
+      module: jest.fn(),
+      imports: [],
+      providers: [],
+      exports: [],
+    })),
+  },
+  KeycloakAuthGuard: jest.fn().mockImplementation(() => ({
+    canActivate: jest.fn(() => true),
+  })),
+}));
+*/

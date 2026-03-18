@@ -14,7 +14,6 @@
     "dev": "ts-node src/index.ts"
   },
   "dependencies": {
-    "@api/prisma-client": "workspace:*",
     "@app/rag-utilities": "workspace:*",
     "@rag/prisma-client": "workspace:*",
     "chalk": "^4.1.2",

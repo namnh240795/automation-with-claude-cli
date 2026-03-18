@@ -5,7 +5,6 @@ import ora, { Ora } from 'ora';
 import * as path from 'path';
 import { Pool } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
-import { DatabaseIngester } from './ingesters/database-ingester';
 import { CodebaseIngester } from './ingesters/codebase-ingester';
 import { CodebaseIngester as CodebaseIngesterFolder } from './ingesters/codebase-ingester-folder';
 import { EmbeddingProviderFactory } from '@app/rag-utilities';
@@ -24,21 +23,17 @@ function createRagPrismaClient(databaseUrl: string) {
 const RAG_DATABASE_URL = process.env.RAG_DATABASE_URL ||
   'postgresql://postgres:postgres_root_password_change_this@localhost:5432/rag_db';
 
-const API_DATABASE_URL = process.env.DATABASE_URL ||
-  'postgresql://api_admin:api_admin_password_change_this@localhost:5432/api_db';
-
 const ROOT_PATH = process.cwd();
 
 program
   .name('rag-index')
-  .description('RAG Indexer - Index database and codebase for semantic search')
+  .description('RAG Indexer - Index codebase for semantic search')
   .version('0.0.1');
 
 program
   .command('index')
   .description('Index content into the RAG database')
   .option('-f, --full', 'Perform full re-index')
-  .option('-s, --source <source>', 'Source to index (database, codebase, or all)', 'all')
   .option('--folder-based', 'Use folder-based indexing strategy (recommended)')
   .option('-v, --verbose', 'Verbose output')
   .action(async (options) => {
@@ -62,78 +57,45 @@ program
       const job = await ragPrisma.indexing_job.create({
         data: {
           status: 'IN_PROGRESS',
-          source: options.source,
+          source: 'codebase',
         },
       });
 
       let documentsIndexed = 0;
       let chunksCreated = 0;
 
-      // Index database content
-      if (options.source === 'all' || options.source === 'database') {
-        spinner.text = 'Indexing database content...';
-        const dbIngester = new DatabaseIngester({
-          apiDatabaseUrl: API_DATABASE_URL,
-          ragDatabaseUrl: RAG_DATABASE_URL,
-          embeddingService,
-          onProgress: (current, total) => {
-            if (options.verbose) {
-              spinner.text = `Indexing database: ${current}/${total}`;
-            }
-          },
-        });
-
-        try {
-          const indexed = await dbIngester.indexPosts();
-          documentsIndexed += indexed;
-
-          // Get chunks count
-          const chunks = await ragPrisma.document_chunk.count();
-          chunksCreated = chunks;
-        } catch (error) {
-          spinner.fail(chalk.red(`Database indexing failed: ${error}`));
-          await dbIngester.disconnect();
-          await ragPrisma.$disconnect();
-          process.exit(1);
-        }
-
-        await dbIngester.disconnect();
-      }
-
       // Index codebase
-      if (options.source === 'all' || options.source === 'codebase') {
-        spinner.text = 'Indexing codebase...';
+      spinner.text = 'Indexing codebase...';
 
-        // Use folder-based ingester if flag is set
-        const IngesterClass = options.folderBased ? CodebaseIngesterFolder : CodebaseIngester;
+      // Use folder-based ingester if flag is set
+      const IngesterClass = options.folderBased ? CodebaseIngesterFolder : CodebaseIngester;
 
-        const codebaseIngester = new IngesterClass({
-          ragDatabaseUrl: RAG_DATABASE_URL,
-          rootPath: ROOT_PATH,
-          embeddingService,
-          onProgress: (current, total) => {
-            if (options.verbose) {
-              spinner.text = `Indexing codebase: ${current}/${total} files`;
-            }
-          },
-        });
+      const codebaseIngester = new IngesterClass({
+        ragDatabaseUrl: RAG_DATABASE_URL,
+        rootPath: ROOT_PATH,
+        embeddingService,
+        onProgress: (current, total) => {
+          if (options.verbose) {
+            spinner.text = `Indexing codebase: ${current}/${total} files`;
+          }
+        },
+      });
 
-        try {
-          const result = await codebaseIngester.indexCodebase();
-          documentsIndexed += result.filesIndexed;
+      try {
+        const result = await codebaseIngester.indexCodebase();
+        documentsIndexed += result.filesIndexed;
 
-          // Get chunks count
-          const chunks = await ragPrisma.document_chunk.count();
-          chunksCreated = chunks;
-        } catch (error) {
-          spinner.fail(chalk.red(`Codebase indexing failed: ${error}`));
-          await codebaseIngester.disconnect();
-          await ragPrisma.$disconnect();
-          process.exit(1);
-        }
-
+        // Get chunks count
+        const chunks = await ragPrisma.document_chunk.count();
+        chunksCreated = chunks;
+      } catch (error) {
+        spinner.fail(chalk.red(`Codebase indexing failed: ${error}`));
         await codebaseIngester.disconnect();
+        await ragPrisma.$disconnect();
+        process.exit(1);
       }
+
+      await codebaseIngester.disconnect();
 
       // Update job record
       await ragPrisma.indexing_job.update({
