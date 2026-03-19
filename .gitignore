@@ -33,7 +33,6 @@ yarn-error.log*
 .env.frontend
 .env.keycloak
 .env.keycloak.multiclient
-.env.rag
 .env.production
 .env.staging
 .env.development
