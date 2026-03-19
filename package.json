@@ -24,13 +24,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "rag:index": "node tools/rag-indexer/dist/index.js index",
-    "rag:index:full": "pnpm rag:index --full",
-    "rag:search": "bash tools/rag-query/bin/rag-query",
-    "rag:status": "node tools/rag-indexer/dist/index.js status",
-    "rag:clear": "node tools/rag-indexer/dist/index.js clear --force",
-    "build:rag-indexer": "cd tools/rag-indexer && pnpm build"
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
     "@fastify/multipart": "^9.0.0",

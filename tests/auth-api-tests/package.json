@@ -1,0 +1,16 @@
+{
+  "name": "auth-api-tests",
+  "version": "1.0.0",
+  "description": "Auth Service API Tests",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "@types/node": "^22.19.8",
+    "dotenv": "^16.6.1"
+  }
+}
