@@ -76,14 +76,13 @@ INSERT INTO "keycloak_role" (
 
 -- ============================================
 -- 3. CREATE SUPER ADMIN USER
--- Password will be set in step 4 using the actual bcrypt hash
+-- Password will be stored in credential table (step 6)
 -- ============================================
 INSERT INTO "user_entity" (
   id,
   email,
   "email_constraint",
   username,
-  "password_hash",  -- Will be updated in step 4
   "first_name",
   "last_name",
   enabled,
@@ -95,7 +94,6 @@ INSERT INTO "user_entity" (
   'superadmin@example.com',
   'superadmin@example.com',
   'superadmin',
-  '$2b$10$T6t8Z1/wEe/4x2dIRcN1lecn.EqL472892iDjj6dL9cQaBTL5PFK2',  -- Bcrypt hash for "SuperAdminPass123!"
   'Super',
   'Admin',
   true,
@@ -132,18 +130,23 @@ INSERT INTO "user_attribute" (
 
 -- ============================================
 -- 6. CREATE CREDENTIAL FOR SUPER ADMIN
+-- Password hash stored in secret_data field
+-- Password: SuperAdminPass123!
+-- Hash: $2b$10$T6t8Z1/wEe/4x2dIRcN1lecn.EqL472892iDjj6dL9cQaBTL5PFK2
 -- ============================================
 INSERT INTO "credential" (
   id,
   "user_id",
   type,
+  "secret_data",
   "created_date",
   "priority"
 ) VALUES (
   '550e8400-e29b-41d4-a716-446655440004',  -- Fixed UUID for credential
   '550e8400-e29b-41d4-a716-446655440002',  -- super admin user
   'password',
-  1710748800000,  -- 2024-03-18 00:00:00 UTC
+  '$2b$10$T6t8Z1/wEe/4x2dIRcN1lecn.EqL472892iDjj6dL9cQaBTL5PFK2',  -- Bcrypt hash for "SuperAdminPass123!"
+  1710748800000,  -- 2024-03-18 00:00:00 UTC in milliseconds
   10
 ) ON CONFLICT DO NOTHING;
 

@@ -7,8 +7,27 @@
  */
 
 import { PrismaClient } from '@auth/prisma-client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { Pool } from 'pg';
+import * as dotenv from 'dotenv';
+import * as path from 'path';
 
-const prisma = new PrismaClient();
+// Load .env file
+const envPath = path.join(__dirname, '..', '.env');
+dotenv.config({ path: envPath });
+
+// Initialize PrismaClient with adapter
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+  console.error('❌ DATABASE_URL is not defined in environment');
+  console.error('   Please check your .env file');
+  process.exit(1);
+}
+
+const pool = new Pool({ connectionString });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   console.log('🔍 Verifying Super Admin Setup...\n');
@@ -47,17 +66,12 @@ async function main() {
 
   // Check if super admin user exists
   console.log('3️⃣  Checking Super Admin User...');
-  const user = await prisma.user.findFirst({
+  const user = await prisma.user_entity.findFirst({
     where: {
       email: 'superadmin@example.com',
     },
     include: {
-      user_role_mapping: {
-        include: {
-          // @ts-ignore - relation field
-          role: true,
-        },
-      },
+      user_role_mapping: true,
       user_attribute: true,
     },
   });
@@ -76,16 +90,28 @@ async function main() {
 
   // Check role assignment
   console.log('4️⃣  Checking Role Assignment...');
-  const hasRole = user.user_role_mapping.some(
-    (mapping) => // @ts-ignore
-    mapping.role?.name === 'super_admin',
-  );
+  const roleIds = user.user_role_mapping.map(m => m.role_id);
+
+  if (roleIds.length === 0) {
+    console.log('   ❌ No roles assigned to user');
+    return;
+  }
+
+  // Get role details
+  const roles = await prisma.keycloak_role.findMany({
+    where: {
+      id: { in: roleIds },
+    },
+  });
+
+  const hasRole = roles.some(role => role.name === 'super_admin');
 
   if (!hasRole) {
     console.log('   ❌ Super admin role not assigned to user');
+    console.log(`   Found roles: ${roles.map(r => r.name).join(', ')}`);
     return;
   }
-  console.log('   ✅ Super admin role assigned to user\n');
+  console.log('   ✅ Super admin role assigned to user');
 
   // Check super admin attribute
   console.log('5️⃣  Checking Super Admin Attribute...');
@@ -120,4 +146,5 @@ main()
   })
   .finally(async () => {
     await prisma.$disconnect();
+    await pool.end();
   });

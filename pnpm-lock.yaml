@@ -377,9 +377,6 @@ importers:
 
   tools/rag-indexer:
     dependencies:
-      '@api/prisma-client':
-        specifier: workspace:*
-        version: link:../../packages/api-prisma-client
       '@app/rag-utilities':
         specifier: workspace:*
         version: link:../../libs/rag-utilities
