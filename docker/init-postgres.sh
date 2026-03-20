@@ -8,17 +8,20 @@ echo "Initializing databases and users..."
 
 # Auth Service Database and User (with Keycloak schema)
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+    -- Create Keycloak database and user for Keycloak Docker container
+    CREATE DATABASE keycloak;
+    CREATE USER keycloak WITH PASSWORD 'keycloak_password_change_this';
+    GRANT ALL PRIVILEGES ON DATABASE keycloak TO keycloak;
+    \c keycloak
+    GRANT ALL ON SCHEMA public TO keycloak;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO keycloak;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO keycloak;
+
     -- Create Auth service database and admin user
     -- This database uses Keycloak's database schema for custom auth implementation
     CREATE DATABASE keycloak_db;
-
-    -- Create admin user for Auth service (access to Keycloak schema)
     CREATE USER keycloak_admin WITH PASSWORD 'keycloak_admin_password_change_this';
-
-    -- Grant all privileges on keycloak_db to keycloak_admin
     GRANT ALL PRIVILEGES ON DATABASE keycloak_db TO keycloak_admin;
-
-    -- Connect to keycloak_db and grant schema privileges
     \c keycloak_db
     GRANT ALL ON SCHEMA public TO keycloak_admin;
     ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO keycloak_admin;
@@ -35,6 +38,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
 EOSQL
 
 echo "Auth service database created with Keycloak schema (keycloak_db) and legacy auth_db."
+echo "Keycloak Docker database created (keycloak)."
 
 # RAG Service Database and User
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL

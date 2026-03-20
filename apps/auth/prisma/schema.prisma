@@ -1119,17 +1119,6 @@ model user_role_mapping {
   @@index([user_id], map: "idx_user_role_mapping")
 }
 
-model username_login_failure {
-  realm_id                String  @db.VarChar(36)
-  username                String  @db.VarChar(255)
-  failed_login_not_before Int?
-  last_failure            BigInt?
-  last_ip_failure         String? @db.VarChar(255)
-  num_failures            Int?
-
-  @@id([realm_id, username], map: "CONSTRAINT_17-2")
-}
-
 model web_origins {
   client_id String @db.VarChar(36)
   value     String @db.VarChar(255)
@@ -1137,4 +1126,12 @@ model web_origins {
 
   @@id([client_id, value], map: "constraint_web_origins")
   @@index([client_id], map: "idx_web_orig_client")
+}
+
+model jgroups_ping {
+  address      String   @id(map: "constraint_jgroups_ping") @db.VarChar(200)
+  name         String?  @db.VarChar(200)
+  cluster_name String   @db.VarChar(200)
+  ip           String   @db.VarChar(200)
+  coord        Boolean?
 }

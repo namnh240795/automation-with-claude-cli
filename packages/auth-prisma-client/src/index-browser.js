@@ -849,18 +849,17 @@ exports.Prisma.User_role_mappingScalarFieldEnum = {
   user_id: 'user_id'
 };
 
-exports.Prisma.Username_login_failureScalarFieldEnum = {
-  realm_id: 'realm_id',
-  username: 'username',
-  failed_login_not_before: 'failed_login_not_before',
-  last_failure: 'last_failure',
-  last_ip_failure: 'last_ip_failure',
-  num_failures: 'num_failures'
-};
-
 exports.Prisma.Web_originsScalarFieldEnum = {
   client_id: 'client_id',
   value: 'value'
+};
+
+exports.Prisma.Jgroups_pingScalarFieldEnum = {
+  address: 'address',
+  name: 'name',
+  cluster_name: 'cluster_name',
+  ip: 'ip',
+  coord: 'coord'
 };
 
 exports.Prisma.SortOrder = {
@@ -964,8 +963,8 @@ exports.Prisma.ModelName = {
   user_group_membership: 'user_group_membership',
   user_required_action: 'user_required_action',
   user_role_mapping: 'user_role_mapping',
-  username_login_failure: 'username_login_failure',
-  web_origins: 'web_origins'
+  web_origins: 'web_origins',
+  jgroups_ping: 'jgroups_ping'
 };
 
 /**

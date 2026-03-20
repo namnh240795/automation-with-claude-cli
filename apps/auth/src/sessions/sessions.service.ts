@@ -118,8 +118,10 @@ export class SessionsService {
   async terminateSession(sessionId: string, offlineFlag: string = 'Offline'): Promise<void> {
     const session = await this.prisma.offline_user_session.findUnique({
       where: {
-        user_session_id: sessionId,
-        offline_flag: offlineFlag,
+        user_session_id_offline_flag: {
+          user_session_id: sessionId,
+          offline_flag: offlineFlag,
+        },
       },
     });
 
@@ -129,8 +131,10 @@ export class SessionsService {
 
     await this.prisma.offline_user_session.delete({
       where: {
-        user_session_id: sessionId,
-        offline_flag: offlineFlag,
+        user_session_id_offline_flag: {
+          user_session_id: sessionId,
+          offline_flag: offlineFlag,
+        },
       },
     });
   }

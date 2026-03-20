@@ -5,8 +5,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
-import { LogActivity } from '@app/app-logger';
 import { PrismaService } from '../prisma/prisma.service';
 import { SignUpDto, SignInDto, TokenResponseDto } from '../dto';
 import { SignupResponseDto } from '../dto/signup-response.dto';
@@ -18,75 +16,137 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  @LogActivity()
   async signUp(signUpDto: SignUpDto): Promise<SignupResponseDto> {
     const { email, password, first_name, last_name } = signUpDto;
 
+    // Get master realm (or create if needed)
+    const realm = await this.prisma.realm.findFirst({
+      where: { realm: 'master' },
+    });
+
+    if (!realm) {
+      throw new NotFoundException('Master realm not found');
+    }
+
     // Check if user already exists
-    const existingUser = await this.prisma.user.findUnique({
-      where: { email },
+    const existingUser = await this.prisma.user_entity.findFirst({
+      where: {
+        email,
+        realm_id: realm.id,
+      },
     });
 
     if (existingUser) {
       throw new ConflictException('User with this email already exists');
     }
 
-    // Hash password
-    const passwordHash = await bcrypt.hash(password, 10);
+    // Create user with Keycloak's user_entity structure
+    const userId = crypto.randomUUID();
+    const now = Date.now();
 
-    // Create user
-    const user = await this.prisma.user.create({
+    const user = await this.prisma.user_entity.create({
       data: {
+        id: userId,
         email,
-        password_hash: passwordHash,
+        email_verified: false,
+        enabled: true,
         first_name,
         last_name,
-        is_active: true,
-        email_verified: false,
-      },
-      select: {
-        id: true,
-        email: true,
-        first_name: true,
-        last_name: true,
-        is_active: true,
-        email_verified: true,
-        created_at: true,
-        updated_at: true,
+        realm_id: realm.id,
+        created_timestamp: now,
+        not_before: 0,
       },
     });
 
-    // Return DTO with snake_case properties
-    return user;
+    // Create credential (password hash stored separately in Keycloak)
+    const passwordHash = await Bun.password.hash(password);
+    const credentialId = crypto.randomUUID();
+
+    await this.prisma.credential.create({
+      data: {
+        id: credentialId,
+        type: 'password',
+        user_id: userId,
+        salt: '',
+        credential_data: JSON.stringify({
+          value: passwordHash,
+          algorithm: 'bcrypt',
+        }),
+        counter: 0,
+        period: 0,
+        created_date: now,
+        priority: 0,
+        user_label: 'Password',
+      },
+    });
+
+    return {
+      id: user.id,
+      email: user.email,
+      first_name: user.first_name || undefined,
+      last_name: user.last_name || undefined,
+      is_active: user.enabled,
+      email_verified: user.email_verified,
+      created_at: new Date(user.created_timestamp || 0),
+      updated_at: new Date(user.created_timestamp || 0),
+    };
   }
 
-  @LogActivity()
   async signIn(signInDto: SignInDto): Promise<TokenResponseDto> {
     const { email, password } = signInDto;
 
+    // Get master realm
+    const realm = await this.prisma.realm.findFirst({
+      where: { realm: 'master' },
+    });
+
+    if (!realm) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
     // Find user
-    const user = await this.prisma.user.findUnique({
-      where: { email },
+    const user = await this.prisma.user_entity.findFirst({
+      where: {
+        email,
+        realm_id: realm.id,
+      },
     });
 
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
+    // Get user's credential
+    const credential = await this.prisma.credential.findFirst({
+      where: { user_id: user.id },
+    });
+
+    if (!credential) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
     // Verify password
-    const isPasswordValid = await bcrypt.compare(password, user.password_hash);
+    const credentialData = JSON.parse(credential.credential_data || '{}');
+    const passwordHash = credentialData.value;
+
+    const isPasswordValid = await Bun.password.verify(password, passwordHash);
 
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    // Check if user is active
-    if (!user.is_active) {
+    // Check if user is enabled
+    if (!user.enabled) {
       throw new UnauthorizedException('User account is inactive');
     }
 
     // Generate tokens
-    const tokens = await this.generateTokens(user.id, user.email, user.first_name, user.last_name);
+    const tokens = await this.generateTokens(
+      user.id,
+      user.email,
+      user.first_name,
+      user.last_name,
+    );
 
     return tokens;
   }
@@ -94,8 +154,8 @@ export class AuthService {
   private async generateTokens(
     userId: string,
     email: string,
-    first_name?: string,
-    last_name?: string,
+    first_name: string | null,
+    last_name: string | null,
   ): Promise<TokenResponseDto> {
     const payload = {
       sub: userId,
@@ -112,20 +172,6 @@ export class AuthService {
     const refreshToken = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_REFRESH_SECRET,
       expiresIn: (process.env.JWT_REFRESH_EXPIRES_IN || '7d') as any,
-    });
-
-    // Store refresh token in database
-    const refreshTokenExpiry = new Date();
-    refreshTokenExpiry.setDate(
-      refreshTokenExpiry.getDate() + 7, // 7 days from now
-    );
-
-    await this.prisma.refresh_token.create({
-      data: {
-        token: refreshToken,
-        user_id: userId,
-        expires_at: refreshTokenExpiry,
-      },
     });
 
     return {
@@ -147,45 +193,26 @@ export class AuthService {
       throw new UnauthorizedException('Invalid refresh token');
     }
 
-    // Check if refresh token exists in database
-    const storedToken = await this.prisma.refresh_token.findUnique({
-      where: { token: refreshToken },
-      include: { user: true },
+    // Find user
+    const user = await this.prisma.user_entity.findUnique({
+      where: { id: payload.sub },
     });
 
-    if (!storedToken || storedToken.revoked_at) {
+    if (!user || !user.enabled) {
       throw new UnauthorizedException('Invalid refresh token');
     }
 
-    // Check if token is expired
-    if (storedToken.expires_at < new Date()) {
-      throw new UnauthorizedException('Refresh token expired');
-    }
-
-    // Check if user is active
-    if (!storedToken.user.is_active) {
-      throw new UnauthorizedException('User account is inactive');
-    }
-
-    // Revoke old refresh token
-    await this.prisma.refresh_token.update({
-      where: { id: storedToken.id },
-      data: { revoked_at: new Date() },
-    });
-
-    // Generate new tokens with user info from database
+    // Generate new tokens
     return this.generateTokens(
-      payload.sub,
-      storedToken.user.email,
-      storedToken.user.first_name,
-      storedToken.user.last_name,
+      user.id,
+      user.email || '',
+      user.first_name,
+      user.last_name,
     );
   }
 
-  async logout(refreshToken: string): Promise<void> {
-    await this.prisma.refresh_token.updateMany({
-      where: { token: refreshToken },
-      data: { revoked_at: new Date() },
-    });
+  async logout(_refreshToken: string): Promise<void> {
+    // In a real implementation, you might want to add token blacklisting
+    // For now, this is a no-op since we're not storing refresh tokens
   }
 }
