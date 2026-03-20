@@ -1,37 +1,34 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class HealthResponseDto {
   @ApiProperty({
-    description: 'Service health status',
+    description: 'Health status of the service',
     example: 'ok',
-    enum: ['ok', 'error', 'degraded'],
-    enumName: 'HealthStatus'
   })
   status: string;
 
   @ApiProperty({
-    description: 'Current timestamp in ISO format',
+    description: 'Current timestamp',
     type: Date,
-    example: '2025-02-23T10:30:00.000Z'
+    example: '2026-03-20T10:30:00.000Z',
   })
   timestamp: Date;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: 'Service name',
-    example: 'auth'
+    example: 'auth',
   })
-  service?: string;
+  service: string;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: 'Service version',
-    example: '1.0.0'
+    example: '1.0.0',
   })
-  version?: string;
+  version: string;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: 'Server uptime in seconds',
-    type: 'integer',
-    format: 'int64'
+    example: 123.45,
   })
-  uptime?: number;
+  uptime: number;
 }

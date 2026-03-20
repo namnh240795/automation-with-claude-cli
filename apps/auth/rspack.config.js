@@ -6,9 +6,11 @@ const path = require('path');
 const config = {
   context: path.resolve(__dirname),
   target: 'node',
-  mode: 'development',
+  mode: process.env.BUILD ? 'production' : 'development',
   entry: {
-    main: ['./src/main.ts'],
+    main: process.env.BUILD
+      ? './src/main.ts'
+      : ['@rspack/core/hot/poll?100', './src/main.ts'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -61,14 +63,22 @@ const config = {
   externalsType: 'commonjs',
   plugins: [
     !process.env.BUILD &&
-      new RunScriptWebpackPlugin({
-        name: 'main.js',
-        autoRestart: false,
-      }),
+    new RunScriptWebpackPlugin({
+      name: 'main.js',
+      autoRestart: false,
+    }),
   ].filter(Boolean),
   devServer: {
     devMiddleware: {
       writeToDisk: true,
+    },
+    watchFiles: {
+      paths: ['src/**/*', '../../libs/**/*', '../../packages/**/*'],
+      options: {
+        ignored: /node_modules/,
+        usePolling: true,
+        interval: 1000,
+      },
     },
   },
   externals: [

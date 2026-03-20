@@ -1,16 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { HelloResponseDto, HealthResponseDto } from './dto';
+import { HealthResponseDto } from './dto/health-response.dto';
 
 @Injectable()
 export class AppService {
-  getHello(): HelloResponseDto {
-    return {
-      message: 'Hello from Auth!',
-      timestamp: new Date(),
-      requestId: crypto.randomUUID(),
-    };
-  }
-
   getHealth(): HealthResponseDto {
     return {
       status: 'ok',
