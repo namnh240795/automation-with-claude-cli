@@ -144,7 +144,12 @@ describe('PrismaService', () => {
       // The PrismaService should have access to all models defined in schema
       // This test checks that the service is properly initialized
       expect(service).toHaveProperty('user');
-      expect(service).toHaveProperty('refresh_token');
+      expect(service).toHaveProperty('oAuthRefreshToken');
+      expect(service).toHaveProperty('oAuthAccessToken');
+      expect(service).toHaveProperty('oAuthClient');
+      expect(service).toHaveProperty('oAuthAuthorizationCode');
+      expect(service).toHaveProperty('oAuthDeviceCode');
+      expect(service).toHaveProperty('oAuthUserConsent');
     });
   });
 

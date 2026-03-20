@@ -52,10 +52,10 @@ Thumbs.db
 test-*.js
 test-*.py
 test-*.ts
-*.test.js
-*.test.ts
-*.spec.js
-*.spec.ts
+# *.test.js
+# *.test.ts
+# *.spec.js
+# *.spec.ts
 
 # Temporary files
 *.tmp

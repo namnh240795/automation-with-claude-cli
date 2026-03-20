@@ -21,6 +21,11 @@ model User {
   // Relations
   refresh_tokens    RefreshToken[]
   sessions          Session[]
+  oauth_authorization_codes  OAuthAuthorizationCode[]
+  oauth_access_tokens        OAuthAccessToken[]
+  oauth_refresh_tokens       OAuthRefreshToken[]
+  oauth_device_codes         OAuthDeviceCode[]
+  oauth_consents             OAuthUserConsent[]
 
   @@map("user")
 }
@@ -53,4 +58,143 @@ model Session {
 
   @@index([user_id])
   @@map("session")
+}
+
+// OAuth Client Application
+model OAuthClient {
+  id                    String   @id @default(uuid())
+  client_id             String   @unique
+  client_secret         String?  // Null for public clients
+  client_secret_hash    String?
+  name                  String
+  description           String?
+  redirect_uris         String[]
+  post_logout_redirect_uris String[]
+  scopes                String[]
+  grant_types           String[]
+  is_confidential       Boolean  @default(true)
+  is_public_client      Boolean  @default(false)
+  require_pkce          Boolean  @default(true)
+  access_token_lifetime  Int      @default(3600)
+  refresh_token_lifetime Int      @default(2592000)
+  allowed_origins       String[]
+  logo_uri              String?
+  policy_uri            String?
+  tos_uri               String?
+  is_active             Boolean  @default(true)
+  created_at            DateTime @default(now())
+  updated_at            DateTime @updatedAt
+
+  authorization_codes   OAuthAuthorizationCode[]
+  access_tokens         OAuthAccessToken[]
+  refresh_tokens        OAuthRefreshToken[]
+  device_codes          OAuthDeviceCode[]
+  user_consents         OAuthUserConsent[]
+
+  @@index([client_id])
+  @@map("oauth_client")
+}
+
+// Authorization Code
+model OAuthAuthorizationCode {
+  id                    String   @id @default(uuid())
+  code                  String   @unique
+  client_id             String
+  user_id               String?
+  redirect_uri          String
+  scope                 String
+  state                 String?
+  code_challenge        String?
+  code_challenge_method String?
+  nonce                 String?
+  expires_at            DateTime
+  consumed_at           DateTime?
+  created_at            DateTime @default(now())
+
+  client                OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  user                  User?       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([code])
+  @@index([expires_at])
+  @@map("oauth_authorization_code")
+}
+
+// Access Token
+model OAuthAccessToken {
+  id                    String   @id @default(uuid())
+  token                 String   @unique
+  client_id             String
+  user_id               String?
+  scope                 String
+  token_type            String   @default("Bearer")
+  expires_at            DateTime
+  revoked_at            DateTime?
+  created_at            DateTime @default(now())
+
+  client                OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  user                  User?       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([expires_at])
+  @@map("oauth_access_token")
+}
+
+// OAuth Refresh Token
+model OAuthRefreshToken {
+  id                    String   @id @default(uuid())
+  token                 String   @unique
+  access_token_id       String
+  client_id             String
+  user_id               String?
+  scope                 String
+  expires_at            DateTime
+  revoked_at            DateTime?
+  created_at            DateTime @default(now())
+
+  client                OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  user                  User?       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([expires_at])
+  @@map("oauth_refresh_token")
+}
+
+// Device Code
+model OAuthDeviceCode {
+  id                    String   @id @default(uuid())
+  device_code           String   @unique
+  user_code             String   @unique
+  client_id             String
+  user_id               String?
+  scope                 String
+  expires_at            DateTime
+  interval              Int      @default(5)
+  verified              Boolean  @default(false)
+  completed_at          DateTime?
+  created_at            DateTime @default(now())
+
+  client                OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  user                  User?       @relation(fields: [user_id], references: [id], onDelete: SetNull)
+
+  @@index([device_code])
+  @@index([user_code])
+  @@map("oauth_device_code")
+}
+
+// User Consent
+model OAuthUserConsent {
+  id                    String   @id @default(uuid())
+  client_id             String
+  user_id               String
+  scope                 String
+  expires_at            DateTime?
+  created_at            DateTime @default(now())
+  updated_at            DateTime @updatedAt
+
+  client                OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  user                  User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([client_id, user_id])
+  @@index([user_id])
+  @@map("oauth_user_consent")
 }
