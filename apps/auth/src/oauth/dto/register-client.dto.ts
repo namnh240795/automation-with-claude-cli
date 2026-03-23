@@ -1,6 +1,53 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsArray, IsBoolean, IsInt, IsOptional, IsString, IsUrl, Max, Min } from 'class-validator';
+import { IsArray, IsBoolean, IsInt, IsOptional, IsString, Max, Min, registerDecorator, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 import { Type } from 'class-transformer';
+
+// Custom URL validators
+@ValidatorConstraint({ name: 'isValidUrl', async: false })
+class IsValidUrlConstraint implements ValidatorConstraintInterface {
+  validate(value: any, args: ValidationArguments) {
+    if (typeof value !== 'string') {
+      return false;
+    }
+    try {
+      const url = new URL(value);
+      return url.protocol === 'http:' || url.protocol === 'https:';
+    } catch {
+      return false;
+    }
+  }
+
+  defaultMessage(args: ValidationArguments) {
+    return `${args.property} must be a valid HTTP or HTTPS URL`;
+  }
+}
+
+function IsValidUrl(validationOptions?: ValidationOptions) {
+  return function (object: Object, propertyName: string) {
+    registerDecorator({
+      target: object.constructor,
+      propertyName: propertyName,
+      options: validationOptions,
+      constraints: [],
+      validator: IsValidUrlConstraint,
+    });
+  };
+}
+
+function IsValidUrlArray(validationOptions?: ValidationOptions) {
+  return function (object: Object, propertyName: string) {
+    registerDecorator({
+      target: object.constructor,
+      propertyName: propertyName,
+      options: {
+        ...validationOptions,
+        each: true,
+      },
+      constraints: [],
+      validator: IsValidUrlConstraint,
+    });
+  };
+}
 
 export class RegisterClientDto {
   @ApiProperty({ description: 'Application name', example: 'My App' })
@@ -19,7 +66,7 @@ export class RegisterClientDto {
   })
   @IsArray()
   @IsString({ each: true })
-  @IsUrl({}, { each: true })
+  @IsValidUrlArray()
   redirect_uris: string[];
 
   @ApiPropertyOptional({
@@ -29,7 +76,7 @@ export class RegisterClientDto {
   })
   @IsArray()
   @IsString({ each: true })
-  @IsUrl({}, { each: true })
+  @IsValidUrlArray()
   @IsOptional()
   post_logout_redirect_uris?: string[];
 
@@ -113,7 +160,7 @@ export class RegisterClientDto {
     description: 'Application logo URI',
     example: 'https://example.com/logo.png',
   })
-  @IsUrl()
+  @IsValidUrl()
   @IsOptional()
   logo_uri?: string;
 
@@ -121,7 +168,7 @@ export class RegisterClientDto {
     description: 'Privacy policy URI',
     example: 'https://example.com/privacy',
   })
-  @IsUrl()
+  @IsValidUrl()
   @IsOptional()
   policy_uri?: string;
 
@@ -129,7 +176,7 @@ export class RegisterClientDto {
     description: 'Terms of service URI',
     example: 'https://example.com/terms',
   })
-  @IsUrl()
+  @IsValidUrl()
   @IsOptional()
   tos_uri?: string;
 }

@@ -85,17 +85,29 @@ test.describe('OAuth 2.0 Device Authorization Flow', () => {
   });
 
   test('should handle pending device code during token polling', async ({ request }) => {
-    // Use the device code from previous test
+    // First initiate device flow to get a device code
+    const deviceResponse = await request.post('http://localhost:3001/auth/oauth/device/authorize', {
+      data: {
+        client_id: deviceClient.client_id,
+        scope: 'openid email',
+      },
+    });
+
+    const deviceData = await deviceResponse.json();
+
+    // Poll for tokens without user verification
+    const formData = new URLSearchParams({
+      grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
+      device_code: deviceData.device_code,
+      client_id: deviceClient.client_id,
+      client_secret: deviceClient.client_secret,
+    });
+
     const response = await request.post('http://localhost:3001/auth/oauth/token', {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      data: new URLSearchParams({
-        grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
-        device_code: deviceCodeResponse.device_code,
-        client_id: deviceClient.client_id,
-        client_secret: deviceClient.client_secret,
-      }),
+      data: formData.toString(),
     });
 
     // Should get authorization_pending error
@@ -145,16 +157,26 @@ test.describe('OAuth 2.0 Device Authorization Flow', () => {
   });
 
   test('should get device verification page', async ({ page, request }) => {
+    // First create a device code
+    const deviceResponse = await request.post('http://localhost:3001/auth/oauth/device/authorize', {
+      data: {
+        client_id: deviceClient.client_id,
+        scope: 'openid email',
+      },
+    });
+
+    const deviceData = await deviceResponse.json();
+
     // Navigate to verification page with user code
     const response = await request.get(
-      `http://localhost:3001/auth/oauth/device/verify?user_code=${deviceCodeResponse.user_code}`
+      `http://localhost:3001/auth/oauth/device/verify?user_code=${deviceData.user_code}`
     );
 
     // Should return device verification info
     expect(response.ok()).toBeTruthy();
 
     const deviceInfo = await response.json();
-    expect(deviceInfo).toHaveProperty('user_code', deviceCodeResponse.user_code);
+    expect(deviceInfo).toHaveProperty('user_code', deviceData.user_code);
     expect(deviceInfo).toHaveProperty('client_name');
     expect(deviceInfo).toHaveProperty('scope');
   });
@@ -171,9 +193,19 @@ test.describe('OAuth 2.0 Device Authorization Flow', () => {
     // Note: This would require user authentication
     // Testing the endpoint structure instead
 
+    // First create a device code
+    const deviceResponse = await request.post('http://localhost:3001/auth/oauth/device/authorize', {
+      data: {
+        client_id: deviceClient.client_id,
+        scope: 'openid email',
+      },
+    });
+
+    const deviceData = await deviceResponse.json();
+
     const acceptResponse = await request.post('http://localhost:3001/auth/oauth/device/consent', {
       data: {
-        user_code: deviceCodeResponse.user_code,
+        user_code: deviceData.user_code,
         action: 'accept',
       },
     });
@@ -183,7 +215,7 @@ test.describe('OAuth 2.0 Device Authorization Flow', () => {
 
     const denyResponse = await request.post('http://localhost:3001/auth/oauth/device/consent', {
       data: {
-        user_code: deviceCodeResponse.user_code,
+        user_code: deviceData.user_code,
         action: 'deny',
       },
     });
@@ -220,16 +252,18 @@ test.describe('Device Flow Polling Behavior', () => {
     const deviceData = await deviceResponse.json();
 
     // Poll multiple times rapidly (simulating non-compliant client)
+    const formData = new URLSearchParams({
+      grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
+      device_code: deviceData.device_code,
+      client_id: deviceClient.client_id,
+      client_secret: deviceClient.client_secret,
+    });
+
     const poll1 = await request.post('http://localhost:3001/auth/oauth/token', {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      data: new URLSearchParams({
-        grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
-        device_code: deviceData.device_code,
-        client_id: deviceClient.client_id,
-        client_secret: deviceClient.client_secret,
-      }),
+      data: formData.toString(),
     });
 
     // First poll should get authorization_pending

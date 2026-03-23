@@ -305,10 +305,11 @@ export class DeviceFlowService {
    * Generate a human-readable user code
    * Format: XXXX-XXXX (8 characters, displayed in groups of 4)
    * Uses a specific character set to avoid ambiguity (no I, L, 1, 0, O)
+   * RFC 8628 recommends using Base20 character set (uppercase consonants + digits)
    */
   private generateUserCode(): string {
-    // Character set that avoids ambiguous characters
-    const charset = 'BCDFGHJKLMNPQRSTVWXYZbcdfghjkmnpqrstvwxyz23456789';
+    // Character set that avoids ambiguous characters (Base20: BCDFGHJKLMNPQRSTVWXYZ23456789)
+    const charset = 'BCDFGHJKLMNPQRSTVWXYZ23456789';
     const codeLength = 8;
     let code = '';
 

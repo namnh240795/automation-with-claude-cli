@@ -30,8 +30,9 @@ test.describe('OAuth 2.0 Client Credentials Flow', () => {
     expect(m2mClient.is_confidential).toBe(true);
   });
 
-  test('should exchange client credentials for access token', async () => {
-    tokenResponse = await oauthHelper.clientCredentialsFlow({
+  test('should exchange client credentials for access token', async ({ request }) => {
+    const helper = new OAuthTestHelper(request, 'http://localhost:3001');
+    tokenResponse = await helper.clientCredentialsFlow({
       client_id: m2mClient.client_id,
       client_secret: m2mClient.client_secret,
       scope: 'openid email',
@@ -78,9 +79,11 @@ test.describe('OAuth 2.0 Client Credentials Flow', () => {
     ).rejects.toThrow();
   });
 
-  test('should support custom scopes', async () => {
+  test('should support custom scopes', async ({ request }) => {
+    const helper = new OAuthTestHelper(request, 'http://localhost:3001');
+
     // Register client with different scopes
-    const scopedClient = await oauthHelper.registerClient({
+    const scopedClient = await helper.registerClient({
       name: 'E2E Scoped M2M Client',
       redirect_uris: [],
       scopes: ['openid', 'email', 'profile'],
@@ -88,7 +91,7 @@ test.describe('OAuth 2.0 Client Credentials Flow', () => {
       is_confidential: true,
     });
 
-    const response = await oauthHelper.clientCredentialsFlow({
+    const response = await helper.clientCredentialsFlow({
       client_id: scopedClient.client_id,
       client_secret: scopedClient.client_secret,
       scope: 'openid',
@@ -98,8 +101,10 @@ test.describe('OAuth 2.0 Client Credentials Flow', () => {
     expect(response.scope).toBe('openid');
   });
 
-  test('should fail with unsupported scope', async () => {
-    const limitedClient = await oauthHelper.registerClient({
+  test('should fail with unsupported scope', async ({ request }) => {
+    const helper = new OAuthTestHelper(request, 'http://localhost:3001');
+
+    const limitedClient = await helper.registerClient({
       name: 'E2E Limited M2M Client',
       redirect_uris: [],
       scopes: ['openid'], // Only openid
@@ -108,7 +113,7 @@ test.describe('OAuth 2.0 Client Credentials Flow', () => {
     });
 
     await expect(
-      oauthHelper.clientCredentialsFlow({
+      helper.clientCredentialsFlow({
         client_id: limitedClient.client_id,
         client_secret: limitedClient.client_secret,
         scope: 'openid profile email', // Request more than allowed
@@ -142,8 +147,9 @@ test.describe('Token Introspection for M2M', () => {
     accessToken = tokenResponse.access_token;
   });
 
-  test('should introspect valid access token', async () => {
-    const introspection = await oauthHelper.introspectToken(accessToken);
+  test('should introspect valid access token', async ({ request }) => {
+    const helper = new OAuthTestHelper(request, 'http://localhost:3001');
+    const introspection = await helper.introspectToken(accessToken);
 
     expect(introspection).toBeDefined();
     expect(introspection.active).toBe(true);
@@ -151,16 +157,19 @@ test.describe('Token Introspection for M2M', () => {
     expect(introspection.scope).toBe('openid');
   });
 
-  test('should show inactive for invalid token', async () => {
-    const introspection = await oauthHelper.introspectToken('invalid_token_string');
+  test('should show inactive for invalid token', async ({ request }) => {
+    const helper = new OAuthTestHelper(request, 'http://localhost:3001');
+    const introspection = await helper.introspectToken('invalid_token_string');
 
     expect(introspection).toBeDefined();
     expect(introspection.active).toBe(false);
   });
 
-  test('should revoke access token', async () => {
+  test('should revoke access token', async ({ request }) => {
+    const helper = new OAuthTestHelper(request, 'http://localhost:3001');
+
     // Get a new token to revoke
-    const tokenResponse = await oauthHelper.clientCredentialsFlow({
+    const tokenResponse = await helper.clientCredentialsFlow({
       client_id: m2mClient.client_id,
       client_secret: m2mClient.client_secret,
       scope: 'openid',
@@ -169,14 +178,14 @@ test.describe('Token Introspection for M2M', () => {
     const tokenToRevoke = tokenResponse.access_token;
 
     // Verify it's active before revocation
-    const beforeRevoke = await oauthHelper.introspectToken(tokenToRevoke);
+    const beforeRevoke = await helper.introspectToken(tokenToRevoke);
     expect(beforeRevoke.active).toBe(true);
 
     // Revoke the token
-    await oauthHelper.revokeToken(tokenToRevoke);
+    await helper.revokeToken(tokenToRevoke);
 
     // Verify it's inactive after revocation
-    const afterRevoke = await oauthHelper.introspectToken(tokenToRevoke);
+    const afterRevoke = await helper.introspectToken(tokenToRevoke);
     expect(afterRevoke.active).toBe(false);
   });
 });

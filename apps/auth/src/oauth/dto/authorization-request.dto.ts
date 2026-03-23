@@ -1,6 +1,38 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsArray, IsIn, IsOptional, IsString, IsUrl } from 'class-validator';
+import { IsArray, IsIn, IsOptional, IsString, registerDecorator, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 import { GRANT_TYPES, SCOPES } from '../oauth.constants';
+
+// Custom URL validator
+@ValidatorConstraint({ name: 'isValidUrl', async: false })
+class IsValidUrlConstraint implements ValidatorConstraintInterface {
+  validate(value: any, args: ValidationArguments) {
+    if (typeof value !== 'string') {
+      return false;
+    }
+    try {
+      const url = new URL(value);
+      return url.protocol === 'http:' || url.protocol === 'https:';
+    } catch {
+      return false;
+    }
+  }
+
+  defaultMessage(args: ValidationArguments) {
+    return `${args.property} must be a valid HTTP or HTTPS URL`;
+  }
+}
+
+function IsValidUrl(validationOptions?: any) {
+  return function (object: Object, propertyName: string) {
+    registerDecorator({
+      target: object.constructor,
+      propertyName: propertyName,
+      options: validationOptions,
+      constraints: [],
+      validator: IsValidUrlConstraint,
+    });
+  };
+}
 
 export class AuthorizationRequestDto {
   @ApiProperty({
@@ -21,7 +53,7 @@ export class AuthorizationRequestDto {
     example: 'https://example.com/callback',
   })
   @IsString()
-  @IsUrl()
+  @IsValidUrl()
   redirect_uri: string;
 
   @ApiPropertyOptional({

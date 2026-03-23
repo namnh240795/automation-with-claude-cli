@@ -5,6 +5,8 @@ import { ClientService } from './client.service';
 import { AuthorizationService } from './authorization.service';
 import { TokenService } from './token.service';
 import { DeviceFlowService } from './device-flow.service';
+import { APP_FILTER } from '@nestjs/core';
+import { OAuthExceptionFilter } from './oauth.exception.filter';
 
 @Module({
   controllers: [OAuthController],
@@ -14,6 +16,10 @@ import { DeviceFlowService } from './device-flow.service';
     AuthorizationService,
     TokenService,
     DeviceFlowService,
+    {
+      provide: APP_FILTER,
+      useClass: OAuthExceptionFilter,
+    },
   ],
   exports: [OAuthService, TokenService, ClientService],
 })

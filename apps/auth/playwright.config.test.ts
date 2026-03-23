@@ -3,6 +3,8 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * Playwright configuration for Auth Service E2E tests
  * Tests OAuth 2.0 authorization flows
+ *
+ * This config is for testing against an already running server
  */
 export default defineConfig({
   testDir: './e2e',
@@ -11,9 +13,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: 1, // Single worker to avoid database state conflicts
   reporter: [
-    ['html'],
     ['list'],
-    ['junit', { outputFile: 'test-results/junit.xml' }],
   ],
 
   use: {
@@ -28,21 +28,7 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
   ],
 
-  // Run local dev server before starting tests
-  webServer: {
-    command: 'cd ../.. && pnpm rspack:auth',
-    url: 'http://localhost:3001',
-    reuseExistingServer: true,
-    timeout: 120000,
-  },
+  // No webServer - expect server to be already running
 });

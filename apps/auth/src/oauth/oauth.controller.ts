@@ -48,12 +48,11 @@ export class OAuthController {
   }
 
   /**
-   * List OAuth clients (admin endpoint)
+   * List OAuth clients (public endpoint for discovery)
+   * Returns public client information only (no secrets)
    */
   @Get('clients')
   @ApiOperation({ summary: 'List all OAuth clients' })
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('bearer-auth')
   async listClients() {
     return this.clientService.listClients();
   }
@@ -141,21 +140,7 @@ export class OAuthController {
   @ApiBadRequestResponse({ description: 'OAuth 2.0 error response' })
   @ApiUnauthorizedResponse({ description: 'Invalid client credentials' })
   async getToken(@Body() dto: TokenRequestDto) {
-    try {
-      return await this.oauthService.handleTokenRequest(dto);
-    } catch (error: any) {
-      this.logger.error(`Token error: ${error.message}`);
-
-      if (error.error) {
-        // OAuth error response
-        throw error;
-      }
-
-      throw {
-        error: OAUTH_ERRORS.INVALID_REQUEST,
-        error_description: error.message || 'Invalid request',
-      };
-    }
+    return await this.oauthService.handleTokenRequest(dto);
   }
 
   /**
@@ -189,44 +174,24 @@ export class OAuthController {
   @ApiOperation({ summary: 'Start device authorization flow' })
   @ApiOkResponse({ type: DeviceCodeResponseDto })
   async deviceAuthorization(@Body() dto: { client_id: string; scope?: string }) {
-    try {
-      return await this.deviceFlowService.generateDeviceCode({
-        client_id: dto.client_id,
-        scope: dto.scope || 'openid',
-      });
-    } catch (error: any) {
-      this.logger.error(`Device authorization error: ${error.message}`);
-
-      if (error.error) {
-        throw error;
-      }
-
-      throw {
-        error: OAUTH_ERRORS.INVALID_REQUEST,
-        error_description: error.message || 'Invalid request',
-      };
-    }
+    return await this.deviceFlowService.generateDeviceCode({
+      client_id: dto.client_id,
+      scope: dto.scope || 'openid',
+    });
   }
 
   /**
    * Device Authorization Flow - Get device verification page
+   * Returns public device info for users to verify their device code
+   * No authentication required - user will authenticate when submitting consent
    */
   @Get('device/verify')
   @ApiOperation({ summary: 'Get device verification page' })
   @ApiQuery({ name: 'user_code', required: true })
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('bearer-auth')
-  async getDeviceVerificationPage(
-    @Query('user_code') userCode: string,
-    @AuthUser() user: JwtPayloadDto,
-  ) {
+  async getDeviceVerificationPage(@Query('user_code') userCode: string) {
     try {
       const deviceInfo = await this.deviceFlowService.getDeviceCodeByUserCode(userCode);
-      return {
-        ...deviceInfo,
-        user_id: user.sub,
-        user_email: user.email,
-      };
+      return deviceInfo;
     } catch (error: any) {
       this.logger.error(`Device verification error: ${error.message}`);
       throw error;

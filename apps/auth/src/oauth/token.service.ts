@@ -33,6 +33,9 @@ export class TokenService {
     const now = Math.floor(Date.now() / 1000);
     const expiresIn = this.parseExpirationTime(this.jwtExpiresIn);
 
+    // Add a random jti (JWT ID) to ensure uniqueness
+    const jti = randomBytes(16).toString('base64url');
+
     const payload: JwtPayloadDto = {
       sub: data.user_id,
       email: data.email,
@@ -40,6 +43,7 @@ export class TokenService {
       last_name: data.last_name,
       iat: now,
       exp: now + expiresIn,
+      jti: jti, // Add unique identifier
     };
 
     // Create JWT token using native Node.js crypto
@@ -80,7 +84,7 @@ export class TokenService {
       },
     });
 
-    this.logger.log(`Generated access token for user ${data.user_id}, client ${data.client_id}`);
+    this.logger.log(`Generated access token for user ${data.user_id || 'none'} (client credentials), client ${data.client_id}`);
 
     return { token, expires_at: accessTokenExpiresAt };
   }

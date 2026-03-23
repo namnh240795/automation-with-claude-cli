@@ -6,6 +6,7 @@ import { DeviceFlowService } from './device-flow.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { hashPassword, verifyPassword } from '@app/auth-utilities';
 import { OAUTH_ERRORS, GRANT_TYPES } from './oauth.constants';
+import { OAuthBadRequestException } from './oauth.exception';
 
 @Injectable()
 export class OAuthService {
@@ -297,7 +298,7 @@ export class OAuthService {
     // Generate access token (no user context for client credentials)
     const { token: accessToken, expires_at: accessTokenExpires } =
       await this.tokenService.generateAccessToken({
-        user_id: '', // No user for client credentials
+        user_id: null, // No user for client credentials
         email: `${client.name}@client`, // Placeholder
         client_id,
         scope: requestedScope,
@@ -356,24 +357,24 @@ export class OAuthService {
     const status = await this.deviceFlowService.pollDeviceStatus(device_code);
 
     if (status.status === 'pending') {
-      throw new BadRequestException({
-        error: 'authorization_pending',
-        error_description: 'Authorization pending',
-      });
+      throw new OAuthBadRequestException(
+        'authorization_pending',
+        'Authorization pending'
+      );
     }
 
     if (status.status === 'expired') {
-      throw new BadRequestException({
-        error: OAUTH_ERRORS.EXPIRED_TOKEN,
-        error_description: 'Device code has expired',
-      });
+      throw new OAuthBadRequestException(
+        OAUTH_ERRORS.EXPIRED_TOKEN,
+        'Device code has expired'
+      );
     }
 
     if (!status.user_id) {
-      throw new BadRequestException({
-        error: OAUTH_ERRORS.ACCESS_DENIED,
-        error_description: 'Access denied',
-      });
+      throw new OAuthBadRequestException(
+        OAUTH_ERRORS.ACCESS_DENIED,
+        'Access denied'
+      );
     }
 
     // Get user details
@@ -388,10 +389,10 @@ export class OAuthService {
     });
 
     if (!user) {
-      throw new BadRequestException({
-        error: OAUTH_ERRORS.INVALID_GRANT,
-        error_description: 'User not found',
-      });
+      throw new OAuthBadRequestException(
+        OAUTH_ERRORS.INVALID_GRANT,
+        'User not found'
+      );
     }
 
     // Generate access token

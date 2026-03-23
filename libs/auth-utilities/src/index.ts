@@ -16,6 +16,7 @@ export interface JwtPayloadDto {
   roles?: string[];     // User roles (optional)
   iat: number;          // Issued at
   exp: number;          // Expiration time
+  jti?: string;         // JWT ID (unique identifier)
 }
 
 export const AuthUser = createParamDecorator(
@@ -56,3 +57,4 @@ export class RolesGuard implements CanActivate {
 
 export { hashPassword, verifyPassword } from './password';
 export { JwtAuthGuard } from './guards/jwt-auth.guard';
+export type { JwtPayloadDto };

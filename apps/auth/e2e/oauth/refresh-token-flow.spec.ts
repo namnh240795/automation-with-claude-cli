@@ -30,23 +30,22 @@ test.describe('OAuth 2.0 Refresh Token Flow', () => {
     expect(refreshClient.grant_types).toContain('refresh_token');
   });
 
-  test('should receive refresh token with offline_access scope', async () => {
+  test('should receive refresh token with offline_access scope', async ({ request }) => {
     // Note: This would require a full authorization code flow
     // For E2E testing, we're testing the token endpoint directly
 
     // Simulate successful token exchange with offline_access
-    const tokenResponse = await fetch('http://localhost:3001/auth/oauth/token', {
-      method: 'POST',
+    const tokenResponse = await request.post('http://localhost:3001/auth/oauth/token', {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: new URLSearchParams({
+      data: new URLSearchParams({
         grant_type: 'authorization_code',
         code: 'mock_code_with_offline_access',
         redirect_uri: 'http://localhost:3000/callback',
         client_id: refreshClient.client_id,
         client_secret: refreshClient.client_secret,
-      }),
+      }).toString(),
     });
 
     // Will fail with invalid code but verifies endpoint
@@ -155,7 +154,8 @@ test.describe('Refresh Token Security', () => {
     });
 
     // Should fail with invalid_client error
-    expect(response.status()).toBe(401);
+    // OAuth 2.0 spec allows both 400 and 401 for invalid_client
+    expect([400, 401]).toContain(response.status());
   });
 
   test('should bind refresh token to client_id', async ({ request }) => {
@@ -193,9 +193,12 @@ test.describe('Refresh Token with Token Introspection', () => {
     });
   });
 
-  test('should introspect refresh token', async () => {
+  test('should introspect refresh token', async ({ request }) => {
+    // Create a new helper instance for this test
+    const helper = new OAuthTestHelper(request, 'http://localhost:3001');
+
     // Introspect a refresh token
-    const introspection = await oauthHelper.introspectToken('test_refresh_token');
+    const introspection = await helper.introspectToken('test_refresh_token');
 
     expect(introspection).toBeDefined();
     expect(introspection).toHaveProperty('active');
@@ -204,12 +207,15 @@ test.describe('Refresh Token with Token Introspection', () => {
     expect(introspection.active).toBe(false);
   });
 
-  test('should revoke refresh token', async () => {
+  test('should revoke refresh token', async ({ request }) => {
+    // Create a new helper instance for this test
+    const helper = new OAuthTestHelper(request, 'http://localhost:3001');
+
     // Revoke a refresh token
-    await oauthHelper.revokeToken('refresh_token_to_revoke');
+    await helper.revokeToken('refresh_token_to_revoke');
 
     // Verify it's inactive after revocation
-    const introspection = await oauthHelper.introspectToken('refresh_token_to_revoke');
+    const introspection = await helper.introspectToken('refresh_token_to_revoke');
     expect(introspection.active).toBe(false);
   });
 
