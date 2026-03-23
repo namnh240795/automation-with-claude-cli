@@ -150,6 +150,95 @@ exports.Prisma.SessionScalarFieldEnum = {
   revoked_at: 'revoked_at'
 };
 
+exports.Prisma.OAuthClientScalarFieldEnum = {
+  id: 'id',
+  client_id: 'client_id',
+  client_secret: 'client_secret',
+  client_secret_hash: 'client_secret_hash',
+  name: 'name',
+  description: 'description',
+  redirect_uris: 'redirect_uris',
+  post_logout_redirect_uris: 'post_logout_redirect_uris',
+  scopes: 'scopes',
+  grant_types: 'grant_types',
+  is_confidential: 'is_confidential',
+  is_public_client: 'is_public_client',
+  require_pkce: 'require_pkce',
+  access_token_lifetime: 'access_token_lifetime',
+  refresh_token_lifetime: 'refresh_token_lifetime',
+  allowed_origins: 'allowed_origins',
+  logo_uri: 'logo_uri',
+  policy_uri: 'policy_uri',
+  tos_uri: 'tos_uri',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.OAuthAuthorizationCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  client_id: 'client_id',
+  user_id: 'user_id',
+  redirect_uri: 'redirect_uri',
+  scope: 'scope',
+  state: 'state',
+  code_challenge: 'code_challenge',
+  code_challenge_method: 'code_challenge_method',
+  nonce: 'nonce',
+  expires_at: 'expires_at',
+  consumed_at: 'consumed_at',
+  created_at: 'created_at'
+};
+
+exports.Prisma.OAuthAccessTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  client_id: 'client_id',
+  user_id: 'user_id',
+  scope: 'scope',
+  token_type: 'token_type',
+  expires_at: 'expires_at',
+  revoked_at: 'revoked_at',
+  created_at: 'created_at'
+};
+
+exports.Prisma.OAuthRefreshTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  access_token_id: 'access_token_id',
+  client_id: 'client_id',
+  user_id: 'user_id',
+  scope: 'scope',
+  expires_at: 'expires_at',
+  revoked_at: 'revoked_at',
+  created_at: 'created_at'
+};
+
+exports.Prisma.OAuthDeviceCodeScalarFieldEnum = {
+  id: 'id',
+  device_code: 'device_code',
+  user_code: 'user_code',
+  client_id: 'client_id',
+  user_id: 'user_id',
+  scope: 'scope',
+  expires_at: 'expires_at',
+  interval: 'interval',
+  verified: 'verified',
+  completed_at: 'completed_at',
+  created_at: 'created_at'
+};
+
+exports.Prisma.OAuthUserConsentScalarFieldEnum = {
+  id: 'id',
+  client_id: 'client_id',
+  user_id: 'user_id',
+  scope: 'scope',
+  expires_at: 'expires_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -169,7 +258,13 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   RefreshToken: 'RefreshToken',
-  Session: 'Session'
+  Session: 'Session',
+  OAuthClient: 'OAuthClient',
+  OAuthAuthorizationCode: 'OAuthAuthorizationCode',
+  OAuthAccessToken: 'OAuthAccessToken',
+  OAuthRefreshToken: 'OAuthRefreshToken',
+  OAuthDeviceCode: 'OAuthDeviceCode',
+  OAuthUserConsent: 'OAuthUserConsent'
 };
 
 /**
