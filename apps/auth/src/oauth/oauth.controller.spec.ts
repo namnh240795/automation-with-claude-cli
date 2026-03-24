@@ -370,7 +370,7 @@ describe('OAuthController', () => {
       deviceFlowService.getDeviceCodeByUserCode.mockResolvedValue(deviceInfo);
 
       // Act
-      const result = await controller.getDeviceVerificationPage('ABCD-1234', mockUser);
+      const result = await controller.getDeviceVerificationPage('ABCD-1234');
 
       // Assert
       expect(result).toBeDefined();

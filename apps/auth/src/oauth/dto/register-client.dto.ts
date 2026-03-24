@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsArray, IsBoolean, IsInt, IsOptional, IsString, Max, Min, registerDecorator, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import { IsArray, IsBoolean, IsInt, IsOptional, IsString, Max, Min, registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 import { Type } from 'class-transformer';
 
 // Custom URL validators

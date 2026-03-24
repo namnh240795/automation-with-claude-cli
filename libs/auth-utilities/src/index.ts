@@ -57,4 +57,3 @@ export class RolesGuard implements CanActivate {
 
 export { hashPassword, verifyPassword } from './password';
 export { JwtAuthGuard } from './guards/jwt-auth.guard';
-export type { JwtPayloadDto };

@@ -7,6 +7,7 @@ import { TokenService } from './token.service';
 import { DeviceFlowService } from './device-flow.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { GRANT_TYPES, OAUTH_ERRORS, OAUTH_STATUS_CODES } from './oauth.constants';
+import { OAuthBadRequestException } from './oauth.exception';
 import * as authUtilities from '@app/auth-utilities';
 
 jest.mock('./client.service');
@@ -465,7 +466,7 @@ describe('OAuthService', () => {
       });
 
       // Act
-      await expect(service.handleTokenRequest(data)).rejects.toThrow(BadRequestException);
+      await expect(service.handleTokenRequest(data)).rejects.toThrow(OAuthBadRequestException);
     });
 
     it('should handle authorized device code', async () => {
