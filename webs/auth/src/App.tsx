@@ -1,11 +1,18 @@
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { Toaster } from '@/components/ui/sonner'
+import Home from '@/pages/Home'
+import ComponentsShowcase from '@/pages/ComponentsShowcase'
+
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Auth App</h1>
-        <p className="text-gray-600">Ready to start building</p>
-      </div>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/components" element={<ComponentsShowcase />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+      <Toaster />
+    </>
   )
 }
 

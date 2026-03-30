@@ -3,6 +3,7 @@ packages:
   - libs/*
   - packages/*
   - tools/*
+  - webs/*
 
 ignoredBuiltDependencies:
   - '@nestjs/core'
