@@ -1,0 +1,9 @@
+{
+  "developmentWorkflow": "fullstack",
+  "autoPlanning": true,
+  "testingFirst": true,
+  "qualityGates": {
+    "unitTestCoverage": 90,
+    "e2eTestPassRate": 95
+  }
+}

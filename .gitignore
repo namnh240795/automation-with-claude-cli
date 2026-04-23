@@ -46,7 +46,8 @@ yarn-error.log*
 
 # OS
 Thumbs.db
-.claude/
+.claude/settings.local.json
+
 
 # Test files
 test-*.js

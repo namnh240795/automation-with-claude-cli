@@ -1,10 +1,97 @@
-# CLAUDE.md
+# Claude AI Agent Configuration
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Overview
 
-## Monorepo Architecture
+This project uses Claude AI as an intelligent development agent with structured workflows, specialized sub-agents, and mandatory coding standards.
 
 This is a **pnpm workspace monorepo** with separate NestJS services using Fastify adapter, PostgreSQL, Prisma 7, and JWT authentication.
+
+---
+
+## Development Workflow
+
+Follow this workflow for all feature development:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│   /spec  →  /plan  →  /build  →  /test  →  /review  →  Ship│
+│                                                             │
+│   Define    Plan     Build     Verify    Review     Deploy  │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+| Phase | Command | Purpose |
+|-------|---------|---------|
+| **Define** | `/spec` | Create PRD with objectives, scope, boundaries |
+| **Plan** | `/plan` | Decompose into vertical slices with acceptance criteria |
+| **Build** | `/build` | Implement incrementally using TDD (RED-GREEN-REFACTOR) |
+| **Verify** | `/test` | Write and verify tests; use Prove-It for bug fixes |
+| **Review** | `/review` | Five-axis code review before merge |
+| **Ship** | `/deploy` | Build, test, deploy with staged rollout |
+
+### Supporting Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/debug` | Systematic error diagnosis and root cause analysis |
+| `/simplify` | Reduce complexity without changing behavior |
+| `/fix-issue` | Analyze and fix reported issues |
+
+---
+
+## Core Principles
+
+### Code Quality
+- **Test-Driven Development** — Write failing tests first, then implement
+- **Incremental Implementation** — Small vertical slices, always buildable
+- **Five-Axis Review** — Correctness, Readability, Architecture, Security, Performance
+
+### Philosophy
+- Progress over perfection
+- Fix root causes, not symptoms
+- The simplest thing that could work
+- Tests are proof, not afterthought
+
+---
+
+## Mandatory Rules
+
+All rules in `.claude/rules/` are **mandatory** and must be followed:
+
+### Code Quality
+| Rule | Description |
+|------|-------------|
+| `clean-code.md` | Variables, functions, SOLID, async/await |
+| `code-style.md` | Formatting, naming conventions |
+| `error-handling.md` | AppError class, global handler patterns |
+
+### Architecture & Design
+| Rule | Description |
+|------|-------------|
+| `tech-stack.md` | Approved technologies (NestJS, Fastify, PG, Redis, Prisma) |
+| `system-design.md` | CAP theorem, caching, scaling, queues |
+| `project-structure.md` | Layered architecture, folder organization |
+| `api-conventions.md` | REST standards, response envelopes |
+
+### Data & Naming
+| Rule | Description |
+|------|-------------|
+| `naming-conventions.md` | Cache keys, DB, queues, env vars |
+| `database.md` | Prisma patterns, transactions, N+1 prevention |
+
+### Operations
+| Rule | Description |
+|------|-------------|
+| `security.md` | **CRITICAL** — Never violate security rules |
+| `monitoring.md` | Prometheus, Grafana, logging, alerting |
+| `testing.md` | Coverage thresholds, test patterns |
+| `git-workflow.md` | Branching strategy, conventional commits |
+
+---
+
+## Monorepo Architecture
 
 ### Services
 
@@ -24,47 +111,63 @@ Each service has:
 - **@app/health** - Health check utilities
 - **@app/common** - Common utilities and interceptors
 
+### Service Standard Structure
+
+Every service follows this pattern:
+```
+apps/[service]/
+├── src/
+│   ├── main.ts              # Fastify + Scalar Swagger setup
+│   ├── app.module.ts        # ConfigModule, PrismaModule, JWT setup
+│   ├── strategies/          # JWT strategy (jwt.strategy.ts)
+│   ├── prisma/              # Prisma module and service
+│   ├── dto/                 # Request/response DTOs
+│   └── common/              # Service-specific utilities
+├── prisma/
+│   ├── schema.prisma        # Database schema (no url in datasource)
+│   └── prisma.config.ts     # Prisma 7 config file
+├── rspack.config.js         # Rspack bundler config
+└── .env                     # Service environment variables
+```
+
+---
+
 ## Common Development Commands
 
 ### Development (Rspack watch mode)
 ```bash
-# Start Auth service (auto-restarts on changes)
-pnpm rspack:auth
-
-# Alternative: NestJS watch mode (slower)
-pnpm dev:auth
+pnpm rspack:auth          # Start Auth service (auto-restarts on changes)
+pnpm dev:auth             # Alternative: NestJS watch mode (slower)
 ```
 
 ### Building
 ```bash
-# Build Auth service
-pnpm build:auth
+pnpm build:auth           # Build Auth service
 ```
 
 ### Database Operations
 ```bash
 # From service directory (apps/auth)
-pnpm prisma:generate    # Generate Prisma client
-pnpm prisma:migrate     # Run migrations
-pnpm prisma:studio      # Open Prisma Studio
+pnpm prisma:generate      # Generate Prisma client
+pnpm prisma:migrate       # Run migrations
+pnpm prisma:studio        # Open Prisma Studio
 ```
 
 ### Testing
 ```bash
-# Root level
-pnpm test              # Run all tests
-pnpm test:watch        # Watch mode
-pnpm test:cov          # Coverage
-
-# Service-specific
-cd apps/auth && pnpm test
+pnpm test                 # Run all tests
+pnpm test:watch           # Watch mode
+pnpm test:cov             # Coverage
+cd apps/auth && pnpm test # Service-specific
 ```
 
 ### Linting/Formatting
 ```bash
-pnpm lint              # ESLint with auto-fix
-pnpm format            # Prettier
+pnpm lint                 # ESLint with auto-fix
+pnpm format               # Prettier
 ```
+
+---
 
 ## Critical Architecture Patterns
 
@@ -98,7 +201,6 @@ export class FeatureController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   async getProfile(@AuthUser() user: JwtPayloadDto) {
-    // user contains: { sub, email, first_name, last_name }
     return { user_id: user.sub, email: user.email };
   }
 }
@@ -117,25 +219,6 @@ This project uses **Prisma 7 with driver adapters**, which requires different se
 cd apps/auth
 DATABASE_URL="postgresql://..." pnpm prisma migrate dev --name migration_name
 pnpm prisma generate
-```
-
-### Service Standard Structure
-
-Every service follows this pattern:
-```
-apps/[service]/
-├── src/
-│   ├── main.ts              # Fastify + Scalar Swagger setup
-│   ├── app.module.ts        # ConfigModule, PrismaModule, JWT setup
-│   ├── strategies/          # JWT strategy (jwt.strategy.ts)
-│   ├── prisma/              # Prisma module and service
-│   ├── dto/                 # Request/response DTOs
-│   └── common/              # Service-specific utilities
-├── prisma/
-│   ├── schema.prisma        # Database schema (no url in datasource)
-│   └── prisma.config.ts     # Prisma 7 config file
-├── rspack.config.js         # Rspack bundler config
-└── .env                     # Service environment variables
 ```
 
 ### Naming Conventions (Critical)
@@ -179,10 +262,10 @@ When adding new libraries or updating imports, **ALWAYS update both `tsconfig.js
 - `@app/caching` → `libs/caching/src`
 - `@app/health` → `libs/health/src`
 - `@auth/prisma-client` → `packages/auth-prisma-client/src`
-- `@app/rag-utilities` → `libs/rag-utilities/src`
-- `@rag/prisma-client` → `packages/rag-prisma-client/src`
 
-## Dependency Installation Rules (from .clinerules)
+---
+
+## Dependency Installation Rules
 
 This is a **pnpm workspace monorepo**. Install dependencies carefully:
 
@@ -207,6 +290,8 @@ When making changes to the monorepo:
 2. **Installing NestJS/Fastify packages:** Add to `externals` array in `rspack.config.js`
 3. **Packages requiring externalization:** `@nestjs/*`, `@fastify/*`, `class-validator`, `class-transformer`, database drivers
 
+---
+
 ## Key Files Reference
 
 - `tsconfig.json` - TypeScript path aliases
@@ -215,14 +300,79 @@ When making changes to the monorepo:
 - `pnpm-workspace.yaml` - Workspace configuration
 - `docker/docker-compose.yml` - PostgreSQL services
 
-## Skills Reference
+---
 
-The `skills/` directory contains reusable patterns for Claude CLI:
-- **nestjs-conventions** - Fastify setup, validation, Swagger, versioning
-- **prisma-patterns** - Database operations, migrations, naming conventions
-- **auth-guard-patterns** - JWT authentication implementation
-- **dto-validation** - DTO creation with class-validator
-- **rspack-dev** - Rspack development and watch mode
+## Available Agents
+
+Invoke the right agent for each task type:
+
+### Development Agents
+| Agent | When to Invoke |
+|-------|---------------|
+| **Frontend Developer** | Components, pages, routing, state, UI performance |
+| **Backend Developer** | APIs, services, DB queries, background jobs |
+| **Systems Architect** | Architecture decisions, ADRs, system design |
+
+### Quality Agents
+| Agent | When to Invoke |
+|-------|---------------|
+| **Code Reviewer** | Five-axis PR review, code quality assessment |
+| **Test Engineer** | Test strategy, TDD, coverage, bug reproduction |
+| **Security Auditor** | Vulnerability assessment, threat modeling |
+| **QA Engineer** | Test plans, E2E tests, bug reports |
+
+### Product Agents
+| Agent | When to Invoke |
+|-------|---------------|
+| **Project Manager** | User stories, sprint planning, status reports |
+| **UI/UX Designer** | Design system, wireframes, accessibility |
+| **Copywriter/SEO** | Page copy, meta tags, SEO optimization |
+
+---
+
+## Available Skills
+
+Specialized skills for complex operations:
+
+| Skill | Description |
+|-------|-------------|
+| `tdd` | Test-Driven Development patterns |
+| `code-review` | Five-axis review framework |
+| `incremental-implementation` | Vertical slice development |
+| `deploy` | Full deployment pipeline |
+| `security-review` | Security audit checklist |
+| `nestjs-conventions` | Fastify setup, validation, Swagger, versioning |
+| `prisma-patterns` | Database operations, migrations, naming conventions |
+| `auth-guard-patterns` | JWT authentication implementation |
+| `dto-validation` | DTO creation with class-validator |
+| `rspack-dev` | Rspack development and watch mode |
+
+---
+
+## Reference Checklists
+
+Quick references in `.claude/references/`:
+
+| Reference | Use For |
+|-----------|---------|
+| `security-checklist.md` | Pre-deploy security verification |
+| `testing-patterns.md` | Test structure and anti-patterns |
+| `performance-checklist.md` | Core Web Vitals, optimization |
+| `accessibility-checklist.md` | WCAG 2.1 AA compliance |
+
+---
+
+## Agent Behavior Guidelines
+
+1. **Follow the workflow** — Use `/spec` → `/plan` → `/build` → `/review`
+2. **Apply mandatory rules** — All rules in `.claude/rules/` are non-negotiable
+3. **Test first** — Write failing tests before implementing
+4. **Incremental changes** — Small commits, always buildable
+5. **Explain before acting** — Describe changes before making them
+6. **Fix root causes** — Don't patch symptoms
+7. **Use the right agent** — Invoke specialized agents for their domains
+
+---
 
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
