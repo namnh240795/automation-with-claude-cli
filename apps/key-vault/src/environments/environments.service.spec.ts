@@ -110,7 +110,9 @@ describe('EnvironmentsService', () => {
     it('should throw NotFoundException when environment not found', async () => {
       prisma.environment.findUnique.mockResolvedValue(null);
 
-      await expect(service.findOne('nonexistent')).rejects.toThrow(NotFoundException);
+      await expect(service.findOne('nonexistent')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 

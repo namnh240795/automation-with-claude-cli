@@ -1,14 +1,33 @@
 import {
-  Controller, Get, Post, Patch, Delete,
-  Body, Param, Query, UseGuards, Version, HttpCode, HttpStatus,
+  Controller,
+  Get,
+  Post,
+  Patch,
+  Delete,
+  Body,
+  Param,
+  Query,
+  UseGuards,
+  Version,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import {
-  ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery,
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiQuery,
 } from '@nestjs/swagger';
 import { SettingsService } from './settings.service';
 import { CreateSettingDto, UpdateSettingDto } from './dto';
 import { JwtAuthGuard } from '@app/auth-utilities';
-import { AuthUser, JwtPayloadDto, Roles, RolesGuard } from '@app/auth-utilities';
+import {
+  AuthUser,
+  JwtPayloadDto,
+  Roles,
+  RolesGuard,
+} from '@app/auth-utilities';
 import { SettingType } from '../common/enum';
 
 @ApiTags('Settings')
@@ -24,10 +43,7 @@ export class SettingsController {
   @ApiOperation({ summary: 'Create setting' })
   @ApiResponse({ status: 201, description: 'Created' })
   @ApiResponse({ status: 409, description: 'Key already exists for service' })
-  create(
-    @Body() dto: CreateSettingDto,
-    @AuthUser() user: JwtPayloadDto,
-  ) {
+  create(@Body() dto: CreateSettingDto, @AuthUser() user: JwtPayloadDto) {
     return this.settingsService.create(dto, user.sub);
   }
 
@@ -43,7 +59,11 @@ export class SettingsController {
     @Query('type') type?: string,
     @Query('search') search?: string,
   ) {
-    return this.settingsService.findAll({ service_name: serviceName, type, search });
+    return this.settingsService.findAll({
+      service_name: serviceName,
+      type,
+      search,
+    });
   }
 
   @Get(':id')

@@ -8,7 +8,10 @@ export class CreateEnvironmentDto {
   @Length(1, 50)
   name: string;
 
-  @ApiPropertyOptional({ example: 'Production environment', description: 'Description' })
+  @ApiPropertyOptional({
+    example: 'Production environment',
+    description: 'Description',
+  })
   @IsOptional()
   @IsString()
   @Length(0, 500)

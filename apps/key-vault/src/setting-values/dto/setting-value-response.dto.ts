@@ -10,7 +10,10 @@ export class SettingValueResponseDto {
   @ApiProperty({ format: 'uuid' })
   environment_id: string;
 
-  @ApiProperty({ example: '••••••••', description: 'Value (masked for SECURE type)' })
+  @ApiProperty({
+    example: '••••••••',
+    description: 'Value (masked for SECURE type)',
+  })
   value: string;
 
   @ApiProperty({ example: 1 })

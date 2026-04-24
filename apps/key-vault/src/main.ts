@@ -34,27 +34,30 @@ export async function bootstrap() {
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   // Get service prefix from environment (default: key-vault)
-  const servicePrefix = configService.get<string>('SERVICE_PREFIX', 'key-vault');
+  const servicePrefix = configService.get<string>(
+    'SERVICE_PREFIX',
+    'key-vault',
+  );
 
   // Set global prefix for all routes
   app.setGlobalPrefix(servicePrefix);
 
   // Enable global validation pipe with transform for DTO auto-parsing
-  app.useGlobalPipes(new ValidationPipe({
-    transform: true,
-    transformOptions: {
-      enableImplicitConversion: true,
-    },
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
+    }),
+  );
 
   // Configure CORS
   const allowedOrigins = configService
     .get<string>('CORS_ORIGIN', 'http://localhost:3000')
     .split(',');
 
-  const rawWildcardOrigins = configService.get<string>(
-    'CORS_ORIGIN_REGEX',
-  );
+  const rawWildcardOrigins = configService.get<string>('CORS_ORIGIN_REGEX');
   const envWildcardPatterns = rawWildcardOrigins
     ? rawWildcardOrigins
         .split(',')
@@ -104,10 +107,12 @@ export async function bootstrap() {
 
   // Configure Swagger documentation
   const config = new DocumentBuilder()
-    .setTitle(`${servicePrefix.toUpperCase()} API - Secure Configuration & Secrets Management`)
+    .setTitle(
+      `${servicePrefix.toUpperCase()} API - Secure Configuration & Secrets Management`,
+    )
     .setDescription(
       'Centralized key-value store for configuration and secrets management. ' +
-      'Supports encrypted (SECURE) and plain text (STATIC) settings with version history and environment-based configuration.',
+        'Supports encrypted (SECURE) and plain text (STATIC) settings with version history and environment-based configuration.',
     )
     .setVersion('1.0.0')
     .addBearerAuth(
@@ -139,7 +144,9 @@ export async function bootstrap() {
   const port = +configService.get<string>('PORT', '3002') || 3002;
   await app.listen(port, '0.0.0.0');
 
-  console.log(`🚀 ${servicePrefix.toUpperCase()} service running on port ${port}`);
+  console.log(
+    `🚀 ${servicePrefix.toUpperCase()} service running on port ${port}`,
+  );
   console.log(`📖 Scalar reference: http://localhost:${port}/reference`);
   console.log(`📚 Swagger JSON: http://localhost:${port}/api-json`);
 

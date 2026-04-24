@@ -1,14 +1,30 @@
 import {
-  Controller, Get, Put, Post, Body, Param, Query,
-  UseGuards, Version,
+  Controller,
+  Get,
+  Put,
+  Post,
+  Body,
+  Param,
+  Query,
+  UseGuards,
+  Version,
 } from '@nestjs/common';
 import {
-  ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery,
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiQuery,
 } from '@nestjs/swagger';
 import { SettingValuesService } from './setting-values.service';
 import { SetValueDto } from './dto';
 import { JwtAuthGuard } from '@app/auth-utilities';
-import { AuthUser, JwtPayloadDto, Roles, RolesGuard } from '@app/auth-utilities';
+import {
+  AuthUser,
+  JwtPayloadDto,
+  Roles,
+  RolesGuard,
+} from '@app/auth-utilities';
 
 @ApiTags('Setting Values')
 @ApiBearerAuth()
@@ -16,9 +32,7 @@ import { AuthUser, JwtPayloadDto, Roles, RolesGuard } from '@app/auth-utilities'
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles('SUPER_ADMIN')
 export class SettingValuesController {
-  constructor(
-    private readonly settingValuesService: SettingValuesService,
-  ) {}
+  constructor(private readonly settingValuesService: SettingValuesService) {}
 
   @Put()
   @Version('1')
@@ -44,7 +58,12 @@ export class SettingValuesController {
   @ApiOperation({ summary: 'Get current setting value' })
   @ApiResponse({ status: 200, description: 'Success' })
   @ApiResponse({ status: 404, description: 'Value not found' })
-  @ApiQuery({ name: 'reveal', required: false, type: Boolean, description: 'Reveal decrypted SECURE value' })
+  @ApiQuery({
+    name: 'reveal',
+    required: false,
+    type: Boolean,
+    description: 'Reveal decrypted SECURE value',
+  })
   getValue(
     @Param('settingId') settingId: string,
     @Param('environmentId') environmentId: string,

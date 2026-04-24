@@ -44,7 +44,11 @@ export class SettingsService {
     }
   }
 
-  async findAll(filters?: { service_name?: string; type?: string; search?: string }) {
+  async findAll(filters?: {
+    service_name?: string;
+    type?: string;
+    search?: string;
+  }) {
     const where: any = { deleted_at: null };
 
     if (filters?.service_name) {

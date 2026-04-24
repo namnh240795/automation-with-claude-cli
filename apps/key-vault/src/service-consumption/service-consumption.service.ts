@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { SettingType } from '../common/enum';
 
@@ -54,7 +58,11 @@ export class ServiceConsumptionService {
     };
   }
 
-  async getSingleSetting(serviceName: string, key: string, environment: string) {
+  async getSingleSetting(
+    serviceName: string,
+    key: string,
+    environment: string,
+  ) {
     if (!environment) {
       throw new BadRequestException('Environment query parameter is required');
     }

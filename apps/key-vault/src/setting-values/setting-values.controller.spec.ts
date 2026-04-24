@@ -39,9 +39,13 @@ describe('SettingValuesController', () => {
         },
       ],
     })
-      .overrideGuard(await import('@app/auth-utilities').then(m => m.JwtAuthGuard))
+      .overrideGuard(
+        await import('@app/auth-utilities').then((m) => m.JwtAuthGuard),
+      )
       .useValue({ canActivate: () => true })
-      .overrideGuard(await import('@app/auth-utilities').then(m => m.RolesGuard))
+      .overrideGuard(
+        await import('@app/auth-utilities').then((m) => m.RolesGuard),
+      )
       .useValue({ canActivate: () => true })
       .compile();
 
@@ -53,16 +57,20 @@ describe('SettingValuesController', () => {
 
   describe('setValue', () => {
     it('should call service with correct params', async () => {
-      jest.spyOn(service, 'setValue').mockResolvedValue(mockValueResponse as any);
+      jest
+        .spyOn(service, 'setValue')
+        .mockResolvedValue(mockValueResponse as any);
 
       const result = await controller.setValue(
-        'setting-1', 'env-1',
+        'setting-1',
+        'env-1',
         { value: 'my-secret', change_reason: 'Initial' },
         mockUser as any,
       );
 
       expect(service.setValue).toHaveBeenCalledWith(
-        'setting-1', 'env-1',
+        'setting-1',
+        'env-1',
         { value: 'my-secret', change_reason: 'Initial' },
         'user-1',
       );
@@ -72,11 +80,17 @@ describe('SettingValuesController', () => {
 
   describe('getValue', () => {
     it('should get value without reveal', async () => {
-      jest.spyOn(service, 'getValue').mockResolvedValue(mockValueResponse as any);
+      jest
+        .spyOn(service, 'getValue')
+        .mockResolvedValue(mockValueResponse as any);
 
       const result = await controller.getValue('setting-1', 'env-1');
 
-      expect(service.getValue).toHaveBeenCalledWith('setting-1', 'env-1', false);
+      expect(service.getValue).toHaveBeenCalledWith(
+        'setting-1',
+        'env-1',
+        false,
+      );
       expect(result.value).toBe('••••••••');
     });
 
@@ -91,11 +105,17 @@ describe('SettingValuesController', () => {
     });
 
     it('should treat non-"true" reveal as false', async () => {
-      jest.spyOn(service, 'getValue').mockResolvedValue(mockValueResponse as any);
+      jest
+        .spyOn(service, 'getValue')
+        .mockResolvedValue(mockValueResponse as any);
 
       await controller.getValue('setting-1', 'env-1', 'false');
 
-      expect(service.getValue).toHaveBeenCalledWith('setting-1', 'env-1', false);
+      expect(service.getValue).toHaveBeenCalledWith(
+        'setting-1',
+        'env-1',
+        false,
+      );
     });
   });
 
@@ -116,23 +136,32 @@ describe('SettingValuesController', () => {
 
   describe('rollback', () => {
     it('should call service with parsed version', async () => {
-      jest.spyOn(service, 'rollback').mockResolvedValue(mockValueResponse as any);
+      jest
+        .spyOn(service, 'rollback')
+        .mockResolvedValue(mockValueResponse as any);
 
       const result = await controller.rollback(
-        'setting-1', 'env-1', '1',
+        'setting-1',
+        'env-1',
+        '1',
         mockUser as any,
       );
 
       expect(service.rollback).toHaveBeenCalledWith(
-        'setting-1', 'env-1', 1, 'user-1',
+        'setting-1',
+        'env-1',
+        1,
+        'user-1',
       );
       expect(result).toEqual(mockValueResponse);
     });
 
     it('should propagate NotFoundException', async () => {
-      jest.spyOn(service, 'rollback').mockRejectedValue(
-        new NotFoundException('Version 99 not found in history'),
-      );
+      jest
+        .spyOn(service, 'rollback')
+        .mockRejectedValue(
+          new NotFoundException('Version 99 not found in history'),
+        );
 
       await expect(
         controller.rollback('setting-1', 'env-1', '99', mockUser as any),

@@ -44,13 +44,16 @@ export class SettingValuesService {
       where: { id: environmentId, deleted_at: null },
     });
     if (!environment) {
-      throw new NotFoundException(`Environment with ID "${environmentId}" not found`);
+      throw new NotFoundException(
+        `Environment with ID "${environmentId}" not found`,
+      );
     }
 
     // Encrypt value if SECURE type
-    const storedValue = setting.type === SettingType.SECURE
-      ? this.encryptionService.encrypt(dto.value)
-      : dto.value;
+    const storedValue =
+      setting.type === SettingType.SECURE
+        ? this.encryptionService.encrypt(dto.value)
+        : dto.value;
 
     // Check if value already exists for this setting+env
     const existing = await this.prisma.setting_value.findFirst({
@@ -195,11 +198,17 @@ export class SettingValuesService {
     }
 
     // Use setValue to create a new version with the old value
-    return this.setValue(settingId, environmentId, {
-      value: setting.type === SettingType.SECURE
-        ? targetEntry.value // Already encrypted in history
-        : targetEntry.value,
-      change_reason: `Rolled back to version ${targetVersion}`,
-    }, userId);
+    return this.setValue(
+      settingId,
+      environmentId,
+      {
+        value:
+          setting.type === SettingType.SECURE
+            ? targetEntry.value // Already encrypted in history
+            : targetEntry.value,
+        change_reason: `Rolled back to version ${targetVersion}`,
+      },
+      userId,
+    );
   }
 }

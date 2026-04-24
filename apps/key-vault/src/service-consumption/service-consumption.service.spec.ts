@@ -45,7 +45,10 @@ describe('ServiceConsumptionService', () => {
 
   describe('getServiceSettings', () => {
     it('should return only STATIC settings for a service', async () => {
-      prisma.environment.findFirst.mockResolvedValue({ id: 'env-1', name: 'production' });
+      prisma.environment.findFirst.mockResolvedValue({
+        id: 'env-1',
+        name: 'production',
+      });
       prisma.setting.findMany.mockResolvedValue(mockStaticSettings);
 
       const result = await service.getServiceSettings('auth', 'production');
@@ -53,14 +56,17 @@ describe('ServiceConsumptionService', () => {
       expect(result.service_name).toBe('auth');
       expect(result.environment).toBe('production');
       expect(result.settings).toHaveLength(2);
-      expect(result.settings[0]).toEqual({ key: 'SMTP_HOST', value: 'smtp.mailtrap.io' });
+      expect(result.settings[0]).toEqual({
+        key: 'SMTP_HOST',
+        value: 'smtp.mailtrap.io',
+      });
       expect(result.settings[1]).toEqual({ key: 'SMTP_PORT', value: '587' });
     });
 
     it('should throw BadRequestException if environment is missing', async () => {
-      await expect(
-        service.getServiceSettings('auth', ''),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.getServiceSettings('auth', '')).rejects.toThrow(
+        BadRequestException,
+      );
     });
 
     it('should throw NotFoundException if environment not found', async () => {
@@ -72,7 +78,10 @@ describe('ServiceConsumptionService', () => {
     });
 
     it('should throw NotFoundException if no settings found', async () => {
-      prisma.environment.findFirst.mockResolvedValue({ id: 'env-1', name: 'production' });
+      prisma.environment.findFirst.mockResolvedValue({
+        id: 'env-1',
+        name: 'production',
+      });
       prisma.setting.findMany.mockResolvedValue([]);
 
       await expect(
@@ -83,7 +92,10 @@ describe('ServiceConsumptionService', () => {
 
   describe('getSingleSetting', () => {
     it('should return a single STATIC setting value', async () => {
-      prisma.environment.findFirst.mockResolvedValue({ id: 'env-1', name: 'production' });
+      prisma.environment.findFirst.mockResolvedValue({
+        id: 'env-1',
+        name: 'production',
+      });
       prisma.setting.findMany.mockResolvedValue([
         {
           id: 's-1',
@@ -94,7 +106,11 @@ describe('ServiceConsumptionService', () => {
         },
       ]);
 
-      const result = await service.getSingleSetting('auth', 'SMTP_HOST', 'production');
+      const result = await service.getSingleSetting(
+        'auth',
+        'SMTP_HOST',
+        'production',
+      );
 
       expect(result).toEqual({ key: 'SMTP_HOST', value: 'smtp.mailtrap.io' });
     });
@@ -106,7 +122,10 @@ describe('ServiceConsumptionService', () => {
     });
 
     it('should throw NotFoundException if setting not found', async () => {
-      prisma.environment.findFirst.mockResolvedValue({ id: 'env-1', name: 'production' });
+      prisma.environment.findFirst.mockResolvedValue({
+        id: 'env-1',
+        name: 'production',
+      });
       prisma.setting.findMany.mockResolvedValue([]);
 
       await expect(
@@ -115,7 +134,10 @@ describe('ServiceConsumptionService', () => {
     });
 
     it('should throw NotFoundException for SECURE setting', async () => {
-      prisma.environment.findFirst.mockResolvedValue({ id: 'env-1', name: 'production' });
+      prisma.environment.findFirst.mockResolvedValue({
+        id: 'env-1',
+        name: 'production',
+      });
       prisma.setting.findMany.mockResolvedValue([
         {
           id: 's-3',

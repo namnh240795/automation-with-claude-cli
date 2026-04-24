@@ -36,12 +36,22 @@ describe('SettingValuesService', () => {
     prisma = {
       setting: { findUnique: jest.fn() },
       environment: { findUnique: jest.fn() },
-      setting_value: { findFirst: jest.fn(), delete: jest.fn(), create: jest.fn() },
-      setting_value_history: { create: jest.fn(), findFirst: jest.fn(), findMany: jest.fn() },
-      $transaction: jest.fn((fn) => fn({
-        setting_value: { delete: jest.fn(), create: jest.fn() },
-        setting_value_history: { create: jest.fn() },
-      })),
+      setting_value: {
+        findFirst: jest.fn(),
+        delete: jest.fn(),
+        create: jest.fn(),
+      },
+      setting_value_history: {
+        create: jest.fn(),
+        findFirst: jest.fn(),
+        findMany: jest.fn(),
+      },
+      $transaction: jest.fn((fn) =>
+        fn({
+          setting_value: { delete: jest.fn(), create: jest.fn() },
+          setting_value_history: { create: jest.fn() },
+        }),
+      ),
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -71,17 +81,31 @@ describe('SettingValuesService', () => {
       prisma.$transaction.mockImplementation(async (fn) => {
         const tx = {
           setting_value_history: { create: jest.fn() },
-          setting_value: { delete: jest.fn(), create: jest.fn().mockResolvedValue({
-            id: 'sv-1', setting_id: 'setting-1', environment_id: 'env-1',
-            value: 'encrypted-value', version: 1, change_reason: 'Initial', created_at: new Date(),
-          }) },
+          setting_value: {
+            delete: jest.fn(),
+            create: jest.fn().mockResolvedValue({
+              id: 'sv-1',
+              setting_id: 'setting-1',
+              environment_id: 'env-1',
+              value: 'encrypted-value',
+              version: 1,
+              change_reason: 'Initial',
+              created_at: new Date(),
+            }),
+          },
         };
         return fn(tx);
       });
 
-      const result = await service.setValue('setting-1', 'env-1', {
-        value: 'my-secret', change_reason: 'Initial',
-      }, 'user-1');
+      const result = await service.setValue(
+        'setting-1',
+        'env-1',
+        {
+          value: 'my-secret',
+          change_reason: 'Initial',
+        },
+        'user-1',
+      );
 
       expect(result.version).toBe(1);
       expect(result.value).toBe('••••••••'); // Masked
@@ -91,8 +115,13 @@ describe('SettingValuesService', () => {
       prisma.setting.findUnique.mockResolvedValue(mockSetting);
       prisma.environment.findUnique.mockResolvedValue(mockEnvironment);
       prisma.setting_value.findFirst.mockResolvedValue({
-        id: 'sv-1', setting_id: 'setting-1', environment_id: 'env-1',
-        value: 'old-encrypted', version: 1, change_reason: null, created_by: 'user-1',
+        id: 'sv-1',
+        setting_id: 'setting-1',
+        environment_id: 'env-1',
+        value: 'old-encrypted',
+        version: 1,
+        change_reason: null,
+        created_by: 'user-1',
       });
       prisma.$transaction.mockImplementation(async (fn) => {
         const tx = {
@@ -100,17 +129,28 @@ describe('SettingValuesService', () => {
           setting_value: {
             delete: jest.fn(),
             create: jest.fn().mockResolvedValue({
-              id: 'sv-2', setting_id: 'setting-1', environment_id: 'env-1',
-              value: 'new-encrypted', version: 2, change_reason: 'Rotated', created_at: new Date(),
+              id: 'sv-2',
+              setting_id: 'setting-1',
+              environment_id: 'env-1',
+              value: 'new-encrypted',
+              version: 2,
+              change_reason: 'Rotated',
+              created_at: new Date(),
             }),
           },
         };
         return fn(tx);
       });
 
-      const result = await service.setValue('setting-1', 'env-1', {
-        value: 'new-secret', change_reason: 'Rotated',
-      }, 'user-1');
+      const result = await service.setValue(
+        'setting-1',
+        'env-1',
+        {
+          value: 'new-secret',
+          change_reason: 'Rotated',
+        },
+        'user-1',
+      );
 
       expect(result.version).toBe(2);
     });
@@ -122,17 +162,30 @@ describe('SettingValuesService', () => {
       prisma.$transaction.mockImplementation(async (fn) => {
         const tx = {
           setting_value_history: { create: jest.fn() },
-          setting_value: { delete: jest.fn(), create: jest.fn().mockResolvedValue({
-            id: 'sv-3', setting_id: 'setting-2', environment_id: 'env-1',
-            value: 'smtp.mailtrap.io', version: 1, change_reason: null, created_at: new Date(),
-          }) },
+          setting_value: {
+            delete: jest.fn(),
+            create: jest.fn().mockResolvedValue({
+              id: 'sv-3',
+              setting_id: 'setting-2',
+              environment_id: 'env-1',
+              value: 'smtp.mailtrap.io',
+              version: 1,
+              change_reason: null,
+              created_at: new Date(),
+            }),
+          },
         };
         return fn(tx);
       });
 
-      const result = await service.setValue('setting-2', 'env-1', {
-        value: 'smtp.mailtrap.io',
-      }, 'user-1');
+      const result = await service.setValue(
+        'setting-2',
+        'env-1',
+        {
+          value: 'smtp.mailtrap.io',
+        },
+        'user-1',
+      );
 
       expect(result.value).toBe('smtp.mailtrap.io'); // Not masked
     });
@@ -150,7 +203,12 @@ describe('SettingValuesService', () => {
       prisma.environment.findUnique.mockResolvedValue(null);
 
       await expect(
-        service.setValue('setting-1', 'nonexistent', { value: 'test' }, 'user-1'),
+        service.setValue(
+          'setting-1',
+          'nonexistent',
+          { value: 'test' },
+          'user-1',
+        ),
       ).rejects.toThrow(NotFoundException);
     });
   });
@@ -159,8 +217,13 @@ describe('SettingValuesService', () => {
     it('should mask SECURE values by default', async () => {
       prisma.setting.findUnique.mockResolvedValue(mockSetting);
       prisma.setting_value.findFirst.mockResolvedValue({
-        id: 'sv-1', setting_id: 'setting-1', environment_id: 'env-1',
-        value: encryptionService.encrypt('secret'), version: 1, change_reason: null, created_at: new Date(),
+        id: 'sv-1',
+        setting_id: 'setting-1',
+        environment_id: 'env-1',
+        value: encryptionService.encrypt('secret'),
+        version: 1,
+        change_reason: null,
+        created_at: new Date(),
       });
 
       const result = await service.getValue('setting-1', 'env-1');
@@ -173,8 +236,13 @@ describe('SettingValuesService', () => {
       const encrypted = encryptionService.encrypt(plaintext);
       prisma.setting.findUnique.mockResolvedValue(mockSetting);
       prisma.setting_value.findFirst.mockResolvedValue({
-        id: 'sv-1', setting_id: 'setting-1', environment_id: 'env-1',
-        value: encrypted, version: 1, change_reason: null, created_at: new Date(),
+        id: 'sv-1',
+        setting_id: 'setting-1',
+        environment_id: 'env-1',
+        value: encrypted,
+        version: 1,
+        change_reason: null,
+        created_at: new Date(),
       });
 
       const result = await service.getValue('setting-1', 'env-1', true);
@@ -185,8 +253,13 @@ describe('SettingValuesService', () => {
     it('should return STATIC values as-is', async () => {
       prisma.setting.findUnique.mockResolvedValue(mockStaticSetting);
       prisma.setting_value.findFirst.mockResolvedValue({
-        id: 'sv-2', setting_id: 'setting-2', environment_id: 'env-1',
-        value: 'smtp.mailtrap.io', version: 1, change_reason: null, created_at: new Date(),
+        id: 'sv-2',
+        setting_id: 'setting-2',
+        environment_id: 'env-1',
+        value: 'smtp.mailtrap.io',
+        version: 1,
+        change_reason: null,
+        created_at: new Date(),
       });
 
       const result = await service.getValue('setting-2', 'env-1');
@@ -198,9 +271,9 @@ describe('SettingValuesService', () => {
       prisma.setting.findUnique.mockResolvedValue(mockSetting);
       prisma.setting_value.findFirst.mockResolvedValue(null);
 
-      await expect(
-        service.getValue('setting-1', 'env-1'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.getValue('setting-1', 'env-1')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 
@@ -208,10 +281,24 @@ describe('SettingValuesService', () => {
     it('should return version history with masked SECURE values', async () => {
       prisma.setting.findUnique.mockResolvedValue(mockSetting);
       prisma.setting_value_history.findMany.mockResolvedValue([
-        { id: 'h-1', setting_id: 'setting-1', environment_id: 'env-1',
-          value: 'encrypted1', version: 1, change_reason: 'Initial', created_at: new Date() },
-        { id: 'h-2', setting_id: 'setting-1', environment_id: 'env-1',
-          value: 'encrypted2', version: 2, change_reason: 'Rotated', created_at: new Date() },
+        {
+          id: 'h-1',
+          setting_id: 'setting-1',
+          environment_id: 'env-1',
+          value: 'encrypted1',
+          version: 1,
+          change_reason: 'Initial',
+          created_at: new Date(),
+        },
+        {
+          id: 'h-2',
+          setting_id: 'setting-1',
+          environment_id: 'env-1',
+          value: 'encrypted2',
+          version: 2,
+          change_reason: 'Rotated',
+          created_at: new Date(),
+        },
       ]);
 
       const result = await service.getHistory('setting-1', 'env-1');

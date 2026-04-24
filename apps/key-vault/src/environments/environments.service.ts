@@ -32,7 +32,9 @@ export class EnvironmentsService {
       });
     } catch (error) {
       if (error.code === 'P2002') {
-        throw new ConflictException(`Environment with name "${dto.name}" already exists`);
+        throw new ConflictException(
+          `Environment with name "${dto.name}" already exists`,
+        );
       }
       throw error;
     }

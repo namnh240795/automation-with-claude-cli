@@ -16,12 +16,16 @@ export class EncryptionService {
     const encryptionKey = this.configService.get<string>('ENCRYPTION_KEY');
 
     if (!encryptionKey) {
-      throw new Error('ENCRYPTION_KEY is not defined. Generate one with: openssl rand -hex 32');
+      throw new Error(
+        'ENCRYPTION_KEY is not defined. Generate one with: openssl rand -hex 32',
+      );
     }
 
     const keyBuffer = Buffer.from(encryptionKey, 'hex');
     if (keyBuffer.length !== 32) {
-      throw new Error('ENCRYPTION_KEY must be a 64-character hex string (32 bytes)');
+      throw new Error(
+        'ENCRYPTION_KEY must be a 64-character hex string (32 bytes)',
+      );
     }
 
     this.key = keyBuffer;
@@ -52,7 +56,10 @@ export class EncryptionService {
 
     const iv = buffer.subarray(0, IV_LENGTH);
     const authTag = buffer.subarray(buffer.length - AUTH_TAG_LENGTH);
-    const ciphertext = buffer.subarray(IV_LENGTH, buffer.length - AUTH_TAG_LENGTH);
+    const ciphertext = buffer.subarray(
+      IV_LENGTH,
+      buffer.length - AUTH_TAG_LENGTH,
+    );
 
     const decipher = crypto.createDecipheriv(ALGORITHM, this.key, iv);
     decipher.setAuthTag(authTag);

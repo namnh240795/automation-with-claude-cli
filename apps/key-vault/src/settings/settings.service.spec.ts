@@ -50,7 +50,12 @@ describe('SettingsService', () => {
       prisma.setting.create.mockResolvedValue(mockSetting);
 
       const result = await service.create(
-        { service_name: 'auth', key: 'SMTP_PASSWORD', type: SettingType.SECURE, description: 'SMTP server password' },
+        {
+          service_name: 'auth',
+          key: 'SMTP_PASSWORD',
+          type: SettingType.SECURE,
+          description: 'SMTP server password',
+        },
         'user-1',
       );
 
@@ -71,7 +76,14 @@ describe('SettingsService', () => {
       prisma.setting.create.mockRejectedValue({ code: 'P2002' });
 
       await expect(
-        service.create({ service_name: 'auth', key: 'SMTP_PASSWORD', type: SettingType.SECURE }, 'user-1'),
+        service.create(
+          {
+            service_name: 'auth',
+            key: 'SMTP_PASSWORD',
+            type: SettingType.SECURE,
+          },
+          'user-1',
+        ),
       ).rejects.toThrow(ConflictException);
     });
   });
@@ -146,7 +158,9 @@ describe('SettingsService', () => {
     it('should throw NotFoundException when not found', async () => {
       prisma.setting.findUnique.mockResolvedValue(null);
 
-      await expect(service.findOne('nonexistent')).rejects.toThrow(NotFoundException);
+      await expect(service.findOne('nonexistent')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 
@@ -156,7 +170,11 @@ describe('SettingsService', () => {
       prisma.setting.findUnique.mockResolvedValue(mockSetting);
       prisma.setting.update.mockResolvedValue(updated);
 
-      const result = await service.update('setting-1', { description: 'New description' }, 'user-1');
+      const result = await service.update(
+        'setting-1',
+        { description: 'New description' },
+        'user-1',
+      );
 
       expect(result.description).toBe('New description');
       expect(prisma.setting.update).toHaveBeenCalledWith({
@@ -198,7 +216,9 @@ describe('SettingsService', () => {
     it('should throw NotFoundException when setting not found', async () => {
       prisma.setting.findUnique.mockResolvedValue(null);
 
-      await expect(service.remove('nonexistent', 'user-1')).rejects.toThrow(NotFoundException);
+      await expect(service.remove('nonexistent', 'user-1')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 });

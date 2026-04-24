@@ -1,5 +1,11 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsOptional, Length, IsEnum } from 'class-validator';
+import {
+  IsString,
+  IsNotEmpty,
+  IsOptional,
+  Length,
+  IsEnum,
+} from 'class-validator';
 import { SettingType } from '../../common/enum';
 
 export class CreateSettingDto {
@@ -15,12 +21,19 @@ export class CreateSettingDto {
   @Length(1, 255)
   key: string;
 
-  @ApiProperty({ enum: SettingType, example: SettingType.SECURE, description: 'Setting type' })
+  @ApiProperty({
+    enum: SettingType,
+    example: SettingType.SECURE,
+    description: 'Setting type',
+  })
   @IsEnum(SettingType)
   @IsNotEmpty()
   type: SettingType;
 
-  @ApiPropertyOptional({ example: 'SMTP server password', description: 'Description' })
+  @ApiPropertyOptional({
+    example: 'SMTP server password',
+    description: 'Description',
+  })
   @IsOptional()
   @IsString()
   @Length(0, 500)

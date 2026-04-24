@@ -1,5 +1,18 @@
-import { Controller, Get, Param, Query, UseGuards, Version } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
+import {
+  Controller,
+  Get,
+  Param,
+  Query,
+  UseGuards,
+  Version,
+} from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiQuery,
+} from '@nestjs/swagger';
 import { ServiceConsumptionService } from './service-consumption.service';
 import { JwtAuthGuard } from '@app/auth-utilities';
 import { AuthUser, JwtPayloadDto } from '@app/auth-utilities';
@@ -19,7 +32,11 @@ export class ServiceConsumptionController {
   @ApiResponse({ status: 200, description: 'Success' })
   @ApiResponse({ status: 400, description: 'Missing environment parameter' })
   @ApiResponse({ status: 404, description: 'Service or environment not found' })
-  @ApiQuery({ name: 'environment', type: String, description: 'Environment name (required)' })
+  @ApiQuery({
+    name: 'environment',
+    type: String,
+    description: 'Environment name (required)',
+  })
   getServiceSettings(
     @Param('serviceName') serviceName: string,
     @Query('environment') environment: string,
@@ -37,7 +54,11 @@ export class ServiceConsumptionController {
   @ApiResponse({ status: 200, description: 'Success' })
   @ApiResponse({ status: 400, description: 'Missing environment parameter' })
   @ApiResponse({ status: 404, description: 'Setting not found' })
-  @ApiQuery({ name: 'environment', type: String, description: 'Environment name (required)' })
+  @ApiQuery({
+    name: 'environment',
+    type: String,
+    description: 'Environment name (required)',
+  })
   getSingleSetting(
     @Param('serviceName') serviceName: string,
     @Param('key') key: string,

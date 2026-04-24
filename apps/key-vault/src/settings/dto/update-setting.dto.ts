@@ -8,7 +8,10 @@ export class UpdateSettingDto {
   @IsEnum(SettingType)
   type?: SettingType;
 
-  @ApiPropertyOptional({ example: 'Updated description', description: 'Description' })
+  @ApiPropertyOptional({
+    example: 'Updated description',
+    description: 'Description',
+  })
   @IsOptional()
   @IsString()
   @Length(0, 500)

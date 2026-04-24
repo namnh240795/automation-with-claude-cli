@@ -60,13 +60,21 @@ describe('SettingsController', () => {
       jest.spyOn(service, 'create').mockResolvedValue(mockSetting as any);
 
       const result = await controller.create(
-        { service_name: 'auth', key: 'SMTP_PASSWORD', type: SettingType.SECURE },
+        {
+          service_name: 'auth',
+          key: 'SMTP_PASSWORD',
+          type: SettingType.SECURE,
+        },
         mockUser as any,
       );
 
       expect(result).toEqual(mockSetting);
       expect(service.create).toHaveBeenCalledWith(
-        { service_name: 'auth', key: 'SMTP_PASSWORD', type: SettingType.SECURE },
+        {
+          service_name: 'auth',
+          key: 'SMTP_PASSWORD',
+          type: SettingType.SECURE,
+        },
         'user-1',
       );
     });
@@ -103,10 +111,18 @@ describe('SettingsController', () => {
       const updated = { ...mockSetting, description: 'New' };
       jest.spyOn(service, 'update').mockResolvedValue(updated as any);
 
-      const result = await controller.update('setting-1', { description: 'New' }, mockUser as any);
+      const result = await controller.update(
+        'setting-1',
+        { description: 'New' },
+        mockUser as any,
+      );
 
       expect(result.description).toBe('New');
-      expect(service.update).toHaveBeenCalledWith('setting-1', { description: 'New' }, 'user-1');
+      expect(service.update).toHaveBeenCalledWith(
+        'setting-1',
+        { description: 'New' },
+        'user-1',
+      );
     });
   });
 

@@ -72,7 +72,9 @@ describe('EnvironmentsController', () => {
 
   describe('findAll', () => {
     it('should return all environments', async () => {
-      jest.spyOn(service, 'findAll').mockResolvedValue([mockEnvironment] as any);
+      jest
+        .spyOn(service, 'findAll')
+        .mockResolvedValue([mockEnvironment] as any);
 
       const result = await controller.findAll();
 
@@ -96,10 +98,18 @@ describe('EnvironmentsController', () => {
       const updated = { ...mockEnvironment, name: 'prod' };
       jest.spyOn(service, 'update').mockResolvedValue(updated as any);
 
-      const result = await controller.update('env-1', { name: 'prod' }, mockUser as any);
+      const result = await controller.update(
+        'env-1',
+        { name: 'prod' },
+        mockUser as any,
+      );
 
       expect(result.name).toBe('prod');
-      expect(service.update).toHaveBeenCalledWith('env-1', { name: 'prod' }, 'user-1');
+      expect(service.update).toHaveBeenCalledWith(
+        'env-1',
+        { name: 'prod' },
+        'user-1',
+      );
     });
   });
 

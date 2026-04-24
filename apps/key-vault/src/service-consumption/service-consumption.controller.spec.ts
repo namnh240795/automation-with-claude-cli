@@ -60,7 +60,11 @@ describe('ServiceConsumptionController', () => {
         .spyOn(service, 'getServiceSettings')
         .mockResolvedValue(mockSettingsResponse as any);
 
-      const result = await controller.getServiceSettings('auth', 'production', mockUser as any);
+      const result = await controller.getServiceSettings(
+        'auth',
+        'production',
+        mockUser as any,
+      );
 
       expect(service.getServiceSettings).toHaveBeenCalledWith(
         'auth',
@@ -118,7 +122,12 @@ describe('ServiceConsumptionController', () => {
         .mockRejectedValue(new NotFoundException('Not found'));
 
       await expect(
-        controller.getSingleSetting('auth', 'SMTP_PASSWORD', 'production', mockUser as any),
+        controller.getSingleSetting(
+          'auth',
+          'SMTP_PASSWORD',
+          'production',
+          mockUser as any,
+        ),
       ).rejects.toThrow(NotFoundException);
     });
   });

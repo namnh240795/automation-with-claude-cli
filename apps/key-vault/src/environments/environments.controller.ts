@@ -1,14 +1,31 @@
 import {
-  Controller, Get, Post, Patch, Delete,
-  Body, Param, UseGuards, Version, HttpCode, HttpStatus,
+  Controller,
+  Get,
+  Post,
+  Patch,
+  Delete,
+  Body,
+  Param,
+  UseGuards,
+  Version,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import {
-  ApiTags, ApiOperation, ApiResponse, ApiBearerAuth,
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { EnvironmentsService } from './environments.service';
 import { CreateEnvironmentDto, UpdateEnvironmentDto } from './dto';
 import { JwtAuthGuard } from '@app/auth-utilities';
-import { AuthUser, JwtPayloadDto, Roles, RolesGuard } from '@app/auth-utilities';
+import {
+  AuthUser,
+  JwtPayloadDto,
+  Roles,
+  RolesGuard,
+} from '@app/auth-utilities';
 
 @ApiTags('Environments')
 @ApiBearerAuth()
@@ -23,10 +40,7 @@ export class EnvironmentsController {
   @ApiOperation({ summary: 'Create environment' })
   @ApiResponse({ status: 201, description: 'Created' })
   @ApiResponse({ status: 409, description: 'Name already exists' })
-  create(
-    @Body() dto: CreateEnvironmentDto,
-    @AuthUser() user: JwtPayloadDto,
-  ) {
+  create(@Body() dto: CreateEnvironmentDto, @AuthUser() user: JwtPayloadDto) {
     return this.environmentsService.create(dto, user.sub);
   }
 
