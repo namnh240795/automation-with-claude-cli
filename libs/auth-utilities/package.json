@@ -1,0 +1,20 @@
+{
+  "name": "@app/auth-utilities",
+  "version": "1.0.0",
+  "description": "Auth utilities - JWT guards, decorators, password hashing",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "echo \"No build required\""
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/passport": "^11.0.0",
+    "@nestjs/config": "^3.0.0",
+    "@nestjs/jwt": "^11.0.0",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "bcrypt": "^6.0.0"
+  }
+}
