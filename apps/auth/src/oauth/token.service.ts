@@ -35,6 +35,7 @@ export class TokenService {
     email: string;
     first_name?: string;
     last_name?: string;
+    roles?: string[];
     client_id: string;
     scope: string;
   }): Promise<{ token: string; expires_at: Date }> {
@@ -49,6 +50,7 @@ export class TokenService {
       email: data.email,
       first_name: data.first_name,
       last_name: data.last_name,
+      roles: data.roles,
       iat: now,
       exp: now + expiresIn,
       jti: jti, // Add unique identifier
@@ -254,6 +256,7 @@ export class TokenService {
           email: true,
           first_name: true,
           last_name: true,
+          role: true,
         },
       }),
       this.prisma.oAuthClient.findUnique({
@@ -285,6 +288,7 @@ export class TokenService {
         email: user.email,
         first_name: user.first_name || undefined,
         last_name: user.last_name || undefined,
+        roles: [user.role],
         client_id: data.client_id,
         scope: refreshTokenData.scope,
       });

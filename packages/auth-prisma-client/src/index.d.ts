@@ -1761,6 +1761,7 @@ export namespace Prisma {
     password_hash: string | null
     first_name: string | null
     last_name: string | null
+    role: string | null
     is_active: boolean | null
     email_verified: boolean | null
     created_at: Date | null
@@ -1773,6 +1774,7 @@ export namespace Prisma {
     password_hash: string | null
     first_name: string | null
     last_name: string | null
+    role: string | null
     is_active: boolean | null
     email_verified: boolean | null
     created_at: Date | null
@@ -1785,6 +1787,7 @@ export namespace Prisma {
     password_hash: number
     first_name: number
     last_name: number
+    role: number
     is_active: number
     email_verified: number
     created_at: number
@@ -1799,6 +1802,7 @@ export namespace Prisma {
     password_hash?: true
     first_name?: true
     last_name?: true
+    role?: true
     is_active?: true
     email_verified?: true
     created_at?: true
@@ -1811,6 +1815,7 @@ export namespace Prisma {
     password_hash?: true
     first_name?: true
     last_name?: true
+    role?: true
     is_active?: true
     email_verified?: true
     created_at?: true
@@ -1823,6 +1828,7 @@ export namespace Prisma {
     password_hash?: true
     first_name?: true
     last_name?: true
+    role?: true
     is_active?: true
     email_verified?: true
     created_at?: true
@@ -1908,6 +1914,7 @@ export namespace Prisma {
     password_hash: string
     first_name: string | null
     last_name: string | null
+    role: string
     is_active: boolean
     email_verified: boolean
     created_at: Date
@@ -1937,6 +1944,7 @@ export namespace Prisma {
     password_hash?: boolean
     first_name?: boolean
     last_name?: boolean
+    role?: boolean
     is_active?: boolean
     email_verified?: boolean
     created_at?: boolean
@@ -1957,6 +1965,7 @@ export namespace Prisma {
     password_hash?: boolean
     first_name?: boolean
     last_name?: boolean
+    role?: boolean
     is_active?: boolean
     email_verified?: boolean
     created_at?: boolean
@@ -1969,6 +1978,7 @@ export namespace Prisma {
     password_hash?: boolean
     first_name?: boolean
     last_name?: boolean
+    role?: boolean
     is_active?: boolean
     email_verified?: boolean
     created_at?: boolean
@@ -1981,13 +1991,14 @@ export namespace Prisma {
     password_hash?: boolean
     first_name?: boolean
     last_name?: boolean
+    role?: boolean
     is_active?: boolean
     email_verified?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password_hash" | "first_name" | "last_name" | "is_active" | "email_verified" | "created_at" | "updated_at", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password_hash" | "first_name" | "last_name" | "role" | "is_active" | "email_verified" | "created_at" | "updated_at", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     refresh_tokens?: boolean | User$refresh_tokensArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
@@ -2018,6 +2029,7 @@ export namespace Prisma {
       password_hash: string
       first_name: string | null
       last_name: string | null
+      role: string
       is_active: boolean
       email_verified: boolean
       created_at: Date
@@ -2457,6 +2469,7 @@ export namespace Prisma {
     readonly password_hash: FieldRef<"User", 'String'>
     readonly first_name: FieldRef<"User", 'String'>
     readonly last_name: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'String'>
     readonly is_active: FieldRef<"User", 'Boolean'>
     readonly email_verified: FieldRef<"User", 'Boolean'>
     readonly created_at: FieldRef<"User", 'DateTime'>
@@ -12415,6 +12428,7 @@ export namespace Prisma {
     password_hash: 'password_hash',
     first_name: 'first_name',
     last_name: 'last_name',
+    role: 'role',
     is_active: 'is_active',
     email_verified: 'email_verified',
     created_at: 'created_at',
@@ -12659,6 +12673,7 @@ export namespace Prisma {
     password_hash?: StringFilter<"User"> | string
     first_name?: StringNullableFilter<"User"> | string | null
     last_name?: StringNullableFilter<"User"> | string | null
+    role?: StringFilter<"User"> | string
     is_active?: BoolFilter<"User"> | boolean
     email_verified?: BoolFilter<"User"> | boolean
     created_at?: DateTimeFilter<"User"> | Date | string
@@ -12678,6 +12693,7 @@ export namespace Prisma {
     password_hash?: SortOrder
     first_name?: SortOrderInput | SortOrder
     last_name?: SortOrderInput | SortOrder
+    role?: SortOrder
     is_active?: SortOrder
     email_verified?: SortOrder
     created_at?: SortOrder
@@ -12700,6 +12716,7 @@ export namespace Prisma {
     password_hash?: StringFilter<"User"> | string
     first_name?: StringNullableFilter<"User"> | string | null
     last_name?: StringNullableFilter<"User"> | string | null
+    role?: StringFilter<"User"> | string
     is_active?: BoolFilter<"User"> | boolean
     email_verified?: BoolFilter<"User"> | boolean
     created_at?: DateTimeFilter<"User"> | Date | string
@@ -12719,6 +12736,7 @@ export namespace Prisma {
     password_hash?: SortOrder
     first_name?: SortOrderInput | SortOrder
     last_name?: SortOrderInput | SortOrder
+    role?: SortOrder
     is_active?: SortOrder
     email_verified?: SortOrder
     created_at?: SortOrder
@@ -12737,6 +12755,7 @@ export namespace Prisma {
     password_hash?: StringWithAggregatesFilter<"User"> | string
     first_name?: StringNullableWithAggregatesFilter<"User"> | string | null
     last_name?: StringNullableWithAggregatesFilter<"User"> | string | null
+    role?: StringWithAggregatesFilter<"User"> | string
     is_active?: BoolWithAggregatesFilter<"User"> | boolean
     email_verified?: BoolWithAggregatesFilter<"User"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -13436,6 +13455,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -13455,6 +13475,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -13474,6 +13495,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13493,6 +13515,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13512,6 +13535,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -13524,6 +13548,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13536,6 +13561,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14426,6 +14452,7 @@ export namespace Prisma {
     password_hash?: SortOrder
     first_name?: SortOrder
     last_name?: SortOrder
+    role?: SortOrder
     is_active?: SortOrder
     email_verified?: SortOrder
     created_at?: SortOrder
@@ -14438,6 +14465,7 @@ export namespace Prisma {
     password_hash?: SortOrder
     first_name?: SortOrder
     last_name?: SortOrder
+    role?: SortOrder
     is_active?: SortOrder
     email_verified?: SortOrder
     created_at?: SortOrder
@@ -14450,6 +14478,7 @@ export namespace Prisma {
     password_hash?: SortOrder
     first_name?: SortOrder
     last_name?: SortOrder
+    role?: SortOrder
     is_active?: SortOrder
     email_verified?: SortOrder
     created_at?: SortOrder
@@ -16291,6 +16320,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -16309,6 +16339,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -16343,6 +16374,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16361,6 +16393,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16379,6 +16412,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -16397,6 +16431,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -16431,6 +16466,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16449,6 +16485,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16778,6 +16815,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -16796,6 +16834,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -16899,6 +16938,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16917,6 +16957,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16998,6 +17039,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -17016,6 +17058,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -17119,6 +17162,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17137,6 +17181,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17218,6 +17263,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -17236,6 +17282,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -17339,6 +17386,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17357,6 +17405,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17438,6 +17487,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -17456,6 +17506,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -17559,6 +17610,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17577,6 +17629,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17658,6 +17711,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -17676,6 +17730,7 @@ export namespace Prisma {
     password_hash: string
     first_name?: string | null
     last_name?: string | null
+    role?: string
     is_active?: boolean
     email_verified?: boolean
     created_at?: Date | string
@@ -17779,6 +17834,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17797,6 +17853,7 @@ export namespace Prisma {
     password_hash?: StringFieldUpdateOperationsInput | string
     first_name?: NullableStringFieldUpdateOperationsInput | string | null
     last_name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     is_active?: BoolFieldUpdateOperationsInput | boolean
     email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string

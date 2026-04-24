@@ -13,6 +13,7 @@ model User {
   password_hash  String
   first_name     String?
   last_name      String?
+  role           String   @default("USER")
   is_active      Boolean  @default(true)
   email_verified Boolean  @default(false)
   created_at     DateTime @default(now())

@@ -203,6 +203,7 @@ export class OAuthService {
         email: true,
         first_name: true,
         last_name: true,
+        role: true,
       },
     });
 
@@ -220,6 +221,7 @@ export class OAuthService {
         email: user.email,
         first_name: user.first_name || undefined,
         last_name: user.last_name || undefined,
+        roles: [user.role],
         client_id,
         scope: authResult.scope,
       });
@@ -423,6 +425,7 @@ export class OAuthService {
         email: true,
         first_name: true,
         last_name: true,
+        role: true,
       },
     });
 
@@ -440,6 +443,7 @@ export class OAuthService {
         email: user.email,
         first_name: user.first_name || undefined,
         last_name: user.last_name || undefined,
+        roles: [user.role],
         client_id,
         scope: deviceCodeInfo.scope,
       });
