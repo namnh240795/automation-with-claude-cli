@@ -5,7 +5,11 @@ import { HttpException, HttpStatus } from '@nestjs/common';
  * Used to return OAuth-compliant error responses with proper status codes
  */
 export class OAuthException extends HttpException {
-  constructor(error: string, error_description: string, status: HttpStatus = HttpStatus.BAD_REQUEST) {
+  constructor(
+    error: string,
+    error_description: string,
+    status: HttpStatus = HttpStatus.BAD_REQUEST,
+  ) {
     super(
       {
         error,

@@ -1,4 +1,9 @@
-import { Injectable, BadRequestException, NotFoundException, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+  Logger,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { randomBytes, createHash } from 'crypto';
 import { TOKEN_LIFETIMES, CODE_CHALLENGE_METHODS } from './oauth.constants';
@@ -25,7 +30,9 @@ export class AuthorizationService {
     // Generate a cryptographically random authorization code
     const code = randomBytes(32).toString('base64url');
 
-    const expiresAt = new Date(Date.now() + TOKEN_LIFETIMES.AUTHORIZATION_CODE * 1000);
+    const expiresAt = new Date(
+      Date.now() + TOKEN_LIFETIMES.AUTHORIZATION_CODE * 1000,
+    );
 
     // Get the client ID from database
     const client = await this.prisma.oAuthClient.findUnique({
@@ -52,7 +59,9 @@ export class AuthorizationService {
       },
     });
 
-    this.logger.log(`Generated authorization code for user ${data.user_id}, client ${data.client_id}`);
+    this.logger.log(
+      `Generated authorization code for user ${data.user_id}, client ${data.client_id}`,
+    );
 
     return code;
   }
@@ -115,7 +124,13 @@ export class AuthorizationService {
         throw new BadRequestException('code_verifier required');
       }
 
-      if (!this.verifyCodeChallenge(data.code_verifier, authCode.code_challenge, authCode.code_challenge_method)) {
+      if (
+        !this.verifyCodeChallenge(
+          data.code_verifier,
+          authCode.code_challenge,
+          authCode.code_challenge_method,
+        )
+      ) {
         throw new BadRequestException('Invalid code_verifier');
       }
     } else if (client.require_pkce && client.is_public_client) {
@@ -144,7 +159,7 @@ export class AuthorizationService {
   private verifyCodeChallenge(
     codeVerifier: string,
     codeChallenge: string,
-    method?: string | null
+    method?: string | null,
   ): boolean {
     let expectedChallenge: string;
 

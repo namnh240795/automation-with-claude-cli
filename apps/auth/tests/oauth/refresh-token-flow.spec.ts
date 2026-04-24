@@ -30,23 +30,28 @@ test.describe('OAuth 2.0 Refresh Token Flow', () => {
     expect(refreshClient.grant_types).toContain('refresh_token');
   });
 
-  test('should receive refresh token with offline_access scope', async ({ request }) => {
+  test('should receive refresh token with offline_access scope', async ({
+    request,
+  }) => {
     // Note: This would require a full authorization code flow
     // For E2E testing, we're testing the token endpoint directly
 
     // Simulate successful token exchange with offline_access
-    const tokenResponse = await request.post('http://localhost:3001/auth/oauth/token', {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const tokenResponse = await request.post(
+      'http://localhost:3001/auth/oauth/token',
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: new URLSearchParams({
+          grant_type: 'authorization_code',
+          code: 'mock_code_with_offline_access',
+          redirect_uri: 'http://localhost:3000/callback',
+          client_id: refreshClient.client_id,
+          client_secret: refreshClient.client_secret,
+        }).toString(),
       },
-      data: new URLSearchParams({
-        grant_type: 'authorization_code',
-        code: 'mock_code_with_offline_access',
-        redirect_uri: 'http://localhost:3000/callback',
-        client_id: refreshClient.client_id,
-        client_secret: refreshClient.client_secret,
-      }).toString(),
-    });
+    );
 
     // Will fail with invalid code but verifies endpoint
     expect(tokenResponse.status()).toBeGreaterThanOrEqual(400);
@@ -58,7 +63,7 @@ test.describe('OAuth 2.0 Refresh Token Flow', () => {
         refresh_token: 'invalid_refresh_token',
         client_id: refreshClient.client_id,
         client_secret: refreshClient.client_secret,
-      })
+      }),
     ).rejects.toThrow();
   });
 
@@ -68,7 +73,7 @@ test.describe('OAuth 2.0 Refresh Token Flow', () => {
         refresh_token: 'some_refresh_token',
         client_id: refreshClient.client_id,
         client_secret: 'wrong_secret',
-      })
+      }),
     ).rejects.toThrow();
   });
 
@@ -77,23 +82,26 @@ test.describe('OAuth 2.0 Refresh Token Flow', () => {
       oauthHelper.refreshToken({
         refresh_token: 'some_refresh_token',
         client_id: 'non_existent_client',
-      })
+      }),
     ).rejects.toThrow();
   });
 
   test('should handle refresh token rotation', async ({ request }) => {
     // Test that refresh token endpoint returns both access and refresh tokens
-    const response = await request.post('http://localhost:3001/auth/oauth/token', {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await request.post(
+      'http://localhost:3001/auth/oauth/token',
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: new URLSearchParams({
+          grant_type: 'refresh_token',
+          refresh_token: 'test_refresh_token',
+          client_id: refreshClient.client_id,
+          client_secret: refreshClient.client_secret,
+        }),
       },
-      data: new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token: 'test_refresh_token',
-        client_id: refreshClient.client_id,
-        client_secret: refreshClient.client_secret,
-      }),
-    });
+    );
 
     // Will fail with invalid token but verifies response structure
     if (response.status() === 400) {
@@ -135,23 +143,26 @@ test.describe('Refresh Token Security', () => {
         refresh_token: 'test_refresh_token',
         client_id: publicClient.client_id,
         // No client_secret for public client
-      })
+      }),
     ).rejects.toThrow(); // Will fail due to invalid token, but endpoint is accessible
   });
 
   test('should require secret for confidential client', async ({ request }) => {
     // Confidential client MUST provide secret
-    const response = await request.post('http://localhost:3001/auth/oauth/token', {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await request.post(
+      'http://localhost:3001/auth/oauth/token',
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: new URLSearchParams({
+          grant_type: 'refresh_token',
+          refresh_token: 'test_token',
+          client_id: confidentialClient.client_id,
+          // Missing client_secret
+        }),
       },
-      data: new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token: 'test_token',
-        client_id: confidentialClient.client_id,
-        // Missing client_secret
-      }),
-    });
+    );
 
     // Should fail with invalid_client error
     // OAuth 2.0 spec allows both 400 and 401 for invalid_client
@@ -160,17 +171,20 @@ test.describe('Refresh Token Security', () => {
 
   test('should bind refresh token to client_id', async ({ request }) => {
     // Try to use refresh token with different client
-    const response = await request.post('http://localhost:3001/auth/oauth/token', {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await request.post(
+      'http://localhost:3001/auth/oauth/token',
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: new URLSearchParams({
+          grant_type: 'refresh_token',
+          refresh_token: 'stolen_refresh_token',
+          client_id: 'different_client_id',
+          client_secret: 'some_secret',
+        }),
       },
-      data: new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token: 'stolen_refresh_token',
-        client_id: 'different_client_id',
-        client_secret: 'some_secret',
-      }),
-    });
+    );
 
     // Should fail - token bound to original client
     expect(response.status()).toBeGreaterThanOrEqual(400);
@@ -215,7 +229,9 @@ test.describe('Refresh Token with Token Introspection', () => {
     await helper.revokeToken('refresh_token_to_revoke');
 
     // Verify it's inactive after revocation
-    const introspection = await helper.introspectToken('refresh_token_to_revoke');
+    const introspection = await helper.introspectToken(
+      'refresh_token_to_revoke',
+    );
     expect(introspection.active).toBe(false);
   });
 
@@ -226,7 +242,7 @@ test.describe('Refresh Token with Token Introspection', () => {
         refresh_token: 'revoked_refresh_token',
         client_id: testClient.client_id,
         client_secret: testClient.client_secret,
-      })
+      }),
     ).rejects.toThrow();
   });
 });

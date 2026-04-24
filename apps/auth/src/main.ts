@@ -15,7 +15,7 @@ import { AppModule } from './app.module';
 export async function bootstrap() {
   const fastifyAdapter = new FastifyAdapter();
 
-   // Register multipart plugin for file uploads BEFORE creating NestJS app
+  // Register multipart plugin for file uploads BEFORE creating NestJS app
   await fastifyAdapter.getInstance().register(require('@fastify/multipart'), {
     attachFieldsToBody: false,
     limits: {
@@ -40,21 +40,21 @@ export async function bootstrap() {
   app.setGlobalPrefix(servicePrefix);
 
   // Enable global validation pipe with transform for DTO auto-parsing
-  app.useGlobalPipes(new ValidationPipe({
-    transform: true,
-    transformOptions: {
-      enableImplicitConversion: true,
-    },
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
+    }),
+  );
 
   // Configure CORS
   const allowedOrigins = configService
     .get<string>('CORS_ORIGIN', 'http://localhost:3000')
     .split(',');
 
-  const rawWildcardOrigins = configService.get<string>(
-    'CORS_ORIGIN_REGEX',
-  );
+  const rawWildcardOrigins = configService.get<string>('CORS_ORIGIN_REGEX');
   const envWildcardPatterns = rawWildcardOrigins
     ? rawWildcardOrigins
         .split(',')
@@ -107,7 +107,9 @@ export async function bootstrap() {
 
   // Configure Swagger documentation
   const config = new DocumentBuilder()
-    .setTitle(`${servicePrefix.toUpperCase()} API - Authentication & Identity Management`)
+    .setTitle(
+      `${servicePrefix.toUpperCase()} API - Authentication & Identity Management`,
+    )
     .setDescription(
       `
       `.trim(),
@@ -118,16 +120,14 @@ export async function bootstrap() {
       'https://github.com/namnh240795/automation-with-claude-cli/issues',
       'support@example.com',
     )
-    .setLicense(
-      'MIT',
-      'https://opensource.org/licenses/MIT',
-    )
+    .setLicense('MIT', 'https://opensource.org/licenses/MIT')
     .addBearerAuth(
       {
         type: 'http',
         scheme: 'bearer',
         bearerFormat: 'JWT',
-        description: 'Enter your JWT access token obtained from /auth/signin endpoint',
+        description:
+          'Enter your JWT access token obtained from /auth/signin endpoint',
         name: 'Authorization',
         in: 'header',
       },
@@ -154,7 +154,9 @@ export async function bootstrap() {
   const port = +configService.get<string>('PORT', '3001') || 3001;
   await app.listen(port, '0.0.0.0');
 
-  console.log(`🚀 ${servicePrefix.toUpperCase()} service running on port ${port}`);
+  console.log(
+    `🚀 ${servicePrefix.toUpperCase()} service running on port ${port}`,
+  );
   console.log(`📖 Scalar reference: http://localhost:${port}/reference`);
   console.log(`📚 Swagger JSON: http://localhost:${port}/api-json`);
 

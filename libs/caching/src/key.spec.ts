@@ -2,7 +2,9 @@ import { CACHE_KEY } from './key';
 
 describe('CACHE_KEY enum', () => {
   it('should have OTP_EMAIL_VALIDATION_CODE property', () => {
-    expect(CACHE_KEY.OTP_EMAIL_VALIDATION_CODE).toBe('OTP_EMAIL_VALIDATION_CODE');
+    expect(CACHE_KEY.OTP_EMAIL_VALIDATION_CODE).toBe(
+      'OTP_EMAIL_VALIDATION_CODE',
+    );
   });
 
   it('should be a const enum', () => {

@@ -99,7 +99,9 @@ describe('DeviceFlowService', () => {
       expect(result).toBeDefined();
       expect(result.device_code).toBe('device-code-123456789');
       expect(result.user_code).toMatch(/^[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}$/);
-      expect(result.verification_uri).toBe('http://localhost:3001/auth/oauth/device/verify');
+      expect(result.verification_uri).toBe(
+        'http://localhost:3001/auth/oauth/device/verify',
+      );
       expect(result.verification_uri_complete).toContain(result.user_code);
       expect(result.expires_in).toBe(TOKEN_LIFETIMES.DEVICE_CODE);
       expect(result.interval).toBe(5);
@@ -115,7 +117,9 @@ describe('DeviceFlowService', () => {
       };
 
       // Act & Assert
-      await expect(service.generateDeviceCode(data)).rejects.toThrow(NotFoundException);
+      await expect(service.generateDeviceCode(data)).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 
@@ -142,7 +146,9 @@ describe('DeviceFlowService', () => {
       prismaService.oAuthDeviceCode.findUnique.mockResolvedValue(null);
 
       // Act & Assert
-      await expect(service.getDeviceCodeByUserCode('INVALID')).rejects.toThrow(NotFoundException);
+      await expect(service.getDeviceCodeByUserCode('INVALID')).rejects.toThrow(
+        NotFoundException,
+      );
     });
 
     it('should throw BadRequestException for expired device code', async () => {
@@ -153,7 +159,9 @@ describe('DeviceFlowService', () => {
       });
 
       // Act & Assert
-      await expect(service.getDeviceCodeByUserCode('ABCD-1234')).rejects.toThrow(BadRequestException);
+      await expect(
+        service.getDeviceCodeByUserCode('ABCD-1234'),
+      ).rejects.toThrow(BadRequestException);
     });
 
     it('should throw BadRequestException for already completed device code', async () => {
@@ -164,14 +172,18 @@ describe('DeviceFlowService', () => {
       });
 
       // Act & Assert
-      await expect(service.getDeviceCodeByUserCode('ABCD-1234')).rejects.toThrow(BadRequestException);
+      await expect(
+        service.getDeviceCodeByUserCode('ABCD-1234'),
+      ).rejects.toThrow(BadRequestException);
     });
   });
 
   describe('verifyDeviceCode', () => {
     it('should verify device code successfully', async () => {
       // Arrange
-      prismaService.oAuthDeviceCode.findUnique.mockResolvedValue(mockDeviceCode);
+      prismaService.oAuthDeviceCode.findUnique.mockResolvedValue(
+        mockDeviceCode,
+      );
       prismaService.oAuthDeviceCode.update.mockResolvedValue({
         ...mockDeviceCode,
         verified: true,
@@ -210,7 +222,9 @@ describe('DeviceFlowService', () => {
   describe('denyDeviceCode', () => {
     it('should mark device code as completed (denied)', async () => {
       // Arrange
-      prismaService.oAuthDeviceCode.findUnique.mockResolvedValue(mockDeviceCode);
+      prismaService.oAuthDeviceCode.findUnique.mockResolvedValue(
+        mockDeviceCode,
+      );
       prismaService.oAuthDeviceCode.update.mockResolvedValue({
         ...mockDeviceCode,
         completed_at: new Date(),
@@ -321,7 +335,9 @@ describe('DeviceFlowService', () => {
   describe('getDeviceCodeInfo', () => {
     it('should return device code info', async () => {
       // Arrange
-      prismaService.oAuthDeviceCode.findUnique.mockResolvedValue(mockDeviceCode);
+      prismaService.oAuthDeviceCode.findUnique.mockResolvedValue(
+        mockDeviceCode,
+      );
 
       // Act
       const result = await service.getDeviceCodeInfo('device-code-123456789');
@@ -367,9 +383,7 @@ describe('DeviceFlowService', () => {
   describe('getPendingDeviceCodes', () => {
     it('should return pending device codes for user', async () => {
       // Arrange
-      const deviceCodes = [
-        { ...mockDeviceCode, client: mockClient },
-      ];
+      const deviceCodes = [{ ...mockDeviceCode, client: mockClient }];
       prismaService.oAuthDeviceCode.findMany.mockResolvedValue(deviceCodes);
 
       // Act

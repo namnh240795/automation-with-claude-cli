@@ -1,4 +1,9 @@
-import { Injectable, BadRequestException, UnauthorizedException, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  UnauthorizedException,
+  Logger,
+} from '@nestjs/common';
 import { ClientService } from './client.service';
 import { AuthorizationService } from './authorization.service';
 import { TokenService } from './token.service';
@@ -34,7 +39,17 @@ export class OAuthService {
     nonce?: string;
     user_id: string;
   }): Promise<{ redirect_uri: string; code?: string; state?: string }> {
-    const { response_type, client_id, redirect_uri, scope, state, code_challenge, code_challenge_method, nonce, user_id } = data;
+    const {
+      response_type,
+      client_id,
+      redirect_uri,
+      scope,
+      state,
+      code_challenge,
+      code_challenge_method,
+      nonce,
+      user_id,
+    } = data;
 
     // Validate response_type
     if (response_type !== 'code') {
@@ -58,7 +73,12 @@ export class OAuthService {
     }
 
     // Check if client supports authorization code grant
-    if (!this.clientService.supportsGrantType(client, GRANT_TYPES.AUTHORIZATION_CODE)) {
+    if (
+      !this.clientService.supportsGrantType(
+        client,
+        GRANT_TYPES.AUTHORIZATION_CODE,
+      )
+    ) {
       throw new BadRequestException({
         error: OAUTH_ERRORS.UNAUTHORIZED_CLIENT,
         error_description: 'Client does not support authorization code grant',
@@ -144,7 +164,8 @@ export class OAuthService {
    * Handle authorization code grant
    */
   private async handleAuthorizationCodeGrant(data: any) {
-    const { code, redirect_uri, client_id, client_secret, code_verifier } = data;
+    const { code, redirect_uri, client_id, client_secret, code_verifier } =
+      data;
 
     if (!code || !redirect_uri || !client_id) {
       throw new BadRequestException({
@@ -154,7 +175,10 @@ export class OAuthService {
     }
 
     // Validate client credentials
-    const isValidClient = await this.clientService.validateClient(client_id, client_secret);
+    const isValidClient = await this.clientService.validateClient(
+      client_id,
+      client_secret,
+    );
     if (!isValidClient) {
       throw new UnauthorizedException({
         error: OAUTH_ERRORS.INVALID_CLIENT,
@@ -163,12 +187,13 @@ export class OAuthService {
     }
 
     // Validate and consume authorization code
-    const authResult = await this.authorizationService.validateAndConsumeAuthorizationCode({
-      code,
-      client_id,
-      redirect_uri,
-      code_verifier,
-    });
+    const authResult =
+      await this.authorizationService.validateAndConsumeAuthorizationCode({
+        code,
+        client_id,
+        redirect_uri,
+        code_verifier,
+      });
 
     // Get user details
     const user = await this.prisma.user.findUnique({
@@ -217,7 +242,9 @@ export class OAuthService {
       refreshToken = rt;
     }
 
-    const expiresIn = Math.floor((accessTokenExpires.getTime() - Date.now()) / 1000);
+    const expiresIn = Math.floor(
+      (accessTokenExpires.getTime() - Date.now()) / 1000,
+    );
 
     return {
       access_token: accessToken,
@@ -242,7 +269,10 @@ export class OAuthService {
     }
 
     // Validate client credentials
-    const isValidClient = await this.clientService.validateClient(client_id, client_secret);
+    const isValidClient = await this.clientService.validateClient(
+      client_id,
+      client_secret,
+    );
     if (!isValidClient) {
       throw new UnauthorizedException({
         error: OAUTH_ERRORS.INVALID_CLIENT,
@@ -279,7 +309,12 @@ export class OAuthService {
     }
 
     // Check if client supports client credentials grant
-    if (!this.clientService.supportsGrantType(client, GRANT_TYPES.CLIENT_CREDENTIALS)) {
+    if (
+      !this.clientService.supportsGrantType(
+        client,
+        GRANT_TYPES.CLIENT_CREDENTIALS,
+      )
+    ) {
       throw new BadRequestException({
         error: OAUTH_ERRORS.UNAUTHORIZED_CLIENT,
         error_description: 'Client does not support client credentials grant',
@@ -304,7 +339,9 @@ export class OAuthService {
         scope: requestedScope,
       });
 
-    const expiresIn = Math.floor((accessTokenExpires.getTime() - Date.now()) / 1000);
+    const expiresIn = Math.floor(
+      (accessTokenExpires.getTime() - Date.now()) / 1000,
+    );
 
     return {
       access_token: accessToken,
@@ -328,7 +365,8 @@ export class OAuthService {
     }
 
     // Get device code info
-    const deviceCodeInfo = await this.deviceFlowService.getDeviceCodeInfo(device_code);
+    const deviceCodeInfo =
+      await this.deviceFlowService.getDeviceCodeInfo(device_code);
 
     if (!deviceCodeInfo) {
       throw new BadRequestException({
@@ -359,21 +397,21 @@ export class OAuthService {
     if (status.status === 'pending') {
       throw new OAuthBadRequestException(
         'authorization_pending',
-        'Authorization pending'
+        'Authorization pending',
       );
     }
 
     if (status.status === 'expired') {
       throw new OAuthBadRequestException(
         OAUTH_ERRORS.EXPIRED_TOKEN,
-        'Device code has expired'
+        'Device code has expired',
       );
     }
 
     if (!status.user_id) {
       throw new OAuthBadRequestException(
         OAUTH_ERRORS.ACCESS_DENIED,
-        'Access denied'
+        'Access denied',
       );
     }
 
@@ -391,7 +429,7 @@ export class OAuthService {
     if (!user) {
       throw new OAuthBadRequestException(
         OAUTH_ERRORS.INVALID_GRANT,
-        'User not found'
+        'User not found',
       );
     }
 
@@ -427,7 +465,9 @@ export class OAuthService {
     // Mark device flow as completed
     await this.deviceFlowService.completeDeviceFlow(device_code);
 
-    const expiresIn = Math.floor((accessTokenExpires.getTime() - Date.now()) / 1000);
+    const expiresIn = Math.floor(
+      (accessTokenExpires.getTime() - Date.now()) / 1000,
+    );
 
     return {
       access_token: accessToken,
@@ -519,7 +559,9 @@ export class OAuthService {
       }),
     ]);
 
-    this.logger.log(`Revoked access for user ${userId} from client ${client_id}`);
+    this.logger.log(
+      `Revoked access for user ${userId} from client ${client_id}`,
+    );
 
     return { message: 'Client access revoked successfully' };
   }
@@ -527,7 +569,11 @@ export class OAuthService {
   /**
    * Check or create user consent
    */
-  private async checkOrCreateUserConsent(userId: string, clientId: string, scope: string) {
+  private async checkOrCreateUserConsent(
+    userId: string,
+    clientId: string,
+    scope: string,
+  ) {
     const existingConsent = await this.prisma.oAuthUserConsent.findUnique({
       where: {
         client_id_user_id: {

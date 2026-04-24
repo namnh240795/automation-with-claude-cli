@@ -12,9 +12,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: 1, // Single worker to avoid database state conflicts
-  reporter: [
-    ['list'],
-  ],
+  reporter: [['list']],
 
   use: {
     baseURL: process.env.BASE_URL || 'http://localhost:3001',

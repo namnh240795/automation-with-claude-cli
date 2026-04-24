@@ -42,10 +42,10 @@ export const OAUTH_ERRORS = {
  * OAuth 2.0 Token Lifetimes (in seconds)
  */
 export const TOKEN_LIFETIMES = {
-  AUTHORIZATION_CODE: 10 * 60,        // 10 minutes
-  ACCESS_TOKEN: 60 * 60,              // 1 hour
-  REFRESH_TOKEN: 30 * 24 * 60 * 60,   // 30 days
-  DEVICE_CODE: 15 * 60,               // 15 minutes
+  AUTHORIZATION_CODE: 10 * 60, // 10 minutes
+  ACCESS_TOKEN: 60 * 60, // 1 hour
+  REFRESH_TOKEN: 30 * 24 * 60 * 60, // 30 days
+  DEVICE_CODE: 15 * 60, // 15 minutes
 } as const;
 
 /**

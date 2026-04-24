@@ -1,4 +1,9 @@
-import { Injectable, OnModuleInit, OnModuleDestroy, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  OnModuleInit,
+  OnModuleDestroy,
+  Logger,
+} from '@nestjs/common';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 import { PrismaClient } from '@auth/prisma-client';
@@ -23,11 +28,17 @@ for (const envPath of envPaths) {
 }
 
 if (!loaded && !process.env.DATABASE_URL) {
-  console.warn('Warning: Could not load .env file from any of these paths:', envPaths);
+  console.warn(
+    'Warning: Could not load .env file from any of these paths:',
+    envPaths,
+  );
 }
 
 @Injectable()
-export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
+export class PrismaService
+  extends PrismaClient
+  implements OnModuleInit, OnModuleDestroy
+{
   private readonly logger = new Logger(PrismaService.name);
   private readonly pool: Pool;
 
@@ -35,7 +46,9 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
     const connectionString = process.env.DATABASE_URL;
 
     if (!connectionString) {
-      throw new Error('DATABASE_URL is not defined. Please check your .env file.');
+      throw new Error(
+        'DATABASE_URL is not defined. Please check your .env file.',
+      );
     }
 
     const pool = new Pool({ connectionString });

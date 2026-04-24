@@ -154,7 +154,9 @@ describe('ClientService', () => {
       };
 
       // Act & Assert
-      await expect(service.registerClient(registerDto as any)).rejects.toThrow(BadRequestException);
+      await expect(service.registerClient(registerDto as any)).rejects.toThrow(
+        BadRequestException,
+      );
     });
   });
 
@@ -178,7 +180,9 @@ describe('ClientService', () => {
       prismaService.oAuthClient.findUnique.mockResolvedValue(null);
 
       // Act & Assert
-      await expect(service.findByClientId('non-existent')).rejects.toThrow(NotFoundException);
+      await expect(service.findByClientId('non-existent')).rejects.toThrow(
+        NotFoundException,
+      );
     });
 
     it('should throw BadRequestException if client is inactive', async () => {
@@ -186,7 +190,9 @@ describe('ClientService', () => {
       prismaService.oAuthClient.findUnique.mockResolvedValue(inactiveClient);
 
       // Act & Assert
-      await expect(service.findByClientId('test-client-id')).rejects.toThrow(BadRequestException);
+      await expect(service.findByClientId('test-client-id')).rejects.toThrow(
+        BadRequestException,
+      );
     });
   });
 
@@ -198,7 +204,10 @@ describe('ClientService', () => {
       (verifyPassword as jest.Mock).mockReturnValue(true);
 
       // Act
-      const result = await service.validateClient('test-client-id', 'secret-123');
+      const result = await service.validateClient(
+        'test-client-id',
+        'secret-123',
+      );
 
       // Assert
       expect(result).toBe(true);
@@ -209,7 +218,10 @@ describe('ClientService', () => {
       prismaService.oAuthClient.findUnique.mockResolvedValue(publicClient);
 
       // Act
-      const result = await service.validateClient('public-client-id', undefined);
+      const result = await service.validateClient(
+        'public-client-id',
+        undefined,
+      );
 
       // Assert
       expect(result).toBe(true);
@@ -222,7 +234,10 @@ describe('ClientService', () => {
       (verifyPassword as jest.Mock).mockReturnValue(false);
 
       // Act
-      const result = await service.validateClient('test-client-id', 'wrong-secret');
+      const result = await service.validateClient(
+        'test-client-id',
+        'wrong-secret',
+      );
 
       // Assert
       expect(result).toBe(false);
@@ -243,7 +258,10 @@ describe('ClientService', () => {
   describe('validateRedirectUri', () => {
     it('should validate exact redirect URI match', () => {
       // Act
-      const result = service.validateRedirectUri(mockClient, 'https://example.com/callback');
+      const result = service.validateRedirectUri(
+        mockClient,
+        'https://example.com/callback',
+      );
 
       // Assert
       expect(result).toBe(true);
@@ -251,7 +269,10 @@ describe('ClientService', () => {
 
     it('should reject mismatched redirect URI', () => {
       // Act
-      const result = service.validateRedirectUri(mockClient, 'https://evil.com/callback');
+      const result = service.validateRedirectUri(
+        mockClient,
+        'https://evil.com/callback',
+      );
 
       // Assert
       expect(result).toBe(false);
@@ -259,7 +280,10 @@ describe('ClientService', () => {
 
     it('should reject if redirect_uri not in list', () => {
       // Act
-      const result = service.validateRedirectUri(mockClient, 'https://other.com/callback');
+      const result = service.validateRedirectUri(
+        mockClient,
+        'https://other.com/callback',
+      );
 
       // Assert
       expect(result).toBe(false);
@@ -270,7 +294,10 @@ describe('ClientService', () => {
       const clientNoUris = { ...mockClient, redirect_uris: [] };
 
       // Act
-      const result = service.validateRedirectUri(clientNoUris, 'https://example.com/callback');
+      const result = service.validateRedirectUri(
+        clientNoUris,
+        'https://example.com/callback',
+      );
 
       // Assert
       expect(result).toBe(false);
@@ -280,7 +307,10 @@ describe('ClientService', () => {
   describe('supportsGrantType', () => {
     it('should return true for supported grant type', () => {
       // Act
-      const result = service.supportsGrantType(mockClient, 'authorization_code');
+      const result = service.supportsGrantType(
+        mockClient,
+        'authorization_code',
+      );
 
       // Assert
       expect(result).toBe(true);
@@ -288,7 +318,10 @@ describe('ClientService', () => {
 
     it('should return false for unsupported grant type', () => {
       // Act
-      const result = service.supportsGrantType(mockClient, 'client_credentials');
+      const result = service.supportsGrantType(
+        mockClient,
+        'client_credentials',
+      );
 
       // Assert
       expect(result).toBe(false);
@@ -362,7 +395,9 @@ describe('ClientService', () => {
       prismaService.oAuthClient.findUnique.mockResolvedValue(null);
 
       // Act & Assert
-      await expect(service.getClientInfo('non-existent')).rejects.toThrow(NotFoundException);
+      await expect(service.getClientInfo('non-existent')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 
@@ -384,7 +419,9 @@ describe('ClientService', () => {
       prismaService.oAuthClient.findUnique.mockResolvedValue(null);
 
       // Act & Assert
-      await expect(service.deleteClient('non-existent')).rejects.toThrow(NotFoundException);
+      await expect(service.deleteClient('non-existent')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 });

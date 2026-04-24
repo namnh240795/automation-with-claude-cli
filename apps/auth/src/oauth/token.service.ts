@@ -1,4 +1,9 @@
-import { Injectable, BadRequestException, NotFoundException, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+  Logger,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../prisma/prisma.service';
 import { randomBytes, createHmac } from 'crypto';
@@ -15,7 +20,10 @@ export class TokenService {
     private readonly prisma: PrismaService,
     private readonly config: ConfigService,
   ) {
-    this.jwtSecret = this.config.get<string>('JWT_SECRET', 'your-jwt-secret-key');
+    this.jwtSecret = this.config.get<string>(
+      'JWT_SECRET',
+      'your-jwt-secret-key',
+    );
     this.jwtExpiresIn = this.config.get<string>('JWT_EXPIRES_IN', '1h');
   }
 
@@ -71,7 +79,9 @@ export class TokenService {
     }
 
     // Store access token in database
-    const accessTokenExpiresAt = new Date(Date.now() + client.access_token_lifetime * 1000);
+    const accessTokenExpiresAt = new Date(
+      Date.now() + client.access_token_lifetime * 1000,
+    );
 
     await this.prisma.oAuthAccessToken.create({
       data: {
@@ -84,7 +94,9 @@ export class TokenService {
       },
     });
 
-    this.logger.log(`Generated access token for user ${data.user_id || 'none'} (client credentials), client ${data.client_id}`);
+    this.logger.log(
+      `Generated access token for user ${data.user_id || 'none'} (client credentials), client ${data.client_id}`,
+    );
 
     return { token, expires_at: accessTokenExpiresAt };
   }
@@ -111,7 +123,9 @@ export class TokenService {
       throw new NotFoundException('Client not found');
     }
 
-    const expiresAt = new Date(Date.now() + client.refresh_token_lifetime * 1000);
+    const expiresAt = new Date(
+      Date.now() + client.refresh_token_lifetime * 1000,
+    );
 
     await this.prisma.oAuthRefreshToken.create({
       data: {
@@ -124,7 +138,9 @@ export class TokenService {
       },
     });
 
-    this.logger.log(`Generated refresh token for user ${data.user_id}, client ${data.client_id}`);
+    this.logger.log(
+      `Generated refresh token for user ${data.user_id}, client ${data.client_id}`,
+    );
 
     return { token, expires_at: expiresAt };
   }
@@ -216,7 +232,9 @@ export class TokenService {
     scope: string;
   }> {
     // Validate refresh token
-    const refreshTokenData = await this.validateRefreshToken(data.refresh_token);
+    const refreshTokenData = await this.validateRefreshToken(
+      data.refresh_token,
+    );
 
     if (!refreshTokenData) {
       throw new BadRequestException('Invalid or expired refresh token');
@@ -289,7 +307,9 @@ export class TokenService {
       scope: refreshTokenData.scope,
     });
 
-    const expiresIn = Math.floor((accessTokenExpires.getTime() - Date.now()) / 1000);
+    const expiresIn = Math.floor(
+      (accessTokenExpires.getTime() - Date.now()) / 1000,
+    );
 
     return {
       access_token: accessToken,

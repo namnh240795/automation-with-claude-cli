@@ -30,7 +30,9 @@ test.describe('OAuth 2.0 Client Credentials Flow', () => {
     expect(m2mClient.is_confidential).toBe(true);
   });
 
-  test('should exchange client credentials for access token', async ({ request }) => {
+  test('should exchange client credentials for access token', async ({
+    request,
+  }) => {
     const helper = new OAuthTestHelper(request, 'http://localhost:3001');
     tokenResponse = await helper.clientCredentialsFlow({
       client_id: m2mClient.client_id,
@@ -55,7 +57,7 @@ test.describe('OAuth 2.0 Client Credentials Flow', () => {
         client_id: m2mClient.client_id,
         client_secret: 'wrong_secret',
         scope: 'openid',
-      })
+      }),
     ).rejects.toThrow();
   });
 
@@ -65,7 +67,7 @@ test.describe('OAuth 2.0 Client Credentials Flow', () => {
         client_id: m2mClient.client_id,
         client_secret: '', // Empty secret
         scope: 'openid',
-      })
+      }),
     ).rejects.toThrow();
   });
 
@@ -75,7 +77,7 @@ test.describe('OAuth 2.0 Client Credentials Flow', () => {
         client_id: 'non_existent_client',
         client_secret: 'some_secret',
         scope: 'openid',
-      })
+      }),
     ).rejects.toThrow();
   });
 
@@ -117,7 +119,7 @@ test.describe('OAuth 2.0 Client Credentials Flow', () => {
         client_id: limitedClient.client_id,
         client_secret: limitedClient.client_secret,
         scope: 'openid profile email', // Request more than allowed
-      })
+      }),
     ).rejects.toThrow();
   });
 });

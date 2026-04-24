@@ -23,7 +23,10 @@ export interface TokenResponse {
  * OAuth Test Helpers
  */
 export class OAuthTestHelper {
-  constructor(private request: APIRequestContext, private baseURL: string) {}
+  constructor(
+    private request: APIRequestContext,
+    private baseURL: string,
+  ) {}
 
   /**
    * Register a new OAuth client
@@ -35,9 +38,12 @@ export class OAuthTestHelper {
     grant_types: string[];
     is_confidential?: boolean;
   }): Promise<OAuthClient> {
-    const response = await this.request.post(`${this.baseURL}/auth/oauth/register`, {
-      data,
-    });
+    const response = await this.request.post(
+      `${this.baseURL}/auth/oauth/register`,
+      {
+        data,
+      },
+    );
 
     if (!response.ok()) {
       throw new Error(`Failed to register client: ${await response.text()}`);
@@ -49,9 +55,14 @@ export class OAuthTestHelper {
   /**
    * Generate PKCE code verifier and challenge
    */
-  async generatePKCE(): Promise<{ codeVerifier: string; codeChallenge: string }> {
+  async generatePKCE(): Promise<{
+    codeVerifier: string;
+    codeChallenge: string;
+  }> {
     // Generate random code verifier (43-128 characters)
-    const codeVerifier = this.base64URLEncode(crypto.getRandomValues(new Uint8Array(32)));
+    const codeVerifier = this.base64URLEncode(
+      crypto.getRandomValues(new Uint8Array(32)),
+    );
 
     // Generate code challenge (SHA256 hash)
     const encoder = new TextEncoder();
@@ -110,12 +121,15 @@ export class OAuthTestHelper {
       formData.append('code_verifier', data.code_verifier);
     }
 
-    const response = await this.request.post(`${this.baseURL}/auth/oauth/token`, {
-      data: formData.toString(),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await this.request.post(
+      `${this.baseURL}/auth/oauth/token`,
+      {
+        data: formData.toString(),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
       },
-    });
+    );
 
     if (!response.ok()) {
       const error = await response.json();
@@ -141,16 +155,21 @@ export class OAuthTestHelper {
       formData.append('scope', data.scope);
     }
 
-    const response = await this.request.post(`${this.baseURL}/auth/oauth/token`, {
-      data: formData.toString(),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await this.request.post(
+      `${this.baseURL}/auth/oauth/token`,
+      {
+        data: formData.toString(),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
       },
-    });
+    );
 
     if (!response.ok()) {
       const error = await response.json();
-      throw new Error(`Client credentials flow failed: ${JSON.stringify(error)}`);
+      throw new Error(
+        `Client credentials flow failed: ${JSON.stringify(error)}`,
+      );
     }
 
     return response.json();
@@ -172,12 +191,15 @@ export class OAuthTestHelper {
       formData.append('client_secret', data.client_secret);
     }
 
-    const response = await this.request.post(`${this.baseURL}/auth/oauth/token`, {
-      data: formData.toString(),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await this.request.post(
+      `${this.baseURL}/auth/oauth/token`,
+      {
+        data: formData.toString(),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
       },
-    });
+    );
 
     if (!response.ok()) {
       const error = await response.json();
@@ -194,12 +216,15 @@ export class OAuthTestHelper {
     const formData = new URLSearchParams();
     formData.append('token', token);
 
-    const response = await this.request.post(`${this.baseURL}/auth/oauth/introspect`, {
-      data: formData.toString(),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await this.request.post(
+      `${this.baseURL}/auth/oauth/introspect`,
+      {
+        data: formData.toString(),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
       },
-    });
+    );
 
     if (!response.ok()) {
       throw new Error(`Token introspection failed: ${await response.text()}`);
@@ -215,12 +240,15 @@ export class OAuthTestHelper {
     const formData = new URLSearchParams();
     formData.append('token', token);
 
-    const response = await this.request.post(`${this.baseURL}/auth/oauth/revoke`, {
-      data: formData.toString(),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await this.request.post(
+      `${this.baseURL}/auth/oauth/revoke`,
+      {
+        data: formData.toString(),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
       },
-    });
+    );
 
     if (!response.ok()) {
       throw new Error(`Token revocation failed: ${await response.text()}`);
@@ -237,9 +265,6 @@ export class OAuthTestHelper {
     for (let i = 0; i < len; i++) {
       str += String.fromCharCode(bytes[i]);
     }
-    return btoa(str)
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_')
-      .replace(/=/g, '');
+    return btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
   }
 }

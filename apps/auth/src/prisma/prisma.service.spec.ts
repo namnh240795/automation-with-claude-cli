@@ -49,7 +49,9 @@ describe('PrismaService', () => {
 
     it('should call $connect on module init', async () => {
       // Arrange
-      const $connectSpy = jest.spyOn(service, '$connect').mockResolvedValue(undefined as never);
+      const $connectSpy = jest
+        .spyOn(service, '$connect')
+        .mockResolvedValue(undefined as never);
 
       // Act
       await service.onModuleInit();
@@ -72,7 +74,9 @@ describe('PrismaService', () => {
 
     it('should handle connection errors', async () => {
       // Arrange
-      jest.spyOn(service, '$connect').mockRejectedValue(new Error('Connection failed') as never);
+      jest
+        .spyOn(service, '$connect')
+        .mockRejectedValue(new Error('Connection failed') as never);
 
       // Act & Assert
       await expect(service.onModuleInit()).rejects.toThrow('Connection failed');
@@ -86,7 +90,9 @@ describe('PrismaService', () => {
 
     it('should call $disconnect on module destroy', async () => {
       // Arrange
-      const $disconnectSpy = jest.spyOn(service, '$disconnect').mockResolvedValue(undefined as never);
+      const $disconnectSpy = jest
+        .spyOn(service, '$disconnect')
+        .mockResolvedValue(undefined as never);
 
       // Act
       await service.onModuleDestroy();
@@ -109,10 +115,14 @@ describe('PrismaService', () => {
 
     it('should handle disconnect errors', async () => {
       // Arrange
-      jest.spyOn(service, '$disconnect').mockRejectedValue(new Error('Disconnect failed') as never);
+      jest
+        .spyOn(service, '$disconnect')
+        .mockRejectedValue(new Error('Disconnect failed') as never);
 
       // Act & Assert
-      await expect(service.onModuleDestroy()).rejects.toThrow('Disconnect failed');
+      await expect(service.onModuleDestroy()).rejects.toThrow(
+        'Disconnect failed',
+      );
     });
   });
 

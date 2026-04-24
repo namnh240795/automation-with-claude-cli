@@ -104,11 +104,15 @@ describe('errorHandler', () => {
       } as any;
 
       // Act
-      const result = errorHandler(axiosError) as { config: { headers: Record<string, string> } };
+      const result = errorHandler(axiosError) as {
+        config: { headers: Record<string, string> };
+      };
 
       // Assert
       expect(result.config.headers.Authorization).toBe('***********');
-      expect(result.config.headers['Ocp-Apim-Subscription-Key']).toBe('***********');
+      expect(result.config.headers['Ocp-Apim-Subscription-Key']).toBe(
+        '***********',
+      );
       expect(result.config.headers['Content-Type']).toBe('application/json');
       expect(result.config.headers.Accept).toBe('application/json');
     });
@@ -124,7 +128,10 @@ describe('errorHandler', () => {
       } as any;
 
       // Act
-      const result = errorHandler(axiosError) as { config: { headers: Record<string, string> }; status: number };
+      const result = errorHandler(axiosError) as {
+        config: { headers: Record<string, string> };
+        status: number;
+      };
 
       // Assert - When headers is undefined, the code creates headers object with masked values
       expect(result.config.headers).toEqual({

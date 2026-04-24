@@ -1,4 +1,9 @@
-import { OAuthErrorDto, TokenErrorDto, DeviceFlowErrorDto, DEVICE_FLOW_ERRORS } from './oauth-error.dto';
+import {
+  OAuthErrorDto,
+  TokenErrorDto,
+  DeviceFlowErrorDto,
+  DEVICE_FLOW_ERRORS,
+} from './oauth-error.dto';
 import { OAUTH_ERRORS } from '../oauth.constants';
 
 describe('OAuth Error DTOs', () => {
@@ -84,7 +89,9 @@ describe('OAuth Error DTOs', () => {
 
   describe('DEVICE_FLOW_ERRORS', () => {
     it('should have correct error codes', () => {
-      expect(DEVICE_FLOW_ERRORS.AUTHORIZATION_PENDING).toBe('authorization_pending');
+      expect(DEVICE_FLOW_ERRORS.AUTHORIZATION_PENDING).toBe(
+        'authorization_pending',
+      );
       expect(DEVICE_FLOW_ERRORS.SLOW_DOWN).toBe('slow_down');
       expect(DEVICE_FLOW_ERRORS.ACCESS_DENIED).toBe('access_denied');
       expect(DEVICE_FLOW_ERRORS.EXPIRED_TOKEN).toBe('expired_token');

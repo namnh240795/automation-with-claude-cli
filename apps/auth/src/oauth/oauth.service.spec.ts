@@ -6,7 +6,11 @@ import { AuthorizationService } from './authorization.service';
 import { TokenService } from './token.service';
 import { DeviceFlowService } from './device-flow.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { GRANT_TYPES, OAUTH_ERRORS, OAUTH_STATUS_CODES } from './oauth.constants';
+import {
+  GRANT_TYPES,
+  OAUTH_ERRORS,
+  OAUTH_STATUS_CODES,
+} from './oauth.constants';
 import { OAuthBadRequestException } from './oauth.exception';
 import * as authUtilities from '@app/auth-utilities';
 
@@ -137,7 +141,9 @@ describe('OAuthService', () => {
       clientService.validateRedirectUri.mockReturnValue(true);
       clientService.supportsGrantType.mockReturnValue(true);
       clientService.supportsScope.mockReturnValue(true);
-      authorizationService.generateAuthorizationCode.mockResolvedValue('auth-code-123');
+      authorizationService.generateAuthorizationCode.mockResolvedValue(
+        'auth-code-123',
+      );
       prismaService.oAuthUserConsent.findUnique.mockResolvedValue(null);
       prismaService.oAuthUserConsent.create.mockResolvedValue({});
 
@@ -146,7 +152,8 @@ describe('OAuthService', () => {
 
       // Assert
       expect(result).toMatchObject({
-        redirect_uri: 'https://example.com/callback?code=auth-code-123&state=state-123',
+        redirect_uri:
+          'https://example.com/callback?code=auth-code-123&state=state-123',
         code: 'auth-code-123',
         state: 'state-123',
       });
@@ -154,10 +161,14 @@ describe('OAuthService', () => {
 
     it('should throw NotFoundException for non-existent client', async () => {
       // Arrange
-      clientService.findByClientId.mockRejectedValue(new NotFoundException('Client not found'));
+      clientService.findByClientId.mockRejectedValue(
+        new NotFoundException('Client not found'),
+      );
 
       // Act & Assert
-      await expect(service.handleAuthorizationRequest(mockAuthRequest)).rejects.toThrow(NotFoundException);
+      await expect(
+        service.handleAuthorizationRequest(mockAuthRequest),
+      ).rejects.toThrow(NotFoundException);
     });
 
     it('should throw BadRequestException for invalid redirect URI', async () => {
@@ -166,7 +177,9 @@ describe('OAuthService', () => {
       clientService.validateRedirectUri.mockReturnValue(false);
 
       // Act & Assert
-      await expect(service.handleAuthorizationRequest(mockAuthRequest)).rejects.toThrow(BadRequestException);
+      await expect(
+        service.handleAuthorizationRequest(mockAuthRequest),
+      ).rejects.toThrow(BadRequestException);
     });
 
     it('should throw BadRequestException for unsupported grant type', async () => {
@@ -176,7 +189,9 @@ describe('OAuthService', () => {
       clientService.supportsGrantType.mockReturnValue(false);
 
       // Act & Assert
-      await expect(service.handleAuthorizationRequest(mockAuthRequest)).rejects.toThrow(BadRequestException);
+      await expect(
+        service.handleAuthorizationRequest(mockAuthRequest),
+      ).rejects.toThrow(BadRequestException);
     });
 
     it('should throw BadRequestException for unsupported scope', async () => {
@@ -187,7 +202,9 @@ describe('OAuthService', () => {
       clientService.supportsScope.mockReturnValue(false);
 
       // Act & Assert
-      await expect(service.handleAuthorizationRequest(mockAuthRequest)).rejects.toThrow(BadRequestException);
+      await expect(
+        service.handleAuthorizationRequest(mockAuthRequest),
+      ).rejects.toThrow(BadRequestException);
     });
 
     it('should throw BadRequestException for invalid response_type', async () => {
@@ -203,7 +220,9 @@ describe('OAuthService', () => {
       };
 
       // Act & Assert
-      await expect(service.handleAuthorizationRequest(invalidRequest)).rejects.toThrow(BadRequestException);
+      await expect(
+        service.handleAuthorizationRequest(invalidRequest),
+      ).rejects.toThrow(BadRequestException);
     });
 
     it('should throw BadRequestException when PKCE required but not provided', async () => {
@@ -225,7 +244,9 @@ describe('OAuthService', () => {
       };
 
       // Act & Assert
-      await expect(service.handleAuthorizationRequest(requestWithoutPKCE)).rejects.toThrow(BadRequestException);
+      await expect(
+        service.handleAuthorizationRequest(requestWithoutPKCE),
+      ).rejects.toThrow(BadRequestException);
     });
 
     it('should update existing consent', async () => {
@@ -234,7 +255,9 @@ describe('OAuthService', () => {
       clientService.validateRedirectUri.mockReturnValue(true);
       clientService.supportsGrantType.mockReturnValue(true);
       clientService.supportsScope.mockReturnValue(true);
-      authorizationService.generateAuthorizationCode.mockResolvedValue('auth-code-123');
+      authorizationService.generateAuthorizationCode.mockResolvedValue(
+        'auth-code-123',
+      );
       prismaService.oAuthUserConsent.findUnique.mockResolvedValue({
         id: 'consent-id-1',
         scope: 'openid',
@@ -266,11 +289,13 @@ describe('OAuthService', () => {
       };
 
       clientService.validateClient.mockResolvedValue(true);
-      authorizationService.validateAndConsumeAuthorizationCode.mockResolvedValue({
-        user_id: 'user-id-1',
-        scope: 'openid email offline_access',
-        nonce: 'nonce-123',
-      });
+      authorizationService.validateAndConsumeAuthorizationCode.mockResolvedValue(
+        {
+          user_id: 'user-id-1',
+          scope: 'openid email offline_access',
+          nonce: 'nonce-123',
+        },
+      );
       prismaService.user.findUnique.mockResolvedValue({
         id: 'user-id-1',
         email: 'test@example.com',
@@ -312,11 +337,13 @@ describe('OAuthService', () => {
       };
 
       clientService.validateClient.mockResolvedValue(true);
-      authorizationService.validateAndConsumeAuthorizationCode.mockResolvedValue({
-        user_id: 'user-id-1',
-        scope: 'openid',
-        nonce: 'nonce-123',
-      });
+      authorizationService.validateAndConsumeAuthorizationCode.mockResolvedValue(
+        {
+          user_id: 'user-id-1',
+          scope: 'openid',
+          nonce: 'nonce-123',
+        },
+      );
       prismaService.user.findUnique.mockResolvedValue({
         id: 'user-id-1',
         email: 'test@example.com',
@@ -353,7 +380,9 @@ describe('OAuthService', () => {
       );
 
       // Act & Assert
-      await expect(service.handleTokenRequest(data)).rejects.toThrow(BadRequestException);
+      await expect(service.handleTokenRequest(data)).rejects.toThrow(
+        BadRequestException,
+      );
     });
   });
 
@@ -388,7 +417,11 @@ describe('OAuthService', () => {
 
     it('should throw BadRequestException for public client attempting client credentials', async () => {
       // Arrange
-      const publicClient = { ...mockClient, is_confidential: false, is_public_client: true };
+      const publicClient = {
+        ...mockClient,
+        is_confidential: false,
+        is_public_client: true,
+      };
       const data = {
         grant_type: GRANT_TYPES.CLIENT_CREDENTIALS,
         client_id: 'public-client-id',
@@ -398,7 +431,9 @@ describe('OAuthService', () => {
       clientService.findByClientId.mockResolvedValue(publicClient);
 
       // Act & Assert
-      await expect(service.handleTokenRequest(data)).rejects.toThrow(BadRequestException);
+      await expect(service.handleTokenRequest(data)).rejects.toThrow(
+        BadRequestException,
+      );
     });
   });
 
@@ -442,7 +477,9 @@ describe('OAuthService', () => {
       );
 
       // Act & Assert
-      await expect(service.handleTokenRequest(data)).rejects.toThrow(BadRequestException);
+      await expect(service.handleTokenRequest(data)).rejects.toThrow(
+        BadRequestException,
+      );
     });
   });
 
@@ -466,7 +503,9 @@ describe('OAuthService', () => {
       });
 
       // Act
-      await expect(service.handleTokenRequest(data)).rejects.toThrow(OAuthBadRequestException);
+      await expect(service.handleTokenRequest(data)).rejects.toThrow(
+        OAuthBadRequestException,
+      );
     });
 
     it('should handle authorized device code', async () => {
@@ -529,7 +568,9 @@ describe('OAuthService', () => {
       });
 
       // Act
-      await expect(service.handleTokenRequest(data)).rejects.toThrow(BadRequestException);
+      await expect(service.handleTokenRequest(data)).rejects.toThrow(
+        BadRequestException,
+      );
     });
   });
 
@@ -542,7 +583,9 @@ describe('OAuthService', () => {
       };
 
       // Act & Assert
-      await expect(service.handleTokenRequest(data)).rejects.toThrow(BadRequestException);
+      await expect(service.handleTokenRequest(data)).rejects.toThrow(
+        BadRequestException,
+      );
     });
   });
 
@@ -569,7 +612,9 @@ describe('OAuthService', () => {
       await service.revokeToken({ token: 'inactive-token' });
 
       // Assert - revokeToken should be called (token service handles the check)
-      expect(tokenService.revokeToken).toHaveBeenCalledWith({ token: 'inactive-token' });
+      expect(tokenService.revokeToken).toHaveBeenCalledWith({
+        token: 'inactive-token',
+      });
     });
   });
 
@@ -585,7 +630,9 @@ describe('OAuthService', () => {
       });
 
       // Act
-      const result = await service.introspectToken({ token: 'access-token-123' });
+      const result = await service.introspectToken({
+        token: 'access-token-123',
+      });
 
       // Assert
       expect(result).toEqual({
@@ -662,10 +709,15 @@ describe('OAuthService', () => {
       clientService.findByClientId.mockResolvedValue(client);
       prismaService.oAuthUserConsent.deleteMany.mockResolvedValue({ count: 1 });
       prismaService.oAuthAccessToken.updateMany.mockResolvedValue({ count: 2 });
-      prismaService.oAuthRefreshToken.updateMany.mockResolvedValue({ count: 1 });
+      prismaService.oAuthRefreshToken.updateMany.mockResolvedValue({
+        count: 1,
+      });
 
       // Act
-      const result = await service.revokeClientAccess('user-id-1', 'test-client-id');
+      const result = await service.revokeClientAccess(
+        'user-id-1',
+        'test-client-id',
+      );
 
       // Assert
       expect(result).toEqual({ message: 'Client access revoked successfully' });
@@ -700,10 +752,15 @@ describe('OAuthService', () => {
       clientService.findByClientId.mockResolvedValue(client);
       prismaService.oAuthUserConsent.deleteMany.mockResolvedValue({ count: 0 });
       prismaService.oAuthAccessToken.updateMany.mockResolvedValue({ count: 0 });
-      prismaService.oAuthRefreshToken.updateMany.mockResolvedValue({ count: 0 });
+      prismaService.oAuthRefreshToken.updateMany.mockResolvedValue({
+        count: 0,
+      });
 
       // Act
-      const result = await service.revokeClientAccess('user-id-1', 'test-client-id');
+      const result = await service.revokeClientAccess(
+        'user-id-1',
+        'test-client-id',
+      );
 
       // Assert
       expect(result).toEqual({ message: 'Client access revoked successfully' });

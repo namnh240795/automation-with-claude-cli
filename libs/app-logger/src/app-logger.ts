@@ -26,9 +26,11 @@ export class AppLogger {
       logMessage.message = info.message;
     }
     // Handle BigInt serialization for Prisma/Keycloak schema
-    console.log(JSON.stringify(logMessage, (_key, value) => {
-      return typeof value === 'bigint' ? value.toString() : value;
-    })); // Explicitly log context and message
+    console.log(
+      JSON.stringify(logMessage, (_key, value) => {
+        return typeof value === 'bigint' ? value.toString() : value;
+      }),
+    ); // Explicitly log context and message
   }
 }
 

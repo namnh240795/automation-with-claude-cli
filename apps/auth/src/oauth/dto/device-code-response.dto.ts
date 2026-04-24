@@ -21,7 +21,8 @@ export class DeviceCodeResponseDto {
 
   @ApiPropertyOptional({
     description: 'Complete verification URI with pre-filled code',
-    example: 'http://localhost:3001/auth/oauth/device/verify?user_code=WDJB-MJHT',
+    example:
+      'http://localhost:3001/auth/oauth/device/verify?user_code=WDJB-MJHT',
   })
   verification_uri_complete?: string;
 

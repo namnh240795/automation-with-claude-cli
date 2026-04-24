@@ -47,21 +47,25 @@ test.describe('OAuth 2.0 Authorization Code Flow', () => {
     expect(publicClient.is_confidential).toBe(false);
   });
 
-  test('should fail authorization with invalid client_id', async ({ request }) => {
+  test('should fail authorization with invalid client_id', async ({
+    request,
+  }) => {
     const response = await request.get(
       `http://localhost:3001/auth/oauth/authorize?` +
         `response_type=code&` +
         `client_id=invalid_client&` +
         `redirect_uri=http://localhost:3000/callback&` +
         `scope=openid&` +
-        `state=test-state`
+        `state=test-state`,
     );
 
     // Should redirect with error
     expect(response.status()).toBeGreaterThanOrEqual(400); // Error response
   });
 
-  test('should generate valid authorization URL with PKCE', async ({ request }) => {
+  test('should generate valid authorization URL with PKCE', async ({
+    request,
+  }) => {
     const helper = new OAuthTestHelper(request, 'http://localhost:3001');
     const { codeChallenge } = await helper.generatePKCE();
     const authURL = helper.buildAuthorizationURL({
@@ -87,11 +91,13 @@ test.describe('OAuth 2.0 Authorization Code Flow', () => {
         redirect_uri: 'http://localhost:3000/callback',
         client_id: confidentialClient.client_id,
         client_secret: confidentialClient.client_secret,
-      })
+      }),
     ).rejects.toThrow('Token exchange failed');
   });
 
-  test('should fail token exchange with wrong client secret', async ({ request }) => {
+  test('should fail token exchange with wrong client secret', async ({
+    request,
+  }) => {
     const helper = new OAuthTestHelper(request, 'http://localhost:3001');
     // Note: This test would require a valid authorization code
     // which we can't get without a user login flow
@@ -102,7 +108,7 @@ test.describe('OAuth 2.0 Authorization Code Flow', () => {
         redirect_uri: 'http://localhost:3000/callback',
         client_id: confidentialClient.client_id,
         client_secret: 'wrong_secret',
-      })
+      }),
     ).rejects.toThrow();
   });
 
@@ -123,7 +129,9 @@ test.describe('OAuth 2.0 Authorization Code Flow', () => {
   });
 
   test('should list all registered clients', async ({ request }) => {
-    const response = await request.get('http://localhost:3001/auth/oauth/clients');
+    const response = await request.get(
+      'http://localhost:3001/auth/oauth/clients',
+    );
 
     expect(response.ok()).toBeTruthy();
 
@@ -132,8 +140,12 @@ test.describe('OAuth 2.0 Authorization Code Flow', () => {
     expect(clients.length).toBeGreaterThan(0);
 
     // Find our test clients
-    const foundConfidential = clients.find((c: any) => c.name === 'E2E Test Confidential Client');
-    const foundPublic = clients.find((c: any) => c.name === 'E2E Test Public Client');
+    const foundConfidential = clients.find(
+      (c: any) => c.name === 'E2E Test Confidential Client',
+    );
+    const foundPublic = clients.find(
+      (c: any) => c.name === 'E2E Test Public Client',
+    );
 
     expect(foundConfidential).toBeDefined();
     expect(foundPublic).toBeDefined();
@@ -141,7 +153,7 @@ test.describe('OAuth 2.0 Authorization Code Flow', () => {
 
   test('should get client info by client_id', async ({ request }) => {
     const response = await request.get(
-      `http://localhost:3001/auth/oauth/clients/${confidentialClient.client_id}`
+      `http://localhost:3001/auth/oauth/clients/${confidentialClient.client_id}`,
     );
 
     expect(response.ok()).toBeTruthy();
@@ -154,7 +166,7 @@ test.describe('OAuth 2.0 Authorization Code Flow', () => {
 
   test('should return 404 for non-existent client', async ({ request }) => {
     const response = await request.get(
-      'http://localhost:3001/auth/oauth/clients/non-existent-client'
+      'http://localhost:3001/auth/oauth/clients/non-existent-client',
     );
 
     expect(response.status()).toBe(404);
@@ -182,14 +194,17 @@ test.describe('OAuth Token Management', () => {
   test('should introspect active token', async ({ request }) => {
     // Note: This would require a valid access token from a full flow
     // Testing the endpoint structure instead
-    const response = await request.post('http://localhost:3001/auth/oauth/introspect', {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await request.post(
+      'http://localhost:3001/auth/oauth/introspect',
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: new URLSearchParams({
+          token: 'test_token',
+        }).toString(),
       },
-      data: new URLSearchParams({
-        token: 'test_token',
-      }).toString(),
-    });
+    );
 
     expect(response.ok()).toBeTruthy();
     const result = await response.json();
@@ -207,17 +222,20 @@ test.describe('OAuth Token Management', () => {
 
   test('should handle token refresh request', async ({ request }) => {
     // Test the refresh token endpoint structure
-    const response = await request.post('http://localhost:3001/auth/oauth/token', {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await request.post(
+      'http://localhost:3001/auth/oauth/token',
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: new URLSearchParams({
+          grant_type: 'refresh_token',
+          refresh_token: 'invalid_refresh_token',
+          client_id: testClient.client_id,
+          client_secret: testClient.client_secret,
+        }).toString(),
       },
-      data: new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token: 'invalid_refresh_token',
-        client_id: testClient.client_id,
-        client_secret: testClient.client_secret,
-      }).toString(),
-    });
+    );
 
     expect(response.status()).toBe(400); // Bad request for invalid token
   });

@@ -1,5 +1,18 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsArray, IsBoolean, IsInt, IsOptional, IsString, Max, Min, registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsInt,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+  registerDecorator,
+  ValidationArguments,
+  ValidationOptions,
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
 // Custom URL validators
@@ -54,7 +67,10 @@ export class RegisterClientDto {
   @IsString()
   name: string;
 
-  @ApiPropertyOptional({ description: 'Application description', example: 'My OAuth 2.0 application' })
+  @ApiPropertyOptional({
+    description: 'Application description',
+    example: 'My OAuth 2.0 application',
+  })
   @IsString()
   @IsOptional()
   description?: string;
@@ -93,7 +109,12 @@ export class RegisterClientDto {
   @ApiProperty({
     description: 'Allowed grant types',
     example: ['authorization_code', 'refresh_token'],
-    enum: ['authorization_code', 'client_credentials', 'refresh_token', 'urn:ietf:params:oauth:grant-type:device_code'],
+    enum: [
+      'authorization_code',
+      'client_credentials',
+      'refresh_token',
+      'urn:ietf:params:oauth:grant-type:device_code',
+    ],
     type: [String],
   })
   @IsArray()
@@ -188,7 +209,9 @@ export class ClientResponseDto {
   @ApiProperty({ description: 'Client identifier' })
   client_id: string;
 
-  @ApiPropertyOptional({ description: 'Client secret (only shown during registration)' })
+  @ApiPropertyOptional({
+    description: 'Client secret (only shown during registration)',
+  })
   client_secret?: string;
 
   @ApiProperty({ description: 'Application name' })
@@ -200,7 +223,10 @@ export class ClientResponseDto {
   @ApiProperty({ description: 'Allowed redirect URIs', type: [String] })
   redirect_uris: string[];
 
-  @ApiPropertyOptional({ description: 'Post-logout redirect URIs', type: [String] })
+  @ApiPropertyOptional({
+    description: 'Post-logout redirect URIs',
+    type: [String],
+  })
   post_logout_redirect_uris?: string[];
 
   @ApiProperty({ description: 'Allowed OAuth scopes', type: [String] })

@@ -180,10 +180,12 @@ describe('TokenService', () => {
     it('should generate refresh token successfully', async () => {
       // Arrange
       prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
-      prismaService.oAuthRefreshToken.create.mockImplementation((data: any) => ({
-        id: 'refresh-token-id-1',
-        ...data.data,
-      }));
+      prismaService.oAuthRefreshToken.create.mockImplementation(
+        (data: any) => ({
+          id: 'refresh-token-id-1',
+          ...data.data,
+        }),
+      );
 
       const data = {
         user_id: 'user-id-1',
@@ -205,7 +207,9 @@ describe('TokenService', () => {
   describe('validateAccessToken', () => {
     it('should validate active access token', async () => {
       // Arrange
-      prismaService.oAuthAccessToken.findUnique.mockResolvedValue(mockAccessToken);
+      prismaService.oAuthAccessToken.findUnique.mockResolvedValue(
+        mockAccessToken,
+      );
 
       // Act
       const result = await service.validateAccessToken('access-token-123');
@@ -294,7 +298,9 @@ describe('TokenService', () => {
       prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
 
       prismaService.oAuthAccessToken.updateMany.mockResolvedValue({ count: 1 });
-      prismaService.oAuthRefreshToken.updateMany.mockResolvedValue({ count: 1 });
+      prismaService.oAuthRefreshToken.updateMany.mockResolvedValue({
+        count: 1,
+      });
       prismaService.oAuthAccessToken.create.mockImplementation((data: any) => ({
         id: 'new-token-id-1',
         ...data.data,
@@ -337,7 +343,9 @@ describe('TokenService', () => {
   describe('revokeToken', () => {
     it('should revoke access token successfully', async () => {
       // Arrange
-      prismaService.oAuthAccessToken.findUnique.mockResolvedValue(mockAccessToken);
+      prismaService.oAuthAccessToken.findUnique.mockResolvedValue(
+        mockAccessToken,
+      );
       prismaService.oAuthAccessToken.update.mockResolvedValue({});
 
       // Act
@@ -353,7 +361,9 @@ describe('TokenService', () => {
     it('should revoke refresh token successfully', async () => {
       // Arrange
       prismaService.oAuthAccessToken.findUnique.mockResolvedValue(null);
-      prismaService.oAuthRefreshToken.findUnique.mockResolvedValue(mockRefreshToken);
+      prismaService.oAuthRefreshToken.findUnique.mockResolvedValue(
+        mockRefreshToken,
+      );
       prismaService.oAuthRefreshToken.update.mockResolvedValue({});
 
       // Act
@@ -376,7 +386,9 @@ describe('TokenService', () => {
       });
 
       // Act
-      const result = await service.introspectToken({ token: 'access-token-123' });
+      const result = await service.introspectToken({
+        token: 'access-token-123',
+      });
 
       // Assert
       expect(result).toEqual({
@@ -397,7 +409,9 @@ describe('TokenService', () => {
       });
 
       // Act
-      const result = await service.introspectToken({ token: 'refresh-token-123' });
+      const result = await service.introspectToken({
+        token: 'refresh-token-123',
+      });
 
       // Assert
       expect(result).toEqual({
@@ -430,7 +444,9 @@ describe('TokenService', () => {
       });
 
       // Act
-      const result = await service.introspectToken({ token: 'access-token-123' });
+      const result = await service.introspectToken({
+        token: 'access-token-123',
+      });
 
       // Assert
       expect(result).toEqual({
@@ -451,7 +467,9 @@ describe('TokenService', () => {
       });
 
       // Act
-      const result = await service.introspectToken({ token: 'access-token-123' });
+      const result = await service.introspectToken({
+        token: 'access-token-123',
+      });
 
       // Assert
       expect(result).toEqual({
@@ -468,7 +486,9 @@ describe('TokenService', () => {
     it('should delete expired access and refresh tokens', async () => {
       // Arrange
       prismaService.oAuthAccessToken.deleteMany.mockResolvedValue({ count: 3 });
-      prismaService.oAuthRefreshToken.deleteMany.mockResolvedValue({ count: 2 });
+      prismaService.oAuthRefreshToken.deleteMany.mockResolvedValue({
+        count: 2,
+      });
 
       // Act
       const result = await service.cleanupExpiredTokens();
@@ -484,8 +504,12 @@ describe('TokenService', () => {
   describe('getUserTokens', () => {
     it('should return user access and refresh tokens', async () => {
       // Arrange
-      prismaService.oAuthAccessToken.findMany.mockResolvedValue([mockAccessToken]);
-      prismaService.oAuthRefreshToken.findMany.mockResolvedValue([mockRefreshToken]);
+      prismaService.oAuthAccessToken.findMany.mockResolvedValue([
+        mockAccessToken,
+      ]);
+      prismaService.oAuthRefreshToken.findMany.mockResolvedValue([
+        mockRefreshToken,
+      ]);
 
       // Act
       const result = await service.getUserTokens('user-id-1');

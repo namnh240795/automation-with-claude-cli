@@ -37,7 +37,9 @@ describe('AuthorizationService', () => {
     code_challenge: null,
     code_challenge_method: null,
     nonce: 'nonce-123',
-    expires_at: new Date(Date.now() + TOKEN_LIFETIMES.AUTHORIZATION_CODE * 1000),
+    expires_at: new Date(
+      Date.now() + TOKEN_LIFETIMES.AUTHORIZATION_CODE * 1000,
+    ),
     consumed_at: null,
     created_at: new Date(),
   };
@@ -92,7 +94,9 @@ describe('AuthorizationService', () => {
     it('should generate authorization code successfully', async () => {
       // Arrange
       prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
-      prismaService.oAuthAuthorizationCode.create.mockResolvedValue(mockAuthCode);
+      prismaService.oAuthAuthorizationCode.create.mockResolvedValue(
+        mockAuthCode,
+      );
 
       const data = {
         client_id: 'test-client-id',
@@ -121,7 +125,9 @@ describe('AuthorizationService', () => {
     it('should generate authorization code with PKCE', async () => {
       // Arrange
       prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
-      prismaService.oAuthAuthorizationCode.create.mockResolvedValue(mockAuthCode);
+      prismaService.oAuthAuthorizationCode.create.mockResolvedValue(
+        mockAuthCode,
+      );
 
       const data = {
         client_id: 'test-client-id',
@@ -157,7 +163,9 @@ describe('AuthorizationService', () => {
       };
 
       // Act & Assert
-      await expect(service.generateAuthorizationCode(data)).rejects.toThrow(NotFoundException);
+      await expect(service.generateAuthorizationCode(data)).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 
@@ -169,7 +177,9 @@ describe('AuthorizationService', () => {
         require_pkce: true,
         is_public_client: false,
       });
-      prismaService.oAuthAuthorizationCode.findUnique.mockResolvedValue(mockAuthCode);
+      prismaService.oAuthAuthorizationCode.findUnique.mockResolvedValue(
+        mockAuthCode,
+      );
       prismaService.oAuthAuthorizationCode.update.mockResolvedValue({
         ...mockAuthCode,
         consumed_at: new Date(),
@@ -203,7 +213,9 @@ describe('AuthorizationService', () => {
         require_pkce: true,
         is_public_client: true,
       });
-      prismaService.oAuthAuthorizationCode.findUnique.mockResolvedValue(mockAuthCodeWithPKCE);
+      prismaService.oAuthAuthorizationCode.findUnique.mockResolvedValue(
+        mockAuthCodeWithPKCE,
+      );
       prismaService.oAuthAuthorizationCode.update.mockResolvedValue({
         ...mockAuthCodeWithPKCE,
         consumed_at: new Date(),
@@ -241,7 +253,9 @@ describe('AuthorizationService', () => {
       };
 
       // Act & Assert
-      await expect(service.validateAndConsumeAuthorizationCode(data)).rejects.toThrow(BadRequestException);
+      await expect(
+        service.validateAndConsumeAuthorizationCode(data),
+      ).rejects.toThrow(BadRequestException);
     });
 
     it('should throw BadRequestException for consumed code', async () => {
@@ -263,7 +277,9 @@ describe('AuthorizationService', () => {
       };
 
       // Act & Assert
-      await expect(service.validateAndConsumeAuthorizationCode(data)).rejects.toThrow(BadRequestException);
+      await expect(
+        service.validateAndConsumeAuthorizationCode(data),
+      ).rejects.toThrow(BadRequestException);
     });
 
     it('should throw BadRequestException for expired code', async () => {
@@ -285,7 +301,9 @@ describe('AuthorizationService', () => {
       };
 
       // Act & Assert
-      await expect(service.validateAndConsumeAuthorizationCode(data)).rejects.toThrow(BadRequestException);
+      await expect(
+        service.validateAndConsumeAuthorizationCode(data),
+      ).rejects.toThrow(BadRequestException);
     });
 
     it('should throw BadRequestException for redirect URI mismatch', async () => {
@@ -307,7 +325,9 @@ describe('AuthorizationService', () => {
       };
 
       // Act & Assert
-      await expect(service.validateAndConsumeAuthorizationCode(data)).rejects.toThrow(BadRequestException);
+      await expect(
+        service.validateAndConsumeAuthorizationCode(data),
+      ).rejects.toThrow(BadRequestException);
     });
 
     it('should throw BadRequestException when code_verifier required but missing', async () => {
@@ -329,21 +349,27 @@ describe('AuthorizationService', () => {
       };
 
       // Act & Assert
-      await expect(service.validateAndConsumeAuthorizationCode(data)).rejects.toThrow(BadRequestException);
+      await expect(
+        service.validateAndConsumeAuthorizationCode(data),
+      ).rejects.toThrow(BadRequestException);
     });
   });
 
   describe('cleanupExpiredCodes', () => {
     it('should delete expired authorization codes', async () => {
       // Arrange
-      prismaService.oAuthAuthorizationCode.deleteMany.mockResolvedValue({ count: 5 });
+      prismaService.oAuthAuthorizationCode.deleteMany.mockResolvedValue({
+        count: 5,
+      });
 
       // Act
       const result = await service.cleanupExpiredCodes();
 
       // Assert
       expect(result).toBe(5);
-      expect(prismaService.oAuthAuthorizationCode.deleteMany).toHaveBeenCalledWith({
+      expect(
+        prismaService.oAuthAuthorizationCode.deleteMany,
+      ).toHaveBeenCalledWith({
         where: {
           expires_at: {
             lt: expect.any(Date),
@@ -356,9 +382,7 @@ describe('AuthorizationService', () => {
   describe('getUserAuthorizationCodes', () => {
     it('should return active authorization codes for user', async () => {
       // Arrange
-      const codes = [
-        { ...mockAuthCode, client: mockClient },
-      ];
+      const codes = [{ ...mockAuthCode, client: mockClient }];
       prismaService.oAuthAuthorizationCode.findMany.mockResolvedValue(codes);
 
       // Act
@@ -366,7 +390,9 @@ describe('AuthorizationService', () => {
 
       // Assert
       expect(result).toEqual(codes);
-      expect(prismaService.oAuthAuthorizationCode.findMany).toHaveBeenCalledWith({
+      expect(
+        prismaService.oAuthAuthorizationCode.findMany,
+      ).toHaveBeenCalledWith({
         where: {
           user_id: 'user-id-1',
           consumed_at: null,

@@ -26,7 +26,8 @@ export class OAuthErrorDto {
   error_uri?: string;
 
   @ApiPropertyOptional({
-    description: 'State parameter from the authorization request (must be returned)',
+    description:
+      'State parameter from the authorization request (must be returned)',
     example: 'xyz789',
   })
   state?: string;

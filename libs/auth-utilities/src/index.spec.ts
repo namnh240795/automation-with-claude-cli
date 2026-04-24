@@ -208,7 +208,9 @@ describe('auth-utilities index exports', () => {
 
     it('should call reflector with correct parameters', () => {
       const requiredRoles = ['admin'];
-      const reflectSpy = jest.spyOn(reflector, 'getAllAndOverride').mockReturnValue(requiredRoles);
+      const reflectSpy = jest
+        .spyOn(reflector, 'getAllAndOverride')
+        .mockReturnValue(requiredRoles);
 
       const mockHandler = 'mockHandler';
       const mockClass = 'mockClass';
@@ -230,7 +232,10 @@ describe('auth-utilities index exports', () => {
 
       guard.canActivate(context);
 
-      expect(reflectSpy).toHaveBeenCalledWith(ROLES_KEY, [mockHandler, mockClass]);
+      expect(reflectSpy).toHaveBeenCalledWith(ROLES_KEY, [
+        mockHandler,
+        mockClass,
+      ]);
       reflectSpy.mockRestore();
     });
 

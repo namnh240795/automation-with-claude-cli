@@ -66,17 +66,25 @@ describe('JwtAuthGuard', () => {
     });
 
     it('should throw UnauthorizedException when user is null', () => {
-      expect(() => guard.handleRequest(null, null, null)).toThrow(UnauthorizedException);
-      expect(() => guard.handleRequest(null, null, null)).toThrow('Invalid or expired token');
+      expect(() => guard.handleRequest(null, null, null)).toThrow(
+        UnauthorizedException,
+      );
+      expect(() => guard.handleRequest(null, null, null)).toThrow(
+        'Invalid or expired token',
+      );
     });
 
     it('should throw UnauthorizedException when user is undefined', () => {
-      expect(() => guard.handleRequest(null, undefined, null)).toThrow(UnauthorizedException);
+      expect(() => guard.handleRequest(null, undefined, null)).toThrow(
+        UnauthorizedException,
+      );
     });
 
     it('should throw UnauthorizedException with custom error when error exists', () => {
       const customError = new Error('Custom auth error');
-      expect(() => guard.handleRequest(customError, null, null)).toThrow(customError);
+      expect(() => guard.handleRequest(customError, null, null)).toThrow(
+        customError,
+      );
     });
 
     it('should throw UnauthorizedException when error is passed and user is null', () => {
@@ -85,8 +93,12 @@ describe('JwtAuthGuard', () => {
     });
 
     it('should throw UnauthorizedException with default message when no error provided and no user', () => {
-      expect(() => guard.handleRequest(null, null, null)).toThrow(UnauthorizedException);
-      expect(() => guard.handleRequest(null, null, null)).toThrow('Invalid or expired token');
+      expect(() => guard.handleRequest(null, null, null)).toThrow(
+        UnauthorizedException,
+      );
+      expect(() => guard.handleRequest(null, null, null)).toThrow(
+        'Invalid or expired token',
+      );
     });
 
     it('should throw error when error exists even if user is present', () => {
@@ -95,9 +107,15 @@ describe('JwtAuthGuard', () => {
     });
 
     it('should handle falsy user values', () => {
-      expect(() => guard.handleRequest(null, false, null)).toThrow(UnauthorizedException);
-      expect(() => guard.handleRequest(null, 0, null)).toThrow(UnauthorizedException);
-      expect(() => guard.handleRequest(null, '', null)).toThrow(UnauthorizedException);
+      expect(() => guard.handleRequest(null, false, null)).toThrow(
+        UnauthorizedException,
+      );
+      expect(() => guard.handleRequest(null, 0, null)).toThrow(
+        UnauthorizedException,
+      );
+      expect(() => guard.handleRequest(null, '', null)).toThrow(
+        UnauthorizedException,
+      );
     });
   });
 

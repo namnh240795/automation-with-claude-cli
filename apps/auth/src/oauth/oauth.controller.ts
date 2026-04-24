@@ -12,18 +12,36 @@ import {
   Req,
   Logger,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiQuery, ApiOkResponse, ApiBadRequestResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiBearerAuth,
+  ApiQuery,
+  ApiOkResponse,
+  ApiBadRequestResponse,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 import { OAuthService } from './oauth.service';
 import { ClientService } from './client.service';
 import { DeviceFlowService } from './device-flow.service';
 import { JwtAuthGuard } from '@app/auth-utilities';
 import { AuthUser, JwtPayloadDto } from '@app/auth-utilities';
-import { RegisterClientDto, ClientResponseDto } from './dto/register-client.dto';
+import {
+  RegisterClientDto,
+  ClientResponseDto,
+} from './dto/register-client.dto';
 import { AuthorizationRequestDto } from './dto/authorization-request.dto';
 import { TokenRequestDto } from './dto/token-request.dto';
 import { TokenResponseDto } from './dto/token-response.dto';
-import { DeviceCodeResponseDto, DeviceConsentDto } from './dto/device-code-response.dto';
-import { RevokeTokenDto, IntrospectTokenDto, IntrospectResponseDto } from './dto/token-response.dto';
+import {
+  DeviceCodeResponseDto,
+  DeviceConsentDto,
+} from './dto/device-code-response.dto';
+import {
+  RevokeTokenDto,
+  IntrospectTokenDto,
+  IntrospectResponseDto,
+} from './dto/token-response.dto';
 import { OAUTH_ERRORS } from './oauth.constants';
 
 @ApiTags('oauth')
@@ -43,7 +61,9 @@ export class OAuthController {
   @Post('register')
   @ApiOperation({ summary: 'Register OAuth client' })
   @ApiOkResponse({ type: ClientResponseDto })
-  async registerClient(@Body() dto: RegisterClientDto): Promise<ClientResponseDto> {
+  async registerClient(
+    @Body() dto: RegisterClientDto,
+  ): Promise<ClientResponseDto> {
     return this.clientService.registerClient(dto) as any;
   }
 
@@ -118,7 +138,9 @@ export class OAuthController {
         // OAuth error - redirect to client with error details
         const errorParams = new URLSearchParams({
           error: error.error || OAUTH_ERRORS.INVALID_REQUEST,
-          ...(error.error_description && { error_description: error.error_description }),
+          ...(error.error_description && {
+            error_description: error.error_description,
+          }),
           ...(state && { state }),
         });
         req.res.redirect(`${redirectUri}?${errorParams.toString()}`);
@@ -173,7 +195,9 @@ export class OAuthController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Start device authorization flow' })
   @ApiOkResponse({ type: DeviceCodeResponseDto })
-  async deviceAuthorization(@Body() dto: { client_id: string; scope?: string }) {
+  async deviceAuthorization(
+    @Body() dto: { client_id: string; scope?: string },
+  ) {
     return await this.deviceFlowService.generateDeviceCode({
       client_id: dto.client_id,
       scope: dto.scope || 'openid',
@@ -190,7 +214,8 @@ export class OAuthController {
   @ApiQuery({ name: 'user_code', required: true })
   async getDeviceVerificationPage(@Query('user_code') userCode: string) {
     try {
-      const deviceInfo = await this.deviceFlowService.getDeviceCodeByUserCode(userCode);
+      const deviceInfo =
+        await this.deviceFlowService.getDeviceCodeByUserCode(userCode);
       return deviceInfo;
     } catch (error: any) {
       this.logger.error(`Device verification error: ${error.message}`);

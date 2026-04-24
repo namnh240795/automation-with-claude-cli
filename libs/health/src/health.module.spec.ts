@@ -26,7 +26,8 @@ describe('HealthModule', () => {
 
   it('should have HealthController loaded', () => {
     // Arrange & Act
-    const healthController = healthModule.get<HealthController>(HealthController);
+    const healthController =
+      healthModule.get<HealthController>(HealthController);
 
     // Assert
     expect(healthController).toBeDefined();

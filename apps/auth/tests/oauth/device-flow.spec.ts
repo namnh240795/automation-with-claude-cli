@@ -27,16 +27,21 @@ test.describe('OAuth 2.0 Device Authorization Flow', () => {
     expect(deviceClient).toBeDefined();
     expect(deviceClient.client_id).toBeDefined();
     expect(deviceClient.client_secret).toBeDefined();
-    expect(deviceClient.grant_types).toContain('urn:ietf:params:oauth:grant-type:device_code');
+    expect(deviceClient.grant_types).toContain(
+      'urn:ietf:params:oauth:grant-type:device_code',
+    );
   });
 
   test('should initiate device authorization flow', async ({ request }) => {
-    const response = await request.post('http://localhost:3001/auth/oauth/device/authorize', {
-      data: {
-        client_id: deviceClient.client_id,
-        scope: 'openid email',
+    const response = await request.post(
+      'http://localhost:3001/auth/oauth/device/authorize',
+      {
+        data: {
+          client_id: deviceClient.client_id,
+          scope: 'openid email',
+        },
       },
-    });
+    );
 
     expect(response.ok()).toBeTruthy();
 
@@ -53,12 +58,14 @@ test.describe('OAuth 2.0 Device Authorization Flow', () => {
     expect(deviceCodeResponse.user_code).toMatch(/^[A-Z0-9]{4}-[A-Z0-9]{4}$/);
 
     // Verify verification URI
-    expect(deviceCodeResponse.verification_uri).toContain('/auth/oauth/device/verify');
+    expect(deviceCodeResponse.verification_uri).toContain(
+      '/auth/oauth/device/verify',
+    );
   });
 
   test('should include verification_uri_complete with user_code', async () => {
     expect(deviceCodeResponse.verification_uri_complete).toContain(
-      `user_code=${deviceCodeResponse.user_code}`
+      `user_code=${deviceCodeResponse.user_code}`,
     );
   });
 
@@ -73,25 +80,35 @@ test.describe('OAuth 2.0 Device Authorization Flow', () => {
     expect(deviceCodeResponse.interval).toBeGreaterThanOrEqual(5);
   });
 
-  test('should fail device authorization with invalid client_id', async ({ request }) => {
-    const response = await request.post('http://localhost:3001/auth/oauth/device/authorize', {
-      data: {
-        client_id: 'invalid_client_id',
-        scope: 'openid',
+  test('should fail device authorization with invalid client_id', async ({
+    request,
+  }) => {
+    const response = await request.post(
+      'http://localhost:3001/auth/oauth/device/authorize',
+      {
+        data: {
+          client_id: 'invalid_client_id',
+          scope: 'openid',
+        },
       },
-    });
+    );
 
     expect(response.status()).toBe(404); // Client not found
   });
 
-  test('should handle pending device code during token polling', async ({ request }) => {
+  test('should handle pending device code during token polling', async ({
+    request,
+  }) => {
     // First initiate device flow to get a device code
-    const deviceResponse = await request.post('http://localhost:3001/auth/oauth/device/authorize', {
-      data: {
-        client_id: deviceClient.client_id,
-        scope: 'openid email',
+    const deviceResponse = await request.post(
+      'http://localhost:3001/auth/oauth/device/authorize',
+      {
+        data: {
+          client_id: deviceClient.client_id,
+          scope: 'openid email',
+        },
       },
-    });
+    );
 
     const deviceData = await deviceResponse.json();
 
@@ -103,12 +120,15 @@ test.describe('OAuth 2.0 Device Authorization Flow', () => {
       client_secret: deviceClient.client_secret,
     });
 
-    const response = await request.post('http://localhost:3001/auth/oauth/token', {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await request.post(
+      'http://localhost:3001/auth/oauth/token',
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: formData.toString(),
       },
-      data: formData.toString(),
-    });
+    );
 
     // Should get authorization_pending error
     expect(response.status()).toBe(400);
@@ -121,34 +141,40 @@ test.describe('OAuth 2.0 Device Authorization Flow', () => {
     // This test simulates polling with an expired code
     // In a real scenario, we'd need to wait for expiration or mock it
 
-    const response = await request.post('http://localhost:3001/auth/oauth/token', {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await request.post(
+      'http://localhost:3001/auth/oauth/token',
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: new URLSearchParams({
+          grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
+          device_code: 'expired_device_code',
+          client_id: deviceClient.client_id,
+          client_secret: deviceClient.client_secret,
+        }),
       },
-      data: new URLSearchParams({
-        grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
-        device_code: 'expired_device_code',
-        client_id: deviceClient.client_id,
-        client_secret: deviceClient.client_secret,
-      }),
-    });
+    );
 
     // Should get error (either invalid_grant or expired_token)
     expect(response.status()).toBe(400);
   });
 
   test('should fail with invalid device code', async ({ request }) => {
-    const response = await request.post('http://localhost:3001/auth/oauth/token', {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await request.post(
+      'http://localhost:3001/auth/oauth/token',
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: new URLSearchParams({
+          grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
+          device_code: 'invalid_device_code',
+          client_id: deviceClient.client_id,
+          client_secret: deviceClient.client_secret,
+        }),
       },
-      data: new URLSearchParams({
-        grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
-        device_code: 'invalid_device_code',
-        client_id: deviceClient.client_id,
-        client_secret: deviceClient.client_secret,
-      }),
-    });
+    );
 
     expect(response.status()).toBe(400);
 
@@ -158,18 +184,21 @@ test.describe('OAuth 2.0 Device Authorization Flow', () => {
 
   test('should get device verification page', async ({ page, request }) => {
     // First create a device code
-    const deviceResponse = await request.post('http://localhost:3001/auth/oauth/device/authorize', {
-      data: {
-        client_id: deviceClient.client_id,
-        scope: 'openid email',
+    const deviceResponse = await request.post(
+      'http://localhost:3001/auth/oauth/device/authorize',
+      {
+        data: {
+          client_id: deviceClient.client_id,
+          scope: 'openid email',
+        },
       },
-    });
+    );
 
     const deviceData = await deviceResponse.json();
 
     // Navigate to verification page with user code
     const response = await request.get(
-      `http://localhost:3001/auth/oauth/device/verify?user_code=${deviceData.user_code}`
+      `http://localhost:3001/auth/oauth/device/verify?user_code=${deviceData.user_code}`,
     );
 
     // Should return device verification info
@@ -181,44 +210,58 @@ test.describe('OAuth 2.0 Device Authorization Flow', () => {
     expect(deviceInfo).toHaveProperty('scope');
   });
 
-  test('should fail verification with invalid user code', async ({ request }) => {
+  test('should fail verification with invalid user code', async ({
+    request,
+  }) => {
     const response = await request.get(
-      'http://localhost:3001/auth/oauth/device/verify?user_code=INVALID'
+      'http://localhost:3001/auth/oauth/device/verify?user_code=INVALID',
     );
 
     expect(response.status()).toBe(404);
   });
 
-  test('should support device consent submission', async ({ page, request }) => {
+  test('should support device consent submission', async ({
+    page,
+    request,
+  }) => {
     // Note: This would require user authentication
     // Testing the endpoint structure instead
 
     // First create a device code
-    const deviceResponse = await request.post('http://localhost:3001/auth/oauth/device/authorize', {
-      data: {
-        client_id: deviceClient.client_id,
-        scope: 'openid email',
+    const deviceResponse = await request.post(
+      'http://localhost:3001/auth/oauth/device/authorize',
+      {
+        data: {
+          client_id: deviceClient.client_id,
+          scope: 'openid email',
+        },
       },
-    });
+    );
 
     const deviceData = await deviceResponse.json();
 
-    const acceptResponse = await request.post('http://localhost:3001/auth/oauth/device/consent', {
-      data: {
-        user_code: deviceData.user_code,
-        action: 'accept',
+    const acceptResponse = await request.post(
+      'http://localhost:3001/auth/oauth/device/consent',
+      {
+        data: {
+          user_code: deviceData.user_code,
+          action: 'accept',
+        },
       },
-    });
+    );
 
     // Will fail without auth, but verifies endpoint exists
     expect(acceptResponse.status()).toBeGreaterThanOrEqual(400);
 
-    const denyResponse = await request.post('http://localhost:3001/auth/oauth/device/consent', {
-      data: {
-        user_code: deviceData.user_code,
-        action: 'deny',
+    const denyResponse = await request.post(
+      'http://localhost:3001/auth/oauth/device/consent',
+      {
+        data: {
+          user_code: deviceData.user_code,
+          action: 'deny',
+        },
       },
-    });
+    );
 
     expect(denyResponse.status()).toBeGreaterThanOrEqual(400);
   });
@@ -240,14 +283,19 @@ test.describe('Device Flow Polling Behavior', () => {
     });
   });
 
-  test('should respect slow_down error after too frequent polling', async ({ request }) => {
+  test('should respect slow_down error after too frequent polling', async ({
+    request,
+  }) => {
     // Initiate device flow
-    const deviceResponse = await request.post('http://localhost:3001/auth/oauth/device/authorize', {
-      data: {
-        client_id: deviceClient.client_id,
-        scope: 'openid',
+    const deviceResponse = await request.post(
+      'http://localhost:3001/auth/oauth/device/authorize',
+      {
+        data: {
+          client_id: deviceClient.client_id,
+          scope: 'openid',
+        },
       },
-    });
+    );
 
     const deviceData = await deviceResponse.json();
 
@@ -272,21 +320,29 @@ test.describe('Device Flow Polling Behavior', () => {
     expect(error1.error).toBe('authorization_pending');
   });
 
-  test('should handle multiple simultaneous device flows', async ({ request }) => {
+  test('should handle multiple simultaneous device flows', async ({
+    request,
+  }) => {
     // Initiate multiple device flows for same client
-    const flow1 = await request.post('http://localhost:3001/auth/oauth/device/authorize', {
-      data: {
-        client_id: deviceClient.client_id,
-        scope: 'openid',
+    const flow1 = await request.post(
+      'http://localhost:3001/auth/oauth/device/authorize',
+      {
+        data: {
+          client_id: deviceClient.client_id,
+          scope: 'openid',
+        },
       },
-    });
+    );
 
-    const flow2 = await request.post('http://localhost:3001/auth/oauth/device/authorize', {
-      data: {
-        client_id: deviceClient.client_id,
-        scope: 'openid',
+    const flow2 = await request.post(
+      'http://localhost:3001/auth/oauth/device/authorize',
+      {
+        data: {
+          client_id: deviceClient.client_id,
+          scope: 'openid',
+        },
       },
-    });
+    );
 
     const data1 = await flow1.json();
     const data2 = await flow2.json();

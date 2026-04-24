@@ -1,4 +1,10 @@
-import { Injectable, NotFoundException, BadRequestException, ConflictException, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+  ConflictException,
+  Logger,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { hashPassword, verifyPassword } from '@app/auth-utilities';
 import { randomBytes } from 'crypto';
@@ -132,7 +138,10 @@ export class ClientService {
   /**
    * Validate client credentials
    */
-  async validateClient(client_id: string, client_secret?: string): Promise<boolean> {
+  async validateClient(
+    client_id: string,
+    client_secret?: string,
+  ): Promise<boolean> {
     try {
       const client = await this.findByClientId(client_id);
 
@@ -157,7 +166,9 @@ export class ClientService {
    */
   validateRedirectUri(client: any, redirect_uri: string): boolean {
     if (!client.redirect_uris.includes(redirect_uri)) {
-      this.logger.warn(`Invalid redirect URI for client ${client.client_id}: ${redirect_uri}`);
+      this.logger.warn(
+        `Invalid redirect URI for client ${client.client_id}: ${redirect_uri}`,
+      );
       return false;
     }
     return true;
@@ -173,12 +184,20 @@ export class ClientService {
 
         // Must be http or https
         if (url.protocol !== 'http:' && url.protocol !== 'https:') {
-          throw new BadRequestException(`Invalid redirect URI protocol: ${uri}`);
+          throw new BadRequestException(
+            `Invalid redirect URI protocol: ${uri}`,
+          );
         }
 
         // HTTPS is required in production (except localhost)
-        if (url.protocol === 'http:' && url.hostname !== 'localhost' && url.hostname !== '127.0.0.1') {
-          this.logger.warn(`HTTP redirect URI detected (should use HTTPS in production): ${uri}`);
+        if (
+          url.protocol === 'http:' &&
+          url.hostname !== 'localhost' &&
+          url.hostname !== '127.0.0.1'
+        ) {
+          this.logger.warn(
+            `HTTP redirect URI detected (should use HTTPS in production): ${uri}`,
+          );
         }
       } catch (e) {
         throw new BadRequestException(`Invalid redirect URI format: ${uri}`);
@@ -200,8 +219,8 @@ export class ClientService {
     if (!scope || scope.trim() === '') {
       return true; // Empty scope is valid
     }
-    const requestedScopes = scope.split(' ').filter(s => s.length > 0);
-    return requestedScopes.every(s => client.scopes.includes(s));
+    const requestedScopes = scope.split(' ').filter((s) => s.length > 0);
+    return requestedScopes.every((s) => client.scopes.includes(s));
   }
 
   /**

@@ -173,7 +173,9 @@ describe('OAuthController', () => {
   describe('deleteClient', () => {
     it('should delete OAuth client', async () => {
       // Arrange
-      clientService.deleteClient.mockResolvedValue({ message: 'Client deleted successfully' });
+      clientService.deleteClient.mockResolvedValue({
+        message: 'Client deleted successfully',
+      });
 
       // Act
       const result = await controller.deleteClient('test-client-id');
@@ -193,7 +195,8 @@ describe('OAuthController', () => {
       };
 
       const authResult = {
-        redirect_uri: 'https://example.com/callback?code=auth-code-123&state=state-123',
+        redirect_uri:
+          'https://example.com/callback?code=auth-code-123&state=state-123',
       };
       oauthService.handleAuthorizationRequest.mockResolvedValue(authResult);
 
@@ -244,7 +247,8 @@ describe('OAuthController', () => {
 
       // Assert
       // Both %20 and + are valid for encoding spaces in URLs
-      const expectedUrl = 'https://example.com/callback?error=invalid_request&error_description=Missing+required+parameter&state=state-123';
+      const expectedUrl =
+        'https://example.com/callback?error=invalid_request&error_description=Missing+required+parameter&state=state-123';
       expect(mockReq.res.redirect).toHaveBeenCalledWith(expectedUrl);
     });
   });
@@ -342,7 +346,8 @@ describe('OAuthController', () => {
         device_code: 'device-code-123',
         user_code: 'ABCD-1234',
         verification_uri: 'http://localhost:3001/auth/oauth/device/verify',
-        verification_uri_complete: 'http://localhost:3001/auth/oauth/device/verify?user_code=ABCD-1234',
+        verification_uri_complete:
+          'http://localhost:3001/auth/oauth/device/verify?user_code=ABCD-1234',
         expires_in: 900,
         interval: 5,
       };
@@ -388,7 +393,10 @@ describe('OAuthController', () => {
       deviceFlowService.verifyDeviceCode.mockResolvedValue(undefined);
 
       // Act
-      const result = await controller.submitDeviceConsent(consentDto as any, mockUser);
+      const result = await controller.submitDeviceConsent(
+        consentDto as any,
+        mockUser,
+      );
 
       // Assert
       expect(result).toEqual({ message: 'Device verified successfully' });
@@ -407,11 +415,16 @@ describe('OAuthController', () => {
       deviceFlowService.denyDeviceCode.mockResolvedValue(undefined);
 
       // Act
-      const result = await controller.submitDeviceConsent(consentDto as any, mockUser);
+      const result = await controller.submitDeviceConsent(
+        consentDto as any,
+        mockUser,
+      );
 
       // Assert
       expect(result).toEqual({ message: 'Device authorization denied' });
-      expect(deviceFlowService.denyDeviceCode).toHaveBeenCalledWith('ABCD-1234');
+      expect(deviceFlowService.denyDeviceCode).toHaveBeenCalledWith(
+        'ABCD-1234',
+      );
     });
   });
 
@@ -447,7 +460,10 @@ describe('OAuthController', () => {
       });
 
       // Act
-      const result = await controller.revokeClientAccess('test-client-id', mockUser);
+      const result = await controller.revokeClientAccess(
+        'test-client-id',
+        mockUser,
+      );
 
       // Assert
       expect(result).toEqual({ message: 'Client access revoked successfully' });
@@ -462,34 +478,38 @@ describe('OAuthController', () => {
     it('should return user tokens', async () => {
       // Arrange
       const tokens = {
-        access_tokens: [{
-          token: 'access-token-123',
-          id: 'token-id-1',
-          client_id: 'test-client-id',
-          created_at: new Date(),
-          user_id: 'user-id-1',
-          scope: 'openid email',
-          expires_at: new Date(),
-          token_type: 'Bearer',
-          revoked_at: null,
-          client: {
-            name: 'Test Client',
+        access_tokens: [
+          {
+            token: 'access-token-123',
+            id: 'token-id-1',
             client_id: 'test-client-id',
+            created_at: new Date(),
+            user_id: 'user-id-1',
+            scope: 'openid email',
+            expires_at: new Date(),
+            token_type: 'Bearer',
+            revoked_at: null,
+            client: {
+              name: 'Test Client',
+              client_id: 'test-client-id',
+            },
           },
-        }],
-        refresh_tokens: [{
-          token: 'refresh-token-123',
-          id: 'refresh-token-id-1',
-          client_id: 'test-client-id',
-          created_at: new Date(),
-          user_id: 'user-id-1',
-          scope: 'openid email',
-          expires_at: new Date(),
-          client: {
-            name: 'Test Client',
+        ],
+        refresh_tokens: [
+          {
+            token: 'refresh-token-123',
+            id: 'refresh-token-id-1',
             client_id: 'test-client-id',
+            created_at: new Date(),
+            user_id: 'user-id-1',
+            scope: 'openid email',
+            expires_at: new Date(),
+            client: {
+              name: 'Test Client',
+              client_id: 'test-client-id',
+            },
           },
-        }],
+        ],
       };
       oauthService.getUserTokens.mockResolvedValue(tokens);
 
