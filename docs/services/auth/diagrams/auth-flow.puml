@@ -1,0 +1,13 @@
+@startuml
+skinparam backgroundColor #FEFEFE
+skinparam shadowing false
+
+actor User
+participant "Auth Service" as Auth
+database "PostgreSQL" as DB
+
+User -> Auth: POST /auth/signup
+Auth -> DB: Create user
+DB --> Auth: User created
+Auth --> User: 201 { access_token }
+@enduml
