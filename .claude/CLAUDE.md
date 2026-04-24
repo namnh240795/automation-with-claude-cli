@@ -64,30 +64,57 @@ All rules in `.claude/rules/` are **mandatory** and must be followed:
 | Rule | Description |
 |------|-------------|
 | `clean-code.md` | Variables, functions, SOLID, async/await |
-| `code-style.md` | Formatting, naming conventions |
-| `error-handling.md` | AppError class, global handler patterns |
+| `code-style.md` | Formatting, naming conventions, file naming |
+| `error-handling.md` | NestJS exception types (NotFound, Conflict, etc.) |
 
 ### Architecture & Design
 | Rule | Description |
 |------|-------------|
-| `tech-stack.md` | Approved technologies (NestJS, Fastify, PG, Redis, Prisma) |
-| `system-design.md` | CAP theorem, caching, scaling, queues |
-| `project-structure.md` | Layered architecture, folder organization |
-| `api-conventions.md` | REST standards, response envelopes |
+| `tech-stack.md` | **CRITICAL** — Approved technologies and banned list |
+| `system-design.md` | CAP theorem, caching strategy, scaling, communication patterns |
+| `project-structure.md` | Monorepo folder organization, service structure |
+| `api-conventions.md` | Fastify adapter, ValidationPipe, versioning, Swagger, CORS |
+| `module-structure.md` | NestJS feature modules, thin controllers, service delegation |
+| `multi-service-routing.md` | SERVICE_PREFIX, multi-service Docker setup, nginx routing |
 
 ### Data & Naming
 | Rule | Description |
 |------|-------------|
-| `naming-conventions.md` | Cache keys, DB, queues, env vars |
-| `database.md` | Prisma patterns, transactions, N+1 prevention |
+| `naming-conventions.md` | Cache keys, DB, queues, env vars, file naming |
+| `database.md` | Schema design, data types, indexes, migrations |
+| `prisma-patterns.md` | Query patterns, pagination, soft deletes, error codes |
+| `prisma-integration.md` | Prisma 7 setup, prisma.config.ts, driver adapters |
+
+### Auth & Security
+| Rule | Description |
+|------|-------------|
+| `security.md` | **CRITICAL** — Never violate security rules |
+| `auth-guard-patterns.md` | JWT guards, @AuthUser(), @Roles(), TokenService, rate limiting |
+| `config-management.md` | ConfigService, ENVIRONMENT constants |
+
+### Validation & Docs
+| Rule | Description |
+|------|-------------|
+| `dto-validation.md` | class-validator decorators, snake_case DTOs |
+| `swagger-scalars.md` | @ApiProperty types, arrays, enums |
+| `nestjs-cli.md` | NestJS schematics with --project in monorepo |
+
+### Infrastructure
+| Rule | Description |
+|------|-------------|
+| `rspack-dev.md` | Rspack commands, aliases, externals |
+| `redis-patterns.md` | Key naming, caching, rate limiting, sessions |
+| `rabbitmq-patterns.md` | Queue topology, message schemas, consumers |
+| `frontend-conventions.md` | React, Tailwind, Radix UI, React Router |
 
 ### Operations
 | Rule | Description |
 |------|-------------|
-| `security.md` | **CRITICAL** — Never violate security rules |
-| `monitoring.md` | Prometheus, Grafana, logging, alerting |
-| `testing.md` | Coverage thresholds, test patterns |
-| `git-workflow.md` | Branching strategy, conventional commits |
+| `monitoring.md` | @LogActivity(), health checks, alerting triggers |
+| `testing.md` | Coverage thresholds (>80%), test structure |
+| `git-workflow.md` | Branching, conventional commits, PR standards |
+| `documentation-updates.md` | When and how to update docs |
+| `diagrams.md` | PlantUML file organization in docs/ |
 
 ---
 
@@ -103,11 +130,19 @@ Each service has:
 - Independent `.env` file for configuration
 - Rspack configuration for fast development builds
 
+### Infrastructure
+
+| Service | Image | Port | Purpose |
+|---------|-------|------|---------|
+| PostgreSQL | pgvector/pgvector:pg16 | 5432 | Primary database (with vector extension) |
+| Redis | redis:7-alpine | 6379 | Cache, rate limiting, sessions |
+| RabbitMQ | rabbitmq:3-management | 5672 / 15672 | Message queue with management UI |
+
 ### Shared Libraries
 
 - **@app/auth-utilities** - JWT guards, `@AuthUser()` decorator, password hashing, `@Roles()` decorator
 - **@app/app-logger** - `@LogActivity()` decorator for service method logging
-- **@app/caching** - Cache manager wrapper
+- **@app/caching** - Redis cache manager wrapper (ioredis)
 - **@app/health** - Health check utilities
 - **@app/common** - Common utilities and interceptors
 
@@ -298,7 +333,7 @@ When making changes to the monorepo:
 - `rspack.config.js` - Rspack bundler config (must match tsconfig paths)
 - `.clinerules` - Dependency installation and Rspack sync rules
 - `pnpm-workspace.yaml` - Workspace configuration
-- `docker/docker-compose.yml` - PostgreSQL services
+- `docker/docker-compose.yml` - PostgreSQL, Redis, RabbitMQ services
 
 ---
 
@@ -336,29 +371,18 @@ Specialized skills for complex operations:
 
 | Skill | Description |
 |-------|-------------|
-| `tdd` | Test-Driven Development patterns |
-| `code-review` | Five-axis review framework |
-| `incremental-implementation` | Vertical slice development |
-| `deploy` | Full deployment pipeline |
-| `security-review` | Security audit checklist |
-| `nestjs-conventions` | Fastify setup, validation, Swagger, versioning |
-| `prisma-patterns` | Database operations, migrations, naming conventions |
-| `auth-guard-patterns` | JWT authentication implementation |
-| `dto-validation` | DTO creation with class-validator |
-| `rspack-dev` | Rspack development and watch mode |
+| `test-driven-development` | TDD cycle (RED-GREEN-REFACTOR), Prove-It pattern for bugs |
+| `incremental-implementation` | Vertical slice development with pnpm/Rspack workflow |
+| `documentation-and-adrs` | ADRs, service READMEs, inline documentation |
+| `security-and-hardening` | OWASP prevention, input validation, secrets management |
+| `nestjs-unit-testing` | Test templates for services, controllers, DTOs, Prisma mocks |
+| `test-coverage-analyzer` | Gap analysis, find files without tests |
+| `spec-driven-development` | Write specs before coding |
+| `source-driven-development` | Ground decisions in official documentation |
+| `planning-and-task-breakdown` | Break work into ordered tasks |
+| `plantuml` | Generate PlantUML diagrams as SVG |
 
 ---
-
-## Reference Checklists
-
-Quick references in `.claude/references/`:
-
-| Reference | Use For |
-|-----------|---------|
-| `security-checklist.md` | Pre-deploy security verification |
-| `testing-patterns.md` | Test structure and anti-patterns |
-| `performance-checklist.md` | Core Web Vitals, optimization |
-| `accessibility-checklist.md` | WCAG 2.1 AA compliance |
 
 ---
 

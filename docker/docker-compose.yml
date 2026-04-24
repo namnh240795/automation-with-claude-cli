@@ -33,9 +33,55 @@ services:
     networks:
       - default
 
+  # Redis Cache Service
+  # Used for: caching, rate limiting, session store
+  # Connect via: redis://redis:6379 (internal) or redis://localhost:6379 (host)
+  redis:
+    image: redis:7-alpine
+    container_name: claude-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - default
+
+  # RabbitMQ Message Queue Service
+  # Used for: async messaging, event-driven architecture, background jobs
+  # Connect via: amqp://rabbitmq:5672 (internal) or amqp://localhost:5672 (host)
+  # Management UI: http://localhost:15672 (guest/guest)
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: claude-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq_password_change_this
+    ports:
+      - "5672:5672"     # AMQP protocol
+      - "15672:15672"   # Management UI
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - default
 
 volumes:
   postgres-data:
+  redis-data:
+  rabbitmq-data:
 
 networks:
   default:
