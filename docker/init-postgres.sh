@@ -38,4 +38,18 @@ EOSQL
 
 echo "RAG service database created with pgvector extension."
 
+# Key Vault Service Database and User
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+    -- Create Key Vault service database and admin user
+    CREATE DATABASE key_vault_db;
+    CREATE USER key_vault_admin WITH PASSWORD 'key_vault_admin_password_change_this';
+    GRANT ALL PRIVILEGES ON DATABASE key_vault_db TO key_vault_admin;
+    \c key_vault_db
+    GRANT ALL ON SCHEMA public TO key_vault_admin;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO key_vault_admin;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO key_vault_admin;
+EOSQL
+
+echo "Key Vault service database created (key_vault_db)."
+
 echo "Database initialization complete!"

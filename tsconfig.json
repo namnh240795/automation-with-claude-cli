@@ -54,6 +54,12 @@
       ],
       "@auth/prisma-client/*": [
         "packages/auth-prisma-client/src/*"
+      ],
+      "@key-vault/prisma-client": [
+        "packages/key-vault-prisma-client/src"
+      ],
+      "@key-vault/prisma-client/*": [
+        "packages/key-vault-prisma-client/src/*"
       ]
     }
   }

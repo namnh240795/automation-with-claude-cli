@@ -1,0 +1,9 @@
+{
+  "name": "@key-vault/prisma-client",
+  "version": "0.0.1",
+  "description": "Key Vault Service Prisma Client",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "private": true,
+  "license": "MIT"
+}

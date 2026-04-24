@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../packages/key-vault-prisma-client/src"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model environment {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  is_active   Boolean   @default(true)
+  created_at  DateTime  @default(now())
+  created_by  String
+  updated_at  DateTime  @updatedAt
+  updated_by  String
+  deleted_at  DateTime?
+  deleted_by  String?
+
+  setting_values          setting_value[]
+  setting_value_histories setting_value_history[]
+
+  @@index([name])
+  @@index([is_active])
+  @@map("environment")
+}
+
+model setting {
+  id           String    @id @default(uuid())
+  service_name String
+  key          String
+  type         String    @default("STATIC")
+  description  String?
+  is_active    Boolean   @default(true)
+  created_at   DateTime  @default(now())
+  created_by   String
+  updated_at   DateTime  @updatedAt
+  updated_by   String
+  deleted_at   DateTime?
+  deleted_by   String?
+
+  setting_values          setting_value[]
+  setting_value_histories setting_value_history[]
+
+  @@unique([service_name, key])
+  @@index([service_name])
+  @@index([key])
+  @@index([type])
+  @@index([is_active])
+  @@index([deleted_at])
+  @@map("setting")
+}
+
+model setting_value {
+  id             String   @id @default(uuid())
+  setting_id     String
+  environment_id String
+  value          String
+  version        Int
+  change_reason  String?
+  created_at     DateTime @default(now())
+  created_by     String
+
+  setting     setting     @relation(fields: [setting_id], references: [id], onDelete: Cascade)
+  environment environment @relation(fields: [environment_id], references: [id], onDelete: Cascade)
+
+  @@unique([setting_id, environment_id, version])
+  @@index([setting_id])
+  @@index([environment_id])
+  @@map("setting_value")
+}
+
+model setting_value_history {
+  id             String   @id @default(uuid())
+  setting_id     String
+  environment_id String
+  value          String
+  version        Int
+  change_reason  String?
+  created_at     DateTime @default(now())
+  created_by     String
+
+  setting     setting     @relation(fields: [setting_id], references: [id], onDelete: Cascade)
+  environment environment @relation(fields: [environment_id], references: [id], onDelete: Cascade)
+
+  @@index([setting_id])
+  @@index([environment_id])
+  @@index([version])
+  @@map("setting_value_history")
+}
