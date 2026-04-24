@@ -9,14 +9,14 @@ import { Reflector } from '@nestjs/core';
 
 // JWT payload structure - matches our token format
 export interface JwtPayloadDto {
-  sub: string;          // User ID
-  email: string;        // User email
-  first_name?: string;  // User first name
-  last_name?: string;   // User last name
-  roles?: string[];     // User roles (optional)
-  iat: number;          // Issued at
-  exp: number;          // Expiration time
-  jti?: string;         // JWT ID (unique identifier)
+  sub: string; // User ID
+  email: string; // User email
+  first_name?: string; // User first name
+  last_name?: string; // User last name
+  roles?: string[]; // User roles (optional)
+  iat: number; // Issued at
+  exp: number; // Expiration time
+  jti?: string; // JWT ID (unique identifier)
 }
 
 export const AuthUser = createParamDecorator(
@@ -57,3 +57,4 @@ export class RolesGuard implements CanActivate {
 
 export { hashPassword, verifyPassword } from './password';
 export { JwtAuthGuard } from './guards/jwt-auth.guard';
+export { JwtStrategy } from './strategies/jwt.strategy';

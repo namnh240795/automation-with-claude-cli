@@ -8,7 +8,7 @@ import { SettingValuesModule } from './setting-values/setting-values.module';
 import { ServiceConsumptionModule } from './service-consumption/service-consumption.module';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { JwtStrategy } from './strategies/jwt.strategy';
+import { JwtStrategy } from '@app/auth-utilities';
 import * as path from 'path';
 
 @Module({
