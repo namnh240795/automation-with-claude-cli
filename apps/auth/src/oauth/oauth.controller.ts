@@ -11,6 +11,7 @@ import {
   UseGuards,
   Req,
   Logger,
+  Version,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -24,7 +25,7 @@ import {
 import { OAuthService } from './oauth.service';
 import { ClientService } from './client.service';
 import { DeviceFlowService } from './device-flow.service';
-import { JwtAuthGuard } from '@app/auth-utilities';
+import { JwtAuthGuard, Roles, RolesGuard } from '@app/auth-utilities';
 import { AuthUser, JwtPayloadDto } from '@app/auth-utilities';
 import {
   RegisterClientDto,
@@ -91,11 +92,30 @@ export class OAuthController {
    * Delete OAuth client (admin endpoint)
    */
   @Delete('clients/:clientId')
-  @ApiOperation({ summary: 'Delete OAuth client' })
-  @UseGuards(JwtAuthGuard)
+  @Version('1')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('SUPER_ADMIN')
   @ApiBearerAuth('bearer-auth')
+  @ApiOperation({ summary: 'Delete OAuth client (Super Admin only)' })
   async deleteClient(@Param('clientId') clientId: string) {
     return this.clientService.deleteClient(clientId);
+  }
+
+  /**
+   * Create OAuth client for service accounts (Super Admin only)
+   * Super admin uses this to create API service credentials
+   */
+  @Post('admin/clients')
+  @Version('1')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('SUPER_ADMIN')
+  @ApiBearerAuth('bearer-auth')
+  @ApiOperation({ summary: 'Create OAuth client for service account (Super Admin only)' })
+  @ApiOkResponse({ type: ClientResponseDto })
+  async createAdminClient(
+    @Body() dto: RegisterClientDto,
+  ): Promise<ClientResponseDto> {
+    return this.clientService.registerClient(dto) as any;
   }
 
   /**
