@@ -11,12 +11,13 @@ import { ConfigService } from '@nestjs/config';
 import { useContainer } from 'class-validator';
 import { apiReference } from '@scalar/nestjs-api-reference';
 import { AppModule } from './app.module';
+import multipart from '@fastify/multipart';
 
 export async function bootstrap() {
   const fastifyAdapter = new FastifyAdapter();
 
   // Register multipart plugin for file uploads BEFORE creating NestJS app
-  await fastifyAdapter.getInstance().register(require('@fastify/multipart'), {
+  await fastifyAdapter.getInstance().register(multipart, {
     attachFieldsToBody: false,
     limits: {
       fileSize: 20 * 1024 * 1024, // 20MB

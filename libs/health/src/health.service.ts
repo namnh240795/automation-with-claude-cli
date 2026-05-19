@@ -1,4 +1,3 @@
-import { LogActivity } from '@app/app-logger';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

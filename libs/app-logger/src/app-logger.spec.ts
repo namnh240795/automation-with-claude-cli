@@ -1,4 +1,4 @@
-import { AppLogger, CustomLog, LogActivity } from './app-logger';
+import { AppLogger, CustomLog, LogActivity } from './index';
 import { errorHandler } from './error-handler';
 import { responseHandler } from './response-handler';
 import { BadRequestException } from '@nestjs/common';
@@ -363,9 +363,8 @@ describe('errorHandler', () => {
 
 describe('responseHandler', () => {
   it('should import AppLogger from index and use it', () => {
-    const { AppLogger: IndexLogger } = require('./index');
-    const logger = new IndexLogger('IndexTest');
-    expect(logger).toBeInstanceOf(IndexLogger);
+    const logger = new AppLogger('IndexTest');
+    expect(logger).toBeInstanceOf(AppLogger);
     jest.spyOn(console, 'log').mockImplementation(() => {});
     expect(() => logger.customLog({ function: 'testFunction' })).not.toThrow();
     jest.restoreAllMocks();

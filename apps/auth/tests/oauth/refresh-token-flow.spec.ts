@@ -8,8 +8,6 @@ import { OAuthTestHelper } from '../helpers/oauth-helpers';
 test.describe('OAuth 2.0 Refresh Token Flow', () => {
   let oauthHelper: OAuthTestHelper;
   let refreshClient: any;
-  let initialAccessToken: string;
-  let initialRefreshToken: string;
 
   test.beforeAll(async ({ request }) => {
     oauthHelper = new OAuthTestHelper(request, 'http://localhost:3001');

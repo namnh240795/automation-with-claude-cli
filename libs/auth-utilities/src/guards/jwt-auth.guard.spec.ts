@@ -1,6 +1,5 @@
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { ExecutionContext, UnauthorizedException } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { JwtPayloadDto } from '../index';
 
 // Mock AuthGuard from passport

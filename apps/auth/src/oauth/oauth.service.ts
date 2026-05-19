@@ -9,7 +9,7 @@ import { AuthorizationService } from './authorization.service';
 import { TokenService } from './token.service';
 import { DeviceFlowService } from './device-flow.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { hashPassword, verifyPassword } from '@app/auth-utilities';
+import { verifyPassword } from '@app/auth-utilities';
 import { OAUTH_ERRORS, GRANT_TYPES } from './oauth.constants';
 import { OAuthBadRequestException } from './oauth.exception';
 

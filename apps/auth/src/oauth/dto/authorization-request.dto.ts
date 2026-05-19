@@ -1,6 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
-  IsArray,
   IsIn,
   IsOptional,
   IsString,
@@ -9,12 +8,11 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { GRANT_TYPES, SCOPES } from '../oauth.constants';
 
 // Custom URL validator
 @ValidatorConstraint({ name: 'isValidUrl', async: false })
 class IsValidUrlConstraint implements ValidatorConstraintInterface {
-  validate(value: any, args: ValidationArguments) {
+  validate(value: any, _args: ValidationArguments) {
     if (typeof value !== 'string') {
       return false;
     }
@@ -32,7 +30,7 @@ class IsValidUrlConstraint implements ValidatorConstraintInterface {
 }
 
 function IsValidUrl(validationOptions?: any) {
-  return function (object: Object, propertyName: string) {
+  return function (object: object, propertyName: string) {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,

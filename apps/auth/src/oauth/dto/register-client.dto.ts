@@ -18,7 +18,7 @@ import { Type } from 'class-transformer';
 // Custom URL validators
 @ValidatorConstraint({ name: 'isValidUrl', async: false })
 class IsValidUrlConstraint implements ValidatorConstraintInterface {
-  validate(value: any, args: ValidationArguments) {
+  validate(value: any, _args: ValidationArguments) {
     if (typeof value !== 'string') {
       return false;
     }
@@ -30,13 +30,13 @@ class IsValidUrlConstraint implements ValidatorConstraintInterface {
     }
   }
 
-  defaultMessage(args: ValidationArguments) {
-    return `${args.property} must be a valid HTTP or HTTPS URL`;
+  defaultMessage(_args: ValidationArguments) {
+    return `${_args.property} must be a valid HTTP or HTTPS URL`;
   }
 }
 
 function IsValidUrl(validationOptions?: ValidationOptions) {
-  return function (object: Object, propertyName: string) {
+  return function (object: object, propertyName: string) {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,
@@ -48,7 +48,7 @@ function IsValidUrl(validationOptions?: ValidationOptions) {
 }
 
 function IsValidUrlArray(validationOptions?: ValidationOptions) {
-  return function (object: Object, propertyName: string) {
+  return function (object: object, propertyName: string) {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,

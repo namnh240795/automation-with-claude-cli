@@ -16,7 +16,6 @@ import Redis from 'ioredis';
 
 describe('CachingService', () => {
   let service: CachingService;
-  let configService: jest.Mocked<ConfigService>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -32,7 +31,6 @@ describe('CachingService', () => {
     }).compile();
 
     service = module.get<CachingService>(CachingService);
-    configService = module.get(ConfigService);
   });
 
   afterEach(() => {

@@ -18,7 +18,7 @@ const ENVIRONMENT = {
 async function bootstrap() {
   const fastifyAdapter = new FastifyAdapter();
 
-  await fastifyAdapter.register(require('@fastify/multipart'), {
+  await fastifyAdapter.register(import('@fastify/multipart'), {
     attachFieldsToBody: false,
     limits: { fileSize: 20 * 1024 * 1024, files: 1, fieldSize: 1024 },
   });

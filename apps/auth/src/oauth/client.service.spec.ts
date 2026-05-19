@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { ClientService } from './client.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { hashPassword } from '@app/auth-utilities';
+import { hashPassword, verifyPassword } from '@app/auth-utilities';
 import { randomBytes } from 'crypto';
 
 jest.mock('../prisma/prisma.service');
@@ -200,7 +200,6 @@ describe('ClientService', () => {
     it('should validate confidential client with correct secret', async () => {
       // Arrange
       prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
-      const { verifyPassword } = require('@app/auth-utilities');
       (verifyPassword as jest.Mock).mockReturnValue(true);
 
       // Act
@@ -230,7 +229,6 @@ describe('ClientService', () => {
     it('should reject confidential client with wrong secret', async () => {
       // Arrange
       prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
-      const { verifyPassword } = require('@app/auth-utilities');
       (verifyPassword as jest.Mock).mockReturnValue(false);
 
       // Act

@@ -1,6 +1,6 @@
 import { AuthUser, Roles, RolesGuard, ROLES_KEY, JwtPayloadDto } from './index';
 import { Reflector } from '@nestjs/core';
-import { ExecutionContext, UnauthorizedException } from '@nestjs/common';
+import { ExecutionContext } from '@nestjs/common';
 
 describe('auth-utilities index exports', () => {
   describe('AuthUser decorator', () => {

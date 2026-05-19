@@ -3,7 +3,7 @@ import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { AuthorizationService } from './authorization.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { randomBytes, createHash } from 'crypto';
-import { TOKEN_LIFETIMES, CODE_CHALLENGE_METHODS } from './oauth.constants';
+import { TOKEN_LIFETIMES } from './oauth.constants';
 
 jest.mock('../prisma/prisma.service');
 jest.mock('crypto', () => ({
@@ -19,11 +19,6 @@ describe('AuthorizationService', () => {
   const mockClient = {
     id: 'client-id-1',
     name: 'Test Client',
-  };
-
-  const mockUser = {
-    id: 'user-id-1',
-    email: 'test@example.com',
   };
 
   const mockAuthCode = {

@@ -113,7 +113,7 @@ test.describe('OAuth 2.0 Authorization Code Flow', () => {
   });
 
   test('should handle PKCE flow for public client', async () => {
-    const { codeVerifier, codeChallenge } = await oauthHelper.generatePKCE();
+    const { codeChallenge } = await oauthHelper.generatePKCE();
 
     // Build authorization URL
     const authURL = oauthHelper.buildAuthorizationURL({
@@ -176,8 +176,6 @@ test.describe('OAuth 2.0 Authorization Code Flow', () => {
 test.describe('OAuth Token Management', () => {
   let oauthHelper: OAuthTestHelper;
   let testClient: any;
-  let accessToken: string;
-  let refreshToken: string;
 
   test.beforeAll(async ({ request }) => {
     oauthHelper = new OAuthTestHelper(request, 'http://localhost:3001');

@@ -182,7 +182,7 @@ test.describe('OAuth 2.0 Device Authorization Flow', () => {
     expect(error).toHaveProperty('error');
   });
 
-  test('should get device verification page', async ({ page, request }) => {
+  test('should get device verification page', async ({ request }) => {
     // First create a device code
     const deviceResponse = await request.post(
       'http://localhost:3001/auth/oauth/device/authorize',
@@ -220,10 +220,7 @@ test.describe('OAuth 2.0 Device Authorization Flow', () => {
     expect(response.status()).toBe(404);
   });
 
-  test('should support device consent submission', async ({
-    page,
-    request,
-  }) => {
+  test('should support device consent submission', async ({ request }) => {
     // Note: This would require user authentication
     // Testing the endpoint structure instead
 

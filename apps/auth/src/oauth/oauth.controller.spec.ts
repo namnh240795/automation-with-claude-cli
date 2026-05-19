@@ -5,7 +5,6 @@ import { OAuthController } from './oauth.controller';
 import { OAuthService } from './oauth.service';
 import { ClientService } from './client.service';
 import { DeviceFlowService } from './device-flow.service';
-import { BadRequestException, UnauthorizedException } from '@nestjs/common';
 
 jest.mock('./oauth.service');
 jest.mock('./client.service');

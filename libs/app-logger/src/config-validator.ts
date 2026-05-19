@@ -46,7 +46,7 @@ export class ConfigValidator implements OnModuleInit {
     const missing: string[] = [];
     const warnings: string[] = [];
 
-    for (const [key, _description] of Object.entries(this.required)) {
+    for (const [key] of Object.entries(this.required)) {
       if (!process.env[key]) {
         missing.push(key);
       }

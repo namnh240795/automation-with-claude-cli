@@ -6,13 +6,8 @@ import { AuthorizationService } from './authorization.service';
 import { TokenService } from './token.service';
 import { DeviceFlowService } from './device-flow.service';
 import { PrismaService } from '../prisma/prisma.service';
-import {
-  GRANT_TYPES,
-  OAUTH_ERRORS,
-  OAUTH_STATUS_CODES,
-} from './oauth.constants';
+import { GRANT_TYPES } from './oauth.constants';
 import { OAuthBadRequestException } from './oauth.exception';
-import * as authUtilities from '@app/auth-utilities';
 
 jest.mock('./client.service');
 jest.mock('./authorization.service');
@@ -22,7 +17,6 @@ jest.mock('../prisma/prisma.service');
 jest.mock('@app/auth-utilities', () => ({
   ...jest.requireActual('@app/auth-utilities'),
   verifyPassword: jest.fn().mockReturnValue(true),
-  hashPassword: jest.fn().mockReturnValue('hashed-password'),
 }));
 
 describe('OAuthService', () => {
@@ -265,7 +259,7 @@ describe('OAuthService', () => {
       prismaService.oAuthUserConsent.update.mockResolvedValue({});
 
       // Act
-      const result = await service.handleAuthorizationRequest(mockAuthRequest);
+      await service.handleAuthorizationRequest(mockAuthRequest);
 
       // Assert
       expect(prismaService.oAuthUserConsent.update).toHaveBeenCalledWith({

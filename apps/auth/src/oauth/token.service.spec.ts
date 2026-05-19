@@ -4,7 +4,7 @@ import { BadRequestException } from '@nestjs/common';
 import { TokenService } from './token.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { randomBytes, createHmac } from 'crypto';
-import { TOKEN_TYPES, TOKEN_LIFETIMES } from './oauth.constants';
+import { TOKEN_TYPES } from './oauth.constants';
 
 jest.mock('../prisma/prisma.service');
 jest.mock('crypto', () => ({
@@ -16,7 +16,6 @@ jest.mock('crypto', () => ({
 describe('TokenService', () => {
   let service: TokenService;
   let prismaService: any;
-  let configService: any;
 
   const mockClient = {
     id: 'client-id-1',
@@ -104,7 +103,6 @@ describe('TokenService', () => {
 
     service = module.get<TokenService>(TokenService);
     prismaService = module.get(PrismaService);
-    configService = module.get(ConfigService);
 
     // Mock crypto functions
     (randomBytes as jest.Mock).mockReturnValue({

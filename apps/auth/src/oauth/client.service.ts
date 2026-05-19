@@ -2,7 +2,6 @@ import {
   Injectable,
   NotFoundException,
   BadRequestException,
-  ConflictException,
   Logger,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
@@ -199,7 +198,7 @@ export class ClientService {
             `HTTP redirect URI detected (should use HTTPS in production): ${uri}`,
           );
         }
-      } catch (e) {
+      } catch {
         throw new BadRequestException(`Invalid redirect URI format: ${uri}`);
       }
     }

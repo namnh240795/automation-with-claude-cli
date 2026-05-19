@@ -43,7 +43,6 @@ describe('CACHE_KEY enum', () => {
   describe('usage examples', () => {
     it('should work with Redis-like key pattern', () => {
       const email = 'test@example.com';
-      const code = '123456';
       const redisKey = `${CACHE_KEY.OTP_EMAIL_VALIDATION_CODE}:${email}`;
 
       expect(redisKey).toBe('OTP_EMAIL_VALIDATION_CODE:test@example.com');

@@ -1,7 +1,6 @@
 import { SnakeCaseInterceptor } from './snake-case.interceptor';
 import { ExecutionContext, CallHandler } from '@nestjs/common';
-import { of, throwError } from 'rxjs';
-import { AxiosResponse } from 'axios';
+import { of } from 'rxjs';
 
 describe('SnakeCaseInterceptor', () => {
   let interceptor: SnakeCaseInterceptor;

@@ -8,7 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../prisma/prisma.service';
 import { randomBytes, createHmac } from 'crypto';
 import { JwtPayloadDto } from '@app/auth-utilities';
-import { TOKEN_LIFETIMES, TOKEN_TYPES } from './oauth.constants';
+import { TOKEN_TYPES } from './oauth.constants';
 
 @Injectable()
 export class TokenService {
@@ -67,8 +67,6 @@ export class TokenService {
     const signatureData = `${encodedHeader}.${encodedPayload}`;
     const signature = this.signHMACSHA256(signatureData, this.jwtSecret);
     const token = `${signatureData}.${signature}`;
-
-    const expiresAt = new Date(Date.now() + expiresIn * 1000);
 
     // Get client ID from database
     const client = await this.prisma.oAuthClient.findUnique({
