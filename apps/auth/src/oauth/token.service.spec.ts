@@ -22,6 +22,17 @@ describe('TokenService', () => {
     client_id: 'test-client-id',
     access_token_lifetime: 3600,
     refresh_token_lifetime: 2592000,
+    permissions: ['openid', 'email'],
+    roles: [
+      {
+        role: {
+          id: 'role-1',
+          name: 'admin',
+          is_active: true,
+          permissions: [{ permission: { name: 'users:read' } }, { permission: { name: 'users:write' } }],
+        },
+      },
+    ],
   };
 
   const mockUser = {

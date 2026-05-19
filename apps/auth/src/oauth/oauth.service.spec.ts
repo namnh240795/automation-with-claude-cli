@@ -254,7 +254,10 @@ describe('OAuthService', () => {
       );
       prismaService.oAuthUserConsent.findUnique.mockResolvedValue({
         id: 'consent-id-1',
-        scope: 'openid',
+        user_id: 'user-id-1',
+        client_id: 'client-id-1',
+        scope: ['openid'],
+        granted_at: new Date(),
       });
       prismaService.oAuthUserConsent.update.mockResolvedValue({});
 
@@ -265,7 +268,7 @@ describe('OAuthService', () => {
       expect(prismaService.oAuthUserConsent.update).toHaveBeenCalledWith({
         where: { id: 'consent-id-1' },
         data: {
-          scope: 'openid email',
+          scope: ['openid', 'email'],
           updated_at: expect.any(Date),
         },
       });

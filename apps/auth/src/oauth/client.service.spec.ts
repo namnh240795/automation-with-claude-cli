@@ -66,7 +66,17 @@ describe('ClientService', () => {
               create: jest.fn(),
               findUnique: jest.fn(),
               findMany: jest.fn(),
+              update: jest.fn(),
               delete: jest.fn(),
+            },
+            role: {
+              findUnique: jest.fn(),
+            },
+            clientRole: {
+              findUnique: jest.fn(),
+              create: jest.fn(),
+              deleteMany: jest.fn(),
+              findMany: jest.fn(),
             },
           },
         },
@@ -420,6 +430,281 @@ describe('ClientService', () => {
       await expect(service.deleteClient('non-existent')).rejects.toThrow(
         NotFoundException,
       );
+    });
+  });
+
+  describe('registerClient - validation', () => {
+    it('should throw BadRequestException for invalid grant type', async () => {
+      // Arrange
+      const mockBuffer = Buffer.from('test-client-id');
+      (randomBytes as jest.Mock).mockReturnValueOnce(mockBuffer);
+
+      const registerDto = {
+        name: 'Test Client',
+        redirect_uris: ['https://example.com/callback'],
+        scopes: ['openid'],
+        grant_types: ['invalid_grant'],
+      };
+
+      // Act & Assert
+      await expect(service.registerClient(registerDto as any)).rejects.toThrow(
+        BadRequestException,
+      );
+    });
+
+    it('should warn for HTTP redirect URI (non-localhost)', async () => {
+      // Arrange
+      const mockBuffer = Buffer.from('test-client-id');
+      (randomBytes as jest.Mock).mockReturnValueOnce(mockBuffer);
+
+      prismaService.oAuthClient.create.mockResolvedValue(mockClient);
+
+      const registerDto = {
+        name: 'Test Client',
+        redirect_uris: ['http://example.com/callback'],
+        scopes: ['openid'],
+        grant_types: ['authorization_code'],
+      };
+
+      // Act
+      const result = await service.registerClient(registerDto as any);
+
+      // Assert - should still succeed but logs warning
+      expect(result).toBeDefined();
+    });
+
+    it('should throw BadRequestException for invalid redirect URI format', async () => {
+      // Arrange
+      const mockBuffer = Buffer.from('test-client-id');
+      (randomBytes as jest.Mock).mockReturnValueOnce(mockBuffer);
+
+      const registerDto = {
+        name: 'Test Client',
+        redirect_uris: ['not-a-valid-url'],
+        scopes: ['openid'],
+        grant_types: ['authorization_code'],
+      };
+
+      // Act & Assert
+      await expect(service.registerClient(registerDto as any)).rejects.toThrow(
+        BadRequestException,
+      );
+    });
+  });
+
+  describe('assignRole', () => {
+    const mockRole = {
+      id: 'role-id-1',
+      name: 'admin',
+      is_active: true,
+      created_at: new Date(),
+    };
+
+    it('should assign role successfully', async () => {
+      // Arrange
+      prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
+      prismaService.role.findUnique.mockResolvedValue(mockRole);
+      prismaService.clientRole.findUnique.mockResolvedValue(null);
+      prismaService.clientRole.create.mockResolvedValue({});
+
+      // Act
+      const result = await service.assignRole('test-client-id', 'admin');
+
+      // Assert
+      expect(result.message).toBe('Role assigned successfully');
+      expect(prismaService.clientRole.create).toHaveBeenCalledWith({
+        data: { client_id: 'client-id-1', role_id: 'role-id-1' },
+      });
+    });
+
+    it('should return already assigned message if role exists', async () => {
+      // Arrange
+      prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
+      prismaService.role.findUnique.mockResolvedValue(mockRole);
+      prismaService.clientRole.findUnique.mockResolvedValue({ client_id: 'client-id-1', role_id: 'role-id-1' });
+
+      // Act
+      const result = await service.assignRole('test-client-id', 'admin');
+
+      // Assert
+      expect(result.message).toBe('Role already assigned');
+      expect(prismaService.clientRole.create).not.toHaveBeenCalled();
+    });
+
+    it('should throw NotFoundException if role not found', async () => {
+      // Arrange
+      prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
+      prismaService.role.findUnique.mockResolvedValue(null);
+
+      // Act & Assert
+      await expect(service.assignRole('test-client-id', 'nonexistent')).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+
+    it('should throw BadRequestException if role is inactive', async () => {
+      // Arrange
+      prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
+      prismaService.role.findUnique.mockResolvedValue({ ...mockRole, is_active: false });
+
+      // Act & Assert
+      await expect(service.assignRole('test-client-id', 'inactive-role')).rejects.toThrow(
+        BadRequestException,
+      );
+    });
+  });
+
+  describe('removeRole', () => {
+    const mockRole = {
+      id: 'role-id-1',
+      name: 'admin',
+      is_active: true,
+      created_at: new Date(),
+    };
+
+    it('should remove role successfully', async () => {
+      // Arrange
+      prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
+      prismaService.role.findUnique.mockResolvedValue(mockRole);
+      prismaService.clientRole.deleteMany.mockResolvedValue({ count: 1 });
+
+      // Act
+      const result = await service.removeRole('test-client-id', 'admin');
+
+      // Assert
+      expect(result.message).toBe('Role removed successfully');
+      expect(prismaService.clientRole.deleteMany).toHaveBeenCalledWith({
+        where: { client_id: 'client-id-1', role_id: 'role-id-1' },
+      });
+    });
+
+    it('should throw NotFoundException if role not found', async () => {
+      // Arrange
+      prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
+      prismaService.role.findUnique.mockResolvedValue(null);
+
+      // Act & Assert
+      await expect(service.removeRole('test-client-id', 'nonexistent')).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+  });
+
+  describe('getClientRoles', () => {
+    it('should return active roles for client', async () => {
+      // Arrange
+      prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
+      prismaService.clientRole.findMany.mockResolvedValue([
+        { role: { name: 'admin', is_active: true } },
+        { role: { name: 'user', is_active: true } },
+        { role: { name: 'inactive', is_active: false } },
+      ]);
+
+      // Act
+      const result = await service.getClientRoles('test-client-id');
+
+      // Assert
+      expect(result).toEqual(['admin', 'user']);
+    });
+  });
+
+  describe('getClientPermissions', () => {
+    it('should return combined direct and role permissions', async () => {
+      // Arrange
+      prismaService.oAuthClient.findUnique.mockResolvedValue({
+        ...mockClient,
+        permissions: ['direct:read'],
+      });
+      prismaService.clientRole.findMany.mockResolvedValue([
+        {
+          role: {
+            name: 'admin',
+            is_active: true,
+            permissions: [
+              { permission: { name: 'role:admin' } },
+              { permission: { name: 'role:manage' } },
+            ],
+          },
+        },
+      ]);
+
+      // Act
+      const result = await service.getClientPermissions('test-client-id');
+
+      // Assert
+      expect(result).toContain('direct:read');
+      expect(result).toContain('role:admin');
+      expect(result).toContain('role:manage');
+    });
+
+    it('should dedupe permissions', async () => {
+      // Arrange
+      prismaService.oAuthClient.findUnique.mockResolvedValue({
+        ...mockClient,
+        permissions: ['shared:read'],
+      });
+      prismaService.clientRole.findMany.mockResolvedValue([
+        {
+          role: {
+            name: 'admin',
+            is_active: true,
+            permissions: [{ permission: { name: 'shared:read' } }],
+          },
+        },
+      ]);
+
+      // Act
+      const result = await service.getClientPermissions('test-client-id');
+
+      // Assert - should only have one 'shared:read'
+      expect(result.filter(p => p === 'shared:read')).toHaveLength(1);
+    });
+  });
+
+  describe('getClientWithRbac', () => {
+    it('should return client with roles and permissions', async () => {
+      // Arrange
+      prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
+      prismaService.clientRole.findMany.mockResolvedValue([
+        { role: { name: 'admin', is_active: true } },
+      ]);
+      prismaService.clientRole.findMany.mockResolvedValueOnce([
+        { role: { name: 'admin', is_active: true, permissions: [{ permission: { name: 'users:read' } }] } },
+      ]);
+      prismaService.clientRole.findMany.mockResolvedValueOnce([
+        { role: { name: 'admin', is_active: true, permissions: [{ permission: { name: 'users:read' } }] } },
+      ]);
+
+      // Act
+      const result = await service.getClientWithRbac('test-client-id');
+
+      // Assert
+      expect(result).toHaveProperty('id');
+      expect(result).toHaveProperty('client_id');
+      expect(result).toHaveProperty('roles');
+      expect(result).toHaveProperty('permissions');
+    });
+  });
+
+  describe('updateClientPermissions', () => {
+    it('should update client permissions and return RBAC info', async () => {
+      // Arrange
+      prismaService.oAuthClient.findUnique.mockResolvedValue(mockClient);
+      prismaService.oAuthClient.update.mockResolvedValue({
+        ...mockClient,
+        permissions: ['new:permission'],
+      });
+      prismaService.clientRole.findMany.mockResolvedValue([]);
+      prismaService.clientRole.findMany.mockResolvedValueOnce([]);
+
+      // Act
+      const result = await service.updateClientPermissions('test-client-id', ['new:permission']);
+
+      // Assert
+      expect(prismaService.oAuthClient.update).toHaveBeenCalledWith({
+        where: { id: 'client-id-1' },
+        data: { permissions: ['new:permission'] },
+      });
     });
   });
 });
