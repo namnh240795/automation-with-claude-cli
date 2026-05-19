@@ -60,6 +60,18 @@
       ],
       "@key-vault/prisma-client/*": [
         "packages/key-vault-prisma-client/src/*"
+      ],
+      "@app/messaging": [
+        "libs/messaging/src"
+      ],
+      "@app/messaging/*": [
+        "libs/messaging/src/*"
+      ],
+      "@app/opensearch": [
+        "libs/opensearch/src"
+      ],
+      "@app/opensearch/*": [
+        "libs/opensearch/src/*"
       ]
     }
   }

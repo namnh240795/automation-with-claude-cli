@@ -9,7 +9,9 @@
       "@app/auth-utilities": ["../../libs/auth-utilities/src"],
       "@app/app-logger": ["../../libs/app-logger/src"],
       "@app/health": ["../../libs/health/src"],
-      "@app/caching": ["../../libs/caching/src"]
+      "@app/caching": ["../../libs/caching/src"],
+      "@app/messaging": ["../../libs/messaging/src"],
+      "@app/opensearch": ["../../libs/opensearch/src"]
     }
   },
   "include": ["src/**/*.ts"],

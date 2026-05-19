@@ -5,6 +5,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { SettingsModule } from './settings/settings.module';
+import { DemoModule } from './common/demo/demo.module';
+import { MessagingModule } from '@app/messaging';
+import { OpenSearchModule } from '@app/opensearch';
+import { ConfigValidator } from '@app/app-logger';
 
 @Module({
   imports: [
@@ -15,8 +19,11 @@ import { SettingsModule } from './settings/settings.module';
     }),
     AuthModule,
     SettingsModule,
+    DemoModule,
+    MessagingModule,
+    OpenSearchModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ConfigValidator],
 })
 export class AppModule {}

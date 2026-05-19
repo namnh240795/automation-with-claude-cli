@@ -78,10 +78,90 @@ services:
     networks:
       - default
 
+# Kafka Message Queue Service (KRaft mode, no ZooKeeper)
+  # Used for: workflow logging, event-driven messaging
+  # Connect via: kafka:9092 (internal) or localhost:9092 (host)
+  kafka:
+    image: apache/kafka:3.7.0
+    container_name: claude-kafka
+    restart: unless-stopped
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,EXTERNAL://0.0.0.0:9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"     # PLAINTEXT broker
+      - "9094:9094"     # EXTERNAL broker
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+    networks:
+      - default
+
+  # OpenSearch Search & Analytics Service
+  # Used for: log storage, search, and analytics
+  # Connect via: http://opensearch:9200 (internal) or http://localhost:9200 (host)
+  opensearch:
+    image: opensearchproject/opensearch:2.6.0
+    container_name: claude-opensearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+      - DISABLE_SECURITY_PLUGIN=true
+      - bootstrap.memory_lock=true
+      - DISABLE_INSTALL_DEMO_CONFIG=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "9200:9200"
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 30s
+    networks:
+      - default
+
+  # OpenSearch Dashboards - Visualize OpenSearch data
+  # UI: http://localhost:5601
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:2.6.0
+    container_name: claude-opensearch-dashboards
+    restart: unless-stopped
+    environment:
+      - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true
+      - OPENSEARCH_HOSTS=http://opensearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      opensearch:
+        condition: service_healthy
+    networks:
+      - default
+
 volumes:
   postgres-data:
   redis-data:
   rabbitmq-data:
+  opensearch-data:
 
 networks:
   default:

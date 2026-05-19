@@ -30,6 +30,10 @@ const config = {
       '@app/caching/*': path.resolve(__dirname, '../../libs/caching/src/*'),
       '@app/health': path.resolve(__dirname, '../../libs/health/src'),
       '@app/health/*': path.resolve(__dirname, '../../libs/health/src/*'),
+      '@app/messaging': path.resolve(__dirname, '../../libs/messaging/src'),
+      '@app/messaging/*': path.resolve(__dirname, '../../libs/messaging/src/*'),
+      '@app/opensearch': path.resolve(__dirname, '../../libs/opensearch/src'),
+      '@app/opensearch/*': path.resolve(__dirname, '../../libs/opensearch/src/*'),
     },
   },
   module: {
@@ -80,7 +84,7 @@ const config = {
     },
   },
   externals: [
-    /^(@nestjs|@fastify|@prisma|@scalar|rxjs|reflect-metadata|class-validator|class-transformer|ioredis|axios|pg|dotenv|bcrypt|@nestjs\/jwt|@nestjs\/passport|passport|passport-jwt)/,
+    /^(@nestjs|@fastify|@prisma|@scalar|rxjs|reflect-metadata|class-validator|class-transformer|ioredis|axios|pg|dotenv|bcrypt|@nestjs\/jwt|@nestjs\/passport|passport|passport-jwt|kafkajs|@opensearch-project)/,
     function (obj, callback) {
       const resource = obj.request;
       const lazyImports = [

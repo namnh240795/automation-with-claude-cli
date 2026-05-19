@@ -1,13 +1,13 @@
 {
-  "name": "@app/app-logger",
+  "name": "@app/messaging",
   "version": "1.0.0",
-  "description": "App logger - @LogActivity decorator",
+  "description": "Kafka producer/consumer for workflow logging",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
     "build": "echo \"No build required\""
   },
   "dependencies": {
-    "@app/messaging": "workspace:*"
+    "kafkajs": "^2.2.4"
   }
 }
