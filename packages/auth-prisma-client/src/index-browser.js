@@ -154,7 +154,6 @@ exports.Prisma.SessionScalarFieldEnum = {
 exports.Prisma.OAuthClientScalarFieldEnum = {
   id: 'id',
   client_id: 'client_id',
-  client_secret: 'client_secret',
   client_secret_hash: 'client_secret_hash',
   name: 'name',
   description: 'description',
@@ -172,24 +171,10 @@ exports.Prisma.OAuthClientScalarFieldEnum = {
   policy_uri: 'policy_uri',
   tos_uri: 'tos_uri',
   is_active: 'is_active',
+  permissions: 'permissions',
+  owner_id: 'owner_id',
   created_at: 'created_at',
   updated_at: 'updated_at'
-};
-
-exports.Prisma.OAuthAuthorizationCodeScalarFieldEnum = {
-  id: 'id',
-  code: 'code',
-  client_id: 'client_id',
-  user_id: 'user_id',
-  redirect_uri: 'redirect_uri',
-  scope: 'scope',
-  state: 'state',
-  code_challenge: 'code_challenge',
-  code_challenge_method: 'code_challenge_method',
-  nonce: 'nonce',
-  expires_at: 'expires_at',
-  consumed_at: 'consumed_at',
-  created_at: 'created_at'
 };
 
 exports.Prisma.OAuthAccessTokenScalarFieldEnum = {
@@ -198,10 +183,12 @@ exports.Prisma.OAuthAccessTokenScalarFieldEnum = {
   client_id: 'client_id',
   user_id: 'user_id',
   scope: 'scope',
+  permissions: 'permissions',
+  roles: 'roles',
   token_type: 'token_type',
   expires_at: 'expires_at',
-  revoked_at: 'revoked_at',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  revoked_at: 'revoked_at'
 };
 
 exports.Prisma.OAuthRefreshTokenScalarFieldEnum = {
@@ -212,8 +199,25 @@ exports.Prisma.OAuthRefreshTokenScalarFieldEnum = {
   user_id: 'user_id',
   scope: 'scope',
   expires_at: 'expires_at',
-  revoked_at: 'revoked_at',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  revoked_at: 'revoked_at'
+};
+
+exports.Prisma.OAuthAuthorizationCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  client_id: 'client_id',
+  user_id: 'user_id',
+  scope: 'scope',
+  redirect_uri: 'redirect_uri',
+  state: 'state',
+  code_challenge: 'code_challenge',
+  code_challenge_method: 'code_challenge_method',
+  nonce: 'nonce',
+  consumed_at: 'consumed_at',
+  expires_at: 'expires_at',
+  created_at: 'created_at',
+  used_at: 'used_at'
 };
 
 exports.Prisma.OAuthDeviceCodeScalarFieldEnum = {
@@ -223,21 +227,55 @@ exports.Prisma.OAuthDeviceCodeScalarFieldEnum = {
   client_id: 'client_id',
   user_id: 'user_id',
   scope: 'scope',
+  verified: 'verified',
   expires_at: 'expires_at',
   interval: 'interval',
-  verified: 'verified',
-  completed_at: 'completed_at',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  completed_at: 'completed_at'
 };
 
 exports.Prisma.OAuthUserConsentScalarFieldEnum = {
   id: 'id',
-  client_id: 'client_id',
   user_id: 'user_id',
+  client_id: 'client_id',
   scope: 'scope',
+  granted_at: 'granted_at',
   expires_at: 'expires_at',
+  revoked_at: 'revoked_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.PermissionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  resource: 'resource',
+  action: 'action',
   created_at: 'created_at',
   updated_at: 'updated_at'
+};
+
+exports.Prisma.RoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.RolePermissionScalarFieldEnum = {
+  id: 'id',
+  role_id: 'role_id',
+  permission_id: 'permission_id',
+  created_at: 'created_at'
+};
+
+exports.Prisma.ClientRoleScalarFieldEnum = {
+  id: 'id',
+  client_id: 'client_id',
+  role_id: 'role_id',
+  created_at: 'created_at'
 };
 
 exports.Prisma.SortOrder = {
@@ -261,11 +299,15 @@ exports.Prisma.ModelName = {
   RefreshToken: 'RefreshToken',
   Session: 'Session',
   OAuthClient: 'OAuthClient',
-  OAuthAuthorizationCode: 'OAuthAuthorizationCode',
   OAuthAccessToken: 'OAuthAccessToken',
   OAuthRefreshToken: 'OAuthRefreshToken',
+  OAuthAuthorizationCode: 'OAuthAuthorizationCode',
   OAuthDeviceCode: 'OAuthDeviceCode',
-  OAuthUserConsent: 'OAuthUserConsent'
+  OAuthUserConsent: 'OAuthUserConsent',
+  Permission: 'Permission',
+  Role: 'Role',
+  RolePermission: 'RolePermission',
+  ClientRole: 'ClientRole'
 };
 
 /**

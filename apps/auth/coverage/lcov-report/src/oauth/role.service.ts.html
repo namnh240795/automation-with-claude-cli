@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/oauth/dto/register-client.dto.ts</title>
+    <title>Code coverage report for src/oauth/role.service.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../../prettify.css" />
-    <link rel="stylesheet" href="../../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../../sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/oauth/dto</a> register-client.dto.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/oauth</a> role.service.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82% </span>
+                <span class="strong">76.19% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>41/50</span>
+                <span class='fraction'>64/84</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">65% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>13/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">77.27% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/8</span>
+                <span class='fraction'>17/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.63% </span>
+                <span class="strong">76% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>40/49</span>
+                <span class='fraction'>57/75</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -321,46 +321,146 @@
 <a name='L256'></a><a href='#L256'>256</a>
 <a name='L257'></a><a href='#L257'>257</a>
 <a name='L258'></a><a href='#L258'>258</a>
-<a name='L259'></a><a href='#L259'>259</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L259'></a><a href='#L259'>259</a>
+<a name='L260'></a><a href='#L260'>260</a>
+<a name='L261'></a><a href='#L261'>261</a>
+<a name='L262'></a><a href='#L262'>262</a>
+<a name='L263'></a><a href='#L263'>263</a>
+<a name='L264'></a><a href='#L264'>264</a>
+<a name='L265'></a><a href='#L265'>265</a>
+<a name='L266'></a><a href='#L266'>266</a>
+<a name='L267'></a><a href='#L267'>267</a>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a>
+<a name='L283'></a><a href='#L283'>283</a>
+<a name='L284'></a><a href='#L284'>284</a>
+<a name='L285'></a><a href='#L285'>285</a>
+<a name='L286'></a><a href='#L286'>286</a>
+<a name='L287'></a><a href='#L287'>287</a>
+<a name='L288'></a><a href='#L288'>288</a>
+<a name='L289'></a><a href='#L289'>289</a>
+<a name='L290'></a><a href='#L290'>290</a>
+<a name='L291'></a><a href='#L291'>291</a>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a>
+<a name='L294'></a><a href='#L294'>294</a>
+<a name='L295'></a><a href='#L295'>295</a>
+<a name='L296'></a><a href='#L296'>296</a>
+<a name='L297'></a><a href='#L297'>297</a>
+<a name='L298'></a><a href='#L298'>298</a>
+<a name='L299'></a><a href='#L299'>299</a>
+<a name='L300'></a><a href='#L300'>300</a>
+<a name='L301'></a><a href='#L301'>301</a>
+<a name='L302'></a><a href='#L302'>302</a>
+<a name='L303'></a><a href='#L303'>303</a>
+<a name='L304'></a><a href='#L304'>304</a>
+<a name='L305'></a><a href='#L305'>305</a>
+<a name='L306'></a><a href='#L306'>306</a>
+<a name='L307'></a><a href='#L307'>307</a>
+<a name='L308'></a><a href='#L308'>308</a>
+<a name='L309'></a><a href='#L309'>309</a>
+<a name='L310'></a><a href='#L310'>310</a>
+<a name='L311'></a><a href='#L311'>311</a>
+<a name='L312'></a><a href='#L312'>312</a>
+<a name='L313'></a><a href='#L313'>313</a>
+<a name='L314'></a><a href='#L314'>314</a>
+<a name='L315'></a><a href='#L315'>315</a>
+<a name='L316'></a><a href='#L316'>316</a>
+<a name='L317'></a><a href='#L317'>317</a>
+<a name='L318'></a><a href='#L318'>318</a>
+<a name='L319'></a><a href='#L319'>319</a>
+<a name='L320'></a><a href='#L320'>320</a>
+<a name='L321'></a><a href='#L321'>321</a>
+<a name='L322'></a><a href='#L322'>322</a>
+<a name='L323'></a><a href='#L323'>323</a>
+<a name='L324'></a><a href='#L324'>324</a>
+<a name='L325'></a><a href='#L325'>325</a>
+<a name='L326'></a><a href='#L326'>326</a>
+<a name='L327'></a><a href='#L327'>327</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -379,51 +479,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -442,6 +507,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -451,6 +547,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -460,7 +569,127 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -474,370 +703,345 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import {
-  IsArray,
-  IsBoolean,
-  IsInt,
-  IsOptional,
-  IsString,
-  Max,
-  Min,
-  registerDecorator,
-  ValidationArguments,
-  ValidationOptions,
-  ValidatorConstraint,
-  ValidatorConstraintInterface,
-} from 'class-validator';
-import { Type } from 'class-transformer';
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+  BadRequestException,
+  Logger,
+} from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { PermissionService } from './permission.service';
 &nbsp;
-// Custom URL validators
-@ValidatorConstraint({ name: 'isValidUrl', async: false })
-class IsValidUrlConstraint implements ValidatorConstraintInterface {
-<span class="fstat-no" title="function not covered" >  validate(</span>value: any, _args: ValidationArguments) {
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof value !== 'string') {</span>
-<span class="cstat-no" title="statement not covered" >      return false;</span>
+@Injectable()
+export class RoleService {
+  private readonly logger = new Logger(RoleService.name);
+&nbsp;
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly permissionService: PermissionService,
+  ) {}
+&nbsp;
+  /**
+   * Create a new role with optional permissions
+   */
+  async create(data: {
+    name: string;
+    description?: string;
+    permission_names?: string[];
+  }) {
+    // Validate name format (alphanumeric with underscores/hyphens)
+    const namePattern = /^[a-zA-Z0-9_-]+$/;
+    if (!namePattern.test(data.name)) {
+      throw new BadRequestException(
+        'Role name must be alphanumeric with underscores or hyphens',
+      );
     }
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      const url = <span class="cstat-no" title="statement not covered" >new URL(value);</span>
-<span class="cstat-no" title="statement not covered" >      return url.protocol === 'http:' || url.protocol === 'https:';</span>
-    } catch {
-<span class="cstat-no" title="statement not covered" >      return false;</span>
-    }
-  }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  defaultMessage(</span>_args: ValidationArguments) {
-<span class="cstat-no" title="statement not covered" >    return `${_args.property} must be a valid HTTP or HTTPS URL`;</span>
-  }
-}
-&nbsp;
-function IsValidUrl(validationOptions?: ValidationOptions) {
-  return function (object: object, propertyName: string) {
-    registerDecorator({
-      target: object.constructor,
-      propertyName: propertyName,
-      options: validationOptions,
-      constraints: [],
-      validator: IsValidUrlConstraint,
+    // Check for duplicate
+    const existing = await this.prisma.role.findUnique({
+      where: { name: data.name },
     });
-  };
-}
 &nbsp;
-function IsValidUrlArray(validationOptions?: ValidationOptions) {
-  return function (object: object, propertyName: string) {
-    registerDecorator({
-      target: object.constructor,
-      propertyName: propertyName,
-      options: {
-        ...validationOptions,
-        each: true,
+    if (existing) {
+      throw new ConflictException(`Role '${data.name}' already exists`);
+    }
+&nbsp;
+    // Resolve permission names to IDs
+    let permissionIds: string[] = [];
+    if (data.permission_names &amp;&amp; data.permission_names.length &gt; 0) {
+      const permissions = await this.permissionService.getByNames(
+        data.permission_names,
+      );
+      permissionIds = permissions.map((p) =&gt; p.id);
+&nbsp;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (permissionIds.length !== data.permission_names.length) {
+        const found = <span class="cstat-no" title="statement not covered" >permissions.map(<span class="fstat-no" title="function not covered" >(p</span>) =&gt; <span class="cstat-no" title="statement not covered" >p.name)</span>;</span>
+        const notFound = <span class="cstat-no" title="statement not covered" >data.permission_names.filter(</span>
+<span class="fstat-no" title="function not covered" >          (n</span>) =&gt; <span class="cstat-no" title="statement not covered" >!found.includes(n),</span>
+        );
+<span class="cstat-no" title="statement not covered" >        throw new NotFoundException(</span>
+          `Permissions not found: ${notFound.join(', ')}`,
+        );
+      }
+    }
+&nbsp;
+    const role = await this.prisma.role.create({
+      data: {
+        name: data.name,
+        description: data.description,
+        permissions: {
+          create: permissionIds.map((permId) =&gt; ({
+            permission_id: permId,
+          })),
+        },
       },
-      constraints: [],
-      validator: IsValidUrlConstraint,
+      include: {
+        permissions: {
+          include: {
+            permission: true,
+          },
+        },
+      },
     });
-  };
-}
 &nbsp;
-export class RegisterClientDto {
-  @ApiProperty({ description: 'Application name', example: 'My App' })
-  @IsString()
-  name: string;
+    this.logger.log(`Created role: ${data.name} with ${permissionIds.length} permissions`);
+    return role;
+  }
 &nbsp;
-  @ApiPropertyOptional({
-    description: 'Application description',
-    example: 'My OAuth 2.0 application',
-  })
-  @IsString()
-  @IsOptional()
-  description?: string;
+  /**
+   * Update a role
+   */
+  async update(id: string, data: { name?: string; description?: string; is_active?: boolean }) {
+    const role = await this.findById(id);
 &nbsp;
-  @ApiProperty({
-    description: 'Allowed redirect URIs',
-    example: ['https://example.com/callback', 'http://localhost:3000/callback'],
-    type: [String],
-  })
-  @IsArray()
-  @IsString({ each: true })
-  @IsValidUrlArray()
-  redirect_uris: string[];
+    // If changing name, check for duplicates
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (data.name &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >data.name !== role.name)</span> {
+      const existing = <span class="cstat-no" title="statement not covered" >await this.prisma.role.findUnique({</span>
+        where: { name: data.name },
+      });
 &nbsp;
-  @ApiPropertyOptional({
-    description: 'Post-logout redirect URIs',
-    example: ['https://example.com/logout'],
-    type: [String],
-  })
-  @IsArray()
-  @IsString({ each: true })
-  @IsValidUrlArray()
-  @IsOptional()
-  post_logout_redirect_uris?: string[];
+<span class="cstat-no" title="statement not covered" >      <span class="missing-if-branch" title="if path not taken" >I</span>if (existing) {</span>
+<span class="cstat-no" title="statement not covered" >        throw new ConflictException(`Role '${data.name}' already exists`);</span>
+      }
+    }
 &nbsp;
-  @ApiProperty({
-    description: 'Allowed OAuth scopes',
-    example: ['openid', 'email', 'profile'],
-    enum: ['openid', 'email', 'profile', 'offline_access'],
-    type: [String],
-  })
-  @IsArray()
-  @IsString({ each: true })
-  scopes: string[];
+    const updated = await this.prisma.role.update({
+      where: { id },
+      data: {
+        ...(data.name &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >{ name: data.name })</span>,
+        ...(data.description !== undefined &amp;&amp; { description: data.description }),
+        ...(data.is_active !== undefined &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >{ is_active: data.is_active })</span>,
+      },
+      include: {
+        permissions: {
+          include: {
+            permission: true,
+          },
+        },
+      },
+    });
 &nbsp;
-  @ApiProperty({
-    description: 'Allowed grant types',
-    example: ['authorization_code', 'refresh_token'],
-    enum: [
-      'authorization_code',
-      'client_credentials',
-      'refresh_token',
-      'urn:ietf:params:oauth:grant-type:device_code',
-    ],
-    type: [String],
-  })
-  @IsArray()
-  @IsString({ each: true })
-  grant_types: string[];
+    this.logger.log(`Updated role: ${updated.name}`);
+    return updated;
+  }
 &nbsp;
-  @ApiPropertyOptional({
-    description: 'Is this a confidential client (requires client secret)',
-    example: true,
-    default: true,
-  })
-  @IsBoolean()
-  @IsOptional()
-  is_confidential?: boolean;
+  /**
+   * Find role by ID
+   */
+  async findById(id: string) {
+    const role = await this.prisma.role.findUnique({
+      where: { id },
+      include: {
+        permissions: {
+          include: {
+            permission: true,
+          },
+        },
+      },
+    });
 &nbsp;
-  @ApiPropertyOptional({
-    description: 'Require PKCE for authorization code flow',
-    example: true,
-    default: true,
-  })
-  @IsBoolean()
-  @IsOptional()
-  require_pkce?: boolean;
+    if (!role) {
+      throw new NotFoundException('Role not found');
+    }
 &nbsp;
-  @ApiPropertyOptional({
-    description: 'Access token lifetime in seconds',
-    example: 3600,
-    default: 3600,
-    minimum: 60,
-    maximum: 86400,
-  })
-  @IsInt()
-  @Min(60)
-  @Max(86400)
-  @IsOptional()
-  @Type(<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >Number)</span>
-  access_token_lifetime?: number;
+    return role;
+  }
 &nbsp;
-  @ApiPropertyOptional({
-    description: 'Refresh token lifetime in seconds',
-    example: 2592000,
-    default: 2592000,
-    minimum: 60,
-    maximum: 7776000,
-  })
-  @IsInt()
-  @Min(60)
-  @Max(7776000)
-  @IsOptional()
-  @Type(<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >Number)</span>
-  refresh_token_lifetime?: number;
+  /**
+   * Find role by name
+   */
+  async findByName(name: string) {
+    const role = await this.prisma.role.findUnique({
+      where: { name },
+      include: {
+        permissions: {
+          include: {
+            permission: true,
+          },
+        },
+      },
+    });
 &nbsp;
-  @ApiPropertyOptional({
-    description: 'Allowed CORS origins',
-    example: ['https://example.com', 'http://localhost:3000'],
-    type: [String],
-  })
-  @IsArray()
-  @IsString({ each: true })
-  @IsOptional()
-  allowed_origins?: string[];
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!role) {
+<span class="cstat-no" title="statement not covered" >      throw new NotFoundException(`Role '${name}' not found`);</span>
+    }
 &nbsp;
-  @ApiPropertyOptional({
-    description: 'Application logo URI',
-    example: 'https://example.com/logo.png',
-  })
-  @IsValidUrl()
-  @IsOptional()
-  logo_uri?: string;
+    return role;
+  }
 &nbsp;
-  @ApiPropertyOptional({
-    description: 'Privacy policy URI',
-    example: 'https://example.com/privacy',
-  })
-  @IsValidUrl()
-  @IsOptional()
-  policy_uri?: string;
+  /**
+   * List all roles
+   */
+  async findAll() {
+    return this.prisma.role.findMany({
+      include: {
+        permissions: {
+          include: {
+            permission: true,
+          },
+        },
+      },
+      orderBy: { name: 'asc' },
+    });
+  }
 &nbsp;
-  @ApiPropertyOptional({
-    description: 'Terms of service URI',
-    example: 'https://example.com/terms',
-  })
-  @IsValidUrl()
-  @IsOptional()
-  tos_uri?: string;
-}
+  /**
+   * Assign permissions to a role
+   */
+  async assignPermissions(roleId: string, permissionNames: string[]) {
+    const role = await this.findById(roleId);
 &nbsp;
-export class ClientResponseDto {
-  @ApiProperty({ description: 'Client ID' })
-  id: string;
+    // Get permission records
+    const permissions = await this.permissionService.getByNames(permissionNames);
 &nbsp;
-  @ApiProperty({ description: 'Client identifier' })
-  client_id: string;
+    if (permissions.length !== permissionNames.length) {
+      const found = permissions.map((p) =&gt; p.name);
+      const notFound = permissionNames.filter((n) =&gt; !found.includes(n));
+      throw new NotFoundException(
+        `Permissions not found: ${notFound.join(', ')}`,
+      );
+    }
 &nbsp;
-  @ApiPropertyOptional({
-    description: 'Client secret (only shown during registration)',
-  })
-  client_secret?: string;
+    // Add new permissions (skip existing)
+    const existingPermIds = role.permissions.map((rp) =&gt; rp.permission_id);
+    const newPerms = permissions.filter((p) =&gt; !existingPermIds.includes(p.id));
 &nbsp;
-  @ApiProperty({ description: 'Application name' })
-  name: string;
+    if (newPerms.length &gt; 0) {
+      await this.prisma.rolePermission.createMany({
+        data: newPerms.map((p) =&gt; ({
+          role_id: roleId,
+          permission_id: p.id,
+        })),
+        skipDuplicates: true,
+      });
+    }
 &nbsp;
-  @ApiPropertyOptional({ description: 'Application description' })
-  description?: string;
+    this.logger.log(
+      `Assigned ${newPerms.length} new permissions to role ${role.name}`,
+    );
 &nbsp;
-  @ApiProperty({ description: 'Allowed redirect URIs', type: [String] })
-  redirect_uris: string[];
+    return this.findById(roleId);
+  }
 &nbsp;
-  @ApiPropertyOptional({
-    description: 'Post-logout redirect URIs',
-    type: [String],
-  })
-  post_logout_redirect_uris?: string[];
+  /**
+   * Remove permissions from a role
+   */
+  async removePermissions(roleId: string, permissionNames: string[]) {
+    const permissions = await this.permissionService.getByNames(permissionNames);
 &nbsp;
-  @ApiProperty({ description: 'Allowed OAuth scopes', type: [String] })
-  scopes: string[];
+    await this.prisma.rolePermission.deleteMany({
+      where: {
+        role_id: roleId,
+        permission_id: { in: permissions.map((p) =&gt; p.id) },
+      },
+    });
 &nbsp;
-  @ApiProperty({ description: 'Allowed grant types', type: [String] })
-  grant_types: string[];
+    this.logger.log(
+      `Removed ${permissions.length} permissions from role`,
+    );
 &nbsp;
-  @ApiProperty({ description: 'Is confidential client' })
-  is_confidential: boolean;
+    return this.findById(roleId);
+  }
 &nbsp;
-  @ApiProperty({ description: 'Require PKCE' })
-  require_pkce: boolean;
+  /**
+   * Delete a role
+   */
+  async delete(id: string) {
+    const role = await this.findById(id);
 &nbsp;
-  @ApiProperty({ description: 'Access token lifetime (seconds)' })
-  access_token_lifetime: number;
+    await this.prisma.role.delete({
+      where: { id: role.id },
+    });
 &nbsp;
-  @ApiProperty({ description: 'Refresh token lifetime (seconds)' })
-  refresh_token_lifetime: number;
+    this.logger.log(`Deleted role: ${role.name}`);
+    return { message: 'Role deleted successfully' };
+  }
 &nbsp;
-  @ApiProperty({ description: 'Allowed origins', type: [String] })
-  allowed_origins: string[];
+  /**
+   * Get all permissions for a role
+   */
+<span class="fstat-no" title="function not covered" >  async </span>getPermissions(roleId: string): Promise&lt;string[]&gt; {
+    const role = <span class="cstat-no" title="statement not covered" >await this.findById(roleId);</span>
+<span class="cstat-no" title="statement not covered" >    return role.permissions.map(<span class="fstat-no" title="function not covered" >(r</span>p) =&gt; <span class="cstat-no" title="statement not covered" >rp.permission.name)</span>;</span>
+  }
 &nbsp;
-  @ApiPropertyOptional({ description: 'Logo URI' })
-  logo_uri?: string;
+  /**
+   * Seed default roles
+   */
+<span class="fstat-no" title="function not covered" >  async </span>seedDefaults() {
+    const defaultRoles = <span class="cstat-no" title="statement not covered" >[</span>
+      {
+        name: 'admin',
+        description: 'Full system administration',
+        permission_names: [
+          'users:admin',
+          'clients:admin',
+          'roles:admin',
+          'serviceaccounts:admin',
+          'billing:admin',
+          'reports:read',
+        ],
+      },
+      {
+        name: 'developer',
+        description: 'Development team access',
+        permission_names: [
+          'users:read',
+          'users:write',
+          'clients:read',
+          'serviceaccounts:write',
+          'reports:read',
+          'reports:write',
+        ],
+      },
+      {
+        name: 'viewer',
+        description: 'Read-only access',
+        permission_names: [
+          'users:read',
+          'clients:read',
+          'reports:read',
+        ],
+      },
+      {
+        name: 'billing-manager',
+        description: 'Billing management access',
+        permission_names: [
+          'billing:read',
+          'billing:write',
+          'invoices:create',
+          'reports:read',
+        ],
+      },
+    ];
 &nbsp;
-  @ApiProperty({ description: 'Creation date' })
-  created_at: Date;
-}
-&nbsp;</pre></td></tr></table></pre>
+    const results = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >    for (const roleData of defaultRoles) {</span>
+<span class="cstat-no" title="statement not covered" >      try {</span>
+<span class="cstat-no" title="statement not covered" >        await this.create(roleData);</span>
+<span class="cstat-no" title="statement not covered" >        results.push(roleData.name);</span>
+      } catch {
+        // Already exists, skip
+      }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.logger.log(`Seeded ${results.length} default roles`);</span>
+<span class="cstat-no" title="statement not covered" >    return results;</span>
+  }
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
@@ -846,14 +1050,14 @@ export class ClientResponseDto {
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2026-05-19T10:04:43.089Z
             </div>
-        <script src="../../../prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../../sorter.js"></script>
-        <script src="../../../block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     

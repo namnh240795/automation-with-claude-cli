@@ -4,6 +4,7 @@ import {
   ArgumentsHost,
   HttpException,
   HttpStatus,
+  Logger,
 } from '@nestjs/common';
 import { FastifyReply } from 'fastify';
 
@@ -11,34 +12,51 @@ import { FastifyReply } from 'fastify';
  * OAuth Exception Filter
  * Ensures OAuth 2.0 compliant error responses
  */
-@Catch(HttpException)
+@Catch()
 export class OAuthExceptionFilter implements ExceptionFilter {
-  catch(exception: HttpException, host: ArgumentsHost) {
+  private readonly logger = new Logger(OAuthExceptionFilter.name);
+
+  catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<FastifyReply>();
-    const status = exception.getStatus();
-    const exceptionResponse = exception.getResponse();
 
-    // Check if this is already an OAuth error format
-    if (typeof exceptionResponse === 'object' && exceptionResponse !== null) {
-      const responseObj = exceptionResponse as any;
+    // Log the exception for debugging
+    this.logger.error(`Exception caught: ${exception instanceof Error ? exception.message : String(exception)}`);
+    this.logger.debug(exception instanceof Error ? exception.stack : String(exception));
 
-      // If it has 'error' property, it's already in OAuth format
-      if (responseObj.error) {
-        return response.code(status).send(responseObj);
+    // Handle HttpException
+    if (exception instanceof HttpException) {
+      const status = exception.getStatus();
+      const exceptionResponse = exception.getResponse();
+
+      // Check if this is already an OAuth error format
+      if (typeof exceptionResponse === 'object' && exceptionResponse !== null) {
+        const responseObj = exceptionResponse as any;
+
+        // If it has 'error' property, it's already in OAuth format
+        if (responseObj.error) {
+          return response.code(status).send(responseObj);
+        }
+
+        // Otherwise, it's the default NestJS format, convert to OAuth format
+        if (responseObj.message) {
+          return response.code(status).send({
+            error: this.getOAuthErrorFromStatus(status),
+            error_description: responseObj.message,
+          });
+        }
       }
 
-      // Otherwise, it's the default NestJS format, convert to OAuth format
-      if (responseObj.message) {
-        return response.code(status).send({
-          error: this.getOAuthErrorFromStatus(status),
-          error_description: responseObj.message,
-        });
-      }
+      // Fallback to default error format
+      return response.code(status).send(exceptionResponse);
     }
 
-    // Fallback to default error format
-    return response.code(status).send(exceptionResponse);
+    // Handle non-HttpException errors
+    const message = exception instanceof Error ? exception.message : String(exception);
+    return response.code(HttpStatus.INTERNAL_SERVER_ERROR).send({
+      error: 'server_error',
+      error_description: message,
+    });
   }
 
   /**

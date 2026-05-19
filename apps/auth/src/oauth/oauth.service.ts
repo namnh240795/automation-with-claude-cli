@@ -527,7 +527,7 @@ export class OAuthService {
       description: consent.client.description,
       logo_uri: consent.client.logo_uri,
       scope: consent.scope,
-      granted_at: consent.created_at,
+      granted_at: consent.granted_at,
     }));
   }
 
@@ -580,9 +580,9 @@ export class OAuthService {
   ) {
     const existingConsent = await this.prisma.oAuthUserConsent.findUnique({
       where: {
-        client_id_user_id: {
-          client_id: clientId,
+        user_id_client_id: {
           user_id: userId,
+          client_id: clientId,
         },
       },
     });
@@ -592,7 +592,7 @@ export class OAuthService {
       await this.prisma.oAuthUserConsent.update({
         where: { id: existingConsent.id },
         data: {
-          scope,
+          scope: scope.split(' '),
           updated_at: new Date(),
         },
       });
@@ -602,7 +602,7 @@ export class OAuthService {
         data: {
           client_id: clientId,
           user_id: userId,
-          scope,
+          scope: scope.split(' '),
         },
       });
     }

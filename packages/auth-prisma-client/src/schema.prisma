@@ -8,25 +8,18 @@ datasource db {
 }
 
 model User {
-  id             String   @id @default(uuid())
-  email          String   @unique
+  id             String         @id @default(uuid())
+  email          String         @unique
   password_hash  String
   first_name     String?
   last_name      String?
-  role           String   @default("USER")
-  is_active      Boolean  @default(true)
-  email_verified Boolean  @default(false)
-  created_at     DateTime @default(now())
-  updated_at     DateTime @updatedAt
-
-  // Relations
-  refresh_tokens            RefreshToken[]
-  sessions                  Session[]
-  oauth_authorization_codes OAuthAuthorizationCode[]
-  oauth_access_tokens       OAuthAccessToken[]
-  oauth_refresh_tokens      OAuthRefreshToken[]
-  oauth_device_codes        OAuthDeviceCode[]
-  oauth_consents            OAuthUserConsent[]
+  role           String         @default("USER") // User role: USER, ADMIN, SUPER_ADMIN
+  is_active      Boolean        @default(true)
+  email_verified Boolean        @default(false)
+  created_at     DateTime       @default(now())
+  updated_at     DateTime       @updatedAt
+  refresh_tokens RefreshToken[]
+  sessions       Session[]
 
   @@map("user")
 }
@@ -38,9 +31,7 @@ model RefreshToken {
   expires_at DateTime
   created_at DateTime  @default(now())
   revoked_at DateTime?
-
-  // Relations
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user       User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@index([user_id])
   @@map("refresh_token")
@@ -53,19 +44,19 @@ model Session {
   expires_at DateTime
   created_at DateTime  @default(now())
   revoked_at DateTime?
-
-  // Relations
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user       User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@index([user_id])
   @@map("session")
 }
 
-// OAuth Client Application
+// ============================================================
+// OAuth 2.0 / OIDC Models
+// ============================================================
+
 model OAuthClient {
-  id                        String   @id @default(uuid())
-  client_id                 String   @unique
-  client_secret             String? // Null for public clients
+  id                        String                   @id @default(uuid())
+  client_id                 String                   @unique
   client_secret_hash        String?
   name                      String
   description               String?
@@ -73,129 +64,188 @@ model OAuthClient {
   post_logout_redirect_uris String[]
   scopes                    String[]
   grant_types               String[]
-  is_confidential           Boolean  @default(true)
-  is_public_client          Boolean  @default(false)
-  require_pkce              Boolean  @default(true)
-  access_token_lifetime     Int      @default(3600)
-  refresh_token_lifetime    Int      @default(2592000)
+  is_confidential           Boolean                  @default(true)
+  is_public_client          Boolean                  @default(false)
+  require_pkce              Boolean                  @default(true)
+  access_token_lifetime     Int                      @default(3600)
+  refresh_token_lifetime    Int                      @default(2592000)
   allowed_origins           String[]
   logo_uri                  String?
   policy_uri                String?
   tos_uri                   String?
-  is_active                 Boolean  @default(true)
-  created_at                DateTime @default(now())
-  updated_at                DateTime @updatedAt
-
-  authorization_codes OAuthAuthorizationCode[]
-  access_tokens       OAuthAccessToken[]
-  refresh_tokens      OAuthRefreshToken[]
-  device_codes        OAuthDeviceCode[]
-  user_consents       OAuthUserConsent[]
+  is_active                 Boolean                  @default(true)
+  permissions               String[] // Direct permissions for M2M
+  owner_id                  String? // User who owns this client
+  created_at                DateTime                 @default(now())
+  updated_at                DateTime                 @updatedAt
+  access_tokens             OAuthAccessToken[]
+  refresh_tokens            OAuthRefreshToken[]
+  authorization_codes       OAuthAuthorizationCode[]
+  device_codes              OAuthDeviceCode[]
+  user_consents             OAuthUserConsent[]
+  roles                     ClientRole[]
 
   @@index([client_id])
-  @@map("oauth_client")
+  @@index([owner_id])
+  @@map("o_auth_client")
 }
 
-// Authorization Code
+model OAuthAccessToken {
+  id             String              @id @default(uuid())
+  token          String              @unique
+  client_id      String
+  user_id        String?
+  scope          String?
+  permissions    String[] // Permissions in token
+  roles          String[] // Roles in token
+  token_type     String              @default("Bearer")
+  expires_at     DateTime
+  created_at     DateTime            @default(now())
+  revoked_at     DateTime?
+  client         OAuthClient         @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  refresh_tokens OAuthRefreshToken[]
+
+  @@index([token])
+  @@index([client_id])
+  @@index([user_id])
+  @@map("o_auth_access_token")
+}
+
+model OAuthRefreshToken {
+  id              String           @id @default(uuid())
+  token           String           @unique
+  access_token_id String
+  client_id       String
+  user_id         String?
+  scope           String?
+  expires_at      DateTime
+  created_at      DateTime         @default(now())
+  revoked_at      DateTime?
+  access_token    OAuthAccessToken @relation(fields: [access_token_id], references: [id], onDelete: Cascade)
+  client          OAuthClient      @relation(fields: [client_id], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([client_id])
+  @@map("o_auth_refresh_token")
+}
+
 model OAuthAuthorizationCode {
-  id                    String    @id @default(uuid())
-  code                  String    @unique
+  id                    String      @id @default(uuid())
+  code                  String      @unique
   client_id             String
-  user_id               String?
+  user_id               String
+  scope                 String?
   redirect_uri          String
-  scope                 String
   state                 String?
   code_challenge        String?
   code_challenge_method String?
   nonce                 String?
-  expires_at            DateTime
   consumed_at           DateTime?
-  created_at            DateTime  @default(now())
-
-  client OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
-  user   User?       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  expires_at            DateTime
+  created_at            DateTime    @default(now())
+  used_at               DateTime?
+  client                OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
 
   @@index([code])
-  @@index([expires_at])
-  @@map("oauth_authorization_code")
+  @@index([client_id])
+  @@index([user_id])
+  @@map("o_auth_authorization_code")
 }
 
-// Access Token
-model OAuthAccessToken {
-  id         String    @id @default(uuid())
-  token      String    @unique
-  client_id  String
-  user_id    String?
-  scope      String
-  token_type String    @default("Bearer")
-  expires_at DateTime
-  revoked_at DateTime?
-  created_at DateTime  @default(now())
-
-  client OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
-  user   User?       @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  @@index([token])
-  @@index([expires_at])
-  @@map("oauth_access_token")
-}
-
-// OAuth Refresh Token
-model OAuthRefreshToken {
-  id              String    @id @default(uuid())
-  token           String    @unique
-  access_token_id String
-  client_id       String
-  user_id         String?
-  scope           String
-  expires_at      DateTime
-  revoked_at      DateTime?
-  created_at      DateTime  @default(now())
-
-  client OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
-  user   User?       @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  @@index([token])
-  @@index([expires_at])
-  @@map("oauth_refresh_token")
-}
-
-// Device Code
 model OAuthDeviceCode {
-  id           String    @id @default(uuid())
-  device_code  String    @unique
-  user_code    String    @unique
+  id           String      @id @default(uuid())
+  device_code  String      @unique
+  user_code    String      @unique
   client_id    String
   user_id      String?
-  scope        String
+  scope        String?
+  verified     Boolean     @default(false)
   expires_at   DateTime
-  interval     Int       @default(5)
-  verified     Boolean   @default(false)
+  interval     Int         @default(5)
+  created_at   DateTime    @default(now())
   completed_at DateTime?
-  created_at   DateTime  @default(now())
-
-  client OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
-  user   User?       @relation(fields: [user_id], references: [id], onDelete: SetNull)
+  client       OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
 
   @@index([device_code])
   @@index([user_code])
-  @@map("oauth_device_code")
+  @@index([client_id])
+  @@map("o_auth_device_code")
 }
 
-// User Consent
 model OAuthUserConsent {
-  id         String    @id @default(uuid())
-  client_id  String
+  id         String      @id @default(uuid())
   user_id    String
-  scope      String
+  client_id  String
+  scope      String[]
+  granted_at DateTime    @default(now())
   expires_at DateTime?
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
+  revoked_at DateTime?
+  updated_at DateTime    @updatedAt
+  client     OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
 
-  client OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
-  user   User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  @@unique([client_id, user_id])
+  @@unique([user_id, client_id])
   @@index([user_id])
-  @@map("oauth_user_consent")
+  @@index([client_id])
+  @@map("o_auth_user_consent")
+}
+
+// ============================================================
+// RBAC Models - Permissions, Roles, and Assignments
+// ============================================================
+
+model Permission {
+  id          String           @id @default(uuid())
+  name        String           @unique // e.g., "users:read", "clients:write"
+  description String?
+  resource    String // e.g., "users", "clients", "roles"
+  action      String // e.g., "read", "write", "delete", "admin"
+  created_at  DateTime         @default(now())
+  updated_at  DateTime         @updatedAt
+  roles       RolePermission[]
+
+  @@index([resource])
+  @@index([name])
+  @@map("permission")
+}
+
+model Role {
+  id          String           @id @default(uuid())
+  name        String           @unique // e.g., "admin", "developer", "viewer"
+  description String?
+  is_active   Boolean          @default(true)
+  created_at  DateTime         @default(now())
+  updated_at  DateTime         @updatedAt
+  permissions RolePermission[]
+  clients     ClientRole[]
+
+  @@index([name])
+  @@map("role")
+}
+
+model RolePermission {
+  id            String     @id @default(uuid())
+  role_id       String
+  permission_id String
+  created_at    DateTime   @default(now())
+  role          Role       @relation(fields: [role_id], references: [id], onDelete: Cascade)
+  permission    Permission @relation(fields: [permission_id], references: [id], onDelete: Cascade)
+
+  @@unique([role_id, permission_id])
+  @@index([role_id])
+  @@index([permission_id])
+  @@map("role_permission")
+}
+
+model ClientRole {
+  id         String      @id @default(uuid())
+  client_id  String
+  role_id    String
+  created_at DateTime    @default(now())
+  client     OAuthClient @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  role       Role        @relation(fields: [role_id], references: [id], onDelete: Cascade)
+
+  @@unique([client_id, role_id])
+  @@index([client_id])
+  @@index([role_id])
+  @@map("client_role")
 }

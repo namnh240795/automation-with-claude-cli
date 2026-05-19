@@ -8,21 +8,73 @@
 # - API versioning
 
 services:
-  # PostgreSQL Database Service
-  # Each service (api, auth) has its own database and admin credentials
+  # Nginx API Gateway - Rate limiting and reverse proxy
+  # All external traffic routes through nginx to internal services
+  nginx-gateway:
+    image: nginx:alpine
+    container_name: claude-nginx-gateway
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/cache:/var/cache/nginx
+      - ./nginx/logs:/var/log/nginx
+    depends_on:
+      auth:
+        condition: service_healthy
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Auth Service - OAuth 2.0 / OIDC provider
+  # Port 3001, accessed only through nginx-gateway
+  auth:
+    build:
+      context: ..
+      dockerfile: apps/auth/Dockerfile
+    container_name: claude-auth
+    restart: unless-stopped
+    environment:
+      SERVICE_PREFIX: auth
+      PORT: 3001
+      DATABASE_URL: postgresql://postgres:postgres_root_password_change_this@postgres:5432/auth_db
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET:-change-this-in-production}
+      JWT_EXPIRES_IN: 1h
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:3001/auth/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  # PostgreSQL Database - Internal only, NOT exposed to host
+  # Accessible only by auth service container
   postgres:
     image: pgvector/pgvector:pg16
     container_name: claude-postgres
     restart: unless-stopped
     environment:
-      # Root postgres user for database initialization
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres_root_password_change_this
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_root_password_change_this}
       POSTGRES_DB: postgres
+    # Temporarily exposed for migration - will be removed after
     ports:
       - "5432:5432"
     volumes:
-      # Mount initialization script to create databases and users
       - ./init-postgres.sh:/docker-entrypoint-initdb.d/init-postgres.sh:ro
       - postgres-data:/var/lib/postgresql/data
     healthcheck:
@@ -33,16 +85,14 @@ services:
     networks:
       - default
 
-  # Redis Cache Service
-  # Used for: caching, rate limiting, session store
-  # Connect via: redis://redis:6379 (internal) or redis://localhost:6379 (host)
+  # Redis Cache - Internal only, NOT exposed to host
+  # Accessible only by auth service container
   redis:
     image: redis:7-alpine
     container_name: claude-redis
     restart: unless-stopped
     command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
-    ports:
-      - "6379:6379"
+    # NO ports exposed to host - internal only
     volumes:
       - redis-data:/data
     healthcheck:
@@ -53,20 +103,15 @@ services:
     networks:
       - default
 
-  # RabbitMQ Message Queue Service
-  # Used for: async messaging, event-driven architecture, background jobs
-  # Connect via: amqp://rabbitmq:5672 (internal) or amqp://localhost:5672 (host)
-  # Management UI: http://localhost:15672 (guest/guest)
+  # RabbitMQ Message Queue - Internal only, NOT exposed to host
   rabbitmq:
     image: rabbitmq:3-management
     container_name: claude-rabbitmq
     restart: unless-stopped
     environment:
-      RABBITMQ_DEFAULT_USER: rabbitmq
-      RABBITMQ_DEFAULT_PASS: rabbitmq_password_change_this
-    ports:
-      - "5672:5672"     # AMQP protocol
-      - "15672:15672"   # Management UI
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-rabbitmq}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-rabbitmq_password_change_this}
+    # NO ports exposed to host - internal only (management UI removed)
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
     healthcheck:
@@ -78,9 +123,7 @@ services:
     networks:
       - default
 
-# Kafka Message Queue Service (KRaft mode, no ZooKeeper)
-  # Used for: workflow logging, event-driven messaging
-  # Connect via: kafka:9092 (internal) or localhost:9092 (host)
+  # Kafka Message Queue - Internal only, NOT exposed to host
   kafka:
     image: apache/kafka:3.7.0
     container_name: claude-kafka
@@ -89,15 +132,13 @@ services:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,EXTERNAL://0.0.0.0:9094
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-    ports:
-      - "9092:9092"     # PLAINTEXT broker
-      - "9094:9094"     # EXTERNAL broker
+    # NO ports exposed to host - internal only
     healthcheck:
       test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list"]
       interval: 10s
@@ -107,9 +148,8 @@ services:
     networks:
       - default
 
-  # OpenSearch Search & Analytics Service
-  # Used for: log storage, search, and analytics
-  # Connect via: http://opensearch:9200 (internal) or http://localhost:9200 (host)
+  # OpenSearch - Accessible for log querying
+  # Connect via: http://localhost:9200
   opensearch:
     image: opensearchproject/opensearch:2.6.0
     container_name: claude-opensearch

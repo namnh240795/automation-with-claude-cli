@@ -304,4 +304,162 @@ export class ClientService {
       updated_at: client.updated_at,
     };
   }
+
+  // ============================================================
+  // M2M RBAC METHODS - Role/Permission assignment for clients
+  // ============================================================
+
+  /**
+   * Assign a role to a client (M2M RBAC)
+   */
+  async assignRole(client_id: string, role_name: string) {
+    const client = await this.findByClientId(client_id);
+
+    const role = await this.prisma.role.findUnique({
+      where: { name: role_name },
+    });
+
+    if (!role) {
+      throw new NotFoundException(`Role '${role_name}' not found`);
+    }
+
+    if (!role.is_active) {
+      throw new BadRequestException(`Role '${role_name}' is inactive`);
+    }
+
+    // Check if already assigned
+    const existing = await this.prisma.clientRole.findUnique({
+      where: {
+        client_id_role_id: {
+          client_id: client.id,
+          role_id: role.id,
+        },
+      },
+    });
+
+    if (existing) {
+      return { message: 'Role already assigned', client_id, role_name };
+    }
+
+    await this.prisma.clientRole.create({
+      data: {
+        client_id: client.id,
+        role_id: role.id,
+      },
+    });
+
+    this.logger.log(`Assigned role '${role_name}' to client '${client_id}'`);
+    return { message: 'Role assigned successfully', client_id, role_name };
+  }
+
+  /**
+   * Remove a role from a client
+   */
+  async removeRole(client_id: string, role_name: string) {
+    const client = await this.findByClientId(client_id);
+
+    const role = await this.prisma.role.findUnique({
+      where: { name: role_name },
+    });
+
+    if (!role) {
+      throw new NotFoundException(`Role '${role_name}' not found`);
+    }
+
+    await this.prisma.clientRole.deleteMany({
+      where: {
+        client_id: client.id,
+        role_id: role.id,
+      },
+    });
+
+    this.logger.log(`Removed role '${role_name}' from client '${client_id}'`);
+    return { message: 'Role removed successfully' };
+  }
+
+  /**
+   * Get all roles assigned to a client
+   */
+  async getClientRoles(client_id: string): Promise<string[]> {
+    const client = await this.findByClientId(client_id);
+
+    const clientRoles = await this.prisma.clientRole.findMany({
+      where: { client_id: client.id },
+      include: { role: true },
+    });
+
+    return clientRoles
+      .filter((cr) => cr.role.is_active)
+      .map((cr) => cr.role.name);
+  }
+
+  /**
+   * Get all permissions for a client (direct + from roles)
+   */
+  async getClientPermissions(client_id: string): Promise<string[]> {
+    const client = await this.findByClientId(client_id);
+
+    // Get direct permissions
+    const directPermissions = client.permissions || [];
+
+    // Get permissions from roles
+    const clientRoles = await this.prisma.clientRole.findMany({
+      where: { client_id: client.id },
+      include: {
+        role: {
+          include: {
+            permissions: {
+              include: { permission: true },
+            },
+          },
+        },
+      },
+    });
+
+    const rolePermissions = clientRoles
+      .filter((cr) => cr.role.is_active)
+      .flatMap((cr) =>
+        cr.role.permissions.map((rp) => rp.permission.name),
+      );
+
+    // Combine and dedupe
+    const allPermissions = [...new Set([...directPermissions, ...rolePermissions])];
+    return allPermissions;
+  }
+
+  /**
+   * Get client with full RBAC info (roles + permissions)
+   */
+  async getClientWithRbac(client_id: string) {
+    const client = await this.findByClientId(client_id);
+
+    const roles = await this.getClientRoles(client_id);
+    const permissions = await this.getClientPermissions(client_id);
+
+    return {
+      id: client.id,
+      client_id: client.client_id,
+      name: client.name,
+      description: client.description,
+      is_active: client.is_active,
+      roles,
+      permissions,
+      created_at: client.created_at,
+    };
+  }
+
+  /**
+   * Update client RBAC settings (direct permissions)
+   */
+  async updateClientPermissions(client_id: string, permissions: string[]) {
+    const client = await this.findByClientId(client_id);
+
+    await this.prisma.oAuthClient.update({
+      where: { id: client.id },
+      data: { permissions },
+    });
+
+    this.logger.log(`Updated permissions for client '${client_id}'`);
+    return this.getClientWithRbac(client_id);
+  }
 }

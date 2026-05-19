@@ -28,14 +28,15 @@ export class TokenService {
   }
 
   /**
-   * Generate access token (JWT)
+   * Generate access token (JWT) with RBAC support
    */
   async generateAccessToken(data: {
-    user_id: string;
+    user_id: string | null;
     email: string;
     first_name?: string;
     last_name?: string;
     roles?: string[];
+    permissions?: string[];
     client_id: string;
     scope: string;
   }): Promise<{ token: string; expires_at: Date }> {
@@ -45,15 +46,27 @@ export class TokenService {
     // Add a random jti (JWT ID) to ensure uniqueness
     const jti = randomBytes(16).toString('base64url');
 
+    // Resolve permissions from client if not provided (for M2M)
+    let finalPermissions = data.permissions || [];
+    let finalRoles = data.roles || [];
+
+    // If no permissions provided, fetch from client (M2M scenario)
+    if (finalPermissions.length === 0 && finalRoles.length === 0) {
+      const clientRbac = await this.getClientRbac(data.client_id);
+      finalPermissions = clientRbac.permissions;
+      finalRoles = clientRbac.roles;
+    }
+
     const payload: JwtPayloadDto = {
       sub: data.user_id,
       email: data.email,
       first_name: data.first_name,
       last_name: data.last_name,
-      roles: data.roles,
+      roles: finalRoles,
+      permissions: finalPermissions,
       iat: now,
       exp: now + expiresIn,
-      jti: jti, // Add unique identifier
+      jti: jti,
     };
 
     // Create JWT token using native Node.js crypto
@@ -78,7 +91,7 @@ export class TokenService {
       throw new NotFoundException('Client not found');
     }
 
-    // Store access token in database
+    // Store access token in database with RBAC info
     const accessTokenExpiresAt = new Date(
       Date.now() + client.access_token_lifetime * 1000,
     );
@@ -89,16 +102,70 @@ export class TokenService {
         client_id: client.id,
         user_id: data.user_id,
         scope: data.scope,
+        permissions: finalPermissions,
+        roles: finalRoles,
         token_type: TOKEN_TYPES.BEARER,
         expires_at: accessTokenExpiresAt,
       },
     });
 
     this.logger.log(
-      `Generated access token for user ${data.user_id || 'none'} (client credentials), client ${data.client_id}`,
+      `Generated access token for ${data.user_id || 'M2M'} (client: ${data.client_id}) with roles: [${finalRoles.join(', ')}] permissions: [${finalPermissions.join(', ')}]`,
     );
 
     return { token, expires_at: accessTokenExpiresAt };
+  }
+
+  /**
+   * Get client RBAC (roles and permissions)
+   */
+  async getClientRbac(client_id: string): Promise<{
+    roles: string[];
+    permissions: string[];
+  }> {
+    const client = await this.prisma.oAuthClient.findUnique({
+      where: { client_id },
+      include: {
+        roles: {
+          include: {
+            role: {
+              include: {
+                permissions: {
+                  include: { permission: true },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!client) {
+      return { roles: [], permissions: [] };
+    }
+
+    // Get direct permissions
+    const directPermissions = client.permissions || [];
+
+    // Get permissions from roles
+    const rolePermissions = client.roles
+      .filter((cr) => cr.role.is_active)
+      .flatMap((cr) =>
+        cr.role.permissions.map((rp) => rp.permission.name),
+      );
+
+    // Get role names
+    const roleNames = client.roles
+      .filter((cr) => cr.role.is_active)
+      .map((cr) => cr.role.name);
+
+    // Combine and dedupe permissions
+    const allPermissions = [...new Set([...directPermissions, ...rolePermissions])];
+
+    return {
+      roles: roleNames,
+      permissions: allPermissions,
+    };
   }
 
   /**

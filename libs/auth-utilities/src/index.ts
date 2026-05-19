@@ -7,16 +7,19 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
-// JWT payload structure - matches our token format
+export const ROLES_KEY = 'roles';
+export const PERMISSIONS_KEY = 'permissions';
+
 export interface JwtPayloadDto {
-  sub: string; // User ID
-  email: string; // User email
-  first_name?: string; // User first name
-  last_name?: string; // User last name
-  roles?: string[]; // User roles (optional)
-  iat: number; // Issued at
-  exp: number; // Expiration time
-  jti?: string; // JWT ID (unique identifier)
+  sub: string;
+  email: string;
+  first_name?: string;
+  last_name?: string;
+  roles?: string[];
+  permissions?: string[];
+  iat: number;
+  exp: number;
+  jti?: string;
 }
 
 export const AuthUser = createParamDecorator(
@@ -26,8 +29,9 @@ export const AuthUser = createParamDecorator(
   },
 );
 
-export const ROLES_KEY = 'roles';
 export const Roles = (...roles: string[]) => SetMetadata(ROLES_KEY, roles);
+export const Permissions = (...permissions: string[]) =>
+  SetMetadata(PERMISSIONS_KEY, permissions);
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -43,15 +47,84 @@ export class RolesGuard implements CanActivate {
       return true;
     }
 
-    const { user }: { user: JwtPayloadDto } = context
-      .switchToHttp()
-      .getRequest();
+    const request = context.switchToHttp().getRequest();
+    const user = request.user as JwtPayloadDto;
 
     if (!user || !user.roles) {
       return false;
     }
 
     return requiredRoles.some((role) => user.roles?.includes(role));
+  }
+}
+
+@Injectable()
+export class PermissionsGuard implements CanActivate {
+  constructor(private reflector: Reflector) {}
+
+  canActivate(context: ExecutionContext): boolean {
+    const requiredPermissions = this.reflector.getAllAndOverride<string[]>(
+      PERMISSIONS_KEY,
+      [context.getHandler(), context.getClass()],
+    );
+
+    if (!requiredPermissions) {
+      return true;
+    }
+
+    const request = context.switchToHttp().getRequest();
+    const user = request.user as JwtPayloadDto;
+
+    if (!user || !user.permissions) {
+      return false;
+    }
+
+    return requiredPermissions.every((perm) =>
+      user.permissions?.includes(perm),
+    );
+  }
+}
+
+@Injectable()
+export class RolesOrPermissionsGuard implements CanActivate {
+  constructor(private reflector: Reflector) {}
+
+  canActivate(context: ExecutionContext): boolean {
+    const requiredRoles = this.reflector.getAllAndOverride<string[]>(
+      ROLES_KEY,
+      [context.getHandler(), context.getClass()],
+    );
+
+    const requiredPermissions = this.reflector.getAllAndOverride<string[]>(
+      PERMISSIONS_KEY,
+      [context.getHandler(), context.getClass()],
+    );
+
+    const request = context.switchToHttp().getRequest();
+    const user = request.user as JwtPayloadDto;
+
+    if (!user) {
+      return false;
+    }
+
+    const hasRole = requiredRoles?.some((role) => user.roles?.includes(role));
+    const hasPermission = requiredPermissions?.every((perm) =>
+      user.permissions?.includes(perm),
+    );
+
+    if (requiredRoles && requiredPermissions) {
+      return hasRole || hasPermission;
+    }
+
+    if (requiredRoles) {
+      return hasRole;
+    }
+
+    if (requiredPermissions) {
+      return hasPermission;
+    }
+
+    return true;
   }
 }
 

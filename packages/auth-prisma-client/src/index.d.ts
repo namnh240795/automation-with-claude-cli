@@ -34,11 +34,6 @@ export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
  */
 export type OAuthClient = $Result.DefaultSelection<Prisma.$OAuthClientPayload>
 /**
- * Model OAuthAuthorizationCode
- * 
- */
-export type OAuthAuthorizationCode = $Result.DefaultSelection<Prisma.$OAuthAuthorizationCodePayload>
-/**
  * Model OAuthAccessToken
  * 
  */
@@ -49,6 +44,11 @@ export type OAuthAccessToken = $Result.DefaultSelection<Prisma.$OAuthAccessToken
  */
 export type OAuthRefreshToken = $Result.DefaultSelection<Prisma.$OAuthRefreshTokenPayload>
 /**
+ * Model OAuthAuthorizationCode
+ * 
+ */
+export type OAuthAuthorizationCode = $Result.DefaultSelection<Prisma.$OAuthAuthorizationCodePayload>
+/**
  * Model OAuthDeviceCode
  * 
  */
@@ -58,6 +58,26 @@ export type OAuthDeviceCode = $Result.DefaultSelection<Prisma.$OAuthDeviceCodePa
  * 
  */
 export type OAuthUserConsent = $Result.DefaultSelection<Prisma.$OAuthUserConsentPayload>
+/**
+ * Model Permission
+ * 
+ */
+export type Permission = $Result.DefaultSelection<Prisma.$PermissionPayload>
+/**
+ * Model Role
+ * 
+ */
+export type Role = $Result.DefaultSelection<Prisma.$RolePayload>
+/**
+ * Model RolePermission
+ * 
+ */
+export type RolePermission = $Result.DefaultSelection<Prisma.$RolePermissionPayload>
+/**
+ * Model ClientRole
+ * 
+ */
+export type ClientRole = $Result.DefaultSelection<Prisma.$ClientRolePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -221,16 +241,6 @@ export class PrismaClient<
   get oAuthClient(): Prisma.OAuthClientDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.oAuthAuthorizationCode`: Exposes CRUD operations for the **OAuthAuthorizationCode** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more OAuthAuthorizationCodes
-    * const oAuthAuthorizationCodes = await prisma.oAuthAuthorizationCode.findMany()
-    * ```
-    */
-  get oAuthAuthorizationCode(): Prisma.OAuthAuthorizationCodeDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.oAuthAccessToken`: Exposes CRUD operations for the **OAuthAccessToken** model.
     * Example usage:
     * ```ts
@@ -251,6 +261,16 @@ export class PrismaClient<
   get oAuthRefreshToken(): Prisma.OAuthRefreshTokenDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.oAuthAuthorizationCode`: Exposes CRUD operations for the **OAuthAuthorizationCode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OAuthAuthorizationCodes
+    * const oAuthAuthorizationCodes = await prisma.oAuthAuthorizationCode.findMany()
+    * ```
+    */
+  get oAuthAuthorizationCode(): Prisma.OAuthAuthorizationCodeDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.oAuthDeviceCode`: Exposes CRUD operations for the **OAuthDeviceCode** model.
     * Example usage:
     * ```ts
@@ -269,6 +289,46 @@ export class PrismaClient<
     * ```
     */
   get oAuthUserConsent(): Prisma.OAuthUserConsentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.permission`: Exposes CRUD operations for the **Permission** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Permissions
+    * const permissions = await prisma.permission.findMany()
+    * ```
+    */
+  get permission(): Prisma.PermissionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.role`: Exposes CRUD operations for the **Role** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Roles
+    * const roles = await prisma.role.findMany()
+    * ```
+    */
+  get role(): Prisma.RoleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.rolePermission`: Exposes CRUD operations for the **RolePermission** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RolePermissions
+    * const rolePermissions = await prisma.rolePermission.findMany()
+    * ```
+    */
+  get rolePermission(): Prisma.RolePermissionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.clientRole`: Exposes CRUD operations for the **ClientRole** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ClientRoles
+    * const clientRoles = await prisma.clientRole.findMany()
+    * ```
+    */
+  get clientRole(): Prisma.ClientRoleDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -707,11 +767,15 @@ export namespace Prisma {
     RefreshToken: 'RefreshToken',
     Session: 'Session',
     OAuthClient: 'OAuthClient',
-    OAuthAuthorizationCode: 'OAuthAuthorizationCode',
     OAuthAccessToken: 'OAuthAccessToken',
     OAuthRefreshToken: 'OAuthRefreshToken',
+    OAuthAuthorizationCode: 'OAuthAuthorizationCode',
     OAuthDeviceCode: 'OAuthDeviceCode',
-    OAuthUserConsent: 'OAuthUserConsent'
+    OAuthUserConsent: 'OAuthUserConsent',
+    Permission: 'Permission',
+    Role: 'Role',
+    RolePermission: 'RolePermission',
+    ClientRole: 'ClientRole'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -727,7 +791,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "refreshToken" | "session" | "oAuthClient" | "oAuthAuthorizationCode" | "oAuthAccessToken" | "oAuthRefreshToken" | "oAuthDeviceCode" | "oAuthUserConsent"
+      modelProps: "user" | "refreshToken" | "session" | "oAuthClient" | "oAuthAccessToken" | "oAuthRefreshToken" | "oAuthAuthorizationCode" | "oAuthDeviceCode" | "oAuthUserConsent" | "permission" | "role" | "rolePermission" | "clientRole"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1027,80 +1091,6 @@ export namespace Prisma {
           }
         }
       }
-      OAuthAuthorizationCode: {
-        payload: Prisma.$OAuthAuthorizationCodePayload<ExtArgs>
-        fields: Prisma.OAuthAuthorizationCodeFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.OAuthAuthorizationCodeFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.OAuthAuthorizationCodeFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>
-          }
-          findFirst: {
-            args: Prisma.OAuthAuthorizationCodeFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.OAuthAuthorizationCodeFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>
-          }
-          findMany: {
-            args: Prisma.OAuthAuthorizationCodeFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>[]
-          }
-          create: {
-            args: Prisma.OAuthAuthorizationCodeCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>
-          }
-          createMany: {
-            args: Prisma.OAuthAuthorizationCodeCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.OAuthAuthorizationCodeCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>[]
-          }
-          delete: {
-            args: Prisma.OAuthAuthorizationCodeDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>
-          }
-          update: {
-            args: Prisma.OAuthAuthorizationCodeUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>
-          }
-          deleteMany: {
-            args: Prisma.OAuthAuthorizationCodeDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.OAuthAuthorizationCodeUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.OAuthAuthorizationCodeUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>[]
-          }
-          upsert: {
-            args: Prisma.OAuthAuthorizationCodeUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>
-          }
-          aggregate: {
-            args: Prisma.OAuthAuthorizationCodeAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateOAuthAuthorizationCode>
-          }
-          groupBy: {
-            args: Prisma.OAuthAuthorizationCodeGroupByArgs<ExtArgs>
-            result: $Utils.Optional<OAuthAuthorizationCodeGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.OAuthAuthorizationCodeCountArgs<ExtArgs>
-            result: $Utils.Optional<OAuthAuthorizationCodeCountAggregateOutputType> | number
-          }
-        }
-      }
       OAuthAccessToken: {
         payload: Prisma.$OAuthAccessTokenPayload<ExtArgs>
         fields: Prisma.OAuthAccessTokenFieldRefs
@@ -1246,6 +1236,80 @@ export namespace Prisma {
           count: {
             args: Prisma.OAuthRefreshTokenCountArgs<ExtArgs>
             result: $Utils.Optional<OAuthRefreshTokenCountAggregateOutputType> | number
+          }
+        }
+      }
+      OAuthAuthorizationCode: {
+        payload: Prisma.$OAuthAuthorizationCodePayload<ExtArgs>
+        fields: Prisma.OAuthAuthorizationCodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OAuthAuthorizationCodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OAuthAuthorizationCodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>
+          }
+          findFirst: {
+            args: Prisma.OAuthAuthorizationCodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OAuthAuthorizationCodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>
+          }
+          findMany: {
+            args: Prisma.OAuthAuthorizationCodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>[]
+          }
+          create: {
+            args: Prisma.OAuthAuthorizationCodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>
+          }
+          createMany: {
+            args: Prisma.OAuthAuthorizationCodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OAuthAuthorizationCodeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>[]
+          }
+          delete: {
+            args: Prisma.OAuthAuthorizationCodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>
+          }
+          update: {
+            args: Prisma.OAuthAuthorizationCodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>
+          }
+          deleteMany: {
+            args: Prisma.OAuthAuthorizationCodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OAuthAuthorizationCodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OAuthAuthorizationCodeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>[]
+          }
+          upsert: {
+            args: Prisma.OAuthAuthorizationCodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthAuthorizationCodePayload>
+          }
+          aggregate: {
+            args: Prisma.OAuthAuthorizationCodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOAuthAuthorizationCode>
+          }
+          groupBy: {
+            args: Prisma.OAuthAuthorizationCodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OAuthAuthorizationCodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OAuthAuthorizationCodeCountArgs<ExtArgs>
+            result: $Utils.Optional<OAuthAuthorizationCodeCountAggregateOutputType> | number
           }
         }
       }
@@ -1397,6 +1461,302 @@ export namespace Prisma {
           }
         }
       }
+      Permission: {
+        payload: Prisma.$PermissionPayload<ExtArgs>
+        fields: Prisma.PermissionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PermissionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PermissionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>
+          }
+          findFirst: {
+            args: Prisma.PermissionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PermissionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>
+          }
+          findMany: {
+            args: Prisma.PermissionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>[]
+          }
+          create: {
+            args: Prisma.PermissionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>
+          }
+          createMany: {
+            args: Prisma.PermissionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PermissionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>[]
+          }
+          delete: {
+            args: Prisma.PermissionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>
+          }
+          update: {
+            args: Prisma.PermissionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>
+          }
+          deleteMany: {
+            args: Prisma.PermissionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PermissionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PermissionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>[]
+          }
+          upsert: {
+            args: Prisma.PermissionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>
+          }
+          aggregate: {
+            args: Prisma.PermissionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePermission>
+          }
+          groupBy: {
+            args: Prisma.PermissionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PermissionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PermissionCountArgs<ExtArgs>
+            result: $Utils.Optional<PermissionCountAggregateOutputType> | number
+          }
+        }
+      }
+      Role: {
+        payload: Prisma.$RolePayload<ExtArgs>
+        fields: Prisma.RoleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RoleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RoleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>
+          }
+          findFirst: {
+            args: Prisma.RoleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RoleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>
+          }
+          findMany: {
+            args: Prisma.RoleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>[]
+          }
+          create: {
+            args: Prisma.RoleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>
+          }
+          createMany: {
+            args: Prisma.RoleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RoleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>[]
+          }
+          delete: {
+            args: Prisma.RoleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>
+          }
+          update: {
+            args: Prisma.RoleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>
+          }
+          deleteMany: {
+            args: Prisma.RoleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RoleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RoleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>[]
+          }
+          upsert: {
+            args: Prisma.RoleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>
+          }
+          aggregate: {
+            args: Prisma.RoleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRole>
+          }
+          groupBy: {
+            args: Prisma.RoleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RoleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RoleCountArgs<ExtArgs>
+            result: $Utils.Optional<RoleCountAggregateOutputType> | number
+          }
+        }
+      }
+      RolePermission: {
+        payload: Prisma.$RolePermissionPayload<ExtArgs>
+        fields: Prisma.RolePermissionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RolePermissionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePermissionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RolePermissionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePermissionPayload>
+          }
+          findFirst: {
+            args: Prisma.RolePermissionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePermissionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RolePermissionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePermissionPayload>
+          }
+          findMany: {
+            args: Prisma.RolePermissionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePermissionPayload>[]
+          }
+          create: {
+            args: Prisma.RolePermissionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePermissionPayload>
+          }
+          createMany: {
+            args: Prisma.RolePermissionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RolePermissionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePermissionPayload>[]
+          }
+          delete: {
+            args: Prisma.RolePermissionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePermissionPayload>
+          }
+          update: {
+            args: Prisma.RolePermissionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePermissionPayload>
+          }
+          deleteMany: {
+            args: Prisma.RolePermissionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RolePermissionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RolePermissionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePermissionPayload>[]
+          }
+          upsert: {
+            args: Prisma.RolePermissionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePermissionPayload>
+          }
+          aggregate: {
+            args: Prisma.RolePermissionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRolePermission>
+          }
+          groupBy: {
+            args: Prisma.RolePermissionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RolePermissionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RolePermissionCountArgs<ExtArgs>
+            result: $Utils.Optional<RolePermissionCountAggregateOutputType> | number
+          }
+        }
+      }
+      ClientRole: {
+        payload: Prisma.$ClientRolePayload<ExtArgs>
+        fields: Prisma.ClientRoleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ClientRoleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientRolePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ClientRoleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientRolePayload>
+          }
+          findFirst: {
+            args: Prisma.ClientRoleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientRolePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ClientRoleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientRolePayload>
+          }
+          findMany: {
+            args: Prisma.ClientRoleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientRolePayload>[]
+          }
+          create: {
+            args: Prisma.ClientRoleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientRolePayload>
+          }
+          createMany: {
+            args: Prisma.ClientRoleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ClientRoleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientRolePayload>[]
+          }
+          delete: {
+            args: Prisma.ClientRoleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientRolePayload>
+          }
+          update: {
+            args: Prisma.ClientRoleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientRolePayload>
+          }
+          deleteMany: {
+            args: Prisma.ClientRoleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ClientRoleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ClientRoleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientRolePayload>[]
+          }
+          upsert: {
+            args: Prisma.ClientRoleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientRolePayload>
+          }
+          aggregate: {
+            args: Prisma.ClientRoleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClientRole>
+          }
+          groupBy: {
+            args: Prisma.ClientRoleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClientRoleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ClientRoleCountArgs<ExtArgs>
+            result: $Utils.Optional<ClientRoleCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1509,11 +1869,15 @@ export namespace Prisma {
     refreshToken?: RefreshTokenOmit
     session?: SessionOmit
     oAuthClient?: OAuthClientOmit
-    oAuthAuthorizationCode?: OAuthAuthorizationCodeOmit
     oAuthAccessToken?: OAuthAccessTokenOmit
     oAuthRefreshToken?: OAuthRefreshTokenOmit
+    oAuthAuthorizationCode?: OAuthAuthorizationCodeOmit
     oAuthDeviceCode?: OAuthDeviceCodeOmit
     oAuthUserConsent?: OAuthUserConsentOmit
+    permission?: PermissionOmit
+    role?: RoleOmit
+    rolePermission?: RolePermissionOmit
+    clientRole?: ClientRoleOmit
   }
 
   /* Types for Logging */
@@ -1596,21 +1960,11 @@ export namespace Prisma {
   export type UserCountOutputType = {
     refresh_tokens: number
     sessions: number
-    oauth_authorization_codes: number
-    oauth_access_tokens: number
-    oauth_refresh_tokens: number
-    oauth_device_codes: number
-    oauth_consents: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     refresh_tokens?: boolean | UserCountOutputTypeCountRefresh_tokensArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
-    oauth_authorization_codes?: boolean | UserCountOutputTypeCountOauth_authorization_codesArgs
-    oauth_access_tokens?: boolean | UserCountOutputTypeCountOauth_access_tokensArgs
-    oauth_refresh_tokens?: boolean | UserCountOutputTypeCountOauth_refresh_tokensArgs
-    oauth_device_codes?: boolean | UserCountOutputTypeCountOauth_device_codesArgs
-    oauth_consents?: boolean | UserCountOutputTypeCountOauth_consentsArgs
   }
 
   // Custom InputTypes
@@ -1638,60 +1992,27 @@ export namespace Prisma {
     where?: SessionWhereInput
   }
 
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountOauth_authorization_codesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OAuthAuthorizationCodeWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountOauth_access_tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OAuthAccessTokenWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountOauth_refresh_tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OAuthRefreshTokenWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountOauth_device_codesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OAuthDeviceCodeWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountOauth_consentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OAuthUserConsentWhereInput
-  }
-
 
   /**
    * Count Type OAuthClientCountOutputType
    */
 
   export type OAuthClientCountOutputType = {
-    authorization_codes: number
     access_tokens: number
     refresh_tokens: number
+    authorization_codes: number
     device_codes: number
     user_consents: number
+    roles: number
   }
 
   export type OAuthClientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    authorization_codes?: boolean | OAuthClientCountOutputTypeCountAuthorization_codesArgs
     access_tokens?: boolean | OAuthClientCountOutputTypeCountAccess_tokensArgs
     refresh_tokens?: boolean | OAuthClientCountOutputTypeCountRefresh_tokensArgs
+    authorization_codes?: boolean | OAuthClientCountOutputTypeCountAuthorization_codesArgs
     device_codes?: boolean | OAuthClientCountOutputTypeCountDevice_codesArgs
     user_consents?: boolean | OAuthClientCountOutputTypeCountUser_consentsArgs
+    roles?: boolean | OAuthClientCountOutputTypeCountRolesArgs
   }
 
   // Custom InputTypes
@@ -1703,13 +2024,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the OAuthClientCountOutputType
      */
     select?: OAuthClientCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * OAuthClientCountOutputType without action
-   */
-  export type OAuthClientCountOutputTypeCountAuthorization_codesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OAuthAuthorizationCodeWhereInput
   }
 
   /**
@@ -1729,6 +2043,13 @@ export namespace Prisma {
   /**
    * OAuthClientCountOutputType without action
    */
+  export type OAuthClientCountOutputTypeCountAuthorization_codesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OAuthAuthorizationCodeWhereInput
+  }
+
+  /**
+   * OAuthClientCountOutputType without action
+   */
   export type OAuthClientCountOutputTypeCountDevice_codesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OAuthDeviceCodeWhereInput
   }
@@ -1738,6 +2059,115 @@ export namespace Prisma {
    */
   export type OAuthClientCountOutputTypeCountUser_consentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OAuthUserConsentWhereInput
+  }
+
+  /**
+   * OAuthClientCountOutputType without action
+   */
+  export type OAuthClientCountOutputTypeCountRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientRoleWhereInput
+  }
+
+
+  /**
+   * Count Type OAuthAccessTokenCountOutputType
+   */
+
+  export type OAuthAccessTokenCountOutputType = {
+    refresh_tokens: number
+  }
+
+  export type OAuthAccessTokenCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    refresh_tokens?: boolean | OAuthAccessTokenCountOutputTypeCountRefresh_tokensArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * OAuthAccessTokenCountOutputType without action
+   */
+  export type OAuthAccessTokenCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAccessTokenCountOutputType
+     */
+    select?: OAuthAccessTokenCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * OAuthAccessTokenCountOutputType without action
+   */
+  export type OAuthAccessTokenCountOutputTypeCountRefresh_tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OAuthRefreshTokenWhereInput
+  }
+
+
+  /**
+   * Count Type PermissionCountOutputType
+   */
+
+  export type PermissionCountOutputType = {
+    roles: number
+  }
+
+  export type PermissionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    roles?: boolean | PermissionCountOutputTypeCountRolesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PermissionCountOutputType without action
+   */
+  export type PermissionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionCountOutputType
+     */
+    select?: PermissionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PermissionCountOutputType without action
+   */
+  export type PermissionCountOutputTypeCountRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RolePermissionWhereInput
+  }
+
+
+  /**
+   * Count Type RoleCountOutputType
+   */
+
+  export type RoleCountOutputType = {
+    permissions: number
+    clients: number
+  }
+
+  export type RoleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    permissions?: boolean | RoleCountOutputTypeCountPermissionsArgs
+    clients?: boolean | RoleCountOutputTypeCountClientsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * RoleCountOutputType without action
+   */
+  export type RoleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCountOutputType
+     */
+    select?: RoleCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * RoleCountOutputType without action
+   */
+  export type RoleCountOutputTypeCountPermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RolePermissionWhereInput
+  }
+
+  /**
+   * RoleCountOutputType without action
+   */
+  export type RoleCountOutputTypeCountClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientRoleWhereInput
   }
 
 
@@ -1951,11 +2381,6 @@ export namespace Prisma {
     updated_at?: boolean
     refresh_tokens?: boolean | User$refresh_tokensArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
-    oauth_authorization_codes?: boolean | User$oauth_authorization_codesArgs<ExtArgs>
-    oauth_access_tokens?: boolean | User$oauth_access_tokensArgs<ExtArgs>
-    oauth_refresh_tokens?: boolean | User$oauth_refresh_tokensArgs<ExtArgs>
-    oauth_device_codes?: boolean | User$oauth_device_codesArgs<ExtArgs>
-    oauth_consents?: boolean | User$oauth_consentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2002,11 +2427,6 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     refresh_tokens?: boolean | User$refresh_tokensArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
-    oauth_authorization_codes?: boolean | User$oauth_authorization_codesArgs<ExtArgs>
-    oauth_access_tokens?: boolean | User$oauth_access_tokensArgs<ExtArgs>
-    oauth_refresh_tokens?: boolean | User$oauth_refresh_tokensArgs<ExtArgs>
-    oauth_device_codes?: boolean | User$oauth_device_codesArgs<ExtArgs>
-    oauth_consents?: boolean | User$oauth_consentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2017,11 +2437,6 @@ export namespace Prisma {
     objects: {
       refresh_tokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
-      oauth_authorization_codes: Prisma.$OAuthAuthorizationCodePayload<ExtArgs>[]
-      oauth_access_tokens: Prisma.$OAuthAccessTokenPayload<ExtArgs>[]
-      oauth_refresh_tokens: Prisma.$OAuthRefreshTokenPayload<ExtArgs>[]
-      oauth_device_codes: Prisma.$OAuthDeviceCodePayload<ExtArgs>[]
-      oauth_consents: Prisma.$OAuthUserConsentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2430,11 +2845,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     refresh_tokens<T extends User$refresh_tokensArgs<ExtArgs> = {}>(args?: Subset<T, User$refresh_tokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    oauth_authorization_codes<T extends User$oauth_authorization_codesArgs<ExtArgs> = {}>(args?: Subset<T, User$oauth_authorization_codesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    oauth_access_tokens<T extends User$oauth_access_tokensArgs<ExtArgs> = {}>(args?: Subset<T, User$oauth_access_tokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthAccessTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    oauth_refresh_tokens<T extends User$oauth_refresh_tokensArgs<ExtArgs> = {}>(args?: Subset<T, User$oauth_refresh_tokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthRefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    oauth_device_codes<T extends User$oauth_device_codesArgs<ExtArgs> = {}>(args?: Subset<T, User$oauth_device_codesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthDeviceCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    oauth_consents<T extends User$oauth_consentsArgs<ExtArgs> = {}>(args?: Subset<T, User$oauth_consentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthUserConsentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2912,126 +3322,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
-  }
-
-  /**
-   * User.oauth_authorization_codes
-   */
-  export type User$oauth_authorization_codesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
-    where?: OAuthAuthorizationCodeWhereInput
-    orderBy?: OAuthAuthorizationCodeOrderByWithRelationInput | OAuthAuthorizationCodeOrderByWithRelationInput[]
-    cursor?: OAuthAuthorizationCodeWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: OAuthAuthorizationCodeScalarFieldEnum | OAuthAuthorizationCodeScalarFieldEnum[]
-  }
-
-  /**
-   * User.oauth_access_tokens
-   */
-  export type User$oauth_access_tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAccessToken
-     */
-    select?: OAuthAccessTokenSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAccessToken
-     */
-    omit?: OAuthAccessTokenOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAccessTokenInclude<ExtArgs> | null
-    where?: OAuthAccessTokenWhereInput
-    orderBy?: OAuthAccessTokenOrderByWithRelationInput | OAuthAccessTokenOrderByWithRelationInput[]
-    cursor?: OAuthAccessTokenWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: OAuthAccessTokenScalarFieldEnum | OAuthAccessTokenScalarFieldEnum[]
-  }
-
-  /**
-   * User.oauth_refresh_tokens
-   */
-  export type User$oauth_refresh_tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthRefreshToken
-     */
-    select?: OAuthRefreshTokenSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthRefreshToken
-     */
-    omit?: OAuthRefreshTokenOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthRefreshTokenInclude<ExtArgs> | null
-    where?: OAuthRefreshTokenWhereInput
-    orderBy?: OAuthRefreshTokenOrderByWithRelationInput | OAuthRefreshTokenOrderByWithRelationInput[]
-    cursor?: OAuthRefreshTokenWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: OAuthRefreshTokenScalarFieldEnum | OAuthRefreshTokenScalarFieldEnum[]
-  }
-
-  /**
-   * User.oauth_device_codes
-   */
-  export type User$oauth_device_codesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthDeviceCode
-     */
-    select?: OAuthDeviceCodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthDeviceCode
-     */
-    omit?: OAuthDeviceCodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthDeviceCodeInclude<ExtArgs> | null
-    where?: OAuthDeviceCodeWhereInput
-    orderBy?: OAuthDeviceCodeOrderByWithRelationInput | OAuthDeviceCodeOrderByWithRelationInput[]
-    cursor?: OAuthDeviceCodeWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: OAuthDeviceCodeScalarFieldEnum | OAuthDeviceCodeScalarFieldEnum[]
-  }
-
-  /**
-   * User.oauth_consents
-   */
-  export type User$oauth_consentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthUserConsent
-     */
-    select?: OAuthUserConsentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthUserConsent
-     */
-    omit?: OAuthUserConsentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthUserConsentInclude<ExtArgs> | null
-    where?: OAuthUserConsentWhereInput
-    orderBy?: OAuthUserConsentOrderByWithRelationInput | OAuthUserConsentOrderByWithRelationInput[]
-    cursor?: OAuthUserConsentWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: OAuthUserConsentScalarFieldEnum | OAuthUserConsentScalarFieldEnum[]
   }
 
   /**
@@ -5230,7 +5520,6 @@ export namespace Prisma {
   export type OAuthClientMinAggregateOutputType = {
     id: string | null
     client_id: string | null
-    client_secret: string | null
     client_secret_hash: string | null
     name: string | null
     description: string | null
@@ -5243,6 +5532,7 @@ export namespace Prisma {
     policy_uri: string | null
     tos_uri: string | null
     is_active: boolean | null
+    owner_id: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -5250,7 +5540,6 @@ export namespace Prisma {
   export type OAuthClientMaxAggregateOutputType = {
     id: string | null
     client_id: string | null
-    client_secret: string | null
     client_secret_hash: string | null
     name: string | null
     description: string | null
@@ -5263,6 +5552,7 @@ export namespace Prisma {
     policy_uri: string | null
     tos_uri: string | null
     is_active: boolean | null
+    owner_id: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -5270,7 +5560,6 @@ export namespace Prisma {
   export type OAuthClientCountAggregateOutputType = {
     id: number
     client_id: number
-    client_secret: number
     client_secret_hash: number
     name: number
     description: number
@@ -5288,6 +5577,8 @@ export namespace Prisma {
     policy_uri: number
     tos_uri: number
     is_active: number
+    permissions: number
+    owner_id: number
     created_at: number
     updated_at: number
     _all: number
@@ -5307,7 +5598,6 @@ export namespace Prisma {
   export type OAuthClientMinAggregateInputType = {
     id?: true
     client_id?: true
-    client_secret?: true
     client_secret_hash?: true
     name?: true
     description?: true
@@ -5320,6 +5610,7 @@ export namespace Prisma {
     policy_uri?: true
     tos_uri?: true
     is_active?: true
+    owner_id?: true
     created_at?: true
     updated_at?: true
   }
@@ -5327,7 +5618,6 @@ export namespace Prisma {
   export type OAuthClientMaxAggregateInputType = {
     id?: true
     client_id?: true
-    client_secret?: true
     client_secret_hash?: true
     name?: true
     description?: true
@@ -5340,6 +5630,7 @@ export namespace Prisma {
     policy_uri?: true
     tos_uri?: true
     is_active?: true
+    owner_id?: true
     created_at?: true
     updated_at?: true
   }
@@ -5347,7 +5638,6 @@ export namespace Prisma {
   export type OAuthClientCountAggregateInputType = {
     id?: true
     client_id?: true
-    client_secret?: true
     client_secret_hash?: true
     name?: true
     description?: true
@@ -5365,6 +5655,8 @@ export namespace Prisma {
     policy_uri?: true
     tos_uri?: true
     is_active?: true
+    permissions?: true
+    owner_id?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -5459,7 +5751,6 @@ export namespace Prisma {
   export type OAuthClientGroupByOutputType = {
     id: string
     client_id: string
-    client_secret: string | null
     client_secret_hash: string | null
     name: string
     description: string | null
@@ -5477,6 +5768,8 @@ export namespace Prisma {
     policy_uri: string | null
     tos_uri: string | null
     is_active: boolean
+    permissions: string[]
+    owner_id: string | null
     created_at: Date
     updated_at: Date
     _count: OAuthClientCountAggregateOutputType | null
@@ -5503,7 +5796,6 @@ export namespace Prisma {
   export type OAuthClientSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     client_id?: boolean
-    client_secret?: boolean
     client_secret_hash?: boolean
     name?: boolean
     description?: boolean
@@ -5521,20 +5813,22 @@ export namespace Prisma {
     policy_uri?: boolean
     tos_uri?: boolean
     is_active?: boolean
+    permissions?: boolean
+    owner_id?: boolean
     created_at?: boolean
     updated_at?: boolean
-    authorization_codes?: boolean | OAuthClient$authorization_codesArgs<ExtArgs>
     access_tokens?: boolean | OAuthClient$access_tokensArgs<ExtArgs>
     refresh_tokens?: boolean | OAuthClient$refresh_tokensArgs<ExtArgs>
+    authorization_codes?: boolean | OAuthClient$authorization_codesArgs<ExtArgs>
     device_codes?: boolean | OAuthClient$device_codesArgs<ExtArgs>
     user_consents?: boolean | OAuthClient$user_consentsArgs<ExtArgs>
+    roles?: boolean | OAuthClient$rolesArgs<ExtArgs>
     _count?: boolean | OAuthClientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["oAuthClient"]>
 
   export type OAuthClientSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     client_id?: boolean
-    client_secret?: boolean
     client_secret_hash?: boolean
     name?: boolean
     description?: boolean
@@ -5552,6 +5846,8 @@ export namespace Prisma {
     policy_uri?: boolean
     tos_uri?: boolean
     is_active?: boolean
+    permissions?: boolean
+    owner_id?: boolean
     created_at?: boolean
     updated_at?: boolean
   }, ExtArgs["result"]["oAuthClient"]>
@@ -5559,7 +5855,6 @@ export namespace Prisma {
   export type OAuthClientSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     client_id?: boolean
-    client_secret?: boolean
     client_secret_hash?: boolean
     name?: boolean
     description?: boolean
@@ -5577,6 +5872,8 @@ export namespace Prisma {
     policy_uri?: boolean
     tos_uri?: boolean
     is_active?: boolean
+    permissions?: boolean
+    owner_id?: boolean
     created_at?: boolean
     updated_at?: boolean
   }, ExtArgs["result"]["oAuthClient"]>
@@ -5584,7 +5881,6 @@ export namespace Prisma {
   export type OAuthClientSelectScalar = {
     id?: boolean
     client_id?: boolean
-    client_secret?: boolean
     client_secret_hash?: boolean
     name?: boolean
     description?: boolean
@@ -5602,17 +5898,20 @@ export namespace Prisma {
     policy_uri?: boolean
     tos_uri?: boolean
     is_active?: boolean
+    permissions?: boolean
+    owner_id?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type OAuthClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "client_id" | "client_secret" | "client_secret_hash" | "name" | "description" | "redirect_uris" | "post_logout_redirect_uris" | "scopes" | "grant_types" | "is_confidential" | "is_public_client" | "require_pkce" | "access_token_lifetime" | "refresh_token_lifetime" | "allowed_origins" | "logo_uri" | "policy_uri" | "tos_uri" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["oAuthClient"]>
+  export type OAuthClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "client_id" | "client_secret_hash" | "name" | "description" | "redirect_uris" | "post_logout_redirect_uris" | "scopes" | "grant_types" | "is_confidential" | "is_public_client" | "require_pkce" | "access_token_lifetime" | "refresh_token_lifetime" | "allowed_origins" | "logo_uri" | "policy_uri" | "tos_uri" | "is_active" | "permissions" | "owner_id" | "created_at" | "updated_at", ExtArgs["result"]["oAuthClient"]>
   export type OAuthClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    authorization_codes?: boolean | OAuthClient$authorization_codesArgs<ExtArgs>
     access_tokens?: boolean | OAuthClient$access_tokensArgs<ExtArgs>
     refresh_tokens?: boolean | OAuthClient$refresh_tokensArgs<ExtArgs>
+    authorization_codes?: boolean | OAuthClient$authorization_codesArgs<ExtArgs>
     device_codes?: boolean | OAuthClient$device_codesArgs<ExtArgs>
     user_consents?: boolean | OAuthClient$user_consentsArgs<ExtArgs>
+    roles?: boolean | OAuthClient$rolesArgs<ExtArgs>
     _count?: boolean | OAuthClientCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OAuthClientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -5621,16 +5920,16 @@ export namespace Prisma {
   export type $OAuthClientPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OAuthClient"
     objects: {
-      authorization_codes: Prisma.$OAuthAuthorizationCodePayload<ExtArgs>[]
       access_tokens: Prisma.$OAuthAccessTokenPayload<ExtArgs>[]
       refresh_tokens: Prisma.$OAuthRefreshTokenPayload<ExtArgs>[]
+      authorization_codes: Prisma.$OAuthAuthorizationCodePayload<ExtArgs>[]
       device_codes: Prisma.$OAuthDeviceCodePayload<ExtArgs>[]
       user_consents: Prisma.$OAuthUserConsentPayload<ExtArgs>[]
+      roles: Prisma.$ClientRolePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       client_id: string
-      client_secret: string | null
       client_secret_hash: string | null
       name: string
       description: string | null
@@ -5648,6 +5947,8 @@ export namespace Prisma {
       policy_uri: string | null
       tos_uri: string | null
       is_active: boolean
+      permissions: string[]
+      owner_id: string | null
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["oAuthClient"]>
@@ -6044,11 +6345,12 @@ export namespace Prisma {
    */
   export interface Prisma__OAuthClientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    authorization_codes<T extends OAuthClient$authorization_codesArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClient$authorization_codesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     access_tokens<T extends OAuthClient$access_tokensArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClient$access_tokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthAccessTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     refresh_tokens<T extends OAuthClient$refresh_tokensArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClient$refresh_tokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthRefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    authorization_codes<T extends OAuthClient$authorization_codesArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClient$authorization_codesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     device_codes<T extends OAuthClient$device_codesArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClient$device_codesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthDeviceCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     user_consents<T extends OAuthClient$user_consentsArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClient$user_consentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthUserConsentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    roles<T extends OAuthClient$rolesArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClient$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6080,7 +6382,6 @@ export namespace Prisma {
   interface OAuthClientFieldRefs {
     readonly id: FieldRef<"OAuthClient", 'String'>
     readonly client_id: FieldRef<"OAuthClient", 'String'>
-    readonly client_secret: FieldRef<"OAuthClient", 'String'>
     readonly client_secret_hash: FieldRef<"OAuthClient", 'String'>
     readonly name: FieldRef<"OAuthClient", 'String'>
     readonly description: FieldRef<"OAuthClient", 'String'>
@@ -6098,6 +6399,8 @@ export namespace Prisma {
     readonly policy_uri: FieldRef<"OAuthClient", 'String'>
     readonly tos_uri: FieldRef<"OAuthClient", 'String'>
     readonly is_active: FieldRef<"OAuthClient", 'Boolean'>
+    readonly permissions: FieldRef<"OAuthClient", 'String[]'>
+    readonly owner_id: FieldRef<"OAuthClient", 'String'>
     readonly created_at: FieldRef<"OAuthClient", 'DateTime'>
     readonly updated_at: FieldRef<"OAuthClient", 'DateTime'>
   }
@@ -6493,30 +6796,6 @@ export namespace Prisma {
   }
 
   /**
-   * OAuthClient.authorization_codes
-   */
-  export type OAuthClient$authorization_codesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
-    where?: OAuthAuthorizationCodeWhereInput
-    orderBy?: OAuthAuthorizationCodeOrderByWithRelationInput | OAuthAuthorizationCodeOrderByWithRelationInput[]
-    cursor?: OAuthAuthorizationCodeWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: OAuthAuthorizationCodeScalarFieldEnum | OAuthAuthorizationCodeScalarFieldEnum[]
-  }
-
-  /**
    * OAuthClient.access_tokens
    */
   export type OAuthClient$access_tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6562,6 +6841,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OAuthRefreshTokenScalarFieldEnum | OAuthRefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * OAuthClient.authorization_codes
+   */
+  export type OAuthClient$authorization_codesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAuthorizationCode
+     */
+    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuthAuthorizationCode
+     */
+    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
+    where?: OAuthAuthorizationCodeWhereInput
+    orderBy?: OAuthAuthorizationCodeOrderByWithRelationInput | OAuthAuthorizationCodeOrderByWithRelationInput[]
+    cursor?: OAuthAuthorizationCodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OAuthAuthorizationCodeScalarFieldEnum | OAuthAuthorizationCodeScalarFieldEnum[]
   }
 
   /**
@@ -6613,6 +6916,30 @@ export namespace Prisma {
   }
 
   /**
+   * OAuthClient.roles
+   */
+  export type OAuthClient$rolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleInclude<ExtArgs> | null
+    where?: ClientRoleWhereInput
+    orderBy?: ClientRoleOrderByWithRelationInput | ClientRoleOrderByWithRelationInput[]
+    cursor?: ClientRoleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientRoleScalarFieldEnum | ClientRoleScalarFieldEnum[]
+  }
+
+  /**
    * OAuthClient without action
    */
   export type OAuthClientDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6628,1200 +6955,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: OAuthClientInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model OAuthAuthorizationCode
-   */
-
-  export type AggregateOAuthAuthorizationCode = {
-    _count: OAuthAuthorizationCodeCountAggregateOutputType | null
-    _min: OAuthAuthorizationCodeMinAggregateOutputType | null
-    _max: OAuthAuthorizationCodeMaxAggregateOutputType | null
-  }
-
-  export type OAuthAuthorizationCodeMinAggregateOutputType = {
-    id: string | null
-    code: string | null
-    client_id: string | null
-    user_id: string | null
-    redirect_uri: string | null
-    scope: string | null
-    state: string | null
-    code_challenge: string | null
-    code_challenge_method: string | null
-    nonce: string | null
-    expires_at: Date | null
-    consumed_at: Date | null
-    created_at: Date | null
-  }
-
-  export type OAuthAuthorizationCodeMaxAggregateOutputType = {
-    id: string | null
-    code: string | null
-    client_id: string | null
-    user_id: string | null
-    redirect_uri: string | null
-    scope: string | null
-    state: string | null
-    code_challenge: string | null
-    code_challenge_method: string | null
-    nonce: string | null
-    expires_at: Date | null
-    consumed_at: Date | null
-    created_at: Date | null
-  }
-
-  export type OAuthAuthorizationCodeCountAggregateOutputType = {
-    id: number
-    code: number
-    client_id: number
-    user_id: number
-    redirect_uri: number
-    scope: number
-    state: number
-    code_challenge: number
-    code_challenge_method: number
-    nonce: number
-    expires_at: number
-    consumed_at: number
-    created_at: number
-    _all: number
-  }
-
-
-  export type OAuthAuthorizationCodeMinAggregateInputType = {
-    id?: true
-    code?: true
-    client_id?: true
-    user_id?: true
-    redirect_uri?: true
-    scope?: true
-    state?: true
-    code_challenge?: true
-    code_challenge_method?: true
-    nonce?: true
-    expires_at?: true
-    consumed_at?: true
-    created_at?: true
-  }
-
-  export type OAuthAuthorizationCodeMaxAggregateInputType = {
-    id?: true
-    code?: true
-    client_id?: true
-    user_id?: true
-    redirect_uri?: true
-    scope?: true
-    state?: true
-    code_challenge?: true
-    code_challenge_method?: true
-    nonce?: true
-    expires_at?: true
-    consumed_at?: true
-    created_at?: true
-  }
-
-  export type OAuthAuthorizationCodeCountAggregateInputType = {
-    id?: true
-    code?: true
-    client_id?: true
-    user_id?: true
-    redirect_uri?: true
-    scope?: true
-    state?: true
-    code_challenge?: true
-    code_challenge_method?: true
-    nonce?: true
-    expires_at?: true
-    consumed_at?: true
-    created_at?: true
-    _all?: true
-  }
-
-  export type OAuthAuthorizationCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which OAuthAuthorizationCode to aggregate.
-     */
-    where?: OAuthAuthorizationCodeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of OAuthAuthorizationCodes to fetch.
-     */
-    orderBy?: OAuthAuthorizationCodeOrderByWithRelationInput | OAuthAuthorizationCodeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: OAuthAuthorizationCodeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` OAuthAuthorizationCodes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` OAuthAuthorizationCodes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned OAuthAuthorizationCodes
-    **/
-    _count?: true | OAuthAuthorizationCodeCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: OAuthAuthorizationCodeMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: OAuthAuthorizationCodeMaxAggregateInputType
-  }
-
-  export type GetOAuthAuthorizationCodeAggregateType<T extends OAuthAuthorizationCodeAggregateArgs> = {
-        [P in keyof T & keyof AggregateOAuthAuthorizationCode]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateOAuthAuthorizationCode[P]>
-      : GetScalarType<T[P], AggregateOAuthAuthorizationCode[P]>
-  }
-
-
-
-
-  export type OAuthAuthorizationCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OAuthAuthorizationCodeWhereInput
-    orderBy?: OAuthAuthorizationCodeOrderByWithAggregationInput | OAuthAuthorizationCodeOrderByWithAggregationInput[]
-    by: OAuthAuthorizationCodeScalarFieldEnum[] | OAuthAuthorizationCodeScalarFieldEnum
-    having?: OAuthAuthorizationCodeScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: OAuthAuthorizationCodeCountAggregateInputType | true
-    _min?: OAuthAuthorizationCodeMinAggregateInputType
-    _max?: OAuthAuthorizationCodeMaxAggregateInputType
-  }
-
-  export type OAuthAuthorizationCodeGroupByOutputType = {
-    id: string
-    code: string
-    client_id: string
-    user_id: string | null
-    redirect_uri: string
-    scope: string
-    state: string | null
-    code_challenge: string | null
-    code_challenge_method: string | null
-    nonce: string | null
-    expires_at: Date
-    consumed_at: Date | null
-    created_at: Date
-    _count: OAuthAuthorizationCodeCountAggregateOutputType | null
-    _min: OAuthAuthorizationCodeMinAggregateOutputType | null
-    _max: OAuthAuthorizationCodeMaxAggregateOutputType | null
-  }
-
-  type GetOAuthAuthorizationCodeGroupByPayload<T extends OAuthAuthorizationCodeGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<OAuthAuthorizationCodeGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof OAuthAuthorizationCodeGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], OAuthAuthorizationCodeGroupByOutputType[P]>
-            : GetScalarType<T[P], OAuthAuthorizationCodeGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type OAuthAuthorizationCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    code?: boolean
-    client_id?: boolean
-    user_id?: boolean
-    redirect_uri?: boolean
-    scope?: boolean
-    state?: boolean
-    code_challenge?: boolean
-    code_challenge_method?: boolean
-    nonce?: boolean
-    expires_at?: boolean
-    consumed_at?: boolean
-    created_at?: boolean
-    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthAuthorizationCode$userArgs<ExtArgs>
-  }, ExtArgs["result"]["oAuthAuthorizationCode"]>
-
-  export type OAuthAuthorizationCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    code?: boolean
-    client_id?: boolean
-    user_id?: boolean
-    redirect_uri?: boolean
-    scope?: boolean
-    state?: boolean
-    code_challenge?: boolean
-    code_challenge_method?: boolean
-    nonce?: boolean
-    expires_at?: boolean
-    consumed_at?: boolean
-    created_at?: boolean
-    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthAuthorizationCode$userArgs<ExtArgs>
-  }, ExtArgs["result"]["oAuthAuthorizationCode"]>
-
-  export type OAuthAuthorizationCodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    code?: boolean
-    client_id?: boolean
-    user_id?: boolean
-    redirect_uri?: boolean
-    scope?: boolean
-    state?: boolean
-    code_challenge?: boolean
-    code_challenge_method?: boolean
-    nonce?: boolean
-    expires_at?: boolean
-    consumed_at?: boolean
-    created_at?: boolean
-    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthAuthorizationCode$userArgs<ExtArgs>
-  }, ExtArgs["result"]["oAuthAuthorizationCode"]>
-
-  export type OAuthAuthorizationCodeSelectScalar = {
-    id?: boolean
-    code?: boolean
-    client_id?: boolean
-    user_id?: boolean
-    redirect_uri?: boolean
-    scope?: boolean
-    state?: boolean
-    code_challenge?: boolean
-    code_challenge_method?: boolean
-    nonce?: boolean
-    expires_at?: boolean
-    consumed_at?: boolean
-    created_at?: boolean
-  }
-
-  export type OAuthAuthorizationCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "client_id" | "user_id" | "redirect_uri" | "scope" | "state" | "code_challenge" | "code_challenge_method" | "nonce" | "expires_at" | "consumed_at" | "created_at", ExtArgs["result"]["oAuthAuthorizationCode"]>
-  export type OAuthAuthorizationCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthAuthorizationCode$userArgs<ExtArgs>
-  }
-  export type OAuthAuthorizationCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthAuthorizationCode$userArgs<ExtArgs>
-  }
-  export type OAuthAuthorizationCodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthAuthorizationCode$userArgs<ExtArgs>
-  }
-
-  export type $OAuthAuthorizationCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "OAuthAuthorizationCode"
-    objects: {
-      client: Prisma.$OAuthClientPayload<ExtArgs>
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      code: string
-      client_id: string
-      user_id: string | null
-      redirect_uri: string
-      scope: string
-      state: string | null
-      code_challenge: string | null
-      code_challenge_method: string | null
-      nonce: string | null
-      expires_at: Date
-      consumed_at: Date | null
-      created_at: Date
-    }, ExtArgs["result"]["oAuthAuthorizationCode"]>
-    composites: {}
-  }
-
-  type OAuthAuthorizationCodeGetPayload<S extends boolean | null | undefined | OAuthAuthorizationCodeDefaultArgs> = $Result.GetResult<Prisma.$OAuthAuthorizationCodePayload, S>
-
-  type OAuthAuthorizationCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<OAuthAuthorizationCodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: OAuthAuthorizationCodeCountAggregateInputType | true
-    }
-
-  export interface OAuthAuthorizationCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OAuthAuthorizationCode'], meta: { name: 'OAuthAuthorizationCode' } }
-    /**
-     * Find zero or one OAuthAuthorizationCode that matches the filter.
-     * @param {OAuthAuthorizationCodeFindUniqueArgs} args - Arguments to find a OAuthAuthorizationCode
-     * @example
-     * // Get one OAuthAuthorizationCode
-     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends OAuthAuthorizationCodeFindUniqueArgs>(args: SelectSubset<T, OAuthAuthorizationCodeFindUniqueArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one OAuthAuthorizationCode that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {OAuthAuthorizationCodeFindUniqueOrThrowArgs} args - Arguments to find a OAuthAuthorizationCode
-     * @example
-     * // Get one OAuthAuthorizationCode
-     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends OAuthAuthorizationCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, OAuthAuthorizationCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first OAuthAuthorizationCode that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthAuthorizationCodeFindFirstArgs} args - Arguments to find a OAuthAuthorizationCode
-     * @example
-     * // Get one OAuthAuthorizationCode
-     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends OAuthAuthorizationCodeFindFirstArgs>(args?: SelectSubset<T, OAuthAuthorizationCodeFindFirstArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first OAuthAuthorizationCode that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthAuthorizationCodeFindFirstOrThrowArgs} args - Arguments to find a OAuthAuthorizationCode
-     * @example
-     * // Get one OAuthAuthorizationCode
-     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends OAuthAuthorizationCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, OAuthAuthorizationCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more OAuthAuthorizationCodes that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthAuthorizationCodeFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all OAuthAuthorizationCodes
-     * const oAuthAuthorizationCodes = await prisma.oAuthAuthorizationCode.findMany()
-     * 
-     * // Get first 10 OAuthAuthorizationCodes
-     * const oAuthAuthorizationCodes = await prisma.oAuthAuthorizationCode.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const oAuthAuthorizationCodeWithIdOnly = await prisma.oAuthAuthorizationCode.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends OAuthAuthorizationCodeFindManyArgs>(args?: SelectSubset<T, OAuthAuthorizationCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a OAuthAuthorizationCode.
-     * @param {OAuthAuthorizationCodeCreateArgs} args - Arguments to create a OAuthAuthorizationCode.
-     * @example
-     * // Create one OAuthAuthorizationCode
-     * const OAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.create({
-     *   data: {
-     *     // ... data to create a OAuthAuthorizationCode
-     *   }
-     * })
-     * 
-     */
-    create<T extends OAuthAuthorizationCodeCreateArgs>(args: SelectSubset<T, OAuthAuthorizationCodeCreateArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many OAuthAuthorizationCodes.
-     * @param {OAuthAuthorizationCodeCreateManyArgs} args - Arguments to create many OAuthAuthorizationCodes.
-     * @example
-     * // Create many OAuthAuthorizationCodes
-     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends OAuthAuthorizationCodeCreateManyArgs>(args?: SelectSubset<T, OAuthAuthorizationCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many OAuthAuthorizationCodes and returns the data saved in the database.
-     * @param {OAuthAuthorizationCodeCreateManyAndReturnArgs} args - Arguments to create many OAuthAuthorizationCodes.
-     * @example
-     * // Create many OAuthAuthorizationCodes
-     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many OAuthAuthorizationCodes and only return the `id`
-     * const oAuthAuthorizationCodeWithIdOnly = await prisma.oAuthAuthorizationCode.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends OAuthAuthorizationCodeCreateManyAndReturnArgs>(args?: SelectSubset<T, OAuthAuthorizationCodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a OAuthAuthorizationCode.
-     * @param {OAuthAuthorizationCodeDeleteArgs} args - Arguments to delete one OAuthAuthorizationCode.
-     * @example
-     * // Delete one OAuthAuthorizationCode
-     * const OAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.delete({
-     *   where: {
-     *     // ... filter to delete one OAuthAuthorizationCode
-     *   }
-     * })
-     * 
-     */
-    delete<T extends OAuthAuthorizationCodeDeleteArgs>(args: SelectSubset<T, OAuthAuthorizationCodeDeleteArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one OAuthAuthorizationCode.
-     * @param {OAuthAuthorizationCodeUpdateArgs} args - Arguments to update one OAuthAuthorizationCode.
-     * @example
-     * // Update one OAuthAuthorizationCode
-     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends OAuthAuthorizationCodeUpdateArgs>(args: SelectSubset<T, OAuthAuthorizationCodeUpdateArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more OAuthAuthorizationCodes.
-     * @param {OAuthAuthorizationCodeDeleteManyArgs} args - Arguments to filter OAuthAuthorizationCodes to delete.
-     * @example
-     * // Delete a few OAuthAuthorizationCodes
-     * const { count } = await prisma.oAuthAuthorizationCode.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends OAuthAuthorizationCodeDeleteManyArgs>(args?: SelectSubset<T, OAuthAuthorizationCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more OAuthAuthorizationCodes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthAuthorizationCodeUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many OAuthAuthorizationCodes
-     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends OAuthAuthorizationCodeUpdateManyArgs>(args: SelectSubset<T, OAuthAuthorizationCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more OAuthAuthorizationCodes and returns the data updated in the database.
-     * @param {OAuthAuthorizationCodeUpdateManyAndReturnArgs} args - Arguments to update many OAuthAuthorizationCodes.
-     * @example
-     * // Update many OAuthAuthorizationCodes
-     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more OAuthAuthorizationCodes and only return the `id`
-     * const oAuthAuthorizationCodeWithIdOnly = await prisma.oAuthAuthorizationCode.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends OAuthAuthorizationCodeUpdateManyAndReturnArgs>(args: SelectSubset<T, OAuthAuthorizationCodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one OAuthAuthorizationCode.
-     * @param {OAuthAuthorizationCodeUpsertArgs} args - Arguments to update or create a OAuthAuthorizationCode.
-     * @example
-     * // Update or create a OAuthAuthorizationCode
-     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.upsert({
-     *   create: {
-     *     // ... data to create a OAuthAuthorizationCode
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the OAuthAuthorizationCode we want to update
-     *   }
-     * })
-     */
-    upsert<T extends OAuthAuthorizationCodeUpsertArgs>(args: SelectSubset<T, OAuthAuthorizationCodeUpsertArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of OAuthAuthorizationCodes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthAuthorizationCodeCountArgs} args - Arguments to filter OAuthAuthorizationCodes to count.
-     * @example
-     * // Count the number of OAuthAuthorizationCodes
-     * const count = await prisma.oAuthAuthorizationCode.count({
-     *   where: {
-     *     // ... the filter for the OAuthAuthorizationCodes we want to count
-     *   }
-     * })
-    **/
-    count<T extends OAuthAuthorizationCodeCountArgs>(
-      args?: Subset<T, OAuthAuthorizationCodeCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], OAuthAuthorizationCodeCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a OAuthAuthorizationCode.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthAuthorizationCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends OAuthAuthorizationCodeAggregateArgs>(args: Subset<T, OAuthAuthorizationCodeAggregateArgs>): Prisma.PrismaPromise<GetOAuthAuthorizationCodeAggregateType<T>>
-
-    /**
-     * Group by OAuthAuthorizationCode.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OAuthAuthorizationCodeGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends OAuthAuthorizationCodeGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: OAuthAuthorizationCodeGroupByArgs['orderBy'] }
-        : { orderBy?: OAuthAuthorizationCodeGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, OAuthAuthorizationCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOAuthAuthorizationCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the OAuthAuthorizationCode model
-   */
-  readonly fields: OAuthAuthorizationCodeFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for OAuthAuthorizationCode.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__OAuthAuthorizationCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    client<T extends OAuthClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClientDefaultArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    user<T extends OAuthAuthorizationCode$userArgs<ExtArgs> = {}>(args?: Subset<T, OAuthAuthorizationCode$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the OAuthAuthorizationCode model
-   */
-  interface OAuthAuthorizationCodeFieldRefs {
-    readonly id: FieldRef<"OAuthAuthorizationCode", 'String'>
-    readonly code: FieldRef<"OAuthAuthorizationCode", 'String'>
-    readonly client_id: FieldRef<"OAuthAuthorizationCode", 'String'>
-    readonly user_id: FieldRef<"OAuthAuthorizationCode", 'String'>
-    readonly redirect_uri: FieldRef<"OAuthAuthorizationCode", 'String'>
-    readonly scope: FieldRef<"OAuthAuthorizationCode", 'String'>
-    readonly state: FieldRef<"OAuthAuthorizationCode", 'String'>
-    readonly code_challenge: FieldRef<"OAuthAuthorizationCode", 'String'>
-    readonly code_challenge_method: FieldRef<"OAuthAuthorizationCode", 'String'>
-    readonly nonce: FieldRef<"OAuthAuthorizationCode", 'String'>
-    readonly expires_at: FieldRef<"OAuthAuthorizationCode", 'DateTime'>
-    readonly consumed_at: FieldRef<"OAuthAuthorizationCode", 'DateTime'>
-    readonly created_at: FieldRef<"OAuthAuthorizationCode", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * OAuthAuthorizationCode findUnique
-   */
-  export type OAuthAuthorizationCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
-    /**
-     * Filter, which OAuthAuthorizationCode to fetch.
-     */
-    where: OAuthAuthorizationCodeWhereUniqueInput
-  }
-
-  /**
-   * OAuthAuthorizationCode findUniqueOrThrow
-   */
-  export type OAuthAuthorizationCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
-    /**
-     * Filter, which OAuthAuthorizationCode to fetch.
-     */
-    where: OAuthAuthorizationCodeWhereUniqueInput
-  }
-
-  /**
-   * OAuthAuthorizationCode findFirst
-   */
-  export type OAuthAuthorizationCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
-    /**
-     * Filter, which OAuthAuthorizationCode to fetch.
-     */
-    where?: OAuthAuthorizationCodeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of OAuthAuthorizationCodes to fetch.
-     */
-    orderBy?: OAuthAuthorizationCodeOrderByWithRelationInput | OAuthAuthorizationCodeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for OAuthAuthorizationCodes.
-     */
-    cursor?: OAuthAuthorizationCodeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` OAuthAuthorizationCodes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` OAuthAuthorizationCodes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of OAuthAuthorizationCodes.
-     */
-    distinct?: OAuthAuthorizationCodeScalarFieldEnum | OAuthAuthorizationCodeScalarFieldEnum[]
-  }
-
-  /**
-   * OAuthAuthorizationCode findFirstOrThrow
-   */
-  export type OAuthAuthorizationCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
-    /**
-     * Filter, which OAuthAuthorizationCode to fetch.
-     */
-    where?: OAuthAuthorizationCodeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of OAuthAuthorizationCodes to fetch.
-     */
-    orderBy?: OAuthAuthorizationCodeOrderByWithRelationInput | OAuthAuthorizationCodeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for OAuthAuthorizationCodes.
-     */
-    cursor?: OAuthAuthorizationCodeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` OAuthAuthorizationCodes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` OAuthAuthorizationCodes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of OAuthAuthorizationCodes.
-     */
-    distinct?: OAuthAuthorizationCodeScalarFieldEnum | OAuthAuthorizationCodeScalarFieldEnum[]
-  }
-
-  /**
-   * OAuthAuthorizationCode findMany
-   */
-  export type OAuthAuthorizationCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
-    /**
-     * Filter, which OAuthAuthorizationCodes to fetch.
-     */
-    where?: OAuthAuthorizationCodeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of OAuthAuthorizationCodes to fetch.
-     */
-    orderBy?: OAuthAuthorizationCodeOrderByWithRelationInput | OAuthAuthorizationCodeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing OAuthAuthorizationCodes.
-     */
-    cursor?: OAuthAuthorizationCodeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` OAuthAuthorizationCodes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` OAuthAuthorizationCodes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of OAuthAuthorizationCodes.
-     */
-    distinct?: OAuthAuthorizationCodeScalarFieldEnum | OAuthAuthorizationCodeScalarFieldEnum[]
-  }
-
-  /**
-   * OAuthAuthorizationCode create
-   */
-  export type OAuthAuthorizationCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
-    /**
-     * The data needed to create a OAuthAuthorizationCode.
-     */
-    data: XOR<OAuthAuthorizationCodeCreateInput, OAuthAuthorizationCodeUncheckedCreateInput>
-  }
-
-  /**
-   * OAuthAuthorizationCode createMany
-   */
-  export type OAuthAuthorizationCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many OAuthAuthorizationCodes.
-     */
-    data: OAuthAuthorizationCodeCreateManyInput | OAuthAuthorizationCodeCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * OAuthAuthorizationCode createManyAndReturn
-   */
-  export type OAuthAuthorizationCodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * The data used to create many OAuthAuthorizationCodes.
-     */
-    data: OAuthAuthorizationCodeCreateManyInput | OAuthAuthorizationCodeCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * OAuthAuthorizationCode update
-   */
-  export type OAuthAuthorizationCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
-    /**
-     * The data needed to update a OAuthAuthorizationCode.
-     */
-    data: XOR<OAuthAuthorizationCodeUpdateInput, OAuthAuthorizationCodeUncheckedUpdateInput>
-    /**
-     * Choose, which OAuthAuthorizationCode to update.
-     */
-    where: OAuthAuthorizationCodeWhereUniqueInput
-  }
-
-  /**
-   * OAuthAuthorizationCode updateMany
-   */
-  export type OAuthAuthorizationCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update OAuthAuthorizationCodes.
-     */
-    data: XOR<OAuthAuthorizationCodeUpdateManyMutationInput, OAuthAuthorizationCodeUncheckedUpdateManyInput>
-    /**
-     * Filter which OAuthAuthorizationCodes to update
-     */
-    where?: OAuthAuthorizationCodeWhereInput
-    /**
-     * Limit how many OAuthAuthorizationCodes to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * OAuthAuthorizationCode updateManyAndReturn
-   */
-  export type OAuthAuthorizationCodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * The data used to update OAuthAuthorizationCodes.
-     */
-    data: XOR<OAuthAuthorizationCodeUpdateManyMutationInput, OAuthAuthorizationCodeUncheckedUpdateManyInput>
-    /**
-     * Filter which OAuthAuthorizationCodes to update
-     */
-    where?: OAuthAuthorizationCodeWhereInput
-    /**
-     * Limit how many OAuthAuthorizationCodes to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * OAuthAuthorizationCode upsert
-   */
-  export type OAuthAuthorizationCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
-    /**
-     * The filter to search for the OAuthAuthorizationCode to update in case it exists.
-     */
-    where: OAuthAuthorizationCodeWhereUniqueInput
-    /**
-     * In case the OAuthAuthorizationCode found by the `where` argument doesn't exist, create a new OAuthAuthorizationCode with this data.
-     */
-    create: XOR<OAuthAuthorizationCodeCreateInput, OAuthAuthorizationCodeUncheckedCreateInput>
-    /**
-     * In case the OAuthAuthorizationCode was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<OAuthAuthorizationCodeUpdateInput, OAuthAuthorizationCodeUncheckedUpdateInput>
-  }
-
-  /**
-   * OAuthAuthorizationCode delete
-   */
-  export type OAuthAuthorizationCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
-    /**
-     * Filter which OAuthAuthorizationCode to delete.
-     */
-    where: OAuthAuthorizationCodeWhereUniqueInput
-  }
-
-  /**
-   * OAuthAuthorizationCode deleteMany
-   */
-  export type OAuthAuthorizationCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which OAuthAuthorizationCodes to delete
-     */
-    where?: OAuthAuthorizationCodeWhereInput
-    /**
-     * Limit how many OAuthAuthorizationCodes to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * OAuthAuthorizationCode.user
-   */
-  export type OAuthAuthorizationCode$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
-   * OAuthAuthorizationCode without action
-   */
-  export type OAuthAuthorizationCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OAuthAuthorizationCode
-     */
-    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OAuthAuthorizationCode
-     */
-    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
   }
 
 
@@ -7843,8 +6976,8 @@ export namespace Prisma {
     scope: string | null
     token_type: string | null
     expires_at: Date | null
-    revoked_at: Date | null
     created_at: Date | null
+    revoked_at: Date | null
   }
 
   export type OAuthAccessTokenMaxAggregateOutputType = {
@@ -7855,8 +6988,8 @@ export namespace Prisma {
     scope: string | null
     token_type: string | null
     expires_at: Date | null
-    revoked_at: Date | null
     created_at: Date | null
+    revoked_at: Date | null
   }
 
   export type OAuthAccessTokenCountAggregateOutputType = {
@@ -7865,10 +6998,12 @@ export namespace Prisma {
     client_id: number
     user_id: number
     scope: number
+    permissions: number
+    roles: number
     token_type: number
     expires_at: number
-    revoked_at: number
     created_at: number
+    revoked_at: number
     _all: number
   }
 
@@ -7881,8 +7016,8 @@ export namespace Prisma {
     scope?: true
     token_type?: true
     expires_at?: true
-    revoked_at?: true
     created_at?: true
+    revoked_at?: true
   }
 
   export type OAuthAccessTokenMaxAggregateInputType = {
@@ -7893,8 +7028,8 @@ export namespace Prisma {
     scope?: true
     token_type?: true
     expires_at?: true
-    revoked_at?: true
     created_at?: true
+    revoked_at?: true
   }
 
   export type OAuthAccessTokenCountAggregateInputType = {
@@ -7903,10 +7038,12 @@ export namespace Prisma {
     client_id?: true
     user_id?: true
     scope?: true
+    permissions?: true
+    roles?: true
     token_type?: true
     expires_at?: true
-    revoked_at?: true
     created_at?: true
+    revoked_at?: true
     _all?: true
   }
 
@@ -7987,11 +7124,13 @@ export namespace Prisma {
     token: string
     client_id: string
     user_id: string | null
-    scope: string
+    scope: string | null
+    permissions: string[]
+    roles: string[]
     token_type: string
     expires_at: Date
-    revoked_at: Date | null
     created_at: Date
+    revoked_at: Date | null
     _count: OAuthAccessTokenCountAggregateOutputType | null
     _min: OAuthAccessTokenMinAggregateOutputType | null
     _max: OAuthAccessTokenMaxAggregateOutputType | null
@@ -8017,12 +7156,15 @@ export namespace Prisma {
     client_id?: boolean
     user_id?: boolean
     scope?: boolean
+    permissions?: boolean
+    roles?: boolean
     token_type?: boolean
     expires_at?: boolean
-    revoked_at?: boolean
     created_at?: boolean
+    revoked_at?: boolean
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthAccessToken$userArgs<ExtArgs>
+    refresh_tokens?: boolean | OAuthAccessToken$refresh_tokensArgs<ExtArgs>
+    _count?: boolean | OAuthAccessTokenCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["oAuthAccessToken"]>
 
   export type OAuthAccessTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8031,12 +7173,13 @@ export namespace Prisma {
     client_id?: boolean
     user_id?: boolean
     scope?: boolean
+    permissions?: boolean
+    roles?: boolean
     token_type?: boolean
     expires_at?: boolean
-    revoked_at?: boolean
     created_at?: boolean
+    revoked_at?: boolean
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthAccessToken$userArgs<ExtArgs>
   }, ExtArgs["result"]["oAuthAccessToken"]>
 
   export type OAuthAccessTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8045,12 +7188,13 @@ export namespace Prisma {
     client_id?: boolean
     user_id?: boolean
     scope?: boolean
+    permissions?: boolean
+    roles?: boolean
     token_type?: boolean
     expires_at?: boolean
-    revoked_at?: boolean
     created_at?: boolean
+    revoked_at?: boolean
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthAccessToken$userArgs<ExtArgs>
   }, ExtArgs["result"]["oAuthAccessToken"]>
 
   export type OAuthAccessTokenSelectScalar = {
@@ -8059,42 +7203,45 @@ export namespace Prisma {
     client_id?: boolean
     user_id?: boolean
     scope?: boolean
+    permissions?: boolean
+    roles?: boolean
     token_type?: boolean
     expires_at?: boolean
-    revoked_at?: boolean
     created_at?: boolean
+    revoked_at?: boolean
   }
 
-  export type OAuthAccessTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "client_id" | "user_id" | "scope" | "token_type" | "expires_at" | "revoked_at" | "created_at", ExtArgs["result"]["oAuthAccessToken"]>
+  export type OAuthAccessTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "client_id" | "user_id" | "scope" | "permissions" | "roles" | "token_type" | "expires_at" | "created_at" | "revoked_at", ExtArgs["result"]["oAuthAccessToken"]>
   export type OAuthAccessTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthAccessToken$userArgs<ExtArgs>
+    refresh_tokens?: boolean | OAuthAccessToken$refresh_tokensArgs<ExtArgs>
+    _count?: boolean | OAuthAccessTokenCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OAuthAccessTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthAccessToken$userArgs<ExtArgs>
   }
   export type OAuthAccessTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthAccessToken$userArgs<ExtArgs>
   }
 
   export type $OAuthAccessTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OAuthAccessToken"
     objects: {
       client: Prisma.$OAuthClientPayload<ExtArgs>
-      user: Prisma.$UserPayload<ExtArgs> | null
+      refresh_tokens: Prisma.$OAuthRefreshTokenPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       token: string
       client_id: string
       user_id: string | null
-      scope: string
+      scope: string | null
+      permissions: string[]
+      roles: string[]
       token_type: string
       expires_at: Date
-      revoked_at: Date | null
       created_at: Date
+      revoked_at: Date | null
     }, ExtArgs["result"]["oAuthAccessToken"]>
     composites: {}
   }
@@ -8490,7 +7637,7 @@ export namespace Prisma {
   export interface Prisma__OAuthAccessTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     client<T extends OAuthClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClientDefaultArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    user<T extends OAuthAccessToken$userArgs<ExtArgs> = {}>(args?: Subset<T, OAuthAccessToken$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    refresh_tokens<T extends OAuthAccessToken$refresh_tokensArgs<ExtArgs> = {}>(args?: Subset<T, OAuthAccessToken$refresh_tokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthRefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8525,10 +7672,12 @@ export namespace Prisma {
     readonly client_id: FieldRef<"OAuthAccessToken", 'String'>
     readonly user_id: FieldRef<"OAuthAccessToken", 'String'>
     readonly scope: FieldRef<"OAuthAccessToken", 'String'>
+    readonly permissions: FieldRef<"OAuthAccessToken", 'String[]'>
+    readonly roles: FieldRef<"OAuthAccessToken", 'String[]'>
     readonly token_type: FieldRef<"OAuthAccessToken", 'String'>
     readonly expires_at: FieldRef<"OAuthAccessToken", 'DateTime'>
-    readonly revoked_at: FieldRef<"OAuthAccessToken", 'DateTime'>
     readonly created_at: FieldRef<"OAuthAccessToken", 'DateTime'>
+    readonly revoked_at: FieldRef<"OAuthAccessToken", 'DateTime'>
   }
     
 
@@ -8930,22 +8079,27 @@ export namespace Prisma {
   }
 
   /**
-   * OAuthAccessToken.user
+   * OAuthAccessToken.refresh_tokens
    */
-  export type OAuthAccessToken$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OAuthAccessToken$refresh_tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the OAuthRefreshToken
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: OAuthRefreshTokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the OAuthRefreshToken
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: OAuthRefreshTokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
+    include?: OAuthRefreshTokenInclude<ExtArgs> | null
+    where?: OAuthRefreshTokenWhereInput
+    orderBy?: OAuthRefreshTokenOrderByWithRelationInput | OAuthRefreshTokenOrderByWithRelationInput[]
+    cursor?: OAuthRefreshTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OAuthRefreshTokenScalarFieldEnum | OAuthRefreshTokenScalarFieldEnum[]
   }
 
   /**
@@ -8985,8 +8139,8 @@ export namespace Prisma {
     user_id: string | null
     scope: string | null
     expires_at: Date | null
-    revoked_at: Date | null
     created_at: Date | null
+    revoked_at: Date | null
   }
 
   export type OAuthRefreshTokenMaxAggregateOutputType = {
@@ -8997,8 +8151,8 @@ export namespace Prisma {
     user_id: string | null
     scope: string | null
     expires_at: Date | null
-    revoked_at: Date | null
     created_at: Date | null
+    revoked_at: Date | null
   }
 
   export type OAuthRefreshTokenCountAggregateOutputType = {
@@ -9009,8 +8163,8 @@ export namespace Prisma {
     user_id: number
     scope: number
     expires_at: number
-    revoked_at: number
     created_at: number
+    revoked_at: number
     _all: number
   }
 
@@ -9023,8 +8177,8 @@ export namespace Prisma {
     user_id?: true
     scope?: true
     expires_at?: true
-    revoked_at?: true
     created_at?: true
+    revoked_at?: true
   }
 
   export type OAuthRefreshTokenMaxAggregateInputType = {
@@ -9035,8 +8189,8 @@ export namespace Prisma {
     user_id?: true
     scope?: true
     expires_at?: true
-    revoked_at?: true
     created_at?: true
+    revoked_at?: true
   }
 
   export type OAuthRefreshTokenCountAggregateInputType = {
@@ -9047,8 +8201,8 @@ export namespace Prisma {
     user_id?: true
     scope?: true
     expires_at?: true
-    revoked_at?: true
     created_at?: true
+    revoked_at?: true
     _all?: true
   }
 
@@ -9130,10 +8284,10 @@ export namespace Prisma {
     access_token_id: string
     client_id: string
     user_id: string | null
-    scope: string
+    scope: string | null
     expires_at: Date
-    revoked_at: Date | null
     created_at: Date
+    revoked_at: Date | null
     _count: OAuthRefreshTokenCountAggregateOutputType | null
     _min: OAuthRefreshTokenMinAggregateOutputType | null
     _max: OAuthRefreshTokenMaxAggregateOutputType | null
@@ -9161,10 +8315,10 @@ export namespace Prisma {
     user_id?: boolean
     scope?: boolean
     expires_at?: boolean
-    revoked_at?: boolean
     created_at?: boolean
+    revoked_at?: boolean
+    access_token?: boolean | OAuthAccessTokenDefaultArgs<ExtArgs>
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthRefreshToken$userArgs<ExtArgs>
   }, ExtArgs["result"]["oAuthRefreshToken"]>
 
   export type OAuthRefreshTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -9175,10 +8329,10 @@ export namespace Prisma {
     user_id?: boolean
     scope?: boolean
     expires_at?: boolean
-    revoked_at?: boolean
     created_at?: boolean
+    revoked_at?: boolean
+    access_token?: boolean | OAuthAccessTokenDefaultArgs<ExtArgs>
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthRefreshToken$userArgs<ExtArgs>
   }, ExtArgs["result"]["oAuthRefreshToken"]>
 
   export type OAuthRefreshTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -9189,10 +8343,10 @@ export namespace Prisma {
     user_id?: boolean
     scope?: boolean
     expires_at?: boolean
-    revoked_at?: boolean
     created_at?: boolean
+    revoked_at?: boolean
+    access_token?: boolean | OAuthAccessTokenDefaultArgs<ExtArgs>
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthRefreshToken$userArgs<ExtArgs>
   }, ExtArgs["result"]["oAuthRefreshToken"]>
 
   export type OAuthRefreshTokenSelectScalar = {
@@ -9203,29 +8357,29 @@ export namespace Prisma {
     user_id?: boolean
     scope?: boolean
     expires_at?: boolean
-    revoked_at?: boolean
     created_at?: boolean
+    revoked_at?: boolean
   }
 
-  export type OAuthRefreshTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "access_token_id" | "client_id" | "user_id" | "scope" | "expires_at" | "revoked_at" | "created_at", ExtArgs["result"]["oAuthRefreshToken"]>
+  export type OAuthRefreshTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "access_token_id" | "client_id" | "user_id" | "scope" | "expires_at" | "created_at" | "revoked_at", ExtArgs["result"]["oAuthRefreshToken"]>
   export type OAuthRefreshTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    access_token?: boolean | OAuthAccessTokenDefaultArgs<ExtArgs>
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthRefreshToken$userArgs<ExtArgs>
   }
   export type OAuthRefreshTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    access_token?: boolean | OAuthAccessTokenDefaultArgs<ExtArgs>
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthRefreshToken$userArgs<ExtArgs>
   }
   export type OAuthRefreshTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    access_token?: boolean | OAuthAccessTokenDefaultArgs<ExtArgs>
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthRefreshToken$userArgs<ExtArgs>
   }
 
   export type $OAuthRefreshTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OAuthRefreshToken"
     objects: {
+      access_token: Prisma.$OAuthAccessTokenPayload<ExtArgs>
       client: Prisma.$OAuthClientPayload<ExtArgs>
-      user: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9233,10 +8387,10 @@ export namespace Prisma {
       access_token_id: string
       client_id: string
       user_id: string | null
-      scope: string
+      scope: string | null
       expires_at: Date
-      revoked_at: Date | null
       created_at: Date
+      revoked_at: Date | null
     }, ExtArgs["result"]["oAuthRefreshToken"]>
     composites: {}
   }
@@ -9631,8 +8785,8 @@ export namespace Prisma {
    */
   export interface Prisma__OAuthRefreshTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    access_token<T extends OAuthAccessTokenDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OAuthAccessTokenDefaultArgs<ExtArgs>>): Prisma__OAuthAccessTokenClient<$Result.GetResult<Prisma.$OAuthAccessTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     client<T extends OAuthClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClientDefaultArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    user<T extends OAuthRefreshToken$userArgs<ExtArgs> = {}>(args?: Subset<T, OAuthRefreshToken$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9669,8 +8823,8 @@ export namespace Prisma {
     readonly user_id: FieldRef<"OAuthRefreshToken", 'String'>
     readonly scope: FieldRef<"OAuthRefreshToken", 'String'>
     readonly expires_at: FieldRef<"OAuthRefreshToken", 'DateTime'>
-    readonly revoked_at: FieldRef<"OAuthRefreshToken", 'DateTime'>
     readonly created_at: FieldRef<"OAuthRefreshToken", 'DateTime'>
+    readonly revoked_at: FieldRef<"OAuthRefreshToken", 'DateTime'>
   }
     
 
@@ -10072,25 +9226,6 @@ export namespace Prisma {
   }
 
   /**
-   * OAuthRefreshToken.user
-   */
-  export type OAuthRefreshToken$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
    * OAuthRefreshToken without action
    */
   export type OAuthRefreshTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10106,6 +9241,1186 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: OAuthRefreshTokenInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model OAuthAuthorizationCode
+   */
+
+  export type AggregateOAuthAuthorizationCode = {
+    _count: OAuthAuthorizationCodeCountAggregateOutputType | null
+    _min: OAuthAuthorizationCodeMinAggregateOutputType | null
+    _max: OAuthAuthorizationCodeMaxAggregateOutputType | null
+  }
+
+  export type OAuthAuthorizationCodeMinAggregateOutputType = {
+    id: string | null
+    code: string | null
+    client_id: string | null
+    user_id: string | null
+    scope: string | null
+    redirect_uri: string | null
+    state: string | null
+    code_challenge: string | null
+    code_challenge_method: string | null
+    nonce: string | null
+    consumed_at: Date | null
+    expires_at: Date | null
+    created_at: Date | null
+    used_at: Date | null
+  }
+
+  export type OAuthAuthorizationCodeMaxAggregateOutputType = {
+    id: string | null
+    code: string | null
+    client_id: string | null
+    user_id: string | null
+    scope: string | null
+    redirect_uri: string | null
+    state: string | null
+    code_challenge: string | null
+    code_challenge_method: string | null
+    nonce: string | null
+    consumed_at: Date | null
+    expires_at: Date | null
+    created_at: Date | null
+    used_at: Date | null
+  }
+
+  export type OAuthAuthorizationCodeCountAggregateOutputType = {
+    id: number
+    code: number
+    client_id: number
+    user_id: number
+    scope: number
+    redirect_uri: number
+    state: number
+    code_challenge: number
+    code_challenge_method: number
+    nonce: number
+    consumed_at: number
+    expires_at: number
+    created_at: number
+    used_at: number
+    _all: number
+  }
+
+
+  export type OAuthAuthorizationCodeMinAggregateInputType = {
+    id?: true
+    code?: true
+    client_id?: true
+    user_id?: true
+    scope?: true
+    redirect_uri?: true
+    state?: true
+    code_challenge?: true
+    code_challenge_method?: true
+    nonce?: true
+    consumed_at?: true
+    expires_at?: true
+    created_at?: true
+    used_at?: true
+  }
+
+  export type OAuthAuthorizationCodeMaxAggregateInputType = {
+    id?: true
+    code?: true
+    client_id?: true
+    user_id?: true
+    scope?: true
+    redirect_uri?: true
+    state?: true
+    code_challenge?: true
+    code_challenge_method?: true
+    nonce?: true
+    consumed_at?: true
+    expires_at?: true
+    created_at?: true
+    used_at?: true
+  }
+
+  export type OAuthAuthorizationCodeCountAggregateInputType = {
+    id?: true
+    code?: true
+    client_id?: true
+    user_id?: true
+    scope?: true
+    redirect_uri?: true
+    state?: true
+    code_challenge?: true
+    code_challenge_method?: true
+    nonce?: true
+    consumed_at?: true
+    expires_at?: true
+    created_at?: true
+    used_at?: true
+    _all?: true
+  }
+
+  export type OAuthAuthorizationCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OAuthAuthorizationCode to aggregate.
+     */
+    where?: OAuthAuthorizationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OAuthAuthorizationCodes to fetch.
+     */
+    orderBy?: OAuthAuthorizationCodeOrderByWithRelationInput | OAuthAuthorizationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OAuthAuthorizationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OAuthAuthorizationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OAuthAuthorizationCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OAuthAuthorizationCodes
+    **/
+    _count?: true | OAuthAuthorizationCodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OAuthAuthorizationCodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OAuthAuthorizationCodeMaxAggregateInputType
+  }
+
+  export type GetOAuthAuthorizationCodeAggregateType<T extends OAuthAuthorizationCodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateOAuthAuthorizationCode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOAuthAuthorizationCode[P]>
+      : GetScalarType<T[P], AggregateOAuthAuthorizationCode[P]>
+  }
+
+
+
+
+  export type OAuthAuthorizationCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OAuthAuthorizationCodeWhereInput
+    orderBy?: OAuthAuthorizationCodeOrderByWithAggregationInput | OAuthAuthorizationCodeOrderByWithAggregationInput[]
+    by: OAuthAuthorizationCodeScalarFieldEnum[] | OAuthAuthorizationCodeScalarFieldEnum
+    having?: OAuthAuthorizationCodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OAuthAuthorizationCodeCountAggregateInputType | true
+    _min?: OAuthAuthorizationCodeMinAggregateInputType
+    _max?: OAuthAuthorizationCodeMaxAggregateInputType
+  }
+
+  export type OAuthAuthorizationCodeGroupByOutputType = {
+    id: string
+    code: string
+    client_id: string
+    user_id: string
+    scope: string | null
+    redirect_uri: string
+    state: string | null
+    code_challenge: string | null
+    code_challenge_method: string | null
+    nonce: string | null
+    consumed_at: Date | null
+    expires_at: Date
+    created_at: Date
+    used_at: Date | null
+    _count: OAuthAuthorizationCodeCountAggregateOutputType | null
+    _min: OAuthAuthorizationCodeMinAggregateOutputType | null
+    _max: OAuthAuthorizationCodeMaxAggregateOutputType | null
+  }
+
+  type GetOAuthAuthorizationCodeGroupByPayload<T extends OAuthAuthorizationCodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OAuthAuthorizationCodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OAuthAuthorizationCodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OAuthAuthorizationCodeGroupByOutputType[P]>
+            : GetScalarType<T[P], OAuthAuthorizationCodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OAuthAuthorizationCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    client_id?: boolean
+    user_id?: boolean
+    scope?: boolean
+    redirect_uri?: boolean
+    state?: boolean
+    code_challenge?: boolean
+    code_challenge_method?: boolean
+    nonce?: boolean
+    consumed_at?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+    used_at?: boolean
+    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["oAuthAuthorizationCode"]>
+
+  export type OAuthAuthorizationCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    client_id?: boolean
+    user_id?: boolean
+    scope?: boolean
+    redirect_uri?: boolean
+    state?: boolean
+    code_challenge?: boolean
+    code_challenge_method?: boolean
+    nonce?: boolean
+    consumed_at?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+    used_at?: boolean
+    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["oAuthAuthorizationCode"]>
+
+  export type OAuthAuthorizationCodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    client_id?: boolean
+    user_id?: boolean
+    scope?: boolean
+    redirect_uri?: boolean
+    state?: boolean
+    code_challenge?: boolean
+    code_challenge_method?: boolean
+    nonce?: boolean
+    consumed_at?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+    used_at?: boolean
+    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["oAuthAuthorizationCode"]>
+
+  export type OAuthAuthorizationCodeSelectScalar = {
+    id?: boolean
+    code?: boolean
+    client_id?: boolean
+    user_id?: boolean
+    scope?: boolean
+    redirect_uri?: boolean
+    state?: boolean
+    code_challenge?: boolean
+    code_challenge_method?: boolean
+    nonce?: boolean
+    consumed_at?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+    used_at?: boolean
+  }
+
+  export type OAuthAuthorizationCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "client_id" | "user_id" | "scope" | "redirect_uri" | "state" | "code_challenge" | "code_challenge_method" | "nonce" | "consumed_at" | "expires_at" | "created_at" | "used_at", ExtArgs["result"]["oAuthAuthorizationCode"]>
+  export type OAuthAuthorizationCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+  }
+  export type OAuthAuthorizationCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+  }
+  export type OAuthAuthorizationCodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+  }
+
+  export type $OAuthAuthorizationCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OAuthAuthorizationCode"
+    objects: {
+      client: Prisma.$OAuthClientPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      code: string
+      client_id: string
+      user_id: string
+      scope: string | null
+      redirect_uri: string
+      state: string | null
+      code_challenge: string | null
+      code_challenge_method: string | null
+      nonce: string | null
+      consumed_at: Date | null
+      expires_at: Date
+      created_at: Date
+      used_at: Date | null
+    }, ExtArgs["result"]["oAuthAuthorizationCode"]>
+    composites: {}
+  }
+
+  type OAuthAuthorizationCodeGetPayload<S extends boolean | null | undefined | OAuthAuthorizationCodeDefaultArgs> = $Result.GetResult<Prisma.$OAuthAuthorizationCodePayload, S>
+
+  type OAuthAuthorizationCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OAuthAuthorizationCodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OAuthAuthorizationCodeCountAggregateInputType | true
+    }
+
+  export interface OAuthAuthorizationCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OAuthAuthorizationCode'], meta: { name: 'OAuthAuthorizationCode' } }
+    /**
+     * Find zero or one OAuthAuthorizationCode that matches the filter.
+     * @param {OAuthAuthorizationCodeFindUniqueArgs} args - Arguments to find a OAuthAuthorizationCode
+     * @example
+     * // Get one OAuthAuthorizationCode
+     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OAuthAuthorizationCodeFindUniqueArgs>(args: SelectSubset<T, OAuthAuthorizationCodeFindUniqueArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OAuthAuthorizationCode that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OAuthAuthorizationCodeFindUniqueOrThrowArgs} args - Arguments to find a OAuthAuthorizationCode
+     * @example
+     * // Get one OAuthAuthorizationCode
+     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OAuthAuthorizationCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, OAuthAuthorizationCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OAuthAuthorizationCode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthAuthorizationCodeFindFirstArgs} args - Arguments to find a OAuthAuthorizationCode
+     * @example
+     * // Get one OAuthAuthorizationCode
+     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OAuthAuthorizationCodeFindFirstArgs>(args?: SelectSubset<T, OAuthAuthorizationCodeFindFirstArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OAuthAuthorizationCode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthAuthorizationCodeFindFirstOrThrowArgs} args - Arguments to find a OAuthAuthorizationCode
+     * @example
+     * // Get one OAuthAuthorizationCode
+     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OAuthAuthorizationCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, OAuthAuthorizationCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OAuthAuthorizationCodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthAuthorizationCodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OAuthAuthorizationCodes
+     * const oAuthAuthorizationCodes = await prisma.oAuthAuthorizationCode.findMany()
+     * 
+     * // Get first 10 OAuthAuthorizationCodes
+     * const oAuthAuthorizationCodes = await prisma.oAuthAuthorizationCode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const oAuthAuthorizationCodeWithIdOnly = await prisma.oAuthAuthorizationCode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OAuthAuthorizationCodeFindManyArgs>(args?: SelectSubset<T, OAuthAuthorizationCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OAuthAuthorizationCode.
+     * @param {OAuthAuthorizationCodeCreateArgs} args - Arguments to create a OAuthAuthorizationCode.
+     * @example
+     * // Create one OAuthAuthorizationCode
+     * const OAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.create({
+     *   data: {
+     *     // ... data to create a OAuthAuthorizationCode
+     *   }
+     * })
+     * 
+     */
+    create<T extends OAuthAuthorizationCodeCreateArgs>(args: SelectSubset<T, OAuthAuthorizationCodeCreateArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OAuthAuthorizationCodes.
+     * @param {OAuthAuthorizationCodeCreateManyArgs} args - Arguments to create many OAuthAuthorizationCodes.
+     * @example
+     * // Create many OAuthAuthorizationCodes
+     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OAuthAuthorizationCodeCreateManyArgs>(args?: SelectSubset<T, OAuthAuthorizationCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many OAuthAuthorizationCodes and returns the data saved in the database.
+     * @param {OAuthAuthorizationCodeCreateManyAndReturnArgs} args - Arguments to create many OAuthAuthorizationCodes.
+     * @example
+     * // Create many OAuthAuthorizationCodes
+     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many OAuthAuthorizationCodes and only return the `id`
+     * const oAuthAuthorizationCodeWithIdOnly = await prisma.oAuthAuthorizationCode.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OAuthAuthorizationCodeCreateManyAndReturnArgs>(args?: SelectSubset<T, OAuthAuthorizationCodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a OAuthAuthorizationCode.
+     * @param {OAuthAuthorizationCodeDeleteArgs} args - Arguments to delete one OAuthAuthorizationCode.
+     * @example
+     * // Delete one OAuthAuthorizationCode
+     * const OAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.delete({
+     *   where: {
+     *     // ... filter to delete one OAuthAuthorizationCode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OAuthAuthorizationCodeDeleteArgs>(args: SelectSubset<T, OAuthAuthorizationCodeDeleteArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OAuthAuthorizationCode.
+     * @param {OAuthAuthorizationCodeUpdateArgs} args - Arguments to update one OAuthAuthorizationCode.
+     * @example
+     * // Update one OAuthAuthorizationCode
+     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OAuthAuthorizationCodeUpdateArgs>(args: SelectSubset<T, OAuthAuthorizationCodeUpdateArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OAuthAuthorizationCodes.
+     * @param {OAuthAuthorizationCodeDeleteManyArgs} args - Arguments to filter OAuthAuthorizationCodes to delete.
+     * @example
+     * // Delete a few OAuthAuthorizationCodes
+     * const { count } = await prisma.oAuthAuthorizationCode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OAuthAuthorizationCodeDeleteManyArgs>(args?: SelectSubset<T, OAuthAuthorizationCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OAuthAuthorizationCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthAuthorizationCodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OAuthAuthorizationCodes
+     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OAuthAuthorizationCodeUpdateManyArgs>(args: SelectSubset<T, OAuthAuthorizationCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OAuthAuthorizationCodes and returns the data updated in the database.
+     * @param {OAuthAuthorizationCodeUpdateManyAndReturnArgs} args - Arguments to update many OAuthAuthorizationCodes.
+     * @example
+     * // Update many OAuthAuthorizationCodes
+     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more OAuthAuthorizationCodes and only return the `id`
+     * const oAuthAuthorizationCodeWithIdOnly = await prisma.oAuthAuthorizationCode.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OAuthAuthorizationCodeUpdateManyAndReturnArgs>(args: SelectSubset<T, OAuthAuthorizationCodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one OAuthAuthorizationCode.
+     * @param {OAuthAuthorizationCodeUpsertArgs} args - Arguments to update or create a OAuthAuthorizationCode.
+     * @example
+     * // Update or create a OAuthAuthorizationCode
+     * const oAuthAuthorizationCode = await prisma.oAuthAuthorizationCode.upsert({
+     *   create: {
+     *     // ... data to create a OAuthAuthorizationCode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OAuthAuthorizationCode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OAuthAuthorizationCodeUpsertArgs>(args: SelectSubset<T, OAuthAuthorizationCodeUpsertArgs<ExtArgs>>): Prisma__OAuthAuthorizationCodeClient<$Result.GetResult<Prisma.$OAuthAuthorizationCodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of OAuthAuthorizationCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthAuthorizationCodeCountArgs} args - Arguments to filter OAuthAuthorizationCodes to count.
+     * @example
+     * // Count the number of OAuthAuthorizationCodes
+     * const count = await prisma.oAuthAuthorizationCode.count({
+     *   where: {
+     *     // ... the filter for the OAuthAuthorizationCodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends OAuthAuthorizationCodeCountArgs>(
+      args?: Subset<T, OAuthAuthorizationCodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OAuthAuthorizationCodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OAuthAuthorizationCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthAuthorizationCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OAuthAuthorizationCodeAggregateArgs>(args: Subset<T, OAuthAuthorizationCodeAggregateArgs>): Prisma.PrismaPromise<GetOAuthAuthorizationCodeAggregateType<T>>
+
+    /**
+     * Group by OAuthAuthorizationCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthAuthorizationCodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OAuthAuthorizationCodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OAuthAuthorizationCodeGroupByArgs['orderBy'] }
+        : { orderBy?: OAuthAuthorizationCodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OAuthAuthorizationCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOAuthAuthorizationCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OAuthAuthorizationCode model
+   */
+  readonly fields: OAuthAuthorizationCodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OAuthAuthorizationCode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OAuthAuthorizationCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends OAuthClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClientDefaultArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OAuthAuthorizationCode model
+   */
+  interface OAuthAuthorizationCodeFieldRefs {
+    readonly id: FieldRef<"OAuthAuthorizationCode", 'String'>
+    readonly code: FieldRef<"OAuthAuthorizationCode", 'String'>
+    readonly client_id: FieldRef<"OAuthAuthorizationCode", 'String'>
+    readonly user_id: FieldRef<"OAuthAuthorizationCode", 'String'>
+    readonly scope: FieldRef<"OAuthAuthorizationCode", 'String'>
+    readonly redirect_uri: FieldRef<"OAuthAuthorizationCode", 'String'>
+    readonly state: FieldRef<"OAuthAuthorizationCode", 'String'>
+    readonly code_challenge: FieldRef<"OAuthAuthorizationCode", 'String'>
+    readonly code_challenge_method: FieldRef<"OAuthAuthorizationCode", 'String'>
+    readonly nonce: FieldRef<"OAuthAuthorizationCode", 'String'>
+    readonly consumed_at: FieldRef<"OAuthAuthorizationCode", 'DateTime'>
+    readonly expires_at: FieldRef<"OAuthAuthorizationCode", 'DateTime'>
+    readonly created_at: FieldRef<"OAuthAuthorizationCode", 'DateTime'>
+    readonly used_at: FieldRef<"OAuthAuthorizationCode", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OAuthAuthorizationCode findUnique
+   */
+  export type OAuthAuthorizationCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAuthorizationCode
+     */
+    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuthAuthorizationCode
+     */
+    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which OAuthAuthorizationCode to fetch.
+     */
+    where: OAuthAuthorizationCodeWhereUniqueInput
+  }
+
+  /**
+   * OAuthAuthorizationCode findUniqueOrThrow
+   */
+  export type OAuthAuthorizationCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAuthorizationCode
+     */
+    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuthAuthorizationCode
+     */
+    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which OAuthAuthorizationCode to fetch.
+     */
+    where: OAuthAuthorizationCodeWhereUniqueInput
+  }
+
+  /**
+   * OAuthAuthorizationCode findFirst
+   */
+  export type OAuthAuthorizationCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAuthorizationCode
+     */
+    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuthAuthorizationCode
+     */
+    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which OAuthAuthorizationCode to fetch.
+     */
+    where?: OAuthAuthorizationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OAuthAuthorizationCodes to fetch.
+     */
+    orderBy?: OAuthAuthorizationCodeOrderByWithRelationInput | OAuthAuthorizationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OAuthAuthorizationCodes.
+     */
+    cursor?: OAuthAuthorizationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OAuthAuthorizationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OAuthAuthorizationCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OAuthAuthorizationCodes.
+     */
+    distinct?: OAuthAuthorizationCodeScalarFieldEnum | OAuthAuthorizationCodeScalarFieldEnum[]
+  }
+
+  /**
+   * OAuthAuthorizationCode findFirstOrThrow
+   */
+  export type OAuthAuthorizationCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAuthorizationCode
+     */
+    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuthAuthorizationCode
+     */
+    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which OAuthAuthorizationCode to fetch.
+     */
+    where?: OAuthAuthorizationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OAuthAuthorizationCodes to fetch.
+     */
+    orderBy?: OAuthAuthorizationCodeOrderByWithRelationInput | OAuthAuthorizationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OAuthAuthorizationCodes.
+     */
+    cursor?: OAuthAuthorizationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OAuthAuthorizationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OAuthAuthorizationCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OAuthAuthorizationCodes.
+     */
+    distinct?: OAuthAuthorizationCodeScalarFieldEnum | OAuthAuthorizationCodeScalarFieldEnum[]
+  }
+
+  /**
+   * OAuthAuthorizationCode findMany
+   */
+  export type OAuthAuthorizationCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAuthorizationCode
+     */
+    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuthAuthorizationCode
+     */
+    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which OAuthAuthorizationCodes to fetch.
+     */
+    where?: OAuthAuthorizationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OAuthAuthorizationCodes to fetch.
+     */
+    orderBy?: OAuthAuthorizationCodeOrderByWithRelationInput | OAuthAuthorizationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OAuthAuthorizationCodes.
+     */
+    cursor?: OAuthAuthorizationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OAuthAuthorizationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OAuthAuthorizationCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OAuthAuthorizationCodes.
+     */
+    distinct?: OAuthAuthorizationCodeScalarFieldEnum | OAuthAuthorizationCodeScalarFieldEnum[]
+  }
+
+  /**
+   * OAuthAuthorizationCode create
+   */
+  export type OAuthAuthorizationCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAuthorizationCode
+     */
+    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuthAuthorizationCode
+     */
+    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OAuthAuthorizationCode.
+     */
+    data: XOR<OAuthAuthorizationCodeCreateInput, OAuthAuthorizationCodeUncheckedCreateInput>
+  }
+
+  /**
+   * OAuthAuthorizationCode createMany
+   */
+  export type OAuthAuthorizationCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OAuthAuthorizationCodes.
+     */
+    data: OAuthAuthorizationCodeCreateManyInput | OAuthAuthorizationCodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OAuthAuthorizationCode createManyAndReturn
+   */
+  export type OAuthAuthorizationCodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAuthorizationCode
+     */
+    select?: OAuthAuthorizationCodeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuthAuthorizationCode
+     */
+    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
+    /**
+     * The data used to create many OAuthAuthorizationCodes.
+     */
+    data: OAuthAuthorizationCodeCreateManyInput | OAuthAuthorizationCodeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthAuthorizationCodeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OAuthAuthorizationCode update
+   */
+  export type OAuthAuthorizationCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAuthorizationCode
+     */
+    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuthAuthorizationCode
+     */
+    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OAuthAuthorizationCode.
+     */
+    data: XOR<OAuthAuthorizationCodeUpdateInput, OAuthAuthorizationCodeUncheckedUpdateInput>
+    /**
+     * Choose, which OAuthAuthorizationCode to update.
+     */
+    where: OAuthAuthorizationCodeWhereUniqueInput
+  }
+
+  /**
+   * OAuthAuthorizationCode updateMany
+   */
+  export type OAuthAuthorizationCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OAuthAuthorizationCodes.
+     */
+    data: XOR<OAuthAuthorizationCodeUpdateManyMutationInput, OAuthAuthorizationCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which OAuthAuthorizationCodes to update
+     */
+    where?: OAuthAuthorizationCodeWhereInput
+    /**
+     * Limit how many OAuthAuthorizationCodes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OAuthAuthorizationCode updateManyAndReturn
+   */
+  export type OAuthAuthorizationCodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAuthorizationCode
+     */
+    select?: OAuthAuthorizationCodeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuthAuthorizationCode
+     */
+    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
+    /**
+     * The data used to update OAuthAuthorizationCodes.
+     */
+    data: XOR<OAuthAuthorizationCodeUpdateManyMutationInput, OAuthAuthorizationCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which OAuthAuthorizationCodes to update
+     */
+    where?: OAuthAuthorizationCodeWhereInput
+    /**
+     * Limit how many OAuthAuthorizationCodes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthAuthorizationCodeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OAuthAuthorizationCode upsert
+   */
+  export type OAuthAuthorizationCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAuthorizationCode
+     */
+    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuthAuthorizationCode
+     */
+    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OAuthAuthorizationCode to update in case it exists.
+     */
+    where: OAuthAuthorizationCodeWhereUniqueInput
+    /**
+     * In case the OAuthAuthorizationCode found by the `where` argument doesn't exist, create a new OAuthAuthorizationCode with this data.
+     */
+    create: XOR<OAuthAuthorizationCodeCreateInput, OAuthAuthorizationCodeUncheckedCreateInput>
+    /**
+     * In case the OAuthAuthorizationCode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OAuthAuthorizationCodeUpdateInput, OAuthAuthorizationCodeUncheckedUpdateInput>
+  }
+
+  /**
+   * OAuthAuthorizationCode delete
+   */
+  export type OAuthAuthorizationCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAuthorizationCode
+     */
+    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuthAuthorizationCode
+     */
+    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
+    /**
+     * Filter which OAuthAuthorizationCode to delete.
+     */
+    where: OAuthAuthorizationCodeWhereUniqueInput
+  }
+
+  /**
+   * OAuthAuthorizationCode deleteMany
+   */
+  export type OAuthAuthorizationCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OAuthAuthorizationCodes to delete
+     */
+    where?: OAuthAuthorizationCodeWhereInput
+    /**
+     * Limit how many OAuthAuthorizationCodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OAuthAuthorizationCode without action
+   */
+  export type OAuthAuthorizationCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuthAuthorizationCode
+     */
+    select?: OAuthAuthorizationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuthAuthorizationCode
+     */
+    omit?: OAuthAuthorizationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthAuthorizationCodeInclude<ExtArgs> | null
   }
 
 
@@ -10136,11 +10451,11 @@ export namespace Prisma {
     client_id: string | null
     user_id: string | null
     scope: string | null
+    verified: boolean | null
     expires_at: Date | null
     interval: number | null
-    verified: boolean | null
-    completed_at: Date | null
     created_at: Date | null
+    completed_at: Date | null
   }
 
   export type OAuthDeviceCodeMaxAggregateOutputType = {
@@ -10150,11 +10465,11 @@ export namespace Prisma {
     client_id: string | null
     user_id: string | null
     scope: string | null
+    verified: boolean | null
     expires_at: Date | null
     interval: number | null
-    verified: boolean | null
-    completed_at: Date | null
     created_at: Date | null
+    completed_at: Date | null
   }
 
   export type OAuthDeviceCodeCountAggregateOutputType = {
@@ -10164,11 +10479,11 @@ export namespace Prisma {
     client_id: number
     user_id: number
     scope: number
+    verified: number
     expires_at: number
     interval: number
-    verified: number
-    completed_at: number
     created_at: number
+    completed_at: number
     _all: number
   }
 
@@ -10188,11 +10503,11 @@ export namespace Prisma {
     client_id?: true
     user_id?: true
     scope?: true
+    verified?: true
     expires_at?: true
     interval?: true
-    verified?: true
-    completed_at?: true
     created_at?: true
+    completed_at?: true
   }
 
   export type OAuthDeviceCodeMaxAggregateInputType = {
@@ -10202,11 +10517,11 @@ export namespace Prisma {
     client_id?: true
     user_id?: true
     scope?: true
+    verified?: true
     expires_at?: true
     interval?: true
-    verified?: true
-    completed_at?: true
     created_at?: true
+    completed_at?: true
   }
 
   export type OAuthDeviceCodeCountAggregateInputType = {
@@ -10216,11 +10531,11 @@ export namespace Prisma {
     client_id?: true
     user_id?: true
     scope?: true
+    verified?: true
     expires_at?: true
     interval?: true
-    verified?: true
-    completed_at?: true
     created_at?: true
+    completed_at?: true
     _all?: true
   }
 
@@ -10316,12 +10631,12 @@ export namespace Prisma {
     user_code: string
     client_id: string
     user_id: string | null
-    scope: string
+    scope: string | null
+    verified: boolean
     expires_at: Date
     interval: number
-    verified: boolean
-    completed_at: Date | null
     created_at: Date
+    completed_at: Date | null
     _count: OAuthDeviceCodeCountAggregateOutputType | null
     _avg: OAuthDeviceCodeAvgAggregateOutputType | null
     _sum: OAuthDeviceCodeSumAggregateOutputType | null
@@ -10350,13 +10665,12 @@ export namespace Prisma {
     client_id?: boolean
     user_id?: boolean
     scope?: boolean
+    verified?: boolean
     expires_at?: boolean
     interval?: boolean
-    verified?: boolean
-    completed_at?: boolean
     created_at?: boolean
+    completed_at?: boolean
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthDeviceCode$userArgs<ExtArgs>
   }, ExtArgs["result"]["oAuthDeviceCode"]>
 
   export type OAuthDeviceCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10366,13 +10680,12 @@ export namespace Prisma {
     client_id?: boolean
     user_id?: boolean
     scope?: boolean
+    verified?: boolean
     expires_at?: boolean
     interval?: boolean
-    verified?: boolean
-    completed_at?: boolean
     created_at?: boolean
+    completed_at?: boolean
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthDeviceCode$userArgs<ExtArgs>
   }, ExtArgs["result"]["oAuthDeviceCode"]>
 
   export type OAuthDeviceCodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10382,13 +10695,12 @@ export namespace Prisma {
     client_id?: boolean
     user_id?: boolean
     scope?: boolean
+    verified?: boolean
     expires_at?: boolean
     interval?: boolean
-    verified?: boolean
-    completed_at?: boolean
     created_at?: boolean
+    completed_at?: boolean
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthDeviceCode$userArgs<ExtArgs>
   }, ExtArgs["result"]["oAuthDeviceCode"]>
 
   export type OAuthDeviceCodeSelectScalar = {
@@ -10398,32 +10710,28 @@ export namespace Prisma {
     client_id?: boolean
     user_id?: boolean
     scope?: boolean
+    verified?: boolean
     expires_at?: boolean
     interval?: boolean
-    verified?: boolean
-    completed_at?: boolean
     created_at?: boolean
+    completed_at?: boolean
   }
 
-  export type OAuthDeviceCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "device_code" | "user_code" | "client_id" | "user_id" | "scope" | "expires_at" | "interval" | "verified" | "completed_at" | "created_at", ExtArgs["result"]["oAuthDeviceCode"]>
+  export type OAuthDeviceCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "device_code" | "user_code" | "client_id" | "user_id" | "scope" | "verified" | "expires_at" | "interval" | "created_at" | "completed_at", ExtArgs["result"]["oAuthDeviceCode"]>
   export type OAuthDeviceCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthDeviceCode$userArgs<ExtArgs>
   }
   export type OAuthDeviceCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthDeviceCode$userArgs<ExtArgs>
   }
   export type OAuthDeviceCodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | OAuthDeviceCode$userArgs<ExtArgs>
   }
 
   export type $OAuthDeviceCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OAuthDeviceCode"
     objects: {
       client: Prisma.$OAuthClientPayload<ExtArgs>
-      user: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10431,12 +10739,12 @@ export namespace Prisma {
       user_code: string
       client_id: string
       user_id: string | null
-      scope: string
+      scope: string | null
+      verified: boolean
       expires_at: Date
       interval: number
-      verified: boolean
-      completed_at: Date | null
       created_at: Date
+      completed_at: Date | null
     }, ExtArgs["result"]["oAuthDeviceCode"]>
     composites: {}
   }
@@ -10832,7 +11140,6 @@ export namespace Prisma {
   export interface Prisma__OAuthDeviceCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     client<T extends OAuthClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClientDefaultArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    user<T extends OAuthDeviceCode$userArgs<ExtArgs> = {}>(args?: Subset<T, OAuthDeviceCode$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10868,11 +11175,11 @@ export namespace Prisma {
     readonly client_id: FieldRef<"OAuthDeviceCode", 'String'>
     readonly user_id: FieldRef<"OAuthDeviceCode", 'String'>
     readonly scope: FieldRef<"OAuthDeviceCode", 'String'>
+    readonly verified: FieldRef<"OAuthDeviceCode", 'Boolean'>
     readonly expires_at: FieldRef<"OAuthDeviceCode", 'DateTime'>
     readonly interval: FieldRef<"OAuthDeviceCode", 'Int'>
-    readonly verified: FieldRef<"OAuthDeviceCode", 'Boolean'>
-    readonly completed_at: FieldRef<"OAuthDeviceCode", 'DateTime'>
     readonly created_at: FieldRef<"OAuthDeviceCode", 'DateTime'>
+    readonly completed_at: FieldRef<"OAuthDeviceCode", 'DateTime'>
   }
     
 
@@ -11274,25 +11581,6 @@ export namespace Prisma {
   }
 
   /**
-   * OAuthDeviceCode.user
-   */
-  export type OAuthDeviceCode$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
    * OAuthDeviceCode without action
    */
   export type OAuthDeviceCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11323,31 +11611,32 @@ export namespace Prisma {
 
   export type OAuthUserConsentMinAggregateOutputType = {
     id: string | null
-    client_id: string | null
     user_id: string | null
-    scope: string | null
+    client_id: string | null
+    granted_at: Date | null
     expires_at: Date | null
-    created_at: Date | null
+    revoked_at: Date | null
     updated_at: Date | null
   }
 
   export type OAuthUserConsentMaxAggregateOutputType = {
     id: string | null
-    client_id: string | null
     user_id: string | null
-    scope: string | null
+    client_id: string | null
+    granted_at: Date | null
     expires_at: Date | null
-    created_at: Date | null
+    revoked_at: Date | null
     updated_at: Date | null
   }
 
   export type OAuthUserConsentCountAggregateOutputType = {
     id: number
-    client_id: number
     user_id: number
+    client_id: number
     scope: number
+    granted_at: number
     expires_at: number
-    created_at: number
+    revoked_at: number
     updated_at: number
     _all: number
   }
@@ -11355,31 +11644,32 @@ export namespace Prisma {
 
   export type OAuthUserConsentMinAggregateInputType = {
     id?: true
-    client_id?: true
     user_id?: true
-    scope?: true
+    client_id?: true
+    granted_at?: true
     expires_at?: true
-    created_at?: true
+    revoked_at?: true
     updated_at?: true
   }
 
   export type OAuthUserConsentMaxAggregateInputType = {
     id?: true
-    client_id?: true
     user_id?: true
-    scope?: true
+    client_id?: true
+    granted_at?: true
     expires_at?: true
-    created_at?: true
+    revoked_at?: true
     updated_at?: true
   }
 
   export type OAuthUserConsentCountAggregateInputType = {
     id?: true
-    client_id?: true
     user_id?: true
+    client_id?: true
     scope?: true
+    granted_at?: true
     expires_at?: true
-    created_at?: true
+    revoked_at?: true
     updated_at?: true
     _all?: true
   }
@@ -11458,11 +11748,12 @@ export namespace Prisma {
 
   export type OAuthUserConsentGroupByOutputType = {
     id: string
-    client_id: string
     user_id: string
-    scope: string
+    client_id: string
+    scope: string[]
+    granted_at: Date
     expires_at: Date | null
-    created_at: Date
+    revoked_at: Date | null
     updated_at: Date
     _count: OAuthUserConsentCountAggregateOutputType | null
     _min: OAuthUserConsentMinAggregateOutputType | null
@@ -11485,77 +11776,75 @@ export namespace Prisma {
 
   export type OAuthUserConsentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    client_id?: boolean
     user_id?: boolean
+    client_id?: boolean
     scope?: boolean
+    granted_at?: boolean
     expires_at?: boolean
-    created_at?: boolean
+    revoked_at?: boolean
     updated_at?: boolean
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["oAuthUserConsent"]>
 
   export type OAuthUserConsentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    client_id?: boolean
     user_id?: boolean
+    client_id?: boolean
     scope?: boolean
+    granted_at?: boolean
     expires_at?: boolean
-    created_at?: boolean
+    revoked_at?: boolean
     updated_at?: boolean
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["oAuthUserConsent"]>
 
   export type OAuthUserConsentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    client_id?: boolean
     user_id?: boolean
+    client_id?: boolean
     scope?: boolean
+    granted_at?: boolean
     expires_at?: boolean
-    created_at?: boolean
+    revoked_at?: boolean
     updated_at?: boolean
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["oAuthUserConsent"]>
 
   export type OAuthUserConsentSelectScalar = {
     id?: boolean
-    client_id?: boolean
     user_id?: boolean
+    client_id?: boolean
     scope?: boolean
+    granted_at?: boolean
     expires_at?: boolean
-    created_at?: boolean
+    revoked_at?: boolean
     updated_at?: boolean
   }
 
-  export type OAuthUserConsentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "client_id" | "user_id" | "scope" | "expires_at" | "created_at" | "updated_at", ExtArgs["result"]["oAuthUserConsent"]>
+  export type OAuthUserConsentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "client_id" | "scope" | "granted_at" | "expires_at" | "revoked_at" | "updated_at", ExtArgs["result"]["oAuthUserConsent"]>
   export type OAuthUserConsentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type OAuthUserConsentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type OAuthUserConsentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | OAuthClientDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $OAuthUserConsentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OAuthUserConsent"
     objects: {
       client: Prisma.$OAuthClientPayload<ExtArgs>
-      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      client_id: string
       user_id: string
-      scope: string
+      client_id: string
+      scope: string[]
+      granted_at: Date
       expires_at: Date | null
-      created_at: Date
+      revoked_at: Date | null
       updated_at: Date
     }, ExtArgs["result"]["oAuthUserConsent"]>
     composites: {}
@@ -11952,7 +12241,6 @@ export namespace Prisma {
   export interface Prisma__OAuthUserConsentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     client<T extends OAuthClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClientDefaultArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11983,11 +12271,12 @@ export namespace Prisma {
    */
   interface OAuthUserConsentFieldRefs {
     readonly id: FieldRef<"OAuthUserConsent", 'String'>
-    readonly client_id: FieldRef<"OAuthUserConsent", 'String'>
     readonly user_id: FieldRef<"OAuthUserConsent", 'String'>
-    readonly scope: FieldRef<"OAuthUserConsent", 'String'>
+    readonly client_id: FieldRef<"OAuthUserConsent", 'String'>
+    readonly scope: FieldRef<"OAuthUserConsent", 'String[]'>
+    readonly granted_at: FieldRef<"OAuthUserConsent", 'DateTime'>
     readonly expires_at: FieldRef<"OAuthUserConsent", 'DateTime'>
-    readonly created_at: FieldRef<"OAuthUserConsent", 'DateTime'>
+    readonly revoked_at: FieldRef<"OAuthUserConsent", 'DateTime'>
     readonly updated_at: FieldRef<"OAuthUserConsent", 'DateTime'>
   }
     
@@ -12409,6 +12698,4339 @@ export namespace Prisma {
 
 
   /**
+   * Model Permission
+   */
+
+  export type AggregatePermission = {
+    _count: PermissionCountAggregateOutputType | null
+    _min: PermissionMinAggregateOutputType | null
+    _max: PermissionMaxAggregateOutputType | null
+  }
+
+  export type PermissionMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    resource: string | null
+    action: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type PermissionMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    resource: string | null
+    action: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type PermissionCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    resource: number
+    action: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type PermissionMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    resource?: true
+    action?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type PermissionMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    resource?: true
+    action?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type PermissionCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    resource?: true
+    action?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type PermissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Permission to aggregate.
+     */
+    where?: PermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Permissions to fetch.
+     */
+    orderBy?: PermissionOrderByWithRelationInput | PermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Permissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Permissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Permissions
+    **/
+    _count?: true | PermissionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PermissionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PermissionMaxAggregateInputType
+  }
+
+  export type GetPermissionAggregateType<T extends PermissionAggregateArgs> = {
+        [P in keyof T & keyof AggregatePermission]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePermission[P]>
+      : GetScalarType<T[P], AggregatePermission[P]>
+  }
+
+
+
+
+  export type PermissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PermissionWhereInput
+    orderBy?: PermissionOrderByWithAggregationInput | PermissionOrderByWithAggregationInput[]
+    by: PermissionScalarFieldEnum[] | PermissionScalarFieldEnum
+    having?: PermissionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PermissionCountAggregateInputType | true
+    _min?: PermissionMinAggregateInputType
+    _max?: PermissionMaxAggregateInputType
+  }
+
+  export type PermissionGroupByOutputType = {
+    id: string
+    name: string
+    description: string | null
+    resource: string
+    action: string
+    created_at: Date
+    updated_at: Date
+    _count: PermissionCountAggregateOutputType | null
+    _min: PermissionMinAggregateOutputType | null
+    _max: PermissionMaxAggregateOutputType | null
+  }
+
+  type GetPermissionGroupByPayload<T extends PermissionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PermissionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PermissionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PermissionGroupByOutputType[P]>
+            : GetScalarType<T[P], PermissionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PermissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    resource?: boolean
+    action?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    roles?: boolean | Permission$rolesArgs<ExtArgs>
+    _count?: boolean | PermissionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["permission"]>
+
+  export type PermissionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    resource?: boolean
+    action?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["permission"]>
+
+  export type PermissionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    resource?: boolean
+    action?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["permission"]>
+
+  export type PermissionSelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    resource?: boolean
+    action?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type PermissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "resource" | "action" | "created_at" | "updated_at", ExtArgs["result"]["permission"]>
+  export type PermissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    roles?: boolean | Permission$rolesArgs<ExtArgs>
+    _count?: boolean | PermissionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PermissionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type PermissionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $PermissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Permission"
+    objects: {
+      roles: Prisma.$RolePermissionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string | null
+      resource: string
+      action: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["permission"]>
+    composites: {}
+  }
+
+  type PermissionGetPayload<S extends boolean | null | undefined | PermissionDefaultArgs> = $Result.GetResult<Prisma.$PermissionPayload, S>
+
+  type PermissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PermissionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PermissionCountAggregateInputType | true
+    }
+
+  export interface PermissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Permission'], meta: { name: 'Permission' } }
+    /**
+     * Find zero or one Permission that matches the filter.
+     * @param {PermissionFindUniqueArgs} args - Arguments to find a Permission
+     * @example
+     * // Get one Permission
+     * const permission = await prisma.permission.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PermissionFindUniqueArgs>(args: SelectSubset<T, PermissionFindUniqueArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Permission that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PermissionFindUniqueOrThrowArgs} args - Arguments to find a Permission
+     * @example
+     * // Get one Permission
+     * const permission = await prisma.permission.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PermissionFindUniqueOrThrowArgs>(args: SelectSubset<T, PermissionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Permission that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionFindFirstArgs} args - Arguments to find a Permission
+     * @example
+     * // Get one Permission
+     * const permission = await prisma.permission.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PermissionFindFirstArgs>(args?: SelectSubset<T, PermissionFindFirstArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Permission that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionFindFirstOrThrowArgs} args - Arguments to find a Permission
+     * @example
+     * // Get one Permission
+     * const permission = await prisma.permission.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PermissionFindFirstOrThrowArgs>(args?: SelectSubset<T, PermissionFindFirstOrThrowArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Permissions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Permissions
+     * const permissions = await prisma.permission.findMany()
+     * 
+     * // Get first 10 Permissions
+     * const permissions = await prisma.permission.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const permissionWithIdOnly = await prisma.permission.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PermissionFindManyArgs>(args?: SelectSubset<T, PermissionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Permission.
+     * @param {PermissionCreateArgs} args - Arguments to create a Permission.
+     * @example
+     * // Create one Permission
+     * const Permission = await prisma.permission.create({
+     *   data: {
+     *     // ... data to create a Permission
+     *   }
+     * })
+     * 
+     */
+    create<T extends PermissionCreateArgs>(args: SelectSubset<T, PermissionCreateArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Permissions.
+     * @param {PermissionCreateManyArgs} args - Arguments to create many Permissions.
+     * @example
+     * // Create many Permissions
+     * const permission = await prisma.permission.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PermissionCreateManyArgs>(args?: SelectSubset<T, PermissionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Permissions and returns the data saved in the database.
+     * @param {PermissionCreateManyAndReturnArgs} args - Arguments to create many Permissions.
+     * @example
+     * // Create many Permissions
+     * const permission = await prisma.permission.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Permissions and only return the `id`
+     * const permissionWithIdOnly = await prisma.permission.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PermissionCreateManyAndReturnArgs>(args?: SelectSubset<T, PermissionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Permission.
+     * @param {PermissionDeleteArgs} args - Arguments to delete one Permission.
+     * @example
+     * // Delete one Permission
+     * const Permission = await prisma.permission.delete({
+     *   where: {
+     *     // ... filter to delete one Permission
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PermissionDeleteArgs>(args: SelectSubset<T, PermissionDeleteArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Permission.
+     * @param {PermissionUpdateArgs} args - Arguments to update one Permission.
+     * @example
+     * // Update one Permission
+     * const permission = await prisma.permission.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PermissionUpdateArgs>(args: SelectSubset<T, PermissionUpdateArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Permissions.
+     * @param {PermissionDeleteManyArgs} args - Arguments to filter Permissions to delete.
+     * @example
+     * // Delete a few Permissions
+     * const { count } = await prisma.permission.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PermissionDeleteManyArgs>(args?: SelectSubset<T, PermissionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Permissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Permissions
+     * const permission = await prisma.permission.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PermissionUpdateManyArgs>(args: SelectSubset<T, PermissionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Permissions and returns the data updated in the database.
+     * @param {PermissionUpdateManyAndReturnArgs} args - Arguments to update many Permissions.
+     * @example
+     * // Update many Permissions
+     * const permission = await prisma.permission.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Permissions and only return the `id`
+     * const permissionWithIdOnly = await prisma.permission.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PermissionUpdateManyAndReturnArgs>(args: SelectSubset<T, PermissionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Permission.
+     * @param {PermissionUpsertArgs} args - Arguments to update or create a Permission.
+     * @example
+     * // Update or create a Permission
+     * const permission = await prisma.permission.upsert({
+     *   create: {
+     *     // ... data to create a Permission
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Permission we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PermissionUpsertArgs>(args: SelectSubset<T, PermissionUpsertArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Permissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionCountArgs} args - Arguments to filter Permissions to count.
+     * @example
+     * // Count the number of Permissions
+     * const count = await prisma.permission.count({
+     *   where: {
+     *     // ... the filter for the Permissions we want to count
+     *   }
+     * })
+    **/
+    count<T extends PermissionCountArgs>(
+      args?: Subset<T, PermissionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PermissionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Permission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PermissionAggregateArgs>(args: Subset<T, PermissionAggregateArgs>): Prisma.PrismaPromise<GetPermissionAggregateType<T>>
+
+    /**
+     * Group by Permission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PermissionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PermissionGroupByArgs['orderBy'] }
+        : { orderBy?: PermissionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PermissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPermissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Permission model
+   */
+  readonly fields: PermissionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Permission.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PermissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    roles<T extends Permission$rolesArgs<ExtArgs> = {}>(args?: Subset<T, Permission$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Permission model
+   */
+  interface PermissionFieldRefs {
+    readonly id: FieldRef<"Permission", 'String'>
+    readonly name: FieldRef<"Permission", 'String'>
+    readonly description: FieldRef<"Permission", 'String'>
+    readonly resource: FieldRef<"Permission", 'String'>
+    readonly action: FieldRef<"Permission", 'String'>
+    readonly created_at: FieldRef<"Permission", 'DateTime'>
+    readonly updated_at: FieldRef<"Permission", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Permission findUnique
+   */
+  export type PermissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which Permission to fetch.
+     */
+    where: PermissionWhereUniqueInput
+  }
+
+  /**
+   * Permission findUniqueOrThrow
+   */
+  export type PermissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which Permission to fetch.
+     */
+    where: PermissionWhereUniqueInput
+  }
+
+  /**
+   * Permission findFirst
+   */
+  export type PermissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which Permission to fetch.
+     */
+    where?: PermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Permissions to fetch.
+     */
+    orderBy?: PermissionOrderByWithRelationInput | PermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Permissions.
+     */
+    cursor?: PermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Permissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Permissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Permissions.
+     */
+    distinct?: PermissionScalarFieldEnum | PermissionScalarFieldEnum[]
+  }
+
+  /**
+   * Permission findFirstOrThrow
+   */
+  export type PermissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which Permission to fetch.
+     */
+    where?: PermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Permissions to fetch.
+     */
+    orderBy?: PermissionOrderByWithRelationInput | PermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Permissions.
+     */
+    cursor?: PermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Permissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Permissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Permissions.
+     */
+    distinct?: PermissionScalarFieldEnum | PermissionScalarFieldEnum[]
+  }
+
+  /**
+   * Permission findMany
+   */
+  export type PermissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which Permissions to fetch.
+     */
+    where?: PermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Permissions to fetch.
+     */
+    orderBy?: PermissionOrderByWithRelationInput | PermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Permissions.
+     */
+    cursor?: PermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Permissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Permissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Permissions.
+     */
+    distinct?: PermissionScalarFieldEnum | PermissionScalarFieldEnum[]
+  }
+
+  /**
+   * Permission create
+   */
+  export type PermissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Permission.
+     */
+    data: XOR<PermissionCreateInput, PermissionUncheckedCreateInput>
+  }
+
+  /**
+   * Permission createMany
+   */
+  export type PermissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Permissions.
+     */
+    data: PermissionCreateManyInput | PermissionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Permission createManyAndReturn
+   */
+  export type PermissionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Permissions.
+     */
+    data: PermissionCreateManyInput | PermissionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Permission update
+   */
+  export type PermissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Permission.
+     */
+    data: XOR<PermissionUpdateInput, PermissionUncheckedUpdateInput>
+    /**
+     * Choose, which Permission to update.
+     */
+    where: PermissionWhereUniqueInput
+  }
+
+  /**
+   * Permission updateMany
+   */
+  export type PermissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Permissions.
+     */
+    data: XOR<PermissionUpdateManyMutationInput, PermissionUncheckedUpdateManyInput>
+    /**
+     * Filter which Permissions to update
+     */
+    where?: PermissionWhereInput
+    /**
+     * Limit how many Permissions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Permission updateManyAndReturn
+   */
+  export type PermissionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * The data used to update Permissions.
+     */
+    data: XOR<PermissionUpdateManyMutationInput, PermissionUncheckedUpdateManyInput>
+    /**
+     * Filter which Permissions to update
+     */
+    where?: PermissionWhereInput
+    /**
+     * Limit how many Permissions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Permission upsert
+   */
+  export type PermissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Permission to update in case it exists.
+     */
+    where: PermissionWhereUniqueInput
+    /**
+     * In case the Permission found by the `where` argument doesn't exist, create a new Permission with this data.
+     */
+    create: XOR<PermissionCreateInput, PermissionUncheckedCreateInput>
+    /**
+     * In case the Permission was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PermissionUpdateInput, PermissionUncheckedUpdateInput>
+  }
+
+  /**
+   * Permission delete
+   */
+  export type PermissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * Filter which Permission to delete.
+     */
+    where: PermissionWhereUniqueInput
+  }
+
+  /**
+   * Permission deleteMany
+   */
+  export type PermissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Permissions to delete
+     */
+    where?: PermissionWhereInput
+    /**
+     * Limit how many Permissions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Permission.roles
+   */
+  export type Permission$rolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionInclude<ExtArgs> | null
+    where?: RolePermissionWhereInput
+    orderBy?: RolePermissionOrderByWithRelationInput | RolePermissionOrderByWithRelationInput[]
+    cursor?: RolePermissionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RolePermissionScalarFieldEnum | RolePermissionScalarFieldEnum[]
+  }
+
+  /**
+   * Permission without action
+   */
+  export type PermissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Role
+   */
+
+  export type AggregateRole = {
+    _count: RoleCountAggregateOutputType | null
+    _min: RoleMinAggregateOutputType | null
+    _max: RoleMaxAggregateOutputType | null
+  }
+
+  export type RoleMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    is_active: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type RoleMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    is_active: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type RoleCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    is_active: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type RoleMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    is_active?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type RoleMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    is_active?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type RoleCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    is_active?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type RoleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Role to aggregate.
+     */
+    where?: RoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Roles to fetch.
+     */
+    orderBy?: RoleOrderByWithRelationInput | RoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Roles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Roles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Roles
+    **/
+    _count?: true | RoleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RoleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RoleMaxAggregateInputType
+  }
+
+  export type GetRoleAggregateType<T extends RoleAggregateArgs> = {
+        [P in keyof T & keyof AggregateRole]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRole[P]>
+      : GetScalarType<T[P], AggregateRole[P]>
+  }
+
+
+
+
+  export type RoleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoleWhereInput
+    orderBy?: RoleOrderByWithAggregationInput | RoleOrderByWithAggregationInput[]
+    by: RoleScalarFieldEnum[] | RoleScalarFieldEnum
+    having?: RoleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RoleCountAggregateInputType | true
+    _min?: RoleMinAggregateInputType
+    _max?: RoleMaxAggregateInputType
+  }
+
+  export type RoleGroupByOutputType = {
+    id: string
+    name: string
+    description: string | null
+    is_active: boolean
+    created_at: Date
+    updated_at: Date
+    _count: RoleCountAggregateOutputType | null
+    _min: RoleMinAggregateOutputType | null
+    _max: RoleMaxAggregateOutputType | null
+  }
+
+  type GetRoleGroupByPayload<T extends RoleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RoleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RoleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RoleGroupByOutputType[P]>
+            : GetScalarType<T[P], RoleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RoleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    permissions?: boolean | Role$permissionsArgs<ExtArgs>
+    clients?: boolean | Role$clientsArgs<ExtArgs>
+    _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["role"]>
+
+  export type RoleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["role"]>
+
+  export type RoleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["role"]>
+
+  export type RoleSelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type RoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["role"]>
+  export type RoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    permissions?: boolean | Role$permissionsArgs<ExtArgs>
+    clients?: boolean | Role$clientsArgs<ExtArgs>
+    _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type RoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type RoleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $RolePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Role"
+    objects: {
+      permissions: Prisma.$RolePermissionPayload<ExtArgs>[]
+      clients: Prisma.$ClientRolePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string | null
+      is_active: boolean
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["role"]>
+    composites: {}
+  }
+
+  type RoleGetPayload<S extends boolean | null | undefined | RoleDefaultArgs> = $Result.GetResult<Prisma.$RolePayload, S>
+
+  type RoleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RoleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RoleCountAggregateInputType | true
+    }
+
+  export interface RoleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Role'], meta: { name: 'Role' } }
+    /**
+     * Find zero or one Role that matches the filter.
+     * @param {RoleFindUniqueArgs} args - Arguments to find a Role
+     * @example
+     * // Get one Role
+     * const role = await prisma.role.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RoleFindUniqueArgs>(args: SelectSubset<T, RoleFindUniqueArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Role that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RoleFindUniqueOrThrowArgs} args - Arguments to find a Role
+     * @example
+     * // Get one Role
+     * const role = await prisma.role.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RoleFindUniqueOrThrowArgs>(args: SelectSubset<T, RoleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Role that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleFindFirstArgs} args - Arguments to find a Role
+     * @example
+     * // Get one Role
+     * const role = await prisma.role.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RoleFindFirstArgs>(args?: SelectSubset<T, RoleFindFirstArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Role that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleFindFirstOrThrowArgs} args - Arguments to find a Role
+     * @example
+     * // Get one Role
+     * const role = await prisma.role.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RoleFindFirstOrThrowArgs>(args?: SelectSubset<T, RoleFindFirstOrThrowArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Roles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Roles
+     * const roles = await prisma.role.findMany()
+     * 
+     * // Get first 10 Roles
+     * const roles = await prisma.role.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const roleWithIdOnly = await prisma.role.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RoleFindManyArgs>(args?: SelectSubset<T, RoleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Role.
+     * @param {RoleCreateArgs} args - Arguments to create a Role.
+     * @example
+     * // Create one Role
+     * const Role = await prisma.role.create({
+     *   data: {
+     *     // ... data to create a Role
+     *   }
+     * })
+     * 
+     */
+    create<T extends RoleCreateArgs>(args: SelectSubset<T, RoleCreateArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Roles.
+     * @param {RoleCreateManyArgs} args - Arguments to create many Roles.
+     * @example
+     * // Create many Roles
+     * const role = await prisma.role.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RoleCreateManyArgs>(args?: SelectSubset<T, RoleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Roles and returns the data saved in the database.
+     * @param {RoleCreateManyAndReturnArgs} args - Arguments to create many Roles.
+     * @example
+     * // Create many Roles
+     * const role = await prisma.role.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Roles and only return the `id`
+     * const roleWithIdOnly = await prisma.role.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RoleCreateManyAndReturnArgs>(args?: SelectSubset<T, RoleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Role.
+     * @param {RoleDeleteArgs} args - Arguments to delete one Role.
+     * @example
+     * // Delete one Role
+     * const Role = await prisma.role.delete({
+     *   where: {
+     *     // ... filter to delete one Role
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RoleDeleteArgs>(args: SelectSubset<T, RoleDeleteArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Role.
+     * @param {RoleUpdateArgs} args - Arguments to update one Role.
+     * @example
+     * // Update one Role
+     * const role = await prisma.role.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RoleUpdateArgs>(args: SelectSubset<T, RoleUpdateArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Roles.
+     * @param {RoleDeleteManyArgs} args - Arguments to filter Roles to delete.
+     * @example
+     * // Delete a few Roles
+     * const { count } = await prisma.role.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RoleDeleteManyArgs>(args?: SelectSubset<T, RoleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Roles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Roles
+     * const role = await prisma.role.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RoleUpdateManyArgs>(args: SelectSubset<T, RoleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Roles and returns the data updated in the database.
+     * @param {RoleUpdateManyAndReturnArgs} args - Arguments to update many Roles.
+     * @example
+     * // Update many Roles
+     * const role = await prisma.role.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Roles and only return the `id`
+     * const roleWithIdOnly = await prisma.role.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RoleUpdateManyAndReturnArgs>(args: SelectSubset<T, RoleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Role.
+     * @param {RoleUpsertArgs} args - Arguments to update or create a Role.
+     * @example
+     * // Update or create a Role
+     * const role = await prisma.role.upsert({
+     *   create: {
+     *     // ... data to create a Role
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Role we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RoleUpsertArgs>(args: SelectSubset<T, RoleUpsertArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Roles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleCountArgs} args - Arguments to filter Roles to count.
+     * @example
+     * // Count the number of Roles
+     * const count = await prisma.role.count({
+     *   where: {
+     *     // ... the filter for the Roles we want to count
+     *   }
+     * })
+    **/
+    count<T extends RoleCountArgs>(
+      args?: Subset<T, RoleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RoleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Role.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RoleAggregateArgs>(args: Subset<T, RoleAggregateArgs>): Prisma.PrismaPromise<GetRoleAggregateType<T>>
+
+    /**
+     * Group by Role.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RoleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RoleGroupByArgs['orderBy'] }
+        : { orderBy?: RoleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RoleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRoleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Role model
+   */
+  readonly fields: RoleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Role.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RoleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    permissions<T extends Role$permissionsArgs<ExtArgs> = {}>(args?: Subset<T, Role$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    clients<T extends Role$clientsArgs<ExtArgs> = {}>(args?: Subset<T, Role$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Role model
+   */
+  interface RoleFieldRefs {
+    readonly id: FieldRef<"Role", 'String'>
+    readonly name: FieldRef<"Role", 'String'>
+    readonly description: FieldRef<"Role", 'String'>
+    readonly is_active: FieldRef<"Role", 'Boolean'>
+    readonly created_at: FieldRef<"Role", 'DateTime'>
+    readonly updated_at: FieldRef<"Role", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Role findUnique
+   */
+  export type RoleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Role to fetch.
+     */
+    where: RoleWhereUniqueInput
+  }
+
+  /**
+   * Role findUniqueOrThrow
+   */
+  export type RoleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Role to fetch.
+     */
+    where: RoleWhereUniqueInput
+  }
+
+  /**
+   * Role findFirst
+   */
+  export type RoleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Role to fetch.
+     */
+    where?: RoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Roles to fetch.
+     */
+    orderBy?: RoleOrderByWithRelationInput | RoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Roles.
+     */
+    cursor?: RoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Roles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Roles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Roles.
+     */
+    distinct?: RoleScalarFieldEnum | RoleScalarFieldEnum[]
+  }
+
+  /**
+   * Role findFirstOrThrow
+   */
+  export type RoleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Role to fetch.
+     */
+    where?: RoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Roles to fetch.
+     */
+    orderBy?: RoleOrderByWithRelationInput | RoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Roles.
+     */
+    cursor?: RoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Roles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Roles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Roles.
+     */
+    distinct?: RoleScalarFieldEnum | RoleScalarFieldEnum[]
+  }
+
+  /**
+   * Role findMany
+   */
+  export type RoleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Roles to fetch.
+     */
+    where?: RoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Roles to fetch.
+     */
+    orderBy?: RoleOrderByWithRelationInput | RoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Roles.
+     */
+    cursor?: RoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Roles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Roles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Roles.
+     */
+    distinct?: RoleScalarFieldEnum | RoleScalarFieldEnum[]
+  }
+
+  /**
+   * Role create
+   */
+  export type RoleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Role.
+     */
+    data: XOR<RoleCreateInput, RoleUncheckedCreateInput>
+  }
+
+  /**
+   * Role createMany
+   */
+  export type RoleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Roles.
+     */
+    data: RoleCreateManyInput | RoleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Role createManyAndReturn
+   */
+  export type RoleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * The data used to create many Roles.
+     */
+    data: RoleCreateManyInput | RoleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Role update
+   */
+  export type RoleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Role.
+     */
+    data: XOR<RoleUpdateInput, RoleUncheckedUpdateInput>
+    /**
+     * Choose, which Role to update.
+     */
+    where: RoleWhereUniqueInput
+  }
+
+  /**
+   * Role updateMany
+   */
+  export type RoleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Roles.
+     */
+    data: XOR<RoleUpdateManyMutationInput, RoleUncheckedUpdateManyInput>
+    /**
+     * Filter which Roles to update
+     */
+    where?: RoleWhereInput
+    /**
+     * Limit how many Roles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Role updateManyAndReturn
+   */
+  export type RoleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * The data used to update Roles.
+     */
+    data: XOR<RoleUpdateManyMutationInput, RoleUncheckedUpdateManyInput>
+    /**
+     * Filter which Roles to update
+     */
+    where?: RoleWhereInput
+    /**
+     * Limit how many Roles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Role upsert
+   */
+  export type RoleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Role to update in case it exists.
+     */
+    where: RoleWhereUniqueInput
+    /**
+     * In case the Role found by the `where` argument doesn't exist, create a new Role with this data.
+     */
+    create: XOR<RoleCreateInput, RoleUncheckedCreateInput>
+    /**
+     * In case the Role was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RoleUpdateInput, RoleUncheckedUpdateInput>
+  }
+
+  /**
+   * Role delete
+   */
+  export type RoleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * Filter which Role to delete.
+     */
+    where: RoleWhereUniqueInput
+  }
+
+  /**
+   * Role deleteMany
+   */
+  export type RoleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Roles to delete
+     */
+    where?: RoleWhereInput
+    /**
+     * Limit how many Roles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Role.permissions
+   */
+  export type Role$permissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionInclude<ExtArgs> | null
+    where?: RolePermissionWhereInput
+    orderBy?: RolePermissionOrderByWithRelationInput | RolePermissionOrderByWithRelationInput[]
+    cursor?: RolePermissionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RolePermissionScalarFieldEnum | RolePermissionScalarFieldEnum[]
+  }
+
+  /**
+   * Role.clients
+   */
+  export type Role$clientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleInclude<ExtArgs> | null
+    where?: ClientRoleWhereInput
+    orderBy?: ClientRoleOrderByWithRelationInput | ClientRoleOrderByWithRelationInput[]
+    cursor?: ClientRoleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientRoleScalarFieldEnum | ClientRoleScalarFieldEnum[]
+  }
+
+  /**
+   * Role without action
+   */
+  export type RoleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RolePermission
+   */
+
+  export type AggregateRolePermission = {
+    _count: RolePermissionCountAggregateOutputType | null
+    _min: RolePermissionMinAggregateOutputType | null
+    _max: RolePermissionMaxAggregateOutputType | null
+  }
+
+  export type RolePermissionMinAggregateOutputType = {
+    id: string | null
+    role_id: string | null
+    permission_id: string | null
+    created_at: Date | null
+  }
+
+  export type RolePermissionMaxAggregateOutputType = {
+    id: string | null
+    role_id: string | null
+    permission_id: string | null
+    created_at: Date | null
+  }
+
+  export type RolePermissionCountAggregateOutputType = {
+    id: number
+    role_id: number
+    permission_id: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type RolePermissionMinAggregateInputType = {
+    id?: true
+    role_id?: true
+    permission_id?: true
+    created_at?: true
+  }
+
+  export type RolePermissionMaxAggregateInputType = {
+    id?: true
+    role_id?: true
+    permission_id?: true
+    created_at?: true
+  }
+
+  export type RolePermissionCountAggregateInputType = {
+    id?: true
+    role_id?: true
+    permission_id?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type RolePermissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RolePermission to aggregate.
+     */
+    where?: RolePermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RolePermissions to fetch.
+     */
+    orderBy?: RolePermissionOrderByWithRelationInput | RolePermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RolePermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RolePermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RolePermissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RolePermissions
+    **/
+    _count?: true | RolePermissionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RolePermissionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RolePermissionMaxAggregateInputType
+  }
+
+  export type GetRolePermissionAggregateType<T extends RolePermissionAggregateArgs> = {
+        [P in keyof T & keyof AggregateRolePermission]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRolePermission[P]>
+      : GetScalarType<T[P], AggregateRolePermission[P]>
+  }
+
+
+
+
+  export type RolePermissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RolePermissionWhereInput
+    orderBy?: RolePermissionOrderByWithAggregationInput | RolePermissionOrderByWithAggregationInput[]
+    by: RolePermissionScalarFieldEnum[] | RolePermissionScalarFieldEnum
+    having?: RolePermissionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RolePermissionCountAggregateInputType | true
+    _min?: RolePermissionMinAggregateInputType
+    _max?: RolePermissionMaxAggregateInputType
+  }
+
+  export type RolePermissionGroupByOutputType = {
+    id: string
+    role_id: string
+    permission_id: string
+    created_at: Date
+    _count: RolePermissionCountAggregateOutputType | null
+    _min: RolePermissionMinAggregateOutputType | null
+    _max: RolePermissionMaxAggregateOutputType | null
+  }
+
+  type GetRolePermissionGroupByPayload<T extends RolePermissionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RolePermissionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RolePermissionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RolePermissionGroupByOutputType[P]>
+            : GetScalarType<T[P], RolePermissionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RolePermissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    role_id?: boolean
+    permission_id?: boolean
+    created_at?: boolean
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    permission?: boolean | PermissionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rolePermission"]>
+
+  export type RolePermissionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    role_id?: boolean
+    permission_id?: boolean
+    created_at?: boolean
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    permission?: boolean | PermissionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rolePermission"]>
+
+  export type RolePermissionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    role_id?: boolean
+    permission_id?: boolean
+    created_at?: boolean
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    permission?: boolean | PermissionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rolePermission"]>
+
+  export type RolePermissionSelectScalar = {
+    id?: boolean
+    role_id?: boolean
+    permission_id?: boolean
+    created_at?: boolean
+  }
+
+  export type RolePermissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "role_id" | "permission_id" | "created_at", ExtArgs["result"]["rolePermission"]>
+  export type RolePermissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    permission?: boolean | PermissionDefaultArgs<ExtArgs>
+  }
+  export type RolePermissionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    permission?: boolean | PermissionDefaultArgs<ExtArgs>
+  }
+  export type RolePermissionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    permission?: boolean | PermissionDefaultArgs<ExtArgs>
+  }
+
+  export type $RolePermissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RolePermission"
+    objects: {
+      role: Prisma.$RolePayload<ExtArgs>
+      permission: Prisma.$PermissionPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      role_id: string
+      permission_id: string
+      created_at: Date
+    }, ExtArgs["result"]["rolePermission"]>
+    composites: {}
+  }
+
+  type RolePermissionGetPayload<S extends boolean | null | undefined | RolePermissionDefaultArgs> = $Result.GetResult<Prisma.$RolePermissionPayload, S>
+
+  type RolePermissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RolePermissionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RolePermissionCountAggregateInputType | true
+    }
+
+  export interface RolePermissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RolePermission'], meta: { name: 'RolePermission' } }
+    /**
+     * Find zero or one RolePermission that matches the filter.
+     * @param {RolePermissionFindUniqueArgs} args - Arguments to find a RolePermission
+     * @example
+     * // Get one RolePermission
+     * const rolePermission = await prisma.rolePermission.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RolePermissionFindUniqueArgs>(args: SelectSubset<T, RolePermissionFindUniqueArgs<ExtArgs>>): Prisma__RolePermissionClient<$Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RolePermission that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RolePermissionFindUniqueOrThrowArgs} args - Arguments to find a RolePermission
+     * @example
+     * // Get one RolePermission
+     * const rolePermission = await prisma.rolePermission.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RolePermissionFindUniqueOrThrowArgs>(args: SelectSubset<T, RolePermissionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RolePermissionClient<$Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RolePermission that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePermissionFindFirstArgs} args - Arguments to find a RolePermission
+     * @example
+     * // Get one RolePermission
+     * const rolePermission = await prisma.rolePermission.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RolePermissionFindFirstArgs>(args?: SelectSubset<T, RolePermissionFindFirstArgs<ExtArgs>>): Prisma__RolePermissionClient<$Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RolePermission that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePermissionFindFirstOrThrowArgs} args - Arguments to find a RolePermission
+     * @example
+     * // Get one RolePermission
+     * const rolePermission = await prisma.rolePermission.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RolePermissionFindFirstOrThrowArgs>(args?: SelectSubset<T, RolePermissionFindFirstOrThrowArgs<ExtArgs>>): Prisma__RolePermissionClient<$Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RolePermissions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePermissionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RolePermissions
+     * const rolePermissions = await prisma.rolePermission.findMany()
+     * 
+     * // Get first 10 RolePermissions
+     * const rolePermissions = await prisma.rolePermission.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const rolePermissionWithIdOnly = await prisma.rolePermission.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RolePermissionFindManyArgs>(args?: SelectSubset<T, RolePermissionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RolePermission.
+     * @param {RolePermissionCreateArgs} args - Arguments to create a RolePermission.
+     * @example
+     * // Create one RolePermission
+     * const RolePermission = await prisma.rolePermission.create({
+     *   data: {
+     *     // ... data to create a RolePermission
+     *   }
+     * })
+     * 
+     */
+    create<T extends RolePermissionCreateArgs>(args: SelectSubset<T, RolePermissionCreateArgs<ExtArgs>>): Prisma__RolePermissionClient<$Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RolePermissions.
+     * @param {RolePermissionCreateManyArgs} args - Arguments to create many RolePermissions.
+     * @example
+     * // Create many RolePermissions
+     * const rolePermission = await prisma.rolePermission.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RolePermissionCreateManyArgs>(args?: SelectSubset<T, RolePermissionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RolePermissions and returns the data saved in the database.
+     * @param {RolePermissionCreateManyAndReturnArgs} args - Arguments to create many RolePermissions.
+     * @example
+     * // Create many RolePermissions
+     * const rolePermission = await prisma.rolePermission.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RolePermissions and only return the `id`
+     * const rolePermissionWithIdOnly = await prisma.rolePermission.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RolePermissionCreateManyAndReturnArgs>(args?: SelectSubset<T, RolePermissionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RolePermission.
+     * @param {RolePermissionDeleteArgs} args - Arguments to delete one RolePermission.
+     * @example
+     * // Delete one RolePermission
+     * const RolePermission = await prisma.rolePermission.delete({
+     *   where: {
+     *     // ... filter to delete one RolePermission
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RolePermissionDeleteArgs>(args: SelectSubset<T, RolePermissionDeleteArgs<ExtArgs>>): Prisma__RolePermissionClient<$Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RolePermission.
+     * @param {RolePermissionUpdateArgs} args - Arguments to update one RolePermission.
+     * @example
+     * // Update one RolePermission
+     * const rolePermission = await prisma.rolePermission.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RolePermissionUpdateArgs>(args: SelectSubset<T, RolePermissionUpdateArgs<ExtArgs>>): Prisma__RolePermissionClient<$Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RolePermissions.
+     * @param {RolePermissionDeleteManyArgs} args - Arguments to filter RolePermissions to delete.
+     * @example
+     * // Delete a few RolePermissions
+     * const { count } = await prisma.rolePermission.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RolePermissionDeleteManyArgs>(args?: SelectSubset<T, RolePermissionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RolePermissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePermissionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RolePermissions
+     * const rolePermission = await prisma.rolePermission.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RolePermissionUpdateManyArgs>(args: SelectSubset<T, RolePermissionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RolePermissions and returns the data updated in the database.
+     * @param {RolePermissionUpdateManyAndReturnArgs} args - Arguments to update many RolePermissions.
+     * @example
+     * // Update many RolePermissions
+     * const rolePermission = await prisma.rolePermission.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RolePermissions and only return the `id`
+     * const rolePermissionWithIdOnly = await prisma.rolePermission.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RolePermissionUpdateManyAndReturnArgs>(args: SelectSubset<T, RolePermissionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RolePermission.
+     * @param {RolePermissionUpsertArgs} args - Arguments to update or create a RolePermission.
+     * @example
+     * // Update or create a RolePermission
+     * const rolePermission = await prisma.rolePermission.upsert({
+     *   create: {
+     *     // ... data to create a RolePermission
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RolePermission we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RolePermissionUpsertArgs>(args: SelectSubset<T, RolePermissionUpsertArgs<ExtArgs>>): Prisma__RolePermissionClient<$Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RolePermissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePermissionCountArgs} args - Arguments to filter RolePermissions to count.
+     * @example
+     * // Count the number of RolePermissions
+     * const count = await prisma.rolePermission.count({
+     *   where: {
+     *     // ... the filter for the RolePermissions we want to count
+     *   }
+     * })
+    **/
+    count<T extends RolePermissionCountArgs>(
+      args?: Subset<T, RolePermissionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RolePermissionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RolePermission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePermissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RolePermissionAggregateArgs>(args: Subset<T, RolePermissionAggregateArgs>): Prisma.PrismaPromise<GetRolePermissionAggregateType<T>>
+
+    /**
+     * Group by RolePermission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePermissionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RolePermissionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RolePermissionGroupByArgs['orderBy'] }
+        : { orderBy?: RolePermissionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RolePermissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRolePermissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RolePermission model
+   */
+  readonly fields: RolePermissionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RolePermission.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RolePermissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    role<T extends RoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoleDefaultArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    permission<T extends PermissionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PermissionDefaultArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RolePermission model
+   */
+  interface RolePermissionFieldRefs {
+    readonly id: FieldRef<"RolePermission", 'String'>
+    readonly role_id: FieldRef<"RolePermission", 'String'>
+    readonly permission_id: FieldRef<"RolePermission", 'String'>
+    readonly created_at: FieldRef<"RolePermission", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RolePermission findUnique
+   */
+  export type RolePermissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which RolePermission to fetch.
+     */
+    where: RolePermissionWhereUniqueInput
+  }
+
+  /**
+   * RolePermission findUniqueOrThrow
+   */
+  export type RolePermissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which RolePermission to fetch.
+     */
+    where: RolePermissionWhereUniqueInput
+  }
+
+  /**
+   * RolePermission findFirst
+   */
+  export type RolePermissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which RolePermission to fetch.
+     */
+    where?: RolePermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RolePermissions to fetch.
+     */
+    orderBy?: RolePermissionOrderByWithRelationInput | RolePermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RolePermissions.
+     */
+    cursor?: RolePermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RolePermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RolePermissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RolePermissions.
+     */
+    distinct?: RolePermissionScalarFieldEnum | RolePermissionScalarFieldEnum[]
+  }
+
+  /**
+   * RolePermission findFirstOrThrow
+   */
+  export type RolePermissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which RolePermission to fetch.
+     */
+    where?: RolePermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RolePermissions to fetch.
+     */
+    orderBy?: RolePermissionOrderByWithRelationInput | RolePermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RolePermissions.
+     */
+    cursor?: RolePermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RolePermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RolePermissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RolePermissions.
+     */
+    distinct?: RolePermissionScalarFieldEnum | RolePermissionScalarFieldEnum[]
+  }
+
+  /**
+   * RolePermission findMany
+   */
+  export type RolePermissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which RolePermissions to fetch.
+     */
+    where?: RolePermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RolePermissions to fetch.
+     */
+    orderBy?: RolePermissionOrderByWithRelationInput | RolePermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RolePermissions.
+     */
+    cursor?: RolePermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RolePermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RolePermissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RolePermissions.
+     */
+    distinct?: RolePermissionScalarFieldEnum | RolePermissionScalarFieldEnum[]
+  }
+
+  /**
+   * RolePermission create
+   */
+  export type RolePermissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RolePermission.
+     */
+    data: XOR<RolePermissionCreateInput, RolePermissionUncheckedCreateInput>
+  }
+
+  /**
+   * RolePermission createMany
+   */
+  export type RolePermissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RolePermissions.
+     */
+    data: RolePermissionCreateManyInput | RolePermissionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RolePermission createManyAndReturn
+   */
+  export type RolePermissionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * The data used to create many RolePermissions.
+     */
+    data: RolePermissionCreateManyInput | RolePermissionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RolePermission update
+   */
+  export type RolePermissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RolePermission.
+     */
+    data: XOR<RolePermissionUpdateInput, RolePermissionUncheckedUpdateInput>
+    /**
+     * Choose, which RolePermission to update.
+     */
+    where: RolePermissionWhereUniqueInput
+  }
+
+  /**
+   * RolePermission updateMany
+   */
+  export type RolePermissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RolePermissions.
+     */
+    data: XOR<RolePermissionUpdateManyMutationInput, RolePermissionUncheckedUpdateManyInput>
+    /**
+     * Filter which RolePermissions to update
+     */
+    where?: RolePermissionWhereInput
+    /**
+     * Limit how many RolePermissions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RolePermission updateManyAndReturn
+   */
+  export type RolePermissionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * The data used to update RolePermissions.
+     */
+    data: XOR<RolePermissionUpdateManyMutationInput, RolePermissionUncheckedUpdateManyInput>
+    /**
+     * Filter which RolePermissions to update
+     */
+    where?: RolePermissionWhereInput
+    /**
+     * Limit how many RolePermissions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RolePermission upsert
+   */
+  export type RolePermissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RolePermission to update in case it exists.
+     */
+    where: RolePermissionWhereUniqueInput
+    /**
+     * In case the RolePermission found by the `where` argument doesn't exist, create a new RolePermission with this data.
+     */
+    create: XOR<RolePermissionCreateInput, RolePermissionUncheckedCreateInput>
+    /**
+     * In case the RolePermission was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RolePermissionUpdateInput, RolePermissionUncheckedUpdateInput>
+  }
+
+  /**
+   * RolePermission delete
+   */
+  export type RolePermissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionInclude<ExtArgs> | null
+    /**
+     * Filter which RolePermission to delete.
+     */
+    where: RolePermissionWhereUniqueInput
+  }
+
+  /**
+   * RolePermission deleteMany
+   */
+  export type RolePermissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RolePermissions to delete
+     */
+    where?: RolePermissionWhereInput
+    /**
+     * Limit how many RolePermissions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RolePermission without action
+   */
+  export type RolePermissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePermission
+     */
+    select?: RolePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RolePermission
+     */
+    omit?: RolePermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePermissionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ClientRole
+   */
+
+  export type AggregateClientRole = {
+    _count: ClientRoleCountAggregateOutputType | null
+    _min: ClientRoleMinAggregateOutputType | null
+    _max: ClientRoleMaxAggregateOutputType | null
+  }
+
+  export type ClientRoleMinAggregateOutputType = {
+    id: string | null
+    client_id: string | null
+    role_id: string | null
+    created_at: Date | null
+  }
+
+  export type ClientRoleMaxAggregateOutputType = {
+    id: string | null
+    client_id: string | null
+    role_id: string | null
+    created_at: Date | null
+  }
+
+  export type ClientRoleCountAggregateOutputType = {
+    id: number
+    client_id: number
+    role_id: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type ClientRoleMinAggregateInputType = {
+    id?: true
+    client_id?: true
+    role_id?: true
+    created_at?: true
+  }
+
+  export type ClientRoleMaxAggregateInputType = {
+    id?: true
+    client_id?: true
+    role_id?: true
+    created_at?: true
+  }
+
+  export type ClientRoleCountAggregateInputType = {
+    id?: true
+    client_id?: true
+    role_id?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type ClientRoleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientRole to aggregate.
+     */
+    where?: ClientRoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientRoles to fetch.
+     */
+    orderBy?: ClientRoleOrderByWithRelationInput | ClientRoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ClientRoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientRoles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientRoles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ClientRoles
+    **/
+    _count?: true | ClientRoleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ClientRoleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ClientRoleMaxAggregateInputType
+  }
+
+  export type GetClientRoleAggregateType<T extends ClientRoleAggregateArgs> = {
+        [P in keyof T & keyof AggregateClientRole]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateClientRole[P]>
+      : GetScalarType<T[P], AggregateClientRole[P]>
+  }
+
+
+
+
+  export type ClientRoleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientRoleWhereInput
+    orderBy?: ClientRoleOrderByWithAggregationInput | ClientRoleOrderByWithAggregationInput[]
+    by: ClientRoleScalarFieldEnum[] | ClientRoleScalarFieldEnum
+    having?: ClientRoleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ClientRoleCountAggregateInputType | true
+    _min?: ClientRoleMinAggregateInputType
+    _max?: ClientRoleMaxAggregateInputType
+  }
+
+  export type ClientRoleGroupByOutputType = {
+    id: string
+    client_id: string
+    role_id: string
+    created_at: Date
+    _count: ClientRoleCountAggregateOutputType | null
+    _min: ClientRoleMinAggregateOutputType | null
+    _max: ClientRoleMaxAggregateOutputType | null
+  }
+
+  type GetClientRoleGroupByPayload<T extends ClientRoleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ClientRoleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ClientRoleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ClientRoleGroupByOutputType[P]>
+            : GetScalarType<T[P], ClientRoleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ClientRoleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    client_id?: boolean
+    role_id?: boolean
+    created_at?: boolean
+    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientRole"]>
+
+  export type ClientRoleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    client_id?: boolean
+    role_id?: boolean
+    created_at?: boolean
+    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientRole"]>
+
+  export type ClientRoleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    client_id?: boolean
+    role_id?: boolean
+    created_at?: boolean
+    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientRole"]>
+
+  export type ClientRoleSelectScalar = {
+    id?: boolean
+    client_id?: boolean
+    role_id?: boolean
+    created_at?: boolean
+  }
+
+  export type ClientRoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "client_id" | "role_id" | "created_at", ExtArgs["result"]["clientRole"]>
+  export type ClientRoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+  }
+  export type ClientRoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+  }
+  export type ClientRoleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | OAuthClientDefaultArgs<ExtArgs>
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+  }
+
+  export type $ClientRolePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClientRole"
+    objects: {
+      client: Prisma.$OAuthClientPayload<ExtArgs>
+      role: Prisma.$RolePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      client_id: string
+      role_id: string
+      created_at: Date
+    }, ExtArgs["result"]["clientRole"]>
+    composites: {}
+  }
+
+  type ClientRoleGetPayload<S extends boolean | null | undefined | ClientRoleDefaultArgs> = $Result.GetResult<Prisma.$ClientRolePayload, S>
+
+  type ClientRoleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClientRoleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClientRoleCountAggregateInputType | true
+    }
+
+  export interface ClientRoleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClientRole'], meta: { name: 'ClientRole' } }
+    /**
+     * Find zero or one ClientRole that matches the filter.
+     * @param {ClientRoleFindUniqueArgs} args - Arguments to find a ClientRole
+     * @example
+     * // Get one ClientRole
+     * const clientRole = await prisma.clientRole.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ClientRoleFindUniqueArgs>(args: SelectSubset<T, ClientRoleFindUniqueArgs<ExtArgs>>): Prisma__ClientRoleClient<$Result.GetResult<Prisma.$ClientRolePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ClientRole that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ClientRoleFindUniqueOrThrowArgs} args - Arguments to find a ClientRole
+     * @example
+     * // Get one ClientRole
+     * const clientRole = await prisma.clientRole.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ClientRoleFindUniqueOrThrowArgs>(args: SelectSubset<T, ClientRoleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClientRoleClient<$Result.GetResult<Prisma.$ClientRolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientRole that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientRoleFindFirstArgs} args - Arguments to find a ClientRole
+     * @example
+     * // Get one ClientRole
+     * const clientRole = await prisma.clientRole.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ClientRoleFindFirstArgs>(args?: SelectSubset<T, ClientRoleFindFirstArgs<ExtArgs>>): Prisma__ClientRoleClient<$Result.GetResult<Prisma.$ClientRolePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientRole that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientRoleFindFirstOrThrowArgs} args - Arguments to find a ClientRole
+     * @example
+     * // Get one ClientRole
+     * const clientRole = await prisma.clientRole.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ClientRoleFindFirstOrThrowArgs>(args?: SelectSubset<T, ClientRoleFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClientRoleClient<$Result.GetResult<Prisma.$ClientRolePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ClientRoles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientRoleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ClientRoles
+     * const clientRoles = await prisma.clientRole.findMany()
+     * 
+     * // Get first 10 ClientRoles
+     * const clientRoles = await prisma.clientRole.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const clientRoleWithIdOnly = await prisma.clientRole.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ClientRoleFindManyArgs>(args?: SelectSubset<T, ClientRoleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ClientRole.
+     * @param {ClientRoleCreateArgs} args - Arguments to create a ClientRole.
+     * @example
+     * // Create one ClientRole
+     * const ClientRole = await prisma.clientRole.create({
+     *   data: {
+     *     // ... data to create a ClientRole
+     *   }
+     * })
+     * 
+     */
+    create<T extends ClientRoleCreateArgs>(args: SelectSubset<T, ClientRoleCreateArgs<ExtArgs>>): Prisma__ClientRoleClient<$Result.GetResult<Prisma.$ClientRolePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ClientRoles.
+     * @param {ClientRoleCreateManyArgs} args - Arguments to create many ClientRoles.
+     * @example
+     * // Create many ClientRoles
+     * const clientRole = await prisma.clientRole.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ClientRoleCreateManyArgs>(args?: SelectSubset<T, ClientRoleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ClientRoles and returns the data saved in the database.
+     * @param {ClientRoleCreateManyAndReturnArgs} args - Arguments to create many ClientRoles.
+     * @example
+     * // Create many ClientRoles
+     * const clientRole = await prisma.clientRole.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ClientRoles and only return the `id`
+     * const clientRoleWithIdOnly = await prisma.clientRole.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ClientRoleCreateManyAndReturnArgs>(args?: SelectSubset<T, ClientRoleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientRolePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ClientRole.
+     * @param {ClientRoleDeleteArgs} args - Arguments to delete one ClientRole.
+     * @example
+     * // Delete one ClientRole
+     * const ClientRole = await prisma.clientRole.delete({
+     *   where: {
+     *     // ... filter to delete one ClientRole
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ClientRoleDeleteArgs>(args: SelectSubset<T, ClientRoleDeleteArgs<ExtArgs>>): Prisma__ClientRoleClient<$Result.GetResult<Prisma.$ClientRolePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ClientRole.
+     * @param {ClientRoleUpdateArgs} args - Arguments to update one ClientRole.
+     * @example
+     * // Update one ClientRole
+     * const clientRole = await prisma.clientRole.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ClientRoleUpdateArgs>(args: SelectSubset<T, ClientRoleUpdateArgs<ExtArgs>>): Prisma__ClientRoleClient<$Result.GetResult<Prisma.$ClientRolePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ClientRoles.
+     * @param {ClientRoleDeleteManyArgs} args - Arguments to filter ClientRoles to delete.
+     * @example
+     * // Delete a few ClientRoles
+     * const { count } = await prisma.clientRole.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ClientRoleDeleteManyArgs>(args?: SelectSubset<T, ClientRoleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClientRoles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientRoleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ClientRoles
+     * const clientRole = await prisma.clientRole.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ClientRoleUpdateManyArgs>(args: SelectSubset<T, ClientRoleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClientRoles and returns the data updated in the database.
+     * @param {ClientRoleUpdateManyAndReturnArgs} args - Arguments to update many ClientRoles.
+     * @example
+     * // Update many ClientRoles
+     * const clientRole = await prisma.clientRole.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ClientRoles and only return the `id`
+     * const clientRoleWithIdOnly = await prisma.clientRole.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ClientRoleUpdateManyAndReturnArgs>(args: SelectSubset<T, ClientRoleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientRolePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ClientRole.
+     * @param {ClientRoleUpsertArgs} args - Arguments to update or create a ClientRole.
+     * @example
+     * // Update or create a ClientRole
+     * const clientRole = await prisma.clientRole.upsert({
+     *   create: {
+     *     // ... data to create a ClientRole
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ClientRole we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ClientRoleUpsertArgs>(args: SelectSubset<T, ClientRoleUpsertArgs<ExtArgs>>): Prisma__ClientRoleClient<$Result.GetResult<Prisma.$ClientRolePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ClientRoles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientRoleCountArgs} args - Arguments to filter ClientRoles to count.
+     * @example
+     * // Count the number of ClientRoles
+     * const count = await prisma.clientRole.count({
+     *   where: {
+     *     // ... the filter for the ClientRoles we want to count
+     *   }
+     * })
+    **/
+    count<T extends ClientRoleCountArgs>(
+      args?: Subset<T, ClientRoleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ClientRoleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ClientRole.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientRoleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ClientRoleAggregateArgs>(args: Subset<T, ClientRoleAggregateArgs>): Prisma.PrismaPromise<GetClientRoleAggregateType<T>>
+
+    /**
+     * Group by ClientRole.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientRoleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ClientRoleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ClientRoleGroupByArgs['orderBy'] }
+        : { orderBy?: ClientRoleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ClientRoleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClientRoleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ClientRole model
+   */
+  readonly fields: ClientRoleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ClientRole.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ClientRoleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends OAuthClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OAuthClientDefaultArgs<ExtArgs>>): Prisma__OAuthClientClient<$Result.GetResult<Prisma.$OAuthClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    role<T extends RoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoleDefaultArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ClientRole model
+   */
+  interface ClientRoleFieldRefs {
+    readonly id: FieldRef<"ClientRole", 'String'>
+    readonly client_id: FieldRef<"ClientRole", 'String'>
+    readonly role_id: FieldRef<"ClientRole", 'String'>
+    readonly created_at: FieldRef<"ClientRole", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ClientRole findUnique
+   */
+  export type ClientRoleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientRole to fetch.
+     */
+    where: ClientRoleWhereUniqueInput
+  }
+
+  /**
+   * ClientRole findUniqueOrThrow
+   */
+  export type ClientRoleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientRole to fetch.
+     */
+    where: ClientRoleWhereUniqueInput
+  }
+
+  /**
+   * ClientRole findFirst
+   */
+  export type ClientRoleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientRole to fetch.
+     */
+    where?: ClientRoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientRoles to fetch.
+     */
+    orderBy?: ClientRoleOrderByWithRelationInput | ClientRoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientRoles.
+     */
+    cursor?: ClientRoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientRoles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientRoles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientRoles.
+     */
+    distinct?: ClientRoleScalarFieldEnum | ClientRoleScalarFieldEnum[]
+  }
+
+  /**
+   * ClientRole findFirstOrThrow
+   */
+  export type ClientRoleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientRole to fetch.
+     */
+    where?: ClientRoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientRoles to fetch.
+     */
+    orderBy?: ClientRoleOrderByWithRelationInput | ClientRoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientRoles.
+     */
+    cursor?: ClientRoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientRoles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientRoles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientRoles.
+     */
+    distinct?: ClientRoleScalarFieldEnum | ClientRoleScalarFieldEnum[]
+  }
+
+  /**
+   * ClientRole findMany
+   */
+  export type ClientRoleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientRoles to fetch.
+     */
+    where?: ClientRoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientRoles to fetch.
+     */
+    orderBy?: ClientRoleOrderByWithRelationInput | ClientRoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ClientRoles.
+     */
+    cursor?: ClientRoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientRoles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientRoles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientRoles.
+     */
+    distinct?: ClientRoleScalarFieldEnum | ClientRoleScalarFieldEnum[]
+  }
+
+  /**
+   * ClientRole create
+   */
+  export type ClientRoleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ClientRole.
+     */
+    data: XOR<ClientRoleCreateInput, ClientRoleUncheckedCreateInput>
+  }
+
+  /**
+   * ClientRole createMany
+   */
+  export type ClientRoleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ClientRoles.
+     */
+    data: ClientRoleCreateManyInput | ClientRoleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ClientRole createManyAndReturn
+   */
+  export type ClientRoleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * The data used to create many ClientRoles.
+     */
+    data: ClientRoleCreateManyInput | ClientRoleCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClientRole update
+   */
+  export type ClientRoleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ClientRole.
+     */
+    data: XOR<ClientRoleUpdateInput, ClientRoleUncheckedUpdateInput>
+    /**
+     * Choose, which ClientRole to update.
+     */
+    where: ClientRoleWhereUniqueInput
+  }
+
+  /**
+   * ClientRole updateMany
+   */
+  export type ClientRoleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ClientRoles.
+     */
+    data: XOR<ClientRoleUpdateManyMutationInput, ClientRoleUncheckedUpdateManyInput>
+    /**
+     * Filter which ClientRoles to update
+     */
+    where?: ClientRoleWhereInput
+    /**
+     * Limit how many ClientRoles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientRole updateManyAndReturn
+   */
+  export type ClientRoleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * The data used to update ClientRoles.
+     */
+    data: XOR<ClientRoleUpdateManyMutationInput, ClientRoleUncheckedUpdateManyInput>
+    /**
+     * Filter which ClientRoles to update
+     */
+    where?: ClientRoleWhereInput
+    /**
+     * Limit how many ClientRoles to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClientRole upsert
+   */
+  export type ClientRoleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ClientRole to update in case it exists.
+     */
+    where: ClientRoleWhereUniqueInput
+    /**
+     * In case the ClientRole found by the `where` argument doesn't exist, create a new ClientRole with this data.
+     */
+    create: XOR<ClientRoleCreateInput, ClientRoleUncheckedCreateInput>
+    /**
+     * In case the ClientRole was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ClientRoleUpdateInput, ClientRoleUncheckedUpdateInput>
+  }
+
+  /**
+   * ClientRole delete
+   */
+  export type ClientRoleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleInclude<ExtArgs> | null
+    /**
+     * Filter which ClientRole to delete.
+     */
+    where: ClientRoleWhereUniqueInput
+  }
+
+  /**
+   * ClientRole deleteMany
+   */
+  export type ClientRoleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientRoles to delete
+     */
+    where?: ClientRoleWhereInput
+    /**
+     * Limit how many ClientRoles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientRole without action
+   */
+  export type ClientRoleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientRole
+     */
+    select?: ClientRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientRole
+     */
+    omit?: ClientRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientRoleInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -12465,7 +17087,6 @@ export namespace Prisma {
   export const OAuthClientScalarFieldEnum: {
     id: 'id',
     client_id: 'client_id',
-    client_secret: 'client_secret',
     client_secret_hash: 'client_secret_hash',
     name: 'name',
     description: 'description',
@@ -12483,30 +17104,13 @@ export namespace Prisma {
     policy_uri: 'policy_uri',
     tos_uri: 'tos_uri',
     is_active: 'is_active',
+    permissions: 'permissions',
+    owner_id: 'owner_id',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
 
   export type OAuthClientScalarFieldEnum = (typeof OAuthClientScalarFieldEnum)[keyof typeof OAuthClientScalarFieldEnum]
-
-
-  export const OAuthAuthorizationCodeScalarFieldEnum: {
-    id: 'id',
-    code: 'code',
-    client_id: 'client_id',
-    user_id: 'user_id',
-    redirect_uri: 'redirect_uri',
-    scope: 'scope',
-    state: 'state',
-    code_challenge: 'code_challenge',
-    code_challenge_method: 'code_challenge_method',
-    nonce: 'nonce',
-    expires_at: 'expires_at',
-    consumed_at: 'consumed_at',
-    created_at: 'created_at'
-  };
-
-  export type OAuthAuthorizationCodeScalarFieldEnum = (typeof OAuthAuthorizationCodeScalarFieldEnum)[keyof typeof OAuthAuthorizationCodeScalarFieldEnum]
 
 
   export const OAuthAccessTokenScalarFieldEnum: {
@@ -12515,10 +17119,12 @@ export namespace Prisma {
     client_id: 'client_id',
     user_id: 'user_id',
     scope: 'scope',
+    permissions: 'permissions',
+    roles: 'roles',
     token_type: 'token_type',
     expires_at: 'expires_at',
-    revoked_at: 'revoked_at',
-    created_at: 'created_at'
+    created_at: 'created_at',
+    revoked_at: 'revoked_at'
   };
 
   export type OAuthAccessTokenScalarFieldEnum = (typeof OAuthAccessTokenScalarFieldEnum)[keyof typeof OAuthAccessTokenScalarFieldEnum]
@@ -12532,11 +17138,31 @@ export namespace Prisma {
     user_id: 'user_id',
     scope: 'scope',
     expires_at: 'expires_at',
-    revoked_at: 'revoked_at',
-    created_at: 'created_at'
+    created_at: 'created_at',
+    revoked_at: 'revoked_at'
   };
 
   export type OAuthRefreshTokenScalarFieldEnum = (typeof OAuthRefreshTokenScalarFieldEnum)[keyof typeof OAuthRefreshTokenScalarFieldEnum]
+
+
+  export const OAuthAuthorizationCodeScalarFieldEnum: {
+    id: 'id',
+    code: 'code',
+    client_id: 'client_id',
+    user_id: 'user_id',
+    scope: 'scope',
+    redirect_uri: 'redirect_uri',
+    state: 'state',
+    code_challenge: 'code_challenge',
+    code_challenge_method: 'code_challenge_method',
+    nonce: 'nonce',
+    consumed_at: 'consumed_at',
+    expires_at: 'expires_at',
+    created_at: 'created_at',
+    used_at: 'used_at'
+  };
+
+  export type OAuthAuthorizationCodeScalarFieldEnum = (typeof OAuthAuthorizationCodeScalarFieldEnum)[keyof typeof OAuthAuthorizationCodeScalarFieldEnum]
 
 
   export const OAuthDeviceCodeScalarFieldEnum: {
@@ -12546,11 +17172,11 @@ export namespace Prisma {
     client_id: 'client_id',
     user_id: 'user_id',
     scope: 'scope',
+    verified: 'verified',
     expires_at: 'expires_at',
     interval: 'interval',
-    verified: 'verified',
-    completed_at: 'completed_at',
-    created_at: 'created_at'
+    created_at: 'created_at',
+    completed_at: 'completed_at'
   };
 
   export type OAuthDeviceCodeScalarFieldEnum = (typeof OAuthDeviceCodeScalarFieldEnum)[keyof typeof OAuthDeviceCodeScalarFieldEnum]
@@ -12558,15 +17184,61 @@ export namespace Prisma {
 
   export const OAuthUserConsentScalarFieldEnum: {
     id: 'id',
-    client_id: 'client_id',
     user_id: 'user_id',
+    client_id: 'client_id',
     scope: 'scope',
+    granted_at: 'granted_at',
     expires_at: 'expires_at',
-    created_at: 'created_at',
+    revoked_at: 'revoked_at',
     updated_at: 'updated_at'
   };
 
   export type OAuthUserConsentScalarFieldEnum = (typeof OAuthUserConsentScalarFieldEnum)[keyof typeof OAuthUserConsentScalarFieldEnum]
+
+
+  export const PermissionScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    resource: 'resource',
+    action: 'action',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
+
+
+  export const RoleScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    is_active: 'is_active',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
+  export const RolePermissionScalarFieldEnum: {
+    id: 'id',
+    role_id: 'role_id',
+    permission_id: 'permission_id',
+    created_at: 'created_at'
+  };
+
+  export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
+
+
+  export const ClientRoleScalarFieldEnum: {
+    id: 'id',
+    client_id: 'client_id',
+    role_id: 'role_id',
+    created_at: 'created_at'
+  };
+
+  export type ClientRoleScalarFieldEnum = (typeof ClientRoleScalarFieldEnum)[keyof typeof ClientRoleScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12680,11 +17352,6 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"User"> | Date | string
     refresh_tokens?: RefreshTokenListRelationFilter
     sessions?: SessionListRelationFilter
-    oauth_authorization_codes?: OAuthAuthorizationCodeListRelationFilter
-    oauth_access_tokens?: OAuthAccessTokenListRelationFilter
-    oauth_refresh_tokens?: OAuthRefreshTokenListRelationFilter
-    oauth_device_codes?: OAuthDeviceCodeListRelationFilter
-    oauth_consents?: OAuthUserConsentListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -12700,11 +17367,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     refresh_tokens?: RefreshTokenOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeOrderByRelationAggregateInput
-    oauth_access_tokens?: OAuthAccessTokenOrderByRelationAggregateInput
-    oauth_refresh_tokens?: OAuthRefreshTokenOrderByRelationAggregateInput
-    oauth_device_codes?: OAuthDeviceCodeOrderByRelationAggregateInput
-    oauth_consents?: OAuthUserConsentOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -12723,11 +17385,6 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"User"> | Date | string
     refresh_tokens?: RefreshTokenListRelationFilter
     sessions?: SessionListRelationFilter
-    oauth_authorization_codes?: OAuthAuthorizationCodeListRelationFilter
-    oauth_access_tokens?: OAuthAccessTokenListRelationFilter
-    oauth_refresh_tokens?: OAuthRefreshTokenListRelationFilter
-    oauth_device_codes?: OAuthDeviceCodeListRelationFilter
-    oauth_consents?: OAuthUserConsentListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -12888,7 +17545,6 @@ export namespace Prisma {
     NOT?: OAuthClientWhereInput | OAuthClientWhereInput[]
     id?: StringFilter<"OAuthClient"> | string
     client_id?: StringFilter<"OAuthClient"> | string
-    client_secret?: StringNullableFilter<"OAuthClient"> | string | null
     client_secret_hash?: StringNullableFilter<"OAuthClient"> | string | null
     name?: StringFilter<"OAuthClient"> | string
     description?: StringNullableFilter<"OAuthClient"> | string | null
@@ -12906,19 +17562,21 @@ export namespace Prisma {
     policy_uri?: StringNullableFilter<"OAuthClient"> | string | null
     tos_uri?: StringNullableFilter<"OAuthClient"> | string | null
     is_active?: BoolFilter<"OAuthClient"> | boolean
+    permissions?: StringNullableListFilter<"OAuthClient">
+    owner_id?: StringNullableFilter<"OAuthClient"> | string | null
     created_at?: DateTimeFilter<"OAuthClient"> | Date | string
     updated_at?: DateTimeFilter<"OAuthClient"> | Date | string
-    authorization_codes?: OAuthAuthorizationCodeListRelationFilter
     access_tokens?: OAuthAccessTokenListRelationFilter
     refresh_tokens?: OAuthRefreshTokenListRelationFilter
+    authorization_codes?: OAuthAuthorizationCodeListRelationFilter
     device_codes?: OAuthDeviceCodeListRelationFilter
     user_consents?: OAuthUserConsentListRelationFilter
+    roles?: ClientRoleListRelationFilter
   }
 
   export type OAuthClientOrderByWithRelationInput = {
     id?: SortOrder
     client_id?: SortOrder
-    client_secret?: SortOrderInput | SortOrder
     client_secret_hash?: SortOrderInput | SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
@@ -12936,13 +17594,16 @@ export namespace Prisma {
     policy_uri?: SortOrderInput | SortOrder
     tos_uri?: SortOrderInput | SortOrder
     is_active?: SortOrder
+    permissions?: SortOrder
+    owner_id?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    authorization_codes?: OAuthAuthorizationCodeOrderByRelationAggregateInput
     access_tokens?: OAuthAccessTokenOrderByRelationAggregateInput
     refresh_tokens?: OAuthRefreshTokenOrderByRelationAggregateInput
+    authorization_codes?: OAuthAuthorizationCodeOrderByRelationAggregateInput
     device_codes?: OAuthDeviceCodeOrderByRelationAggregateInput
     user_consents?: OAuthUserConsentOrderByRelationAggregateInput
+    roles?: ClientRoleOrderByRelationAggregateInput
   }
 
   export type OAuthClientWhereUniqueInput = Prisma.AtLeast<{
@@ -12951,7 +17612,6 @@ export namespace Prisma {
     AND?: OAuthClientWhereInput | OAuthClientWhereInput[]
     OR?: OAuthClientWhereInput[]
     NOT?: OAuthClientWhereInput | OAuthClientWhereInput[]
-    client_secret?: StringNullableFilter<"OAuthClient"> | string | null
     client_secret_hash?: StringNullableFilter<"OAuthClient"> | string | null
     name?: StringFilter<"OAuthClient"> | string
     description?: StringNullableFilter<"OAuthClient"> | string | null
@@ -12969,19 +17629,21 @@ export namespace Prisma {
     policy_uri?: StringNullableFilter<"OAuthClient"> | string | null
     tos_uri?: StringNullableFilter<"OAuthClient"> | string | null
     is_active?: BoolFilter<"OAuthClient"> | boolean
+    permissions?: StringNullableListFilter<"OAuthClient">
+    owner_id?: StringNullableFilter<"OAuthClient"> | string | null
     created_at?: DateTimeFilter<"OAuthClient"> | Date | string
     updated_at?: DateTimeFilter<"OAuthClient"> | Date | string
-    authorization_codes?: OAuthAuthorizationCodeListRelationFilter
     access_tokens?: OAuthAccessTokenListRelationFilter
     refresh_tokens?: OAuthRefreshTokenListRelationFilter
+    authorization_codes?: OAuthAuthorizationCodeListRelationFilter
     device_codes?: OAuthDeviceCodeListRelationFilter
     user_consents?: OAuthUserConsentListRelationFilter
+    roles?: ClientRoleListRelationFilter
   }, "id" | "client_id">
 
   export type OAuthClientOrderByWithAggregationInput = {
     id?: SortOrder
     client_id?: SortOrder
-    client_secret?: SortOrderInput | SortOrder
     client_secret_hash?: SortOrderInput | SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
@@ -12999,6 +17661,8 @@ export namespace Prisma {
     policy_uri?: SortOrderInput | SortOrder
     tos_uri?: SortOrderInput | SortOrder
     is_active?: SortOrder
+    permissions?: SortOrder
+    owner_id?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: OAuthClientCountOrderByAggregateInput
@@ -13014,7 +17678,6 @@ export namespace Prisma {
     NOT?: OAuthClientScalarWhereWithAggregatesInput | OAuthClientScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"OAuthClient"> | string
     client_id?: StringWithAggregatesFilter<"OAuthClient"> | string
-    client_secret?: StringNullableWithAggregatesFilter<"OAuthClient"> | string | null
     client_secret_hash?: StringNullableWithAggregatesFilter<"OAuthClient"> | string | null
     name?: StringWithAggregatesFilter<"OAuthClient"> | string
     description?: StringNullableWithAggregatesFilter<"OAuthClient"> | string | null
@@ -13032,106 +17695,10 @@ export namespace Prisma {
     policy_uri?: StringNullableWithAggregatesFilter<"OAuthClient"> | string | null
     tos_uri?: StringNullableWithAggregatesFilter<"OAuthClient"> | string | null
     is_active?: BoolWithAggregatesFilter<"OAuthClient"> | boolean
+    permissions?: StringNullableListFilter<"OAuthClient">
+    owner_id?: StringNullableWithAggregatesFilter<"OAuthClient"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"OAuthClient"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"OAuthClient"> | Date | string
-  }
-
-  export type OAuthAuthorizationCodeWhereInput = {
-    AND?: OAuthAuthorizationCodeWhereInput | OAuthAuthorizationCodeWhereInput[]
-    OR?: OAuthAuthorizationCodeWhereInput[]
-    NOT?: OAuthAuthorizationCodeWhereInput | OAuthAuthorizationCodeWhereInput[]
-    id?: StringFilter<"OAuthAuthorizationCode"> | string
-    code?: StringFilter<"OAuthAuthorizationCode"> | string
-    client_id?: StringFilter<"OAuthAuthorizationCode"> | string
-    user_id?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    redirect_uri?: StringFilter<"OAuthAuthorizationCode"> | string
-    scope?: StringFilter<"OAuthAuthorizationCode"> | string
-    state?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    code_challenge?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    code_challenge_method?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    nonce?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    expires_at?: DateTimeFilter<"OAuthAuthorizationCode"> | Date | string
-    consumed_at?: DateTimeNullableFilter<"OAuthAuthorizationCode"> | Date | string | null
-    created_at?: DateTimeFilter<"OAuthAuthorizationCode"> | Date | string
-    client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }
-
-  export type OAuthAuthorizationCodeOrderByWithRelationInput = {
-    id?: SortOrder
-    code?: SortOrder
-    client_id?: SortOrder
-    user_id?: SortOrderInput | SortOrder
-    redirect_uri?: SortOrder
-    scope?: SortOrder
-    state?: SortOrderInput | SortOrder
-    code_challenge?: SortOrderInput | SortOrder
-    code_challenge_method?: SortOrderInput | SortOrder
-    nonce?: SortOrderInput | SortOrder
-    expires_at?: SortOrder
-    consumed_at?: SortOrderInput | SortOrder
-    created_at?: SortOrder
-    client?: OAuthClientOrderByWithRelationInput
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type OAuthAuthorizationCodeWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    code?: string
-    AND?: OAuthAuthorizationCodeWhereInput | OAuthAuthorizationCodeWhereInput[]
-    OR?: OAuthAuthorizationCodeWhereInput[]
-    NOT?: OAuthAuthorizationCodeWhereInput | OAuthAuthorizationCodeWhereInput[]
-    client_id?: StringFilter<"OAuthAuthorizationCode"> | string
-    user_id?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    redirect_uri?: StringFilter<"OAuthAuthorizationCode"> | string
-    scope?: StringFilter<"OAuthAuthorizationCode"> | string
-    state?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    code_challenge?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    code_challenge_method?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    nonce?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    expires_at?: DateTimeFilter<"OAuthAuthorizationCode"> | Date | string
-    consumed_at?: DateTimeNullableFilter<"OAuthAuthorizationCode"> | Date | string | null
-    created_at?: DateTimeFilter<"OAuthAuthorizationCode"> | Date | string
-    client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id" | "code">
-
-  export type OAuthAuthorizationCodeOrderByWithAggregationInput = {
-    id?: SortOrder
-    code?: SortOrder
-    client_id?: SortOrder
-    user_id?: SortOrderInput | SortOrder
-    redirect_uri?: SortOrder
-    scope?: SortOrder
-    state?: SortOrderInput | SortOrder
-    code_challenge?: SortOrderInput | SortOrder
-    code_challenge_method?: SortOrderInput | SortOrder
-    nonce?: SortOrderInput | SortOrder
-    expires_at?: SortOrder
-    consumed_at?: SortOrderInput | SortOrder
-    created_at?: SortOrder
-    _count?: OAuthAuthorizationCodeCountOrderByAggregateInput
-    _max?: OAuthAuthorizationCodeMaxOrderByAggregateInput
-    _min?: OAuthAuthorizationCodeMinOrderByAggregateInput
-  }
-
-  export type OAuthAuthorizationCodeScalarWhereWithAggregatesInput = {
-    AND?: OAuthAuthorizationCodeScalarWhereWithAggregatesInput | OAuthAuthorizationCodeScalarWhereWithAggregatesInput[]
-    OR?: OAuthAuthorizationCodeScalarWhereWithAggregatesInput[]
-    NOT?: OAuthAuthorizationCodeScalarWhereWithAggregatesInput | OAuthAuthorizationCodeScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"OAuthAuthorizationCode"> | string
-    code?: StringWithAggregatesFilter<"OAuthAuthorizationCode"> | string
-    client_id?: StringWithAggregatesFilter<"OAuthAuthorizationCode"> | string
-    user_id?: StringNullableWithAggregatesFilter<"OAuthAuthorizationCode"> | string | null
-    redirect_uri?: StringWithAggregatesFilter<"OAuthAuthorizationCode"> | string
-    scope?: StringWithAggregatesFilter<"OAuthAuthorizationCode"> | string
-    state?: StringNullableWithAggregatesFilter<"OAuthAuthorizationCode"> | string | null
-    code_challenge?: StringNullableWithAggregatesFilter<"OAuthAuthorizationCode"> | string | null
-    code_challenge_method?: StringNullableWithAggregatesFilter<"OAuthAuthorizationCode"> | string | null
-    nonce?: StringNullableWithAggregatesFilter<"OAuthAuthorizationCode"> | string | null
-    expires_at?: DateTimeWithAggregatesFilter<"OAuthAuthorizationCode"> | Date | string
-    consumed_at?: DateTimeNullableWithAggregatesFilter<"OAuthAuthorizationCode"> | Date | string | null
-    created_at?: DateTimeWithAggregatesFilter<"OAuthAuthorizationCode"> | Date | string
   }
 
   export type OAuthAccessTokenWhereInput = {
@@ -13142,13 +17709,15 @@ export namespace Prisma {
     token?: StringFilter<"OAuthAccessToken"> | string
     client_id?: StringFilter<"OAuthAccessToken"> | string
     user_id?: StringNullableFilter<"OAuthAccessToken"> | string | null
-    scope?: StringFilter<"OAuthAccessToken"> | string
+    scope?: StringNullableFilter<"OAuthAccessToken"> | string | null
+    permissions?: StringNullableListFilter<"OAuthAccessToken">
+    roles?: StringNullableListFilter<"OAuthAccessToken">
     token_type?: StringFilter<"OAuthAccessToken"> | string
     expires_at?: DateTimeFilter<"OAuthAccessToken"> | Date | string
-    revoked_at?: DateTimeNullableFilter<"OAuthAccessToken"> | Date | string | null
     created_at?: DateTimeFilter<"OAuthAccessToken"> | Date | string
+    revoked_at?: DateTimeNullableFilter<"OAuthAccessToken"> | Date | string | null
     client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    refresh_tokens?: OAuthRefreshTokenListRelationFilter
   }
 
   export type OAuthAccessTokenOrderByWithRelationInput = {
@@ -13156,13 +17725,15 @@ export namespace Prisma {
     token?: SortOrder
     client_id?: SortOrder
     user_id?: SortOrderInput | SortOrder
-    scope?: SortOrder
+    scope?: SortOrderInput | SortOrder
+    permissions?: SortOrder
+    roles?: SortOrder
     token_type?: SortOrder
     expires_at?: SortOrder
-    revoked_at?: SortOrderInput | SortOrder
     created_at?: SortOrder
+    revoked_at?: SortOrderInput | SortOrder
     client?: OAuthClientOrderByWithRelationInput
-    user?: UserOrderByWithRelationInput
+    refresh_tokens?: OAuthRefreshTokenOrderByRelationAggregateInput
   }
 
   export type OAuthAccessTokenWhereUniqueInput = Prisma.AtLeast<{
@@ -13173,13 +17744,15 @@ export namespace Prisma {
     NOT?: OAuthAccessTokenWhereInput | OAuthAccessTokenWhereInput[]
     client_id?: StringFilter<"OAuthAccessToken"> | string
     user_id?: StringNullableFilter<"OAuthAccessToken"> | string | null
-    scope?: StringFilter<"OAuthAccessToken"> | string
+    scope?: StringNullableFilter<"OAuthAccessToken"> | string | null
+    permissions?: StringNullableListFilter<"OAuthAccessToken">
+    roles?: StringNullableListFilter<"OAuthAccessToken">
     token_type?: StringFilter<"OAuthAccessToken"> | string
     expires_at?: DateTimeFilter<"OAuthAccessToken"> | Date | string
-    revoked_at?: DateTimeNullableFilter<"OAuthAccessToken"> | Date | string | null
     created_at?: DateTimeFilter<"OAuthAccessToken"> | Date | string
+    revoked_at?: DateTimeNullableFilter<"OAuthAccessToken"> | Date | string | null
     client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    refresh_tokens?: OAuthRefreshTokenListRelationFilter
   }, "id" | "token">
 
   export type OAuthAccessTokenOrderByWithAggregationInput = {
@@ -13187,11 +17760,13 @@ export namespace Prisma {
     token?: SortOrder
     client_id?: SortOrder
     user_id?: SortOrderInput | SortOrder
-    scope?: SortOrder
+    scope?: SortOrderInput | SortOrder
+    permissions?: SortOrder
+    roles?: SortOrder
     token_type?: SortOrder
     expires_at?: SortOrder
-    revoked_at?: SortOrderInput | SortOrder
     created_at?: SortOrder
+    revoked_at?: SortOrderInput | SortOrder
     _count?: OAuthAccessTokenCountOrderByAggregateInput
     _max?: OAuthAccessTokenMaxOrderByAggregateInput
     _min?: OAuthAccessTokenMinOrderByAggregateInput
@@ -13205,11 +17780,13 @@ export namespace Prisma {
     token?: StringWithAggregatesFilter<"OAuthAccessToken"> | string
     client_id?: StringWithAggregatesFilter<"OAuthAccessToken"> | string
     user_id?: StringNullableWithAggregatesFilter<"OAuthAccessToken"> | string | null
-    scope?: StringWithAggregatesFilter<"OAuthAccessToken"> | string
+    scope?: StringNullableWithAggregatesFilter<"OAuthAccessToken"> | string | null
+    permissions?: StringNullableListFilter<"OAuthAccessToken">
+    roles?: StringNullableListFilter<"OAuthAccessToken">
     token_type?: StringWithAggregatesFilter<"OAuthAccessToken"> | string
     expires_at?: DateTimeWithAggregatesFilter<"OAuthAccessToken"> | Date | string
-    revoked_at?: DateTimeNullableWithAggregatesFilter<"OAuthAccessToken"> | Date | string | null
     created_at?: DateTimeWithAggregatesFilter<"OAuthAccessToken"> | Date | string
+    revoked_at?: DateTimeNullableWithAggregatesFilter<"OAuthAccessToken"> | Date | string | null
   }
 
   export type OAuthRefreshTokenWhereInput = {
@@ -13221,12 +17798,12 @@ export namespace Prisma {
     access_token_id?: StringFilter<"OAuthRefreshToken"> | string
     client_id?: StringFilter<"OAuthRefreshToken"> | string
     user_id?: StringNullableFilter<"OAuthRefreshToken"> | string | null
-    scope?: StringFilter<"OAuthRefreshToken"> | string
+    scope?: StringNullableFilter<"OAuthRefreshToken"> | string | null
     expires_at?: DateTimeFilter<"OAuthRefreshToken"> | Date | string
-    revoked_at?: DateTimeNullableFilter<"OAuthRefreshToken"> | Date | string | null
     created_at?: DateTimeFilter<"OAuthRefreshToken"> | Date | string
+    revoked_at?: DateTimeNullableFilter<"OAuthRefreshToken"> | Date | string | null
+    access_token?: XOR<OAuthAccessTokenScalarRelationFilter, OAuthAccessTokenWhereInput>
     client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type OAuthRefreshTokenOrderByWithRelationInput = {
@@ -13235,12 +17812,12 @@ export namespace Prisma {
     access_token_id?: SortOrder
     client_id?: SortOrder
     user_id?: SortOrderInput | SortOrder
-    scope?: SortOrder
+    scope?: SortOrderInput | SortOrder
     expires_at?: SortOrder
-    revoked_at?: SortOrderInput | SortOrder
     created_at?: SortOrder
+    revoked_at?: SortOrderInput | SortOrder
+    access_token?: OAuthAccessTokenOrderByWithRelationInput
     client?: OAuthClientOrderByWithRelationInput
-    user?: UserOrderByWithRelationInput
   }
 
   export type OAuthRefreshTokenWhereUniqueInput = Prisma.AtLeast<{
@@ -13252,12 +17829,12 @@ export namespace Prisma {
     access_token_id?: StringFilter<"OAuthRefreshToken"> | string
     client_id?: StringFilter<"OAuthRefreshToken"> | string
     user_id?: StringNullableFilter<"OAuthRefreshToken"> | string | null
-    scope?: StringFilter<"OAuthRefreshToken"> | string
+    scope?: StringNullableFilter<"OAuthRefreshToken"> | string | null
     expires_at?: DateTimeFilter<"OAuthRefreshToken"> | Date | string
-    revoked_at?: DateTimeNullableFilter<"OAuthRefreshToken"> | Date | string | null
     created_at?: DateTimeFilter<"OAuthRefreshToken"> | Date | string
+    revoked_at?: DateTimeNullableFilter<"OAuthRefreshToken"> | Date | string | null
+    access_token?: XOR<OAuthAccessTokenScalarRelationFilter, OAuthAccessTokenWhereInput>
     client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id" | "token">
 
   export type OAuthRefreshTokenOrderByWithAggregationInput = {
@@ -13266,10 +17843,10 @@ export namespace Prisma {
     access_token_id?: SortOrder
     client_id?: SortOrder
     user_id?: SortOrderInput | SortOrder
-    scope?: SortOrder
+    scope?: SortOrderInput | SortOrder
     expires_at?: SortOrder
-    revoked_at?: SortOrderInput | SortOrder
     created_at?: SortOrder
+    revoked_at?: SortOrderInput | SortOrder
     _count?: OAuthRefreshTokenCountOrderByAggregateInput
     _max?: OAuthRefreshTokenMaxOrderByAggregateInput
     _min?: OAuthRefreshTokenMinOrderByAggregateInput
@@ -13284,10 +17861,110 @@ export namespace Prisma {
     access_token_id?: StringWithAggregatesFilter<"OAuthRefreshToken"> | string
     client_id?: StringWithAggregatesFilter<"OAuthRefreshToken"> | string
     user_id?: StringNullableWithAggregatesFilter<"OAuthRefreshToken"> | string | null
-    scope?: StringWithAggregatesFilter<"OAuthRefreshToken"> | string
+    scope?: StringNullableWithAggregatesFilter<"OAuthRefreshToken"> | string | null
     expires_at?: DateTimeWithAggregatesFilter<"OAuthRefreshToken"> | Date | string
-    revoked_at?: DateTimeNullableWithAggregatesFilter<"OAuthRefreshToken"> | Date | string | null
     created_at?: DateTimeWithAggregatesFilter<"OAuthRefreshToken"> | Date | string
+    revoked_at?: DateTimeNullableWithAggregatesFilter<"OAuthRefreshToken"> | Date | string | null
+  }
+
+  export type OAuthAuthorizationCodeWhereInput = {
+    AND?: OAuthAuthorizationCodeWhereInput | OAuthAuthorizationCodeWhereInput[]
+    OR?: OAuthAuthorizationCodeWhereInput[]
+    NOT?: OAuthAuthorizationCodeWhereInput | OAuthAuthorizationCodeWhereInput[]
+    id?: StringFilter<"OAuthAuthorizationCode"> | string
+    code?: StringFilter<"OAuthAuthorizationCode"> | string
+    client_id?: StringFilter<"OAuthAuthorizationCode"> | string
+    user_id?: StringFilter<"OAuthAuthorizationCode"> | string
+    scope?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    redirect_uri?: StringFilter<"OAuthAuthorizationCode"> | string
+    state?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    code_challenge?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    code_challenge_method?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    nonce?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    consumed_at?: DateTimeNullableFilter<"OAuthAuthorizationCode"> | Date | string | null
+    expires_at?: DateTimeFilter<"OAuthAuthorizationCode"> | Date | string
+    created_at?: DateTimeFilter<"OAuthAuthorizationCode"> | Date | string
+    used_at?: DateTimeNullableFilter<"OAuthAuthorizationCode"> | Date | string | null
+    client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
+  }
+
+  export type OAuthAuthorizationCodeOrderByWithRelationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    client_id?: SortOrder
+    user_id?: SortOrder
+    scope?: SortOrderInput | SortOrder
+    redirect_uri?: SortOrder
+    state?: SortOrderInput | SortOrder
+    code_challenge?: SortOrderInput | SortOrder
+    code_challenge_method?: SortOrderInput | SortOrder
+    nonce?: SortOrderInput | SortOrder
+    consumed_at?: SortOrderInput | SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+    used_at?: SortOrderInput | SortOrder
+    client?: OAuthClientOrderByWithRelationInput
+  }
+
+  export type OAuthAuthorizationCodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    code?: string
+    AND?: OAuthAuthorizationCodeWhereInput | OAuthAuthorizationCodeWhereInput[]
+    OR?: OAuthAuthorizationCodeWhereInput[]
+    NOT?: OAuthAuthorizationCodeWhereInput | OAuthAuthorizationCodeWhereInput[]
+    client_id?: StringFilter<"OAuthAuthorizationCode"> | string
+    user_id?: StringFilter<"OAuthAuthorizationCode"> | string
+    scope?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    redirect_uri?: StringFilter<"OAuthAuthorizationCode"> | string
+    state?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    code_challenge?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    code_challenge_method?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    nonce?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    consumed_at?: DateTimeNullableFilter<"OAuthAuthorizationCode"> | Date | string | null
+    expires_at?: DateTimeFilter<"OAuthAuthorizationCode"> | Date | string
+    created_at?: DateTimeFilter<"OAuthAuthorizationCode"> | Date | string
+    used_at?: DateTimeNullableFilter<"OAuthAuthorizationCode"> | Date | string | null
+    client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
+  }, "id" | "code">
+
+  export type OAuthAuthorizationCodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    client_id?: SortOrder
+    user_id?: SortOrder
+    scope?: SortOrderInput | SortOrder
+    redirect_uri?: SortOrder
+    state?: SortOrderInput | SortOrder
+    code_challenge?: SortOrderInput | SortOrder
+    code_challenge_method?: SortOrderInput | SortOrder
+    nonce?: SortOrderInput | SortOrder
+    consumed_at?: SortOrderInput | SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+    used_at?: SortOrderInput | SortOrder
+    _count?: OAuthAuthorizationCodeCountOrderByAggregateInput
+    _max?: OAuthAuthorizationCodeMaxOrderByAggregateInput
+    _min?: OAuthAuthorizationCodeMinOrderByAggregateInput
+  }
+
+  export type OAuthAuthorizationCodeScalarWhereWithAggregatesInput = {
+    AND?: OAuthAuthorizationCodeScalarWhereWithAggregatesInput | OAuthAuthorizationCodeScalarWhereWithAggregatesInput[]
+    OR?: OAuthAuthorizationCodeScalarWhereWithAggregatesInput[]
+    NOT?: OAuthAuthorizationCodeScalarWhereWithAggregatesInput | OAuthAuthorizationCodeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"OAuthAuthorizationCode"> | string
+    code?: StringWithAggregatesFilter<"OAuthAuthorizationCode"> | string
+    client_id?: StringWithAggregatesFilter<"OAuthAuthorizationCode"> | string
+    user_id?: StringWithAggregatesFilter<"OAuthAuthorizationCode"> | string
+    scope?: StringNullableWithAggregatesFilter<"OAuthAuthorizationCode"> | string | null
+    redirect_uri?: StringWithAggregatesFilter<"OAuthAuthorizationCode"> | string
+    state?: StringNullableWithAggregatesFilter<"OAuthAuthorizationCode"> | string | null
+    code_challenge?: StringNullableWithAggregatesFilter<"OAuthAuthorizationCode"> | string | null
+    code_challenge_method?: StringNullableWithAggregatesFilter<"OAuthAuthorizationCode"> | string | null
+    nonce?: StringNullableWithAggregatesFilter<"OAuthAuthorizationCode"> | string | null
+    consumed_at?: DateTimeNullableWithAggregatesFilter<"OAuthAuthorizationCode"> | Date | string | null
+    expires_at?: DateTimeWithAggregatesFilter<"OAuthAuthorizationCode"> | Date | string
+    created_at?: DateTimeWithAggregatesFilter<"OAuthAuthorizationCode"> | Date | string
+    used_at?: DateTimeNullableWithAggregatesFilter<"OAuthAuthorizationCode"> | Date | string | null
   }
 
   export type OAuthDeviceCodeWhereInput = {
@@ -13299,14 +17976,13 @@ export namespace Prisma {
     user_code?: StringFilter<"OAuthDeviceCode"> | string
     client_id?: StringFilter<"OAuthDeviceCode"> | string
     user_id?: StringNullableFilter<"OAuthDeviceCode"> | string | null
-    scope?: StringFilter<"OAuthDeviceCode"> | string
+    scope?: StringNullableFilter<"OAuthDeviceCode"> | string | null
+    verified?: BoolFilter<"OAuthDeviceCode"> | boolean
     expires_at?: DateTimeFilter<"OAuthDeviceCode"> | Date | string
     interval?: IntFilter<"OAuthDeviceCode"> | number
-    verified?: BoolFilter<"OAuthDeviceCode"> | boolean
-    completed_at?: DateTimeNullableFilter<"OAuthDeviceCode"> | Date | string | null
     created_at?: DateTimeFilter<"OAuthDeviceCode"> | Date | string
+    completed_at?: DateTimeNullableFilter<"OAuthDeviceCode"> | Date | string | null
     client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type OAuthDeviceCodeOrderByWithRelationInput = {
@@ -13315,14 +17991,13 @@ export namespace Prisma {
     user_code?: SortOrder
     client_id?: SortOrder
     user_id?: SortOrderInput | SortOrder
-    scope?: SortOrder
+    scope?: SortOrderInput | SortOrder
+    verified?: SortOrder
     expires_at?: SortOrder
     interval?: SortOrder
-    verified?: SortOrder
-    completed_at?: SortOrderInput | SortOrder
     created_at?: SortOrder
+    completed_at?: SortOrderInput | SortOrder
     client?: OAuthClientOrderByWithRelationInput
-    user?: UserOrderByWithRelationInput
   }
 
   export type OAuthDeviceCodeWhereUniqueInput = Prisma.AtLeast<{
@@ -13334,14 +18009,13 @@ export namespace Prisma {
     NOT?: OAuthDeviceCodeWhereInput | OAuthDeviceCodeWhereInput[]
     client_id?: StringFilter<"OAuthDeviceCode"> | string
     user_id?: StringNullableFilter<"OAuthDeviceCode"> | string | null
-    scope?: StringFilter<"OAuthDeviceCode"> | string
+    scope?: StringNullableFilter<"OAuthDeviceCode"> | string | null
+    verified?: BoolFilter<"OAuthDeviceCode"> | boolean
     expires_at?: DateTimeFilter<"OAuthDeviceCode"> | Date | string
     interval?: IntFilter<"OAuthDeviceCode"> | number
-    verified?: BoolFilter<"OAuthDeviceCode"> | boolean
-    completed_at?: DateTimeNullableFilter<"OAuthDeviceCode"> | Date | string | null
     created_at?: DateTimeFilter<"OAuthDeviceCode"> | Date | string
+    completed_at?: DateTimeNullableFilter<"OAuthDeviceCode"> | Date | string | null
     client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id" | "device_code" | "user_code">
 
   export type OAuthDeviceCodeOrderByWithAggregationInput = {
@@ -13350,12 +18024,12 @@ export namespace Prisma {
     user_code?: SortOrder
     client_id?: SortOrder
     user_id?: SortOrderInput | SortOrder
-    scope?: SortOrder
+    scope?: SortOrderInput | SortOrder
+    verified?: SortOrder
     expires_at?: SortOrder
     interval?: SortOrder
-    verified?: SortOrder
-    completed_at?: SortOrderInput | SortOrder
     created_at?: SortOrder
+    completed_at?: SortOrderInput | SortOrder
     _count?: OAuthDeviceCodeCountOrderByAggregateInput
     _avg?: OAuthDeviceCodeAvgOrderByAggregateInput
     _max?: OAuthDeviceCodeMaxOrderByAggregateInput
@@ -13372,12 +18046,12 @@ export namespace Prisma {
     user_code?: StringWithAggregatesFilter<"OAuthDeviceCode"> | string
     client_id?: StringWithAggregatesFilter<"OAuthDeviceCode"> | string
     user_id?: StringNullableWithAggregatesFilter<"OAuthDeviceCode"> | string | null
-    scope?: StringWithAggregatesFilter<"OAuthDeviceCode"> | string
+    scope?: StringNullableWithAggregatesFilter<"OAuthDeviceCode"> | string | null
+    verified?: BoolWithAggregatesFilter<"OAuthDeviceCode"> | boolean
     expires_at?: DateTimeWithAggregatesFilter<"OAuthDeviceCode"> | Date | string
     interval?: IntWithAggregatesFilter<"OAuthDeviceCode"> | number
-    verified?: BoolWithAggregatesFilter<"OAuthDeviceCode"> | boolean
-    completed_at?: DateTimeNullableWithAggregatesFilter<"OAuthDeviceCode"> | Date | string | null
     created_at?: DateTimeWithAggregatesFilter<"OAuthDeviceCode"> | Date | string
+    completed_at?: DateTimeNullableWithAggregatesFilter<"OAuthDeviceCode"> | Date | string | null
   }
 
   export type OAuthUserConsentWhereInput = {
@@ -13385,51 +18059,52 @@ export namespace Prisma {
     OR?: OAuthUserConsentWhereInput[]
     NOT?: OAuthUserConsentWhereInput | OAuthUserConsentWhereInput[]
     id?: StringFilter<"OAuthUserConsent"> | string
-    client_id?: StringFilter<"OAuthUserConsent"> | string
     user_id?: StringFilter<"OAuthUserConsent"> | string
-    scope?: StringFilter<"OAuthUserConsent"> | string
+    client_id?: StringFilter<"OAuthUserConsent"> | string
+    scope?: StringNullableListFilter<"OAuthUserConsent">
+    granted_at?: DateTimeFilter<"OAuthUserConsent"> | Date | string
     expires_at?: DateTimeNullableFilter<"OAuthUserConsent"> | Date | string | null
-    created_at?: DateTimeFilter<"OAuthUserConsent"> | Date | string
+    revoked_at?: DateTimeNullableFilter<"OAuthUserConsent"> | Date | string | null
     updated_at?: DateTimeFilter<"OAuthUserConsent"> | Date | string
     client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type OAuthUserConsentOrderByWithRelationInput = {
     id?: SortOrder
-    client_id?: SortOrder
     user_id?: SortOrder
+    client_id?: SortOrder
     scope?: SortOrder
+    granted_at?: SortOrder
     expires_at?: SortOrderInput | SortOrder
-    created_at?: SortOrder
+    revoked_at?: SortOrderInput | SortOrder
     updated_at?: SortOrder
     client?: OAuthClientOrderByWithRelationInput
-    user?: UserOrderByWithRelationInput
   }
 
   export type OAuthUserConsentWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    client_id_user_id?: OAuthUserConsentClient_idUser_idCompoundUniqueInput
+    user_id_client_id?: OAuthUserConsentUser_idClient_idCompoundUniqueInput
     AND?: OAuthUserConsentWhereInput | OAuthUserConsentWhereInput[]
     OR?: OAuthUserConsentWhereInput[]
     NOT?: OAuthUserConsentWhereInput | OAuthUserConsentWhereInput[]
-    client_id?: StringFilter<"OAuthUserConsent"> | string
     user_id?: StringFilter<"OAuthUserConsent"> | string
-    scope?: StringFilter<"OAuthUserConsent"> | string
+    client_id?: StringFilter<"OAuthUserConsent"> | string
+    scope?: StringNullableListFilter<"OAuthUserConsent">
+    granted_at?: DateTimeFilter<"OAuthUserConsent"> | Date | string
     expires_at?: DateTimeNullableFilter<"OAuthUserConsent"> | Date | string | null
-    created_at?: DateTimeFilter<"OAuthUserConsent"> | Date | string
+    revoked_at?: DateTimeNullableFilter<"OAuthUserConsent"> | Date | string | null
     updated_at?: DateTimeFilter<"OAuthUserConsent"> | Date | string
     client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "client_id_user_id">
+  }, "id" | "user_id_client_id">
 
   export type OAuthUserConsentOrderByWithAggregationInput = {
     id?: SortOrder
-    client_id?: SortOrder
     user_id?: SortOrder
+    client_id?: SortOrder
     scope?: SortOrder
+    granted_at?: SortOrder
     expires_at?: SortOrderInput | SortOrder
-    created_at?: SortOrder
+    revoked_at?: SortOrderInput | SortOrder
     updated_at?: SortOrder
     _count?: OAuthUserConsentCountOrderByAggregateInput
     _max?: OAuthUserConsentMaxOrderByAggregateInput
@@ -13441,12 +18116,249 @@ export namespace Prisma {
     OR?: OAuthUserConsentScalarWhereWithAggregatesInput[]
     NOT?: OAuthUserConsentScalarWhereWithAggregatesInput | OAuthUserConsentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"OAuthUserConsent"> | string
-    client_id?: StringWithAggregatesFilter<"OAuthUserConsent"> | string
     user_id?: StringWithAggregatesFilter<"OAuthUserConsent"> | string
-    scope?: StringWithAggregatesFilter<"OAuthUserConsent"> | string
+    client_id?: StringWithAggregatesFilter<"OAuthUserConsent"> | string
+    scope?: StringNullableListFilter<"OAuthUserConsent">
+    granted_at?: DateTimeWithAggregatesFilter<"OAuthUserConsent"> | Date | string
     expires_at?: DateTimeNullableWithAggregatesFilter<"OAuthUserConsent"> | Date | string | null
-    created_at?: DateTimeWithAggregatesFilter<"OAuthUserConsent"> | Date | string
+    revoked_at?: DateTimeNullableWithAggregatesFilter<"OAuthUserConsent"> | Date | string | null
     updated_at?: DateTimeWithAggregatesFilter<"OAuthUserConsent"> | Date | string
+  }
+
+  export type PermissionWhereInput = {
+    AND?: PermissionWhereInput | PermissionWhereInput[]
+    OR?: PermissionWhereInput[]
+    NOT?: PermissionWhereInput | PermissionWhereInput[]
+    id?: StringFilter<"Permission"> | string
+    name?: StringFilter<"Permission"> | string
+    description?: StringNullableFilter<"Permission"> | string | null
+    resource?: StringFilter<"Permission"> | string
+    action?: StringFilter<"Permission"> | string
+    created_at?: DateTimeFilter<"Permission"> | Date | string
+    updated_at?: DateTimeFilter<"Permission"> | Date | string
+    roles?: RolePermissionListRelationFilter
+  }
+
+  export type PermissionOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    resource?: SortOrder
+    action?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    roles?: RolePermissionOrderByRelationAggregateInput
+  }
+
+  export type PermissionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: PermissionWhereInput | PermissionWhereInput[]
+    OR?: PermissionWhereInput[]
+    NOT?: PermissionWhereInput | PermissionWhereInput[]
+    description?: StringNullableFilter<"Permission"> | string | null
+    resource?: StringFilter<"Permission"> | string
+    action?: StringFilter<"Permission"> | string
+    created_at?: DateTimeFilter<"Permission"> | Date | string
+    updated_at?: DateTimeFilter<"Permission"> | Date | string
+    roles?: RolePermissionListRelationFilter
+  }, "id" | "name">
+
+  export type PermissionOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    resource?: SortOrder
+    action?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: PermissionCountOrderByAggregateInput
+    _max?: PermissionMaxOrderByAggregateInput
+    _min?: PermissionMinOrderByAggregateInput
+  }
+
+  export type PermissionScalarWhereWithAggregatesInput = {
+    AND?: PermissionScalarWhereWithAggregatesInput | PermissionScalarWhereWithAggregatesInput[]
+    OR?: PermissionScalarWhereWithAggregatesInput[]
+    NOT?: PermissionScalarWhereWithAggregatesInput | PermissionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Permission"> | string
+    name?: StringWithAggregatesFilter<"Permission"> | string
+    description?: StringNullableWithAggregatesFilter<"Permission"> | string | null
+    resource?: StringWithAggregatesFilter<"Permission"> | string
+    action?: StringWithAggregatesFilter<"Permission"> | string
+    created_at?: DateTimeWithAggregatesFilter<"Permission"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Permission"> | Date | string
+  }
+
+  export type RoleWhereInput = {
+    AND?: RoleWhereInput | RoleWhereInput[]
+    OR?: RoleWhereInput[]
+    NOT?: RoleWhereInput | RoleWhereInput[]
+    id?: StringFilter<"Role"> | string
+    name?: StringFilter<"Role"> | string
+    description?: StringNullableFilter<"Role"> | string | null
+    is_active?: BoolFilter<"Role"> | boolean
+    created_at?: DateTimeFilter<"Role"> | Date | string
+    updated_at?: DateTimeFilter<"Role"> | Date | string
+    permissions?: RolePermissionListRelationFilter
+    clients?: ClientRoleListRelationFilter
+  }
+
+  export type RoleOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    permissions?: RolePermissionOrderByRelationAggregateInput
+    clients?: ClientRoleOrderByRelationAggregateInput
+  }
+
+  export type RoleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: RoleWhereInput | RoleWhereInput[]
+    OR?: RoleWhereInput[]
+    NOT?: RoleWhereInput | RoleWhereInput[]
+    description?: StringNullableFilter<"Role"> | string | null
+    is_active?: BoolFilter<"Role"> | boolean
+    created_at?: DateTimeFilter<"Role"> | Date | string
+    updated_at?: DateTimeFilter<"Role"> | Date | string
+    permissions?: RolePermissionListRelationFilter
+    clients?: ClientRoleListRelationFilter
+  }, "id" | "name">
+
+  export type RoleOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: RoleCountOrderByAggregateInput
+    _max?: RoleMaxOrderByAggregateInput
+    _min?: RoleMinOrderByAggregateInput
+  }
+
+  export type RoleScalarWhereWithAggregatesInput = {
+    AND?: RoleScalarWhereWithAggregatesInput | RoleScalarWhereWithAggregatesInput[]
+    OR?: RoleScalarWhereWithAggregatesInput[]
+    NOT?: RoleScalarWhereWithAggregatesInput | RoleScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Role"> | string
+    name?: StringWithAggregatesFilter<"Role"> | string
+    description?: StringNullableWithAggregatesFilter<"Role"> | string | null
+    is_active?: BoolWithAggregatesFilter<"Role"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"Role"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Role"> | Date | string
+  }
+
+  export type RolePermissionWhereInput = {
+    AND?: RolePermissionWhereInput | RolePermissionWhereInput[]
+    OR?: RolePermissionWhereInput[]
+    NOT?: RolePermissionWhereInput | RolePermissionWhereInput[]
+    id?: StringFilter<"RolePermission"> | string
+    role_id?: StringFilter<"RolePermission"> | string
+    permission_id?: StringFilter<"RolePermission"> | string
+    created_at?: DateTimeFilter<"RolePermission"> | Date | string
+    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
+    permission?: XOR<PermissionScalarRelationFilter, PermissionWhereInput>
+  }
+
+  export type RolePermissionOrderByWithRelationInput = {
+    id?: SortOrder
+    role_id?: SortOrder
+    permission_id?: SortOrder
+    created_at?: SortOrder
+    role?: RoleOrderByWithRelationInput
+    permission?: PermissionOrderByWithRelationInput
+  }
+
+  export type RolePermissionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    role_id_permission_id?: RolePermissionRole_idPermission_idCompoundUniqueInput
+    AND?: RolePermissionWhereInput | RolePermissionWhereInput[]
+    OR?: RolePermissionWhereInput[]
+    NOT?: RolePermissionWhereInput | RolePermissionWhereInput[]
+    role_id?: StringFilter<"RolePermission"> | string
+    permission_id?: StringFilter<"RolePermission"> | string
+    created_at?: DateTimeFilter<"RolePermission"> | Date | string
+    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
+    permission?: XOR<PermissionScalarRelationFilter, PermissionWhereInput>
+  }, "id" | "role_id_permission_id">
+
+  export type RolePermissionOrderByWithAggregationInput = {
+    id?: SortOrder
+    role_id?: SortOrder
+    permission_id?: SortOrder
+    created_at?: SortOrder
+    _count?: RolePermissionCountOrderByAggregateInput
+    _max?: RolePermissionMaxOrderByAggregateInput
+    _min?: RolePermissionMinOrderByAggregateInput
+  }
+
+  export type RolePermissionScalarWhereWithAggregatesInput = {
+    AND?: RolePermissionScalarWhereWithAggregatesInput | RolePermissionScalarWhereWithAggregatesInput[]
+    OR?: RolePermissionScalarWhereWithAggregatesInput[]
+    NOT?: RolePermissionScalarWhereWithAggregatesInput | RolePermissionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RolePermission"> | string
+    role_id?: StringWithAggregatesFilter<"RolePermission"> | string
+    permission_id?: StringWithAggregatesFilter<"RolePermission"> | string
+    created_at?: DateTimeWithAggregatesFilter<"RolePermission"> | Date | string
+  }
+
+  export type ClientRoleWhereInput = {
+    AND?: ClientRoleWhereInput | ClientRoleWhereInput[]
+    OR?: ClientRoleWhereInput[]
+    NOT?: ClientRoleWhereInput | ClientRoleWhereInput[]
+    id?: StringFilter<"ClientRole"> | string
+    client_id?: StringFilter<"ClientRole"> | string
+    role_id?: StringFilter<"ClientRole"> | string
+    created_at?: DateTimeFilter<"ClientRole"> | Date | string
+    client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
+    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
+  }
+
+  export type ClientRoleOrderByWithRelationInput = {
+    id?: SortOrder
+    client_id?: SortOrder
+    role_id?: SortOrder
+    created_at?: SortOrder
+    client?: OAuthClientOrderByWithRelationInput
+    role?: RoleOrderByWithRelationInput
+  }
+
+  export type ClientRoleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    client_id_role_id?: ClientRoleClient_idRole_idCompoundUniqueInput
+    AND?: ClientRoleWhereInput | ClientRoleWhereInput[]
+    OR?: ClientRoleWhereInput[]
+    NOT?: ClientRoleWhereInput | ClientRoleWhereInput[]
+    client_id?: StringFilter<"ClientRole"> | string
+    role_id?: StringFilter<"ClientRole"> | string
+    created_at?: DateTimeFilter<"ClientRole"> | Date | string
+    client?: XOR<OAuthClientScalarRelationFilter, OAuthClientWhereInput>
+    role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
+  }, "id" | "client_id_role_id">
+
+  export type ClientRoleOrderByWithAggregationInput = {
+    id?: SortOrder
+    client_id?: SortOrder
+    role_id?: SortOrder
+    created_at?: SortOrder
+    _count?: ClientRoleCountOrderByAggregateInput
+    _max?: ClientRoleMaxOrderByAggregateInput
+    _min?: ClientRoleMinOrderByAggregateInput
+  }
+
+  export type ClientRoleScalarWhereWithAggregatesInput = {
+    AND?: ClientRoleScalarWhereWithAggregatesInput | ClientRoleScalarWhereWithAggregatesInput[]
+    OR?: ClientRoleScalarWhereWithAggregatesInput[]
+    NOT?: ClientRoleScalarWhereWithAggregatesInput | ClientRoleScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ClientRole"> | string
+    client_id?: StringWithAggregatesFilter<"ClientRole"> | string
+    role_id?: StringWithAggregatesFilter<"ClientRole"> | string
+    created_at?: DateTimeWithAggregatesFilter<"ClientRole"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -13462,11 +18374,6 @@ export namespace Prisma {
     updated_at?: Date | string
     refresh_tokens?: RefreshTokenCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -13482,11 +18389,6 @@ export namespace Prisma {
     updated_at?: Date | string
     refresh_tokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -13502,11 +18404,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     refresh_tokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -13522,11 +18419,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     refresh_tokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -13695,7 +18587,6 @@ export namespace Prisma {
   export type OAuthClientCreateInput = {
     id?: string
     client_id: string
-    client_secret?: string | null
     client_secret_hash?: string | null
     name: string
     description?: string | null
@@ -13713,19 +18604,21 @@ export namespace Prisma {
     policy_uri?: string | null
     tos_uri?: string | null
     is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutClientInput
     access_tokens?: OAuthAccessTokenCreateNestedManyWithoutClientInput
     refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutClientInput
+    authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutClientInput
     device_codes?: OAuthDeviceCodeCreateNestedManyWithoutClientInput
     user_consents?: OAuthUserConsentCreateNestedManyWithoutClientInput
+    roles?: ClientRoleCreateNestedManyWithoutClientInput
   }
 
   export type OAuthClientUncheckedCreateInput = {
     id?: string
     client_id: string
-    client_secret?: string | null
     client_secret_hash?: string | null
     name: string
     description?: string | null
@@ -13743,19 +18636,21 @@ export namespace Prisma {
     policy_uri?: string | null
     tos_uri?: string | null
     is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutClientInput
     access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput
     refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutClientInput
+    authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutClientInput
     device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutClientInput
     user_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutClientInput
+    roles?: ClientRoleUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type OAuthClientUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
     client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13773,19 +18668,21 @@ export namespace Prisma {
     policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
     tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutClientNestedInput
     access_tokens?: OAuthAccessTokenUpdateManyWithoutClientNestedInput
     refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutClientNestedInput
+    authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutClientNestedInput
     device_codes?: OAuthDeviceCodeUpdateManyWithoutClientNestedInput
     user_consents?: OAuthUserConsentUpdateManyWithoutClientNestedInput
+    roles?: ClientRoleUpdateManyWithoutClientNestedInput
   }
 
   export type OAuthClientUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
     client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13803,19 +18700,21 @@ export namespace Prisma {
     policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
     tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientNestedInput
     access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput
     refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutClientNestedInput
+    authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientNestedInput
     device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutClientNestedInput
     user_consents?: OAuthUserConsentUncheckedUpdateManyWithoutClientNestedInput
+    roles?: ClientRoleUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type OAuthClientCreateManyInput = {
     id?: string
     client_id: string
-    client_secret?: string | null
     client_secret_hash?: string | null
     name: string
     description?: string | null
@@ -13833,6 +18732,8 @@ export namespace Prisma {
     policy_uri?: string | null
     tos_uri?: string | null
     is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -13840,7 +18741,6 @@ export namespace Prisma {
   export type OAuthClientUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
     client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13858,6 +18758,8 @@ export namespace Prisma {
     policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
     tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13865,7 +18767,6 @@ export namespace Prisma {
   export type OAuthClientUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
     client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13883,130 +18784,25 @@ export namespace Prisma {
     policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
     tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthAuthorizationCodeCreateInput = {
-    id?: string
-    code: string
-    redirect_uri: string
-    scope: string
-    state?: string | null
-    code_challenge?: string | null
-    code_challenge_method?: string | null
-    nonce?: string | null
-    expires_at: Date | string
-    consumed_at?: Date | string | null
-    created_at?: Date | string
-    client: OAuthClientCreateNestedOneWithoutAuthorization_codesInput
-    user?: UserCreateNestedOneWithoutOauth_authorization_codesInput
-  }
-
-  export type OAuthAuthorizationCodeUncheckedCreateInput = {
-    id?: string
-    code: string
-    client_id: string
-    user_id?: string | null
-    redirect_uri: string
-    scope: string
-    state?: string | null
-    code_challenge?: string | null
-    code_challenge_method?: string | null
-    nonce?: string | null
-    expires_at: Date | string
-    consumed_at?: Date | string | null
-    created_at?: Date | string
-  }
-
-  export type OAuthAuthorizationCodeUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    redirect_uri?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
-    nonce?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: OAuthClientUpdateOneRequiredWithoutAuthorization_codesNestedInput
-    user?: UserUpdateOneWithoutOauth_authorization_codesNestedInput
-  }
-
-  export type OAuthAuthorizationCodeUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    redirect_uri?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
-    nonce?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthAuthorizationCodeCreateManyInput = {
-    id?: string
-    code: string
-    client_id: string
-    user_id?: string | null
-    redirect_uri: string
-    scope: string
-    state?: string | null
-    code_challenge?: string | null
-    code_challenge_method?: string | null
-    nonce?: string | null
-    expires_at: Date | string
-    consumed_at?: Date | string | null
-    created_at?: Date | string
-  }
-
-  export type OAuthAuthorizationCodeUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    redirect_uri?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
-    nonce?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthAuthorizationCodeUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    redirect_uri?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
-    nonce?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OAuthAccessTokenCreateInput = {
     id?: string
     token: string
-    scope: string
+    user_id?: string | null
+    scope?: string | null
+    permissions?: OAuthAccessTokenCreatepermissionsInput | string[]
+    roles?: OAuthAccessTokenCreaterolesInput | string[]
     token_type?: string
     expires_at: Date | string
-    revoked_at?: Date | string | null
     created_at?: Date | string
+    revoked_at?: Date | string | null
     client: OAuthClientCreateNestedOneWithoutAccess_tokensInput
-    user?: UserCreateNestedOneWithoutOauth_access_tokensInput
+    refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutAccess_tokenInput
   }
 
   export type OAuthAccessTokenUncheckedCreateInput = {
@@ -14014,23 +18810,29 @@ export namespace Prisma {
     token: string
     client_id: string
     user_id?: string | null
-    scope: string
+    scope?: string | null
+    permissions?: OAuthAccessTokenCreatepermissionsInput | string[]
+    roles?: OAuthAccessTokenCreaterolesInput | string[]
     token_type?: string
     expires_at: Date | string
-    revoked_at?: Date | string | null
     created_at?: Date | string
+    revoked_at?: Date | string | null
+    refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutAccess_tokenInput
   }
 
   export type OAuthAccessTokenUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    permissions?: OAuthAccessTokenUpdatepermissionsInput | string[]
+    roles?: OAuthAccessTokenUpdaterolesInput | string[]
     token_type?: StringFieldUpdateOperationsInput | string
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     client?: OAuthClientUpdateOneRequiredWithoutAccess_tokensNestedInput
-    user?: UserUpdateOneWithoutOauth_access_tokensNestedInput
+    refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutAccess_tokenNestedInput
   }
 
   export type OAuthAccessTokenUncheckedUpdateInput = {
@@ -14038,11 +18840,14 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    permissions?: OAuthAccessTokenUpdatepermissionsInput | string[]
+    roles?: OAuthAccessTokenUpdaterolesInput | string[]
     token_type?: StringFieldUpdateOperationsInput | string
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutAccess_tokenNestedInput
   }
 
   export type OAuthAccessTokenCreateManyInput = {
@@ -14050,21 +18855,26 @@ export namespace Prisma {
     token: string
     client_id: string
     user_id?: string | null
-    scope: string
+    scope?: string | null
+    permissions?: OAuthAccessTokenCreatepermissionsInput | string[]
+    roles?: OAuthAccessTokenCreaterolesInput | string[]
     token_type?: string
     expires_at: Date | string
-    revoked_at?: Date | string | null
     created_at?: Date | string
+    revoked_at?: Date | string | null
   }
 
   export type OAuthAccessTokenUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    permissions?: OAuthAccessTokenUpdatepermissionsInput | string[]
+    roles?: OAuthAccessTokenUpdaterolesInput | string[]
     token_type?: StringFieldUpdateOperationsInput | string
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthAccessTokenUncheckedUpdateManyInput = {
@@ -14072,23 +18882,25 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    permissions?: OAuthAccessTokenUpdatepermissionsInput | string[]
+    roles?: OAuthAccessTokenUpdaterolesInput | string[]
     token_type?: StringFieldUpdateOperationsInput | string
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthRefreshTokenCreateInput = {
     id?: string
     token: string
-    access_token_id: string
-    scope: string
+    user_id?: string | null
+    scope?: string | null
     expires_at: Date | string
-    revoked_at?: Date | string | null
     created_at?: Date | string
+    revoked_at?: Date | string | null
+    access_token: OAuthAccessTokenCreateNestedOneWithoutRefresh_tokensInput
     client: OAuthClientCreateNestedOneWithoutRefresh_tokensInput
-    user?: UserCreateNestedOneWithoutOauth_refresh_tokensInput
   }
 
   export type OAuthRefreshTokenUncheckedCreateInput = {
@@ -14097,22 +18909,22 @@ export namespace Prisma {
     access_token_id: string
     client_id: string
     user_id?: string | null
-    scope: string
+    scope?: string | null
     expires_at: Date | string
-    revoked_at?: Date | string | null
     created_at?: Date | string
+    revoked_at?: Date | string | null
   }
 
   export type OAuthRefreshTokenUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    access_token_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    access_token?: OAuthAccessTokenUpdateOneRequiredWithoutRefresh_tokensNestedInput
     client?: OAuthClientUpdateOneRequiredWithoutRefresh_tokensNestedInput
-    user?: UserUpdateOneWithoutOauth_refresh_tokensNestedInput
   }
 
   export type OAuthRefreshTokenUncheckedUpdateInput = {
@@ -14121,10 +18933,10 @@ export namespace Prisma {
     access_token_id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthRefreshTokenCreateManyInput = {
@@ -14133,20 +18945,20 @@ export namespace Prisma {
     access_token_id: string
     client_id: string
     user_id?: string | null
-    scope: string
+    scope?: string | null
     expires_at: Date | string
-    revoked_at?: Date | string | null
     created_at?: Date | string
+    revoked_at?: Date | string | null
   }
 
   export type OAuthRefreshTokenUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    access_token_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthRefreshTokenUncheckedUpdateManyInput = {
@@ -14155,24 +18967,142 @@ export namespace Prisma {
     access_token_id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type OAuthAuthorizationCodeCreateInput = {
+    id?: string
+    code: string
+    user_id: string
+    scope?: string | null
+    redirect_uri: string
+    state?: string | null
+    code_challenge?: string | null
+    code_challenge_method?: string | null
+    nonce?: string | null
+    consumed_at?: Date | string | null
+    expires_at: Date | string
+    created_at?: Date | string
+    used_at?: Date | string | null
+    client: OAuthClientCreateNestedOneWithoutAuthorization_codesInput
+  }
+
+  export type OAuthAuthorizationCodeUncheckedCreateInput = {
+    id?: string
+    code: string
+    client_id: string
+    user_id: string
+    scope?: string | null
+    redirect_uri: string
+    state?: string | null
+    code_challenge?: string | null
+    code_challenge_method?: string | null
+    nonce?: string | null
+    consumed_at?: Date | string | null
+    expires_at: Date | string
+    created_at?: Date | string
+    used_at?: Date | string | null
+  }
+
+  export type OAuthAuthorizationCodeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    redirect_uri?: StringFieldUpdateOperationsInput | string
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
+    nonce?: NullableStringFieldUpdateOperationsInput | string | null
+    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    used_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    client?: OAuthClientUpdateOneRequiredWithoutAuthorization_codesNestedInput
+  }
+
+  export type OAuthAuthorizationCodeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    redirect_uri?: StringFieldUpdateOperationsInput | string
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
+    nonce?: NullableStringFieldUpdateOperationsInput | string | null
+    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    used_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type OAuthAuthorizationCodeCreateManyInput = {
+    id?: string
+    code: string
+    client_id: string
+    user_id: string
+    scope?: string | null
+    redirect_uri: string
+    state?: string | null
+    code_challenge?: string | null
+    code_challenge_method?: string | null
+    nonce?: string | null
+    consumed_at?: Date | string | null
+    expires_at: Date | string
+    created_at?: Date | string
+    used_at?: Date | string | null
+  }
+
+  export type OAuthAuthorizationCodeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    redirect_uri?: StringFieldUpdateOperationsInput | string
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
+    nonce?: NullableStringFieldUpdateOperationsInput | string | null
+    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    used_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type OAuthAuthorizationCodeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    redirect_uri?: StringFieldUpdateOperationsInput | string
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
+    nonce?: NullableStringFieldUpdateOperationsInput | string | null
+    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    used_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthDeviceCodeCreateInput = {
     id?: string
     device_code: string
     user_code: string
-    scope: string
+    user_id?: string | null
+    scope?: string | null
+    verified?: boolean
     expires_at: Date | string
     interval?: number
-    verified?: boolean
-    completed_at?: Date | string | null
     created_at?: Date | string
+    completed_at?: Date | string | null
     client: OAuthClientCreateNestedOneWithoutDevice_codesInput
-    user?: UserCreateNestedOneWithoutOauth_device_codesInput
   }
 
   export type OAuthDeviceCodeUncheckedCreateInput = {
@@ -14181,26 +19111,26 @@ export namespace Prisma {
     user_code: string
     client_id: string
     user_id?: string | null
-    scope: string
+    scope?: string | null
+    verified?: boolean
     expires_at: Date | string
     interval?: number
-    verified?: boolean
-    completed_at?: Date | string | null
     created_at?: Date | string
+    completed_at?: Date | string | null
   }
 
   export type OAuthDeviceCodeUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     device_code?: StringFieldUpdateOperationsInput | string
     user_code?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
     interval?: IntFieldUpdateOperationsInput | number
-    verified?: BoolFieldUpdateOperationsInput | boolean
-    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     client?: OAuthClientUpdateOneRequiredWithoutDevice_codesNestedInput
-    user?: UserUpdateOneWithoutOauth_device_codesNestedInput
   }
 
   export type OAuthDeviceCodeUncheckedUpdateInput = {
@@ -14209,12 +19139,12 @@ export namespace Prisma {
     user_code?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
     interval?: IntFieldUpdateOperationsInput | number
-    verified?: BoolFieldUpdateOperationsInput | boolean
-    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthDeviceCodeCreateManyInput = {
@@ -14223,24 +19153,25 @@ export namespace Prisma {
     user_code: string
     client_id: string
     user_id?: string | null
-    scope: string
+    scope?: string | null
+    verified?: boolean
     expires_at: Date | string
     interval?: number
-    verified?: boolean
-    completed_at?: Date | string | null
     created_at?: Date | string
+    completed_at?: Date | string | null
   }
 
   export type OAuthDeviceCodeUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     device_code?: StringFieldUpdateOperationsInput | string
     user_code?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
     interval?: IntFieldUpdateOperationsInput | number
-    verified?: BoolFieldUpdateOperationsInput | boolean
-    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthDeviceCodeUncheckedUpdateManyInput = {
@@ -14249,80 +19180,327 @@ export namespace Prisma {
     user_code?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
     interval?: IntFieldUpdateOperationsInput | number
-    verified?: BoolFieldUpdateOperationsInput | boolean
-    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthUserConsentCreateInput = {
     id?: string
-    scope: string
+    user_id: string
+    scope?: OAuthUserConsentCreatescopeInput | string[]
+    granted_at?: Date | string
     expires_at?: Date | string | null
-    created_at?: Date | string
+    revoked_at?: Date | string | null
     updated_at?: Date | string
     client: OAuthClientCreateNestedOneWithoutUser_consentsInput
-    user: UserCreateNestedOneWithoutOauth_consentsInput
   }
 
   export type OAuthUserConsentUncheckedCreateInput = {
     id?: string
-    client_id: string
     user_id: string
-    scope: string
+    client_id: string
+    scope?: OAuthUserConsentCreatescopeInput | string[]
+    granted_at?: Date | string
     expires_at?: Date | string | null
-    created_at?: Date | string
+    revoked_at?: Date | string | null
     updated_at?: Date | string
   }
 
   export type OAuthUserConsentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    scope?: OAuthUserConsentUpdatescopeInput | string[]
+    granted_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     client?: OAuthClientUpdateOneRequiredWithoutUser_consentsNestedInput
-    user?: UserUpdateOneRequiredWithoutOauth_consentsNestedInput
   }
 
   export type OAuthUserConsentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    scope?: OAuthUserConsentUpdatescopeInput | string[]
+    granted_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OAuthUserConsentCreateManyInput = {
     id?: string
-    client_id: string
     user_id: string
-    scope: string
+    client_id: string
+    scope?: OAuthUserConsentCreatescopeInput | string[]
+    granted_at?: Date | string
     expires_at?: Date | string | null
-    created_at?: Date | string
+    revoked_at?: Date | string | null
     updated_at?: Date | string
   }
 
   export type OAuthUserConsentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    scope?: OAuthUserConsentUpdatescopeInput | string[]
+    granted_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OAuthUserConsentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    scope?: OAuthUserConsentUpdatescopeInput | string[]
+    granted_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PermissionCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    resource: string
+    action: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    roles?: RolePermissionCreateNestedManyWithoutPermissionInput
+  }
+
+  export type PermissionUncheckedCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    resource: string
+    action: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    roles?: RolePermissionUncheckedCreateNestedManyWithoutPermissionInput
+  }
+
+  export type PermissionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    resource?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: RolePermissionUpdateManyWithoutPermissionNestedInput
+  }
+
+  export type PermissionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    resource?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: RolePermissionUncheckedUpdateManyWithoutPermissionNestedInput
+  }
+
+  export type PermissionCreateManyInput = {
+    id?: string
+    name: string
+    description?: string | null
+    resource: string
+    action: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PermissionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    resource?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PermissionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    resource?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoleCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    permissions?: RolePermissionCreateNestedManyWithoutRoleInput
+    clients?: ClientRoleCreateNestedManyWithoutRoleInput
+  }
+
+  export type RoleUncheckedCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    permissions?: RolePermissionUncheckedCreateNestedManyWithoutRoleInput
+    clients?: ClientRoleUncheckedCreateNestedManyWithoutRoleInput
+  }
+
+  export type RoleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: RolePermissionUpdateManyWithoutRoleNestedInput
+    clients?: ClientRoleUpdateManyWithoutRoleNestedInput
+  }
+
+  export type RoleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
+    clients?: ClientRoleUncheckedUpdateManyWithoutRoleNestedInput
+  }
+
+  export type RoleCreateManyInput = {
+    id?: string
+    name: string
+    description?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type RoleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RolePermissionCreateInput = {
+    id?: string
+    created_at?: Date | string
+    role: RoleCreateNestedOneWithoutPermissionsInput
+    permission: PermissionCreateNestedOneWithoutRolesInput
+  }
+
+  export type RolePermissionUncheckedCreateInput = {
+    id?: string
+    role_id: string
+    permission_id: string
+    created_at?: Date | string
+  }
+
+  export type RolePermissionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneRequiredWithoutPermissionsNestedInput
+    permission?: PermissionUpdateOneRequiredWithoutRolesNestedInput
+  }
+
+  export type RolePermissionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role_id?: StringFieldUpdateOperationsInput | string
+    permission_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RolePermissionCreateManyInput = {
+    id?: string
+    role_id: string
+    permission_id: string
+    created_at?: Date | string
+  }
+
+  export type RolePermissionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RolePermissionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role_id?: StringFieldUpdateOperationsInput | string
+    permission_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientRoleCreateInput = {
+    id?: string
+    created_at?: Date | string
+    client: OAuthClientCreateNestedOneWithoutRolesInput
+    role: RoleCreateNestedOneWithoutClientsInput
+  }
+
+  export type ClientRoleUncheckedCreateInput = {
+    id?: string
+    client_id: string
+    role_id: string
+    created_at?: Date | string
+  }
+
+  export type ClientRoleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: OAuthClientUpdateOneRequiredWithoutRolesNestedInput
+    role?: RoleUpdateOneRequiredWithoutClientsNestedInput
+  }
+
+  export type ClientRoleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    role_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientRoleCreateManyInput = {
+    id?: string
+    client_id: string
+    role_id: string
+    created_at?: Date | string
+  }
+
+  export type ClientRoleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientRoleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    role_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -14383,36 +19561,6 @@ export namespace Prisma {
     none?: SessionWhereInput
   }
 
-  export type OAuthAuthorizationCodeListRelationFilter = {
-    every?: OAuthAuthorizationCodeWhereInput
-    some?: OAuthAuthorizationCodeWhereInput
-    none?: OAuthAuthorizationCodeWhereInput
-  }
-
-  export type OAuthAccessTokenListRelationFilter = {
-    every?: OAuthAccessTokenWhereInput
-    some?: OAuthAccessTokenWhereInput
-    none?: OAuthAccessTokenWhereInput
-  }
-
-  export type OAuthRefreshTokenListRelationFilter = {
-    every?: OAuthRefreshTokenWhereInput
-    some?: OAuthRefreshTokenWhereInput
-    none?: OAuthRefreshTokenWhereInput
-  }
-
-  export type OAuthDeviceCodeListRelationFilter = {
-    every?: OAuthDeviceCodeWhereInput
-    some?: OAuthDeviceCodeWhereInput
-    none?: OAuthDeviceCodeWhereInput
-  }
-
-  export type OAuthUserConsentListRelationFilter = {
-    every?: OAuthUserConsentWhereInput
-    some?: OAuthUserConsentWhereInput
-    none?: OAuthUserConsentWhereInput
-  }
-
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -14423,26 +19571,6 @@ export namespace Prisma {
   }
 
   export type SessionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type OAuthAuthorizationCodeOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type OAuthAccessTokenOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type OAuthRefreshTokenOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type OAuthDeviceCodeOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type OAuthUserConsentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14646,10 +19774,69 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type OAuthAccessTokenListRelationFilter = {
+    every?: OAuthAccessTokenWhereInput
+    some?: OAuthAccessTokenWhereInput
+    none?: OAuthAccessTokenWhereInput
+  }
+
+  export type OAuthRefreshTokenListRelationFilter = {
+    every?: OAuthRefreshTokenWhereInput
+    some?: OAuthRefreshTokenWhereInput
+    none?: OAuthRefreshTokenWhereInput
+  }
+
+  export type OAuthAuthorizationCodeListRelationFilter = {
+    every?: OAuthAuthorizationCodeWhereInput
+    some?: OAuthAuthorizationCodeWhereInput
+    none?: OAuthAuthorizationCodeWhereInput
+  }
+
+  export type OAuthDeviceCodeListRelationFilter = {
+    every?: OAuthDeviceCodeWhereInput
+    some?: OAuthDeviceCodeWhereInput
+    none?: OAuthDeviceCodeWhereInput
+  }
+
+  export type OAuthUserConsentListRelationFilter = {
+    every?: OAuthUserConsentWhereInput
+    some?: OAuthUserConsentWhereInput
+    none?: OAuthUserConsentWhereInput
+  }
+
+  export type ClientRoleListRelationFilter = {
+    every?: ClientRoleWhereInput
+    some?: ClientRoleWhereInput
+    none?: ClientRoleWhereInput
+  }
+
+  export type OAuthAccessTokenOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OAuthRefreshTokenOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OAuthAuthorizationCodeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OAuthDeviceCodeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OAuthUserConsentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ClientRoleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type OAuthClientCountOrderByAggregateInput = {
     id?: SortOrder
     client_id?: SortOrder
-    client_secret?: SortOrder
     client_secret_hash?: SortOrder
     name?: SortOrder
     description?: SortOrder
@@ -14667,6 +19854,8 @@ export namespace Prisma {
     policy_uri?: SortOrder
     tos_uri?: SortOrder
     is_active?: SortOrder
+    permissions?: SortOrder
+    owner_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -14679,7 +19868,6 @@ export namespace Prisma {
   export type OAuthClientMaxOrderByAggregateInput = {
     id?: SortOrder
     client_id?: SortOrder
-    client_secret?: SortOrder
     client_secret_hash?: SortOrder
     name?: SortOrder
     description?: SortOrder
@@ -14692,6 +19880,7 @@ export namespace Prisma {
     policy_uri?: SortOrder
     tos_uri?: SortOrder
     is_active?: SortOrder
+    owner_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -14699,7 +19888,6 @@ export namespace Prisma {
   export type OAuthClientMinOrderByAggregateInput = {
     id?: SortOrder
     client_id?: SortOrder
-    client_secret?: SortOrder
     client_secret_hash?: SortOrder
     name?: SortOrder
     description?: SortOrder
@@ -14712,6 +19900,7 @@ export namespace Prisma {
     policy_uri?: SortOrder
     tos_uri?: SortOrder
     is_active?: SortOrder
+    owner_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -14742,69 +19931,18 @@ export namespace Prisma {
     isNot?: OAuthClientWhereInput
   }
 
-  export type UserNullableScalarRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
-  }
-
-  export type OAuthAuthorizationCodeCountOrderByAggregateInput = {
-    id?: SortOrder
-    code?: SortOrder
-    client_id?: SortOrder
-    user_id?: SortOrder
-    redirect_uri?: SortOrder
-    scope?: SortOrder
-    state?: SortOrder
-    code_challenge?: SortOrder
-    code_challenge_method?: SortOrder
-    nonce?: SortOrder
-    expires_at?: SortOrder
-    consumed_at?: SortOrder
-    created_at?: SortOrder
-  }
-
-  export type OAuthAuthorizationCodeMaxOrderByAggregateInput = {
-    id?: SortOrder
-    code?: SortOrder
-    client_id?: SortOrder
-    user_id?: SortOrder
-    redirect_uri?: SortOrder
-    scope?: SortOrder
-    state?: SortOrder
-    code_challenge?: SortOrder
-    code_challenge_method?: SortOrder
-    nonce?: SortOrder
-    expires_at?: SortOrder
-    consumed_at?: SortOrder
-    created_at?: SortOrder
-  }
-
-  export type OAuthAuthorizationCodeMinOrderByAggregateInput = {
-    id?: SortOrder
-    code?: SortOrder
-    client_id?: SortOrder
-    user_id?: SortOrder
-    redirect_uri?: SortOrder
-    scope?: SortOrder
-    state?: SortOrder
-    code_challenge?: SortOrder
-    code_challenge_method?: SortOrder
-    nonce?: SortOrder
-    expires_at?: SortOrder
-    consumed_at?: SortOrder
-    created_at?: SortOrder
-  }
-
   export type OAuthAccessTokenCountOrderByAggregateInput = {
     id?: SortOrder
     token?: SortOrder
     client_id?: SortOrder
     user_id?: SortOrder
     scope?: SortOrder
+    permissions?: SortOrder
+    roles?: SortOrder
     token_type?: SortOrder
     expires_at?: SortOrder
-    revoked_at?: SortOrder
     created_at?: SortOrder
+    revoked_at?: SortOrder
   }
 
   export type OAuthAccessTokenMaxOrderByAggregateInput = {
@@ -14815,8 +19953,8 @@ export namespace Prisma {
     scope?: SortOrder
     token_type?: SortOrder
     expires_at?: SortOrder
-    revoked_at?: SortOrder
     created_at?: SortOrder
+    revoked_at?: SortOrder
   }
 
   export type OAuthAccessTokenMinOrderByAggregateInput = {
@@ -14827,8 +19965,13 @@ export namespace Prisma {
     scope?: SortOrder
     token_type?: SortOrder
     expires_at?: SortOrder
-    revoked_at?: SortOrder
     created_at?: SortOrder
+    revoked_at?: SortOrder
+  }
+
+  export type OAuthAccessTokenScalarRelationFilter = {
+    is?: OAuthAccessTokenWhereInput
+    isNot?: OAuthAccessTokenWhereInput
   }
 
   export type OAuthRefreshTokenCountOrderByAggregateInput = {
@@ -14839,8 +19982,8 @@ export namespace Prisma {
     user_id?: SortOrder
     scope?: SortOrder
     expires_at?: SortOrder
-    revoked_at?: SortOrder
     created_at?: SortOrder
+    revoked_at?: SortOrder
   }
 
   export type OAuthRefreshTokenMaxOrderByAggregateInput = {
@@ -14851,8 +19994,8 @@ export namespace Prisma {
     user_id?: SortOrder
     scope?: SortOrder
     expires_at?: SortOrder
-    revoked_at?: SortOrder
     created_at?: SortOrder
+    revoked_at?: SortOrder
   }
 
   export type OAuthRefreshTokenMinOrderByAggregateInput = {
@@ -14863,8 +20006,59 @@ export namespace Prisma {
     user_id?: SortOrder
     scope?: SortOrder
     expires_at?: SortOrder
-    revoked_at?: SortOrder
     created_at?: SortOrder
+    revoked_at?: SortOrder
+  }
+
+  export type OAuthAuthorizationCodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    client_id?: SortOrder
+    user_id?: SortOrder
+    scope?: SortOrder
+    redirect_uri?: SortOrder
+    state?: SortOrder
+    code_challenge?: SortOrder
+    code_challenge_method?: SortOrder
+    nonce?: SortOrder
+    consumed_at?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+    used_at?: SortOrder
+  }
+
+  export type OAuthAuthorizationCodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    client_id?: SortOrder
+    user_id?: SortOrder
+    scope?: SortOrder
+    redirect_uri?: SortOrder
+    state?: SortOrder
+    code_challenge?: SortOrder
+    code_challenge_method?: SortOrder
+    nonce?: SortOrder
+    consumed_at?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+    used_at?: SortOrder
+  }
+
+  export type OAuthAuthorizationCodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    client_id?: SortOrder
+    user_id?: SortOrder
+    scope?: SortOrder
+    redirect_uri?: SortOrder
+    state?: SortOrder
+    code_challenge?: SortOrder
+    code_challenge_method?: SortOrder
+    nonce?: SortOrder
+    consumed_at?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+    used_at?: SortOrder
   }
 
   export type OAuthDeviceCodeCountOrderByAggregateInput = {
@@ -14874,11 +20068,11 @@ export namespace Prisma {
     client_id?: SortOrder
     user_id?: SortOrder
     scope?: SortOrder
+    verified?: SortOrder
     expires_at?: SortOrder
     interval?: SortOrder
-    verified?: SortOrder
-    completed_at?: SortOrder
     created_at?: SortOrder
+    completed_at?: SortOrder
   }
 
   export type OAuthDeviceCodeAvgOrderByAggregateInput = {
@@ -14892,11 +20086,11 @@ export namespace Prisma {
     client_id?: SortOrder
     user_id?: SortOrder
     scope?: SortOrder
+    verified?: SortOrder
     expires_at?: SortOrder
     interval?: SortOrder
-    verified?: SortOrder
-    completed_at?: SortOrder
     created_at?: SortOrder
+    completed_at?: SortOrder
   }
 
   export type OAuthDeviceCodeMinOrderByAggregateInput = {
@@ -14906,50 +20100,180 @@ export namespace Prisma {
     client_id?: SortOrder
     user_id?: SortOrder
     scope?: SortOrder
+    verified?: SortOrder
     expires_at?: SortOrder
     interval?: SortOrder
-    verified?: SortOrder
-    completed_at?: SortOrder
     created_at?: SortOrder
+    completed_at?: SortOrder
   }
 
   export type OAuthDeviceCodeSumOrderByAggregateInput = {
     interval?: SortOrder
   }
 
-  export type OAuthUserConsentClient_idUser_idCompoundUniqueInput = {
-    client_id: string
+  export type OAuthUserConsentUser_idClient_idCompoundUniqueInput = {
     user_id: string
+    client_id: string
   }
 
   export type OAuthUserConsentCountOrderByAggregateInput = {
     id?: SortOrder
-    client_id?: SortOrder
     user_id?: SortOrder
+    client_id?: SortOrder
     scope?: SortOrder
+    granted_at?: SortOrder
     expires_at?: SortOrder
-    created_at?: SortOrder
+    revoked_at?: SortOrder
     updated_at?: SortOrder
   }
 
   export type OAuthUserConsentMaxOrderByAggregateInput = {
     id?: SortOrder
-    client_id?: SortOrder
     user_id?: SortOrder
-    scope?: SortOrder
+    client_id?: SortOrder
+    granted_at?: SortOrder
     expires_at?: SortOrder
-    created_at?: SortOrder
+    revoked_at?: SortOrder
     updated_at?: SortOrder
   }
 
   export type OAuthUserConsentMinOrderByAggregateInput = {
     id?: SortOrder
-    client_id?: SortOrder
     user_id?: SortOrder
-    scope?: SortOrder
+    client_id?: SortOrder
+    granted_at?: SortOrder
     expires_at?: SortOrder
+    revoked_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type RolePermissionListRelationFilter = {
+    every?: RolePermissionWhereInput
+    some?: RolePermissionWhereInput
+    none?: RolePermissionWhereInput
+  }
+
+  export type RolePermissionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PermissionCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    resource?: SortOrder
+    action?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+  }
+
+  export type PermissionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    resource?: SortOrder
+    action?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type PermissionMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    resource?: SortOrder
+    action?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type RoleCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type RoleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type RoleMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type RoleScalarRelationFilter = {
+    is?: RoleWhereInput
+    isNot?: RoleWhereInput
+  }
+
+  export type PermissionScalarRelationFilter = {
+    is?: PermissionWhereInput
+    isNot?: PermissionWhereInput
+  }
+
+  export type RolePermissionRole_idPermission_idCompoundUniqueInput = {
+    role_id: string
+    permission_id: string
+  }
+
+  export type RolePermissionCountOrderByAggregateInput = {
+    id?: SortOrder
+    role_id?: SortOrder
+    permission_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type RolePermissionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    role_id?: SortOrder
+    permission_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type RolePermissionMinOrderByAggregateInput = {
+    id?: SortOrder
+    role_id?: SortOrder
+    permission_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type ClientRoleClient_idRole_idCompoundUniqueInput = {
+    client_id: string
+    role_id: string
+  }
+
+  export type ClientRoleCountOrderByAggregateInput = {
+    id?: SortOrder
+    client_id?: SortOrder
+    role_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type ClientRoleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    client_id?: SortOrder
+    role_id?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type ClientRoleMinOrderByAggregateInput = {
+    id?: SortOrder
+    client_id?: SortOrder
+    role_id?: SortOrder
+    created_at?: SortOrder
   }
 
   export type RefreshTokenCreateNestedManyWithoutUserInput = {
@@ -14966,41 +20290,6 @@ export namespace Prisma {
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
-  export type OAuthAuthorizationCodeCreateNestedManyWithoutUserInput = {
-    create?: XOR<OAuthAuthorizationCodeCreateWithoutUserInput, OAuthAuthorizationCodeUncheckedCreateWithoutUserInput> | OAuthAuthorizationCodeCreateWithoutUserInput[] | OAuthAuthorizationCodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthAuthorizationCodeCreateOrConnectWithoutUserInput | OAuthAuthorizationCodeCreateOrConnectWithoutUserInput[]
-    createMany?: OAuthAuthorizationCodeCreateManyUserInputEnvelope
-    connect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-  }
-
-  export type OAuthAccessTokenCreateNestedManyWithoutUserInput = {
-    create?: XOR<OAuthAccessTokenCreateWithoutUserInput, OAuthAccessTokenUncheckedCreateWithoutUserInput> | OAuthAccessTokenCreateWithoutUserInput[] | OAuthAccessTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthAccessTokenCreateOrConnectWithoutUserInput | OAuthAccessTokenCreateOrConnectWithoutUserInput[]
-    createMany?: OAuthAccessTokenCreateManyUserInputEnvelope
-    connect?: OAuthAccessTokenWhereUniqueInput | OAuthAccessTokenWhereUniqueInput[]
-  }
-
-  export type OAuthRefreshTokenCreateNestedManyWithoutUserInput = {
-    create?: XOR<OAuthRefreshTokenCreateWithoutUserInput, OAuthRefreshTokenUncheckedCreateWithoutUserInput> | OAuthRefreshTokenCreateWithoutUserInput[] | OAuthRefreshTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthRefreshTokenCreateOrConnectWithoutUserInput | OAuthRefreshTokenCreateOrConnectWithoutUserInput[]
-    createMany?: OAuthRefreshTokenCreateManyUserInputEnvelope
-    connect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
-  }
-
-  export type OAuthDeviceCodeCreateNestedManyWithoutUserInput = {
-    create?: XOR<OAuthDeviceCodeCreateWithoutUserInput, OAuthDeviceCodeUncheckedCreateWithoutUserInput> | OAuthDeviceCodeCreateWithoutUserInput[] | OAuthDeviceCodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthDeviceCodeCreateOrConnectWithoutUserInput | OAuthDeviceCodeCreateOrConnectWithoutUserInput[]
-    createMany?: OAuthDeviceCodeCreateManyUserInputEnvelope
-    connect?: OAuthDeviceCodeWhereUniqueInput | OAuthDeviceCodeWhereUniqueInput[]
-  }
-
-  export type OAuthUserConsentCreateNestedManyWithoutUserInput = {
-    create?: XOR<OAuthUserConsentCreateWithoutUserInput, OAuthUserConsentUncheckedCreateWithoutUserInput> | OAuthUserConsentCreateWithoutUserInput[] | OAuthUserConsentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthUserConsentCreateOrConnectWithoutUserInput | OAuthUserConsentCreateOrConnectWithoutUserInput[]
-    createMany?: OAuthUserConsentCreateManyUserInputEnvelope
-    connect?: OAuthUserConsentWhereUniqueInput | OAuthUserConsentWhereUniqueInput[]
-  }
-
   export type RefreshTokenUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
@@ -15013,41 +20302,6 @@ export namespace Prisma {
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
     createMany?: SessionCreateManyUserInputEnvelope
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
-  export type OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<OAuthAuthorizationCodeCreateWithoutUserInput, OAuthAuthorizationCodeUncheckedCreateWithoutUserInput> | OAuthAuthorizationCodeCreateWithoutUserInput[] | OAuthAuthorizationCodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthAuthorizationCodeCreateOrConnectWithoutUserInput | OAuthAuthorizationCodeCreateOrConnectWithoutUserInput[]
-    createMany?: OAuthAuthorizationCodeCreateManyUserInputEnvelope
-    connect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-  }
-
-  export type OAuthAccessTokenUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<OAuthAccessTokenCreateWithoutUserInput, OAuthAccessTokenUncheckedCreateWithoutUserInput> | OAuthAccessTokenCreateWithoutUserInput[] | OAuthAccessTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthAccessTokenCreateOrConnectWithoutUserInput | OAuthAccessTokenCreateOrConnectWithoutUserInput[]
-    createMany?: OAuthAccessTokenCreateManyUserInputEnvelope
-    connect?: OAuthAccessTokenWhereUniqueInput | OAuthAccessTokenWhereUniqueInput[]
-  }
-
-  export type OAuthRefreshTokenUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<OAuthRefreshTokenCreateWithoutUserInput, OAuthRefreshTokenUncheckedCreateWithoutUserInput> | OAuthRefreshTokenCreateWithoutUserInput[] | OAuthRefreshTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthRefreshTokenCreateOrConnectWithoutUserInput | OAuthRefreshTokenCreateOrConnectWithoutUserInput[]
-    createMany?: OAuthRefreshTokenCreateManyUserInputEnvelope
-    connect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
-  }
-
-  export type OAuthDeviceCodeUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<OAuthDeviceCodeCreateWithoutUserInput, OAuthDeviceCodeUncheckedCreateWithoutUserInput> | OAuthDeviceCodeCreateWithoutUserInput[] | OAuthDeviceCodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthDeviceCodeCreateOrConnectWithoutUserInput | OAuthDeviceCodeCreateOrConnectWithoutUserInput[]
-    createMany?: OAuthDeviceCodeCreateManyUserInputEnvelope
-    connect?: OAuthDeviceCodeWhereUniqueInput | OAuthDeviceCodeWhereUniqueInput[]
-  }
-
-  export type OAuthUserConsentUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<OAuthUserConsentCreateWithoutUserInput, OAuthUserConsentUncheckedCreateWithoutUserInput> | OAuthUserConsentCreateWithoutUserInput[] | OAuthUserConsentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthUserConsentCreateOrConnectWithoutUserInput | OAuthUserConsentCreateOrConnectWithoutUserInput[]
-    createMany?: OAuthUserConsentCreateManyUserInputEnvelope
-    connect?: OAuthUserConsentWhereUniqueInput | OAuthUserConsentWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -15094,76 +20348,6 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
-  export type OAuthAuthorizationCodeUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OAuthAuthorizationCodeCreateWithoutUserInput, OAuthAuthorizationCodeUncheckedCreateWithoutUserInput> | OAuthAuthorizationCodeCreateWithoutUserInput[] | OAuthAuthorizationCodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthAuthorizationCodeCreateOrConnectWithoutUserInput | OAuthAuthorizationCodeCreateOrConnectWithoutUserInput[]
-    upsert?: OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutUserInput | OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OAuthAuthorizationCodeCreateManyUserInputEnvelope
-    set?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    disconnect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    delete?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    connect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    update?: OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutUserInput | OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OAuthAuthorizationCodeUpdateManyWithWhereWithoutUserInput | OAuthAuthorizationCodeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OAuthAuthorizationCodeScalarWhereInput | OAuthAuthorizationCodeScalarWhereInput[]
-  }
-
-  export type OAuthAccessTokenUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OAuthAccessTokenCreateWithoutUserInput, OAuthAccessTokenUncheckedCreateWithoutUserInput> | OAuthAccessTokenCreateWithoutUserInput[] | OAuthAccessTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthAccessTokenCreateOrConnectWithoutUserInput | OAuthAccessTokenCreateOrConnectWithoutUserInput[]
-    upsert?: OAuthAccessTokenUpsertWithWhereUniqueWithoutUserInput | OAuthAccessTokenUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OAuthAccessTokenCreateManyUserInputEnvelope
-    set?: OAuthAccessTokenWhereUniqueInput | OAuthAccessTokenWhereUniqueInput[]
-    disconnect?: OAuthAccessTokenWhereUniqueInput | OAuthAccessTokenWhereUniqueInput[]
-    delete?: OAuthAccessTokenWhereUniqueInput | OAuthAccessTokenWhereUniqueInput[]
-    connect?: OAuthAccessTokenWhereUniqueInput | OAuthAccessTokenWhereUniqueInput[]
-    update?: OAuthAccessTokenUpdateWithWhereUniqueWithoutUserInput | OAuthAccessTokenUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OAuthAccessTokenUpdateManyWithWhereWithoutUserInput | OAuthAccessTokenUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OAuthAccessTokenScalarWhereInput | OAuthAccessTokenScalarWhereInput[]
-  }
-
-  export type OAuthRefreshTokenUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OAuthRefreshTokenCreateWithoutUserInput, OAuthRefreshTokenUncheckedCreateWithoutUserInput> | OAuthRefreshTokenCreateWithoutUserInput[] | OAuthRefreshTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthRefreshTokenCreateOrConnectWithoutUserInput | OAuthRefreshTokenCreateOrConnectWithoutUserInput[]
-    upsert?: OAuthRefreshTokenUpsertWithWhereUniqueWithoutUserInput | OAuthRefreshTokenUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OAuthRefreshTokenCreateManyUserInputEnvelope
-    set?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
-    disconnect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
-    delete?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
-    connect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
-    update?: OAuthRefreshTokenUpdateWithWhereUniqueWithoutUserInput | OAuthRefreshTokenUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OAuthRefreshTokenUpdateManyWithWhereWithoutUserInput | OAuthRefreshTokenUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OAuthRefreshTokenScalarWhereInput | OAuthRefreshTokenScalarWhereInput[]
-  }
-
-  export type OAuthDeviceCodeUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OAuthDeviceCodeCreateWithoutUserInput, OAuthDeviceCodeUncheckedCreateWithoutUserInput> | OAuthDeviceCodeCreateWithoutUserInput[] | OAuthDeviceCodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthDeviceCodeCreateOrConnectWithoutUserInput | OAuthDeviceCodeCreateOrConnectWithoutUserInput[]
-    upsert?: OAuthDeviceCodeUpsertWithWhereUniqueWithoutUserInput | OAuthDeviceCodeUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OAuthDeviceCodeCreateManyUserInputEnvelope
-    set?: OAuthDeviceCodeWhereUniqueInput | OAuthDeviceCodeWhereUniqueInput[]
-    disconnect?: OAuthDeviceCodeWhereUniqueInput | OAuthDeviceCodeWhereUniqueInput[]
-    delete?: OAuthDeviceCodeWhereUniqueInput | OAuthDeviceCodeWhereUniqueInput[]
-    connect?: OAuthDeviceCodeWhereUniqueInput | OAuthDeviceCodeWhereUniqueInput[]
-    update?: OAuthDeviceCodeUpdateWithWhereUniqueWithoutUserInput | OAuthDeviceCodeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OAuthDeviceCodeUpdateManyWithWhereWithoutUserInput | OAuthDeviceCodeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OAuthDeviceCodeScalarWhereInput | OAuthDeviceCodeScalarWhereInput[]
-  }
-
-  export type OAuthUserConsentUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OAuthUserConsentCreateWithoutUserInput, OAuthUserConsentUncheckedCreateWithoutUserInput> | OAuthUserConsentCreateWithoutUserInput[] | OAuthUserConsentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthUserConsentCreateOrConnectWithoutUserInput | OAuthUserConsentCreateOrConnectWithoutUserInput[]
-    upsert?: OAuthUserConsentUpsertWithWhereUniqueWithoutUserInput | OAuthUserConsentUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OAuthUserConsentCreateManyUserInputEnvelope
-    set?: OAuthUserConsentWhereUniqueInput | OAuthUserConsentWhereUniqueInput[]
-    disconnect?: OAuthUserConsentWhereUniqueInput | OAuthUserConsentWhereUniqueInput[]
-    delete?: OAuthUserConsentWhereUniqueInput | OAuthUserConsentWhereUniqueInput[]
-    connect?: OAuthUserConsentWhereUniqueInput | OAuthUserConsentWhereUniqueInput[]
-    update?: OAuthUserConsentUpdateWithWhereUniqueWithoutUserInput | OAuthUserConsentUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OAuthUserConsentUpdateManyWithWhereWithoutUserInput | OAuthUserConsentUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OAuthUserConsentScalarWhereInput | OAuthUserConsentScalarWhereInput[]
-  }
-
   export type RefreshTokenUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
@@ -15190,76 +20374,6 @@ export namespace Prisma {
     update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
-  export type OAuthAuthorizationCodeUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OAuthAuthorizationCodeCreateWithoutUserInput, OAuthAuthorizationCodeUncheckedCreateWithoutUserInput> | OAuthAuthorizationCodeCreateWithoutUserInput[] | OAuthAuthorizationCodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthAuthorizationCodeCreateOrConnectWithoutUserInput | OAuthAuthorizationCodeCreateOrConnectWithoutUserInput[]
-    upsert?: OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutUserInput | OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OAuthAuthorizationCodeCreateManyUserInputEnvelope
-    set?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    disconnect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    delete?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    connect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    update?: OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutUserInput | OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OAuthAuthorizationCodeUpdateManyWithWhereWithoutUserInput | OAuthAuthorizationCodeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OAuthAuthorizationCodeScalarWhereInput | OAuthAuthorizationCodeScalarWhereInput[]
-  }
-
-  export type OAuthAccessTokenUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OAuthAccessTokenCreateWithoutUserInput, OAuthAccessTokenUncheckedCreateWithoutUserInput> | OAuthAccessTokenCreateWithoutUserInput[] | OAuthAccessTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthAccessTokenCreateOrConnectWithoutUserInput | OAuthAccessTokenCreateOrConnectWithoutUserInput[]
-    upsert?: OAuthAccessTokenUpsertWithWhereUniqueWithoutUserInput | OAuthAccessTokenUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OAuthAccessTokenCreateManyUserInputEnvelope
-    set?: OAuthAccessTokenWhereUniqueInput | OAuthAccessTokenWhereUniqueInput[]
-    disconnect?: OAuthAccessTokenWhereUniqueInput | OAuthAccessTokenWhereUniqueInput[]
-    delete?: OAuthAccessTokenWhereUniqueInput | OAuthAccessTokenWhereUniqueInput[]
-    connect?: OAuthAccessTokenWhereUniqueInput | OAuthAccessTokenWhereUniqueInput[]
-    update?: OAuthAccessTokenUpdateWithWhereUniqueWithoutUserInput | OAuthAccessTokenUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OAuthAccessTokenUpdateManyWithWhereWithoutUserInput | OAuthAccessTokenUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OAuthAccessTokenScalarWhereInput | OAuthAccessTokenScalarWhereInput[]
-  }
-
-  export type OAuthRefreshTokenUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OAuthRefreshTokenCreateWithoutUserInput, OAuthRefreshTokenUncheckedCreateWithoutUserInput> | OAuthRefreshTokenCreateWithoutUserInput[] | OAuthRefreshTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthRefreshTokenCreateOrConnectWithoutUserInput | OAuthRefreshTokenCreateOrConnectWithoutUserInput[]
-    upsert?: OAuthRefreshTokenUpsertWithWhereUniqueWithoutUserInput | OAuthRefreshTokenUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OAuthRefreshTokenCreateManyUserInputEnvelope
-    set?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
-    disconnect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
-    delete?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
-    connect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
-    update?: OAuthRefreshTokenUpdateWithWhereUniqueWithoutUserInput | OAuthRefreshTokenUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OAuthRefreshTokenUpdateManyWithWhereWithoutUserInput | OAuthRefreshTokenUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OAuthRefreshTokenScalarWhereInput | OAuthRefreshTokenScalarWhereInput[]
-  }
-
-  export type OAuthDeviceCodeUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OAuthDeviceCodeCreateWithoutUserInput, OAuthDeviceCodeUncheckedCreateWithoutUserInput> | OAuthDeviceCodeCreateWithoutUserInput[] | OAuthDeviceCodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthDeviceCodeCreateOrConnectWithoutUserInput | OAuthDeviceCodeCreateOrConnectWithoutUserInput[]
-    upsert?: OAuthDeviceCodeUpsertWithWhereUniqueWithoutUserInput | OAuthDeviceCodeUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OAuthDeviceCodeCreateManyUserInputEnvelope
-    set?: OAuthDeviceCodeWhereUniqueInput | OAuthDeviceCodeWhereUniqueInput[]
-    disconnect?: OAuthDeviceCodeWhereUniqueInput | OAuthDeviceCodeWhereUniqueInput[]
-    delete?: OAuthDeviceCodeWhereUniqueInput | OAuthDeviceCodeWhereUniqueInput[]
-    connect?: OAuthDeviceCodeWhereUniqueInput | OAuthDeviceCodeWhereUniqueInput[]
-    update?: OAuthDeviceCodeUpdateWithWhereUniqueWithoutUserInput | OAuthDeviceCodeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OAuthDeviceCodeUpdateManyWithWhereWithoutUserInput | OAuthDeviceCodeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OAuthDeviceCodeScalarWhereInput | OAuthDeviceCodeScalarWhereInput[]
-  }
-
-  export type OAuthUserConsentUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OAuthUserConsentCreateWithoutUserInput, OAuthUserConsentUncheckedCreateWithoutUserInput> | OAuthUserConsentCreateWithoutUserInput[] | OAuthUserConsentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OAuthUserConsentCreateOrConnectWithoutUserInput | OAuthUserConsentCreateOrConnectWithoutUserInput[]
-    upsert?: OAuthUserConsentUpsertWithWhereUniqueWithoutUserInput | OAuthUserConsentUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OAuthUserConsentCreateManyUserInputEnvelope
-    set?: OAuthUserConsentWhereUniqueInput | OAuthUserConsentWhereUniqueInput[]
-    disconnect?: OAuthUserConsentWhereUniqueInput | OAuthUserConsentWhereUniqueInput[]
-    delete?: OAuthUserConsentWhereUniqueInput | OAuthUserConsentWhereUniqueInput[]
-    connect?: OAuthUserConsentWhereUniqueInput | OAuthUserConsentWhereUniqueInput[]
-    update?: OAuthUserConsentUpdateWithWhereUniqueWithoutUserInput | OAuthUserConsentUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OAuthUserConsentUpdateManyWithWhereWithoutUserInput | OAuthUserConsentUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OAuthUserConsentScalarWhereInput | OAuthUserConsentScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutRefresh_tokensInput = {
@@ -15314,11 +20428,8 @@ export namespace Prisma {
     set: string[]
   }
 
-  export type OAuthAuthorizationCodeCreateNestedManyWithoutClientInput = {
-    create?: XOR<OAuthAuthorizationCodeCreateWithoutClientInput, OAuthAuthorizationCodeUncheckedCreateWithoutClientInput> | OAuthAuthorizationCodeCreateWithoutClientInput[] | OAuthAuthorizationCodeUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: OAuthAuthorizationCodeCreateOrConnectWithoutClientInput | OAuthAuthorizationCodeCreateOrConnectWithoutClientInput[]
-    createMany?: OAuthAuthorizationCodeCreateManyClientInputEnvelope
-    connect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
+  export type OAuthClientCreatepermissionsInput = {
+    set: string[]
   }
 
   export type OAuthAccessTokenCreateNestedManyWithoutClientInput = {
@@ -15335,6 +20446,13 @@ export namespace Prisma {
     connect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
   }
 
+  export type OAuthAuthorizationCodeCreateNestedManyWithoutClientInput = {
+    create?: XOR<OAuthAuthorizationCodeCreateWithoutClientInput, OAuthAuthorizationCodeUncheckedCreateWithoutClientInput> | OAuthAuthorizationCodeCreateWithoutClientInput[] | OAuthAuthorizationCodeUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: OAuthAuthorizationCodeCreateOrConnectWithoutClientInput | OAuthAuthorizationCodeCreateOrConnectWithoutClientInput[]
+    createMany?: OAuthAuthorizationCodeCreateManyClientInputEnvelope
+    connect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
+  }
+
   export type OAuthDeviceCodeCreateNestedManyWithoutClientInput = {
     create?: XOR<OAuthDeviceCodeCreateWithoutClientInput, OAuthDeviceCodeUncheckedCreateWithoutClientInput> | OAuthDeviceCodeCreateWithoutClientInput[] | OAuthDeviceCodeUncheckedCreateWithoutClientInput[]
     connectOrCreate?: OAuthDeviceCodeCreateOrConnectWithoutClientInput | OAuthDeviceCodeCreateOrConnectWithoutClientInput[]
@@ -15349,11 +20467,11 @@ export namespace Prisma {
     connect?: OAuthUserConsentWhereUniqueInput | OAuthUserConsentWhereUniqueInput[]
   }
 
-  export type OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutClientInput = {
-    create?: XOR<OAuthAuthorizationCodeCreateWithoutClientInput, OAuthAuthorizationCodeUncheckedCreateWithoutClientInput> | OAuthAuthorizationCodeCreateWithoutClientInput[] | OAuthAuthorizationCodeUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: OAuthAuthorizationCodeCreateOrConnectWithoutClientInput | OAuthAuthorizationCodeCreateOrConnectWithoutClientInput[]
-    createMany?: OAuthAuthorizationCodeCreateManyClientInputEnvelope
-    connect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
+  export type ClientRoleCreateNestedManyWithoutClientInput = {
+    create?: XOR<ClientRoleCreateWithoutClientInput, ClientRoleUncheckedCreateWithoutClientInput> | ClientRoleCreateWithoutClientInput[] | ClientRoleUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientRoleCreateOrConnectWithoutClientInput | ClientRoleCreateOrConnectWithoutClientInput[]
+    createMany?: ClientRoleCreateManyClientInputEnvelope
+    connect?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
   }
 
   export type OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput = {
@@ -15370,6 +20488,13 @@ export namespace Prisma {
     connect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
   }
 
+  export type OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<OAuthAuthorizationCodeCreateWithoutClientInput, OAuthAuthorizationCodeUncheckedCreateWithoutClientInput> | OAuthAuthorizationCodeCreateWithoutClientInput[] | OAuthAuthorizationCodeUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: OAuthAuthorizationCodeCreateOrConnectWithoutClientInput | OAuthAuthorizationCodeCreateOrConnectWithoutClientInput[]
+    createMany?: OAuthAuthorizationCodeCreateManyClientInputEnvelope
+    connect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
+  }
+
   export type OAuthDeviceCodeUncheckedCreateNestedManyWithoutClientInput = {
     create?: XOR<OAuthDeviceCodeCreateWithoutClientInput, OAuthDeviceCodeUncheckedCreateWithoutClientInput> | OAuthDeviceCodeCreateWithoutClientInput[] | OAuthDeviceCodeUncheckedCreateWithoutClientInput[]
     connectOrCreate?: OAuthDeviceCodeCreateOrConnectWithoutClientInput | OAuthDeviceCodeCreateOrConnectWithoutClientInput[]
@@ -15382,6 +20507,13 @@ export namespace Prisma {
     connectOrCreate?: OAuthUserConsentCreateOrConnectWithoutClientInput | OAuthUserConsentCreateOrConnectWithoutClientInput[]
     createMany?: OAuthUserConsentCreateManyClientInputEnvelope
     connect?: OAuthUserConsentWhereUniqueInput | OAuthUserConsentWhereUniqueInput[]
+  }
+
+  export type ClientRoleUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<ClientRoleCreateWithoutClientInput, ClientRoleUncheckedCreateWithoutClientInput> | ClientRoleCreateWithoutClientInput[] | ClientRoleUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientRoleCreateOrConnectWithoutClientInput | ClientRoleCreateOrConnectWithoutClientInput[]
+    createMany?: ClientRoleCreateManyClientInputEnvelope
+    connect?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
   }
 
   export type OAuthClientUpdateredirect_urisInput = {
@@ -15417,18 +20549,9 @@ export namespace Prisma {
     push?: string | string[]
   }
 
-  export type OAuthAuthorizationCodeUpdateManyWithoutClientNestedInput = {
-    create?: XOR<OAuthAuthorizationCodeCreateWithoutClientInput, OAuthAuthorizationCodeUncheckedCreateWithoutClientInput> | OAuthAuthorizationCodeCreateWithoutClientInput[] | OAuthAuthorizationCodeUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: OAuthAuthorizationCodeCreateOrConnectWithoutClientInput | OAuthAuthorizationCodeCreateOrConnectWithoutClientInput[]
-    upsert?: OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutClientInput | OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutClientInput[]
-    createMany?: OAuthAuthorizationCodeCreateManyClientInputEnvelope
-    set?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    disconnect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    delete?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    connect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    update?: OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutClientInput | OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutClientInput[]
-    updateMany?: OAuthAuthorizationCodeUpdateManyWithWhereWithoutClientInput | OAuthAuthorizationCodeUpdateManyWithWhereWithoutClientInput[]
-    deleteMany?: OAuthAuthorizationCodeScalarWhereInput | OAuthAuthorizationCodeScalarWhereInput[]
+  export type OAuthClientUpdatepermissionsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type OAuthAccessTokenUpdateManyWithoutClientNestedInput = {
@@ -15459,6 +20582,20 @@ export namespace Prisma {
     deleteMany?: OAuthRefreshTokenScalarWhereInput | OAuthRefreshTokenScalarWhereInput[]
   }
 
+  export type OAuthAuthorizationCodeUpdateManyWithoutClientNestedInput = {
+    create?: XOR<OAuthAuthorizationCodeCreateWithoutClientInput, OAuthAuthorizationCodeUncheckedCreateWithoutClientInput> | OAuthAuthorizationCodeCreateWithoutClientInput[] | OAuthAuthorizationCodeUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: OAuthAuthorizationCodeCreateOrConnectWithoutClientInput | OAuthAuthorizationCodeCreateOrConnectWithoutClientInput[]
+    upsert?: OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutClientInput | OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: OAuthAuthorizationCodeCreateManyClientInputEnvelope
+    set?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
+    disconnect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
+    delete?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
+    connect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
+    update?: OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutClientInput | OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: OAuthAuthorizationCodeUpdateManyWithWhereWithoutClientInput | OAuthAuthorizationCodeUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: OAuthAuthorizationCodeScalarWhereInput | OAuthAuthorizationCodeScalarWhereInput[]
+  }
+
   export type OAuthDeviceCodeUpdateManyWithoutClientNestedInput = {
     create?: XOR<OAuthDeviceCodeCreateWithoutClientInput, OAuthDeviceCodeUncheckedCreateWithoutClientInput> | OAuthDeviceCodeCreateWithoutClientInput[] | OAuthDeviceCodeUncheckedCreateWithoutClientInput[]
     connectOrCreate?: OAuthDeviceCodeCreateOrConnectWithoutClientInput | OAuthDeviceCodeCreateOrConnectWithoutClientInput[]
@@ -15487,18 +20624,18 @@ export namespace Prisma {
     deleteMany?: OAuthUserConsentScalarWhereInput | OAuthUserConsentScalarWhereInput[]
   }
 
-  export type OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientNestedInput = {
-    create?: XOR<OAuthAuthorizationCodeCreateWithoutClientInput, OAuthAuthorizationCodeUncheckedCreateWithoutClientInput> | OAuthAuthorizationCodeCreateWithoutClientInput[] | OAuthAuthorizationCodeUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: OAuthAuthorizationCodeCreateOrConnectWithoutClientInput | OAuthAuthorizationCodeCreateOrConnectWithoutClientInput[]
-    upsert?: OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutClientInput | OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutClientInput[]
-    createMany?: OAuthAuthorizationCodeCreateManyClientInputEnvelope
-    set?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    disconnect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    delete?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    connect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
-    update?: OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutClientInput | OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutClientInput[]
-    updateMany?: OAuthAuthorizationCodeUpdateManyWithWhereWithoutClientInput | OAuthAuthorizationCodeUpdateManyWithWhereWithoutClientInput[]
-    deleteMany?: OAuthAuthorizationCodeScalarWhereInput | OAuthAuthorizationCodeScalarWhereInput[]
+  export type ClientRoleUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ClientRoleCreateWithoutClientInput, ClientRoleUncheckedCreateWithoutClientInput> | ClientRoleCreateWithoutClientInput[] | ClientRoleUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientRoleCreateOrConnectWithoutClientInput | ClientRoleCreateOrConnectWithoutClientInput[]
+    upsert?: ClientRoleUpsertWithWhereUniqueWithoutClientInput | ClientRoleUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ClientRoleCreateManyClientInputEnvelope
+    set?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    disconnect?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    delete?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    connect?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    update?: ClientRoleUpdateWithWhereUniqueWithoutClientInput | ClientRoleUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ClientRoleUpdateManyWithWhereWithoutClientInput | ClientRoleUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ClientRoleScalarWhereInput | ClientRoleScalarWhereInput[]
   }
 
   export type OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput = {
@@ -15529,6 +20666,20 @@ export namespace Prisma {
     deleteMany?: OAuthRefreshTokenScalarWhereInput | OAuthRefreshTokenScalarWhereInput[]
   }
 
+  export type OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<OAuthAuthorizationCodeCreateWithoutClientInput, OAuthAuthorizationCodeUncheckedCreateWithoutClientInput> | OAuthAuthorizationCodeCreateWithoutClientInput[] | OAuthAuthorizationCodeUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: OAuthAuthorizationCodeCreateOrConnectWithoutClientInput | OAuthAuthorizationCodeCreateOrConnectWithoutClientInput[]
+    upsert?: OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutClientInput | OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: OAuthAuthorizationCodeCreateManyClientInputEnvelope
+    set?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
+    disconnect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
+    delete?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
+    connect?: OAuthAuthorizationCodeWhereUniqueInput | OAuthAuthorizationCodeWhereUniqueInput[]
+    update?: OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutClientInput | OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: OAuthAuthorizationCodeUpdateManyWithWhereWithoutClientInput | OAuthAuthorizationCodeUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: OAuthAuthorizationCodeScalarWhereInput | OAuthAuthorizationCodeScalarWhereInput[]
+  }
+
   export type OAuthDeviceCodeUncheckedUpdateManyWithoutClientNestedInput = {
     create?: XOR<OAuthDeviceCodeCreateWithoutClientInput, OAuthDeviceCodeUncheckedCreateWithoutClientInput> | OAuthDeviceCodeCreateWithoutClientInput[] | OAuthDeviceCodeUncheckedCreateWithoutClientInput[]
     connectOrCreate?: OAuthDeviceCodeCreateOrConnectWithoutClientInput | OAuthDeviceCodeCreateOrConnectWithoutClientInput[]
@@ -15557,34 +20708,26 @@ export namespace Prisma {
     deleteMany?: OAuthUserConsentScalarWhereInput | OAuthUserConsentScalarWhereInput[]
   }
 
-  export type OAuthClientCreateNestedOneWithoutAuthorization_codesInput = {
-    create?: XOR<OAuthClientCreateWithoutAuthorization_codesInput, OAuthClientUncheckedCreateWithoutAuthorization_codesInput>
-    connectOrCreate?: OAuthClientCreateOrConnectWithoutAuthorization_codesInput
-    connect?: OAuthClientWhereUniqueInput
+  export type ClientRoleUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ClientRoleCreateWithoutClientInput, ClientRoleUncheckedCreateWithoutClientInput> | ClientRoleCreateWithoutClientInput[] | ClientRoleUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientRoleCreateOrConnectWithoutClientInput | ClientRoleCreateOrConnectWithoutClientInput[]
+    upsert?: ClientRoleUpsertWithWhereUniqueWithoutClientInput | ClientRoleUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ClientRoleCreateManyClientInputEnvelope
+    set?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    disconnect?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    delete?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    connect?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    update?: ClientRoleUpdateWithWhereUniqueWithoutClientInput | ClientRoleUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ClientRoleUpdateManyWithWhereWithoutClientInput | ClientRoleUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ClientRoleScalarWhereInput | ClientRoleScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutOauth_authorization_codesInput = {
-    create?: XOR<UserCreateWithoutOauth_authorization_codesInput, UserUncheckedCreateWithoutOauth_authorization_codesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOauth_authorization_codesInput
-    connect?: UserWhereUniqueInput
+  export type OAuthAccessTokenCreatepermissionsInput = {
+    set: string[]
   }
 
-  export type OAuthClientUpdateOneRequiredWithoutAuthorization_codesNestedInput = {
-    create?: XOR<OAuthClientCreateWithoutAuthorization_codesInput, OAuthClientUncheckedCreateWithoutAuthorization_codesInput>
-    connectOrCreate?: OAuthClientCreateOrConnectWithoutAuthorization_codesInput
-    upsert?: OAuthClientUpsertWithoutAuthorization_codesInput
-    connect?: OAuthClientWhereUniqueInput
-    update?: XOR<XOR<OAuthClientUpdateToOneWithWhereWithoutAuthorization_codesInput, OAuthClientUpdateWithoutAuthorization_codesInput>, OAuthClientUncheckedUpdateWithoutAuthorization_codesInput>
-  }
-
-  export type UserUpdateOneWithoutOauth_authorization_codesNestedInput = {
-    create?: XOR<UserCreateWithoutOauth_authorization_codesInput, UserUncheckedCreateWithoutOauth_authorization_codesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOauth_authorization_codesInput
-    upsert?: UserUpsertWithoutOauth_authorization_codesInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOauth_authorization_codesInput, UserUpdateWithoutOauth_authorization_codesInput>, UserUncheckedUpdateWithoutOauth_authorization_codesInput>
+  export type OAuthAccessTokenCreaterolesInput = {
+    set: string[]
   }
 
   export type OAuthClientCreateNestedOneWithoutAccess_tokensInput = {
@@ -15593,10 +20736,28 @@ export namespace Prisma {
     connect?: OAuthClientWhereUniqueInput
   }
 
-  export type UserCreateNestedOneWithoutOauth_access_tokensInput = {
-    create?: XOR<UserCreateWithoutOauth_access_tokensInput, UserUncheckedCreateWithoutOauth_access_tokensInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOauth_access_tokensInput
-    connect?: UserWhereUniqueInput
+  export type OAuthRefreshTokenCreateNestedManyWithoutAccess_tokenInput = {
+    create?: XOR<OAuthRefreshTokenCreateWithoutAccess_tokenInput, OAuthRefreshTokenUncheckedCreateWithoutAccess_tokenInput> | OAuthRefreshTokenCreateWithoutAccess_tokenInput[] | OAuthRefreshTokenUncheckedCreateWithoutAccess_tokenInput[]
+    connectOrCreate?: OAuthRefreshTokenCreateOrConnectWithoutAccess_tokenInput | OAuthRefreshTokenCreateOrConnectWithoutAccess_tokenInput[]
+    createMany?: OAuthRefreshTokenCreateManyAccess_tokenInputEnvelope
+    connect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
+  }
+
+  export type OAuthRefreshTokenUncheckedCreateNestedManyWithoutAccess_tokenInput = {
+    create?: XOR<OAuthRefreshTokenCreateWithoutAccess_tokenInput, OAuthRefreshTokenUncheckedCreateWithoutAccess_tokenInput> | OAuthRefreshTokenCreateWithoutAccess_tokenInput[] | OAuthRefreshTokenUncheckedCreateWithoutAccess_tokenInput[]
+    connectOrCreate?: OAuthRefreshTokenCreateOrConnectWithoutAccess_tokenInput | OAuthRefreshTokenCreateOrConnectWithoutAccess_tokenInput[]
+    createMany?: OAuthRefreshTokenCreateManyAccess_tokenInputEnvelope
+    connect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
+  }
+
+  export type OAuthAccessTokenUpdatepermissionsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type OAuthAccessTokenUpdaterolesInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type OAuthClientUpdateOneRequiredWithoutAccess_tokensNestedInput = {
@@ -15607,14 +20768,38 @@ export namespace Prisma {
     update?: XOR<XOR<OAuthClientUpdateToOneWithWhereWithoutAccess_tokensInput, OAuthClientUpdateWithoutAccess_tokensInput>, OAuthClientUncheckedUpdateWithoutAccess_tokensInput>
   }
 
-  export type UserUpdateOneWithoutOauth_access_tokensNestedInput = {
-    create?: XOR<UserCreateWithoutOauth_access_tokensInput, UserUncheckedCreateWithoutOauth_access_tokensInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOauth_access_tokensInput
-    upsert?: UserUpsertWithoutOauth_access_tokensInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOauth_access_tokensInput, UserUpdateWithoutOauth_access_tokensInput>, UserUncheckedUpdateWithoutOauth_access_tokensInput>
+  export type OAuthRefreshTokenUpdateManyWithoutAccess_tokenNestedInput = {
+    create?: XOR<OAuthRefreshTokenCreateWithoutAccess_tokenInput, OAuthRefreshTokenUncheckedCreateWithoutAccess_tokenInput> | OAuthRefreshTokenCreateWithoutAccess_tokenInput[] | OAuthRefreshTokenUncheckedCreateWithoutAccess_tokenInput[]
+    connectOrCreate?: OAuthRefreshTokenCreateOrConnectWithoutAccess_tokenInput | OAuthRefreshTokenCreateOrConnectWithoutAccess_tokenInput[]
+    upsert?: OAuthRefreshTokenUpsertWithWhereUniqueWithoutAccess_tokenInput | OAuthRefreshTokenUpsertWithWhereUniqueWithoutAccess_tokenInput[]
+    createMany?: OAuthRefreshTokenCreateManyAccess_tokenInputEnvelope
+    set?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
+    disconnect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
+    delete?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
+    connect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
+    update?: OAuthRefreshTokenUpdateWithWhereUniqueWithoutAccess_tokenInput | OAuthRefreshTokenUpdateWithWhereUniqueWithoutAccess_tokenInput[]
+    updateMany?: OAuthRefreshTokenUpdateManyWithWhereWithoutAccess_tokenInput | OAuthRefreshTokenUpdateManyWithWhereWithoutAccess_tokenInput[]
+    deleteMany?: OAuthRefreshTokenScalarWhereInput | OAuthRefreshTokenScalarWhereInput[]
+  }
+
+  export type OAuthRefreshTokenUncheckedUpdateManyWithoutAccess_tokenNestedInput = {
+    create?: XOR<OAuthRefreshTokenCreateWithoutAccess_tokenInput, OAuthRefreshTokenUncheckedCreateWithoutAccess_tokenInput> | OAuthRefreshTokenCreateWithoutAccess_tokenInput[] | OAuthRefreshTokenUncheckedCreateWithoutAccess_tokenInput[]
+    connectOrCreate?: OAuthRefreshTokenCreateOrConnectWithoutAccess_tokenInput | OAuthRefreshTokenCreateOrConnectWithoutAccess_tokenInput[]
+    upsert?: OAuthRefreshTokenUpsertWithWhereUniqueWithoutAccess_tokenInput | OAuthRefreshTokenUpsertWithWhereUniqueWithoutAccess_tokenInput[]
+    createMany?: OAuthRefreshTokenCreateManyAccess_tokenInputEnvelope
+    set?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
+    disconnect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
+    delete?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
+    connect?: OAuthRefreshTokenWhereUniqueInput | OAuthRefreshTokenWhereUniqueInput[]
+    update?: OAuthRefreshTokenUpdateWithWhereUniqueWithoutAccess_tokenInput | OAuthRefreshTokenUpdateWithWhereUniqueWithoutAccess_tokenInput[]
+    updateMany?: OAuthRefreshTokenUpdateManyWithWhereWithoutAccess_tokenInput | OAuthRefreshTokenUpdateManyWithWhereWithoutAccess_tokenInput[]
+    deleteMany?: OAuthRefreshTokenScalarWhereInput | OAuthRefreshTokenScalarWhereInput[]
+  }
+
+  export type OAuthAccessTokenCreateNestedOneWithoutRefresh_tokensInput = {
+    create?: XOR<OAuthAccessTokenCreateWithoutRefresh_tokensInput, OAuthAccessTokenUncheckedCreateWithoutRefresh_tokensInput>
+    connectOrCreate?: OAuthAccessTokenCreateOrConnectWithoutRefresh_tokensInput
+    connect?: OAuthAccessTokenWhereUniqueInput
   }
 
   export type OAuthClientCreateNestedOneWithoutRefresh_tokensInput = {
@@ -15623,10 +20808,12 @@ export namespace Prisma {
     connect?: OAuthClientWhereUniqueInput
   }
 
-  export type UserCreateNestedOneWithoutOauth_refresh_tokensInput = {
-    create?: XOR<UserCreateWithoutOauth_refresh_tokensInput, UserUncheckedCreateWithoutOauth_refresh_tokensInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOauth_refresh_tokensInput
-    connect?: UserWhereUniqueInput
+  export type OAuthAccessTokenUpdateOneRequiredWithoutRefresh_tokensNestedInput = {
+    create?: XOR<OAuthAccessTokenCreateWithoutRefresh_tokensInput, OAuthAccessTokenUncheckedCreateWithoutRefresh_tokensInput>
+    connectOrCreate?: OAuthAccessTokenCreateOrConnectWithoutRefresh_tokensInput
+    upsert?: OAuthAccessTokenUpsertWithoutRefresh_tokensInput
+    connect?: OAuthAccessTokenWhereUniqueInput
+    update?: XOR<XOR<OAuthAccessTokenUpdateToOneWithWhereWithoutRefresh_tokensInput, OAuthAccessTokenUpdateWithoutRefresh_tokensInput>, OAuthAccessTokenUncheckedUpdateWithoutRefresh_tokensInput>
   }
 
   export type OAuthClientUpdateOneRequiredWithoutRefresh_tokensNestedInput = {
@@ -15637,26 +20824,24 @@ export namespace Prisma {
     update?: XOR<XOR<OAuthClientUpdateToOneWithWhereWithoutRefresh_tokensInput, OAuthClientUpdateWithoutRefresh_tokensInput>, OAuthClientUncheckedUpdateWithoutRefresh_tokensInput>
   }
 
-  export type UserUpdateOneWithoutOauth_refresh_tokensNestedInput = {
-    create?: XOR<UserCreateWithoutOauth_refresh_tokensInput, UserUncheckedCreateWithoutOauth_refresh_tokensInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOauth_refresh_tokensInput
-    upsert?: UserUpsertWithoutOauth_refresh_tokensInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOauth_refresh_tokensInput, UserUpdateWithoutOauth_refresh_tokensInput>, UserUncheckedUpdateWithoutOauth_refresh_tokensInput>
+  export type OAuthClientCreateNestedOneWithoutAuthorization_codesInput = {
+    create?: XOR<OAuthClientCreateWithoutAuthorization_codesInput, OAuthClientUncheckedCreateWithoutAuthorization_codesInput>
+    connectOrCreate?: OAuthClientCreateOrConnectWithoutAuthorization_codesInput
+    connect?: OAuthClientWhereUniqueInput
+  }
+
+  export type OAuthClientUpdateOneRequiredWithoutAuthorization_codesNestedInput = {
+    create?: XOR<OAuthClientCreateWithoutAuthorization_codesInput, OAuthClientUncheckedCreateWithoutAuthorization_codesInput>
+    connectOrCreate?: OAuthClientCreateOrConnectWithoutAuthorization_codesInput
+    upsert?: OAuthClientUpsertWithoutAuthorization_codesInput
+    connect?: OAuthClientWhereUniqueInput
+    update?: XOR<XOR<OAuthClientUpdateToOneWithWhereWithoutAuthorization_codesInput, OAuthClientUpdateWithoutAuthorization_codesInput>, OAuthClientUncheckedUpdateWithoutAuthorization_codesInput>
   }
 
   export type OAuthClientCreateNestedOneWithoutDevice_codesInput = {
     create?: XOR<OAuthClientCreateWithoutDevice_codesInput, OAuthClientUncheckedCreateWithoutDevice_codesInput>
     connectOrCreate?: OAuthClientCreateOrConnectWithoutDevice_codesInput
     connect?: OAuthClientWhereUniqueInput
-  }
-
-  export type UserCreateNestedOneWithoutOauth_device_codesInput = {
-    create?: XOR<UserCreateWithoutOauth_device_codesInput, UserUncheckedCreateWithoutOauth_device_codesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOauth_device_codesInput
-    connect?: UserWhereUniqueInput
   }
 
   export type OAuthClientUpdateOneRequiredWithoutDevice_codesNestedInput = {
@@ -15667,14 +20852,8 @@ export namespace Prisma {
     update?: XOR<XOR<OAuthClientUpdateToOneWithWhereWithoutDevice_codesInput, OAuthClientUpdateWithoutDevice_codesInput>, OAuthClientUncheckedUpdateWithoutDevice_codesInput>
   }
 
-  export type UserUpdateOneWithoutOauth_device_codesNestedInput = {
-    create?: XOR<UserCreateWithoutOauth_device_codesInput, UserUncheckedCreateWithoutOauth_device_codesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOauth_device_codesInput
-    upsert?: UserUpsertWithoutOauth_device_codesInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOauth_device_codesInput, UserUpdateWithoutOauth_device_codesInput>, UserUncheckedUpdateWithoutOauth_device_codesInput>
+  export type OAuthUserConsentCreatescopeInput = {
+    set: string[]
   }
 
   export type OAuthClientCreateNestedOneWithoutUser_consentsInput = {
@@ -15683,10 +20862,9 @@ export namespace Prisma {
     connect?: OAuthClientWhereUniqueInput
   }
 
-  export type UserCreateNestedOneWithoutOauth_consentsInput = {
-    create?: XOR<UserCreateWithoutOauth_consentsInput, UserUncheckedCreateWithoutOauth_consentsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOauth_consentsInput
-    connect?: UserWhereUniqueInput
+  export type OAuthUserConsentUpdatescopeInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type OAuthClientUpdateOneRequiredWithoutUser_consentsNestedInput = {
@@ -15697,12 +20875,186 @@ export namespace Prisma {
     update?: XOR<XOR<OAuthClientUpdateToOneWithWhereWithoutUser_consentsInput, OAuthClientUpdateWithoutUser_consentsInput>, OAuthClientUncheckedUpdateWithoutUser_consentsInput>
   }
 
-  export type UserUpdateOneRequiredWithoutOauth_consentsNestedInput = {
-    create?: XOR<UserCreateWithoutOauth_consentsInput, UserUncheckedCreateWithoutOauth_consentsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOauth_consentsInput
-    upsert?: UserUpsertWithoutOauth_consentsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOauth_consentsInput, UserUpdateWithoutOauth_consentsInput>, UserUncheckedUpdateWithoutOauth_consentsInput>
+  export type RolePermissionCreateNestedManyWithoutPermissionInput = {
+    create?: XOR<RolePermissionCreateWithoutPermissionInput, RolePermissionUncheckedCreateWithoutPermissionInput> | RolePermissionCreateWithoutPermissionInput[] | RolePermissionUncheckedCreateWithoutPermissionInput[]
+    connectOrCreate?: RolePermissionCreateOrConnectWithoutPermissionInput | RolePermissionCreateOrConnectWithoutPermissionInput[]
+    createMany?: RolePermissionCreateManyPermissionInputEnvelope
+    connect?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+  }
+
+  export type RolePermissionUncheckedCreateNestedManyWithoutPermissionInput = {
+    create?: XOR<RolePermissionCreateWithoutPermissionInput, RolePermissionUncheckedCreateWithoutPermissionInput> | RolePermissionCreateWithoutPermissionInput[] | RolePermissionUncheckedCreateWithoutPermissionInput[]
+    connectOrCreate?: RolePermissionCreateOrConnectWithoutPermissionInput | RolePermissionCreateOrConnectWithoutPermissionInput[]
+    createMany?: RolePermissionCreateManyPermissionInputEnvelope
+    connect?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+  }
+
+  export type RolePermissionUpdateManyWithoutPermissionNestedInput = {
+    create?: XOR<RolePermissionCreateWithoutPermissionInput, RolePermissionUncheckedCreateWithoutPermissionInput> | RolePermissionCreateWithoutPermissionInput[] | RolePermissionUncheckedCreateWithoutPermissionInput[]
+    connectOrCreate?: RolePermissionCreateOrConnectWithoutPermissionInput | RolePermissionCreateOrConnectWithoutPermissionInput[]
+    upsert?: RolePermissionUpsertWithWhereUniqueWithoutPermissionInput | RolePermissionUpsertWithWhereUniqueWithoutPermissionInput[]
+    createMany?: RolePermissionCreateManyPermissionInputEnvelope
+    set?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    disconnect?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    delete?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    connect?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    update?: RolePermissionUpdateWithWhereUniqueWithoutPermissionInput | RolePermissionUpdateWithWhereUniqueWithoutPermissionInput[]
+    updateMany?: RolePermissionUpdateManyWithWhereWithoutPermissionInput | RolePermissionUpdateManyWithWhereWithoutPermissionInput[]
+    deleteMany?: RolePermissionScalarWhereInput | RolePermissionScalarWhereInput[]
+  }
+
+  export type RolePermissionUncheckedUpdateManyWithoutPermissionNestedInput = {
+    create?: XOR<RolePermissionCreateWithoutPermissionInput, RolePermissionUncheckedCreateWithoutPermissionInput> | RolePermissionCreateWithoutPermissionInput[] | RolePermissionUncheckedCreateWithoutPermissionInput[]
+    connectOrCreate?: RolePermissionCreateOrConnectWithoutPermissionInput | RolePermissionCreateOrConnectWithoutPermissionInput[]
+    upsert?: RolePermissionUpsertWithWhereUniqueWithoutPermissionInput | RolePermissionUpsertWithWhereUniqueWithoutPermissionInput[]
+    createMany?: RolePermissionCreateManyPermissionInputEnvelope
+    set?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    disconnect?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    delete?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    connect?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    update?: RolePermissionUpdateWithWhereUniqueWithoutPermissionInput | RolePermissionUpdateWithWhereUniqueWithoutPermissionInput[]
+    updateMany?: RolePermissionUpdateManyWithWhereWithoutPermissionInput | RolePermissionUpdateManyWithWhereWithoutPermissionInput[]
+    deleteMany?: RolePermissionScalarWhereInput | RolePermissionScalarWhereInput[]
+  }
+
+  export type RolePermissionCreateNestedManyWithoutRoleInput = {
+    create?: XOR<RolePermissionCreateWithoutRoleInput, RolePermissionUncheckedCreateWithoutRoleInput> | RolePermissionCreateWithoutRoleInput[] | RolePermissionUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: RolePermissionCreateOrConnectWithoutRoleInput | RolePermissionCreateOrConnectWithoutRoleInput[]
+    createMany?: RolePermissionCreateManyRoleInputEnvelope
+    connect?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+  }
+
+  export type ClientRoleCreateNestedManyWithoutRoleInput = {
+    create?: XOR<ClientRoleCreateWithoutRoleInput, ClientRoleUncheckedCreateWithoutRoleInput> | ClientRoleCreateWithoutRoleInput[] | ClientRoleUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: ClientRoleCreateOrConnectWithoutRoleInput | ClientRoleCreateOrConnectWithoutRoleInput[]
+    createMany?: ClientRoleCreateManyRoleInputEnvelope
+    connect?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+  }
+
+  export type RolePermissionUncheckedCreateNestedManyWithoutRoleInput = {
+    create?: XOR<RolePermissionCreateWithoutRoleInput, RolePermissionUncheckedCreateWithoutRoleInput> | RolePermissionCreateWithoutRoleInput[] | RolePermissionUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: RolePermissionCreateOrConnectWithoutRoleInput | RolePermissionCreateOrConnectWithoutRoleInput[]
+    createMany?: RolePermissionCreateManyRoleInputEnvelope
+    connect?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+  }
+
+  export type ClientRoleUncheckedCreateNestedManyWithoutRoleInput = {
+    create?: XOR<ClientRoleCreateWithoutRoleInput, ClientRoleUncheckedCreateWithoutRoleInput> | ClientRoleCreateWithoutRoleInput[] | ClientRoleUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: ClientRoleCreateOrConnectWithoutRoleInput | ClientRoleCreateOrConnectWithoutRoleInput[]
+    createMany?: ClientRoleCreateManyRoleInputEnvelope
+    connect?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+  }
+
+  export type RolePermissionUpdateManyWithoutRoleNestedInput = {
+    create?: XOR<RolePermissionCreateWithoutRoleInput, RolePermissionUncheckedCreateWithoutRoleInput> | RolePermissionCreateWithoutRoleInput[] | RolePermissionUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: RolePermissionCreateOrConnectWithoutRoleInput | RolePermissionCreateOrConnectWithoutRoleInput[]
+    upsert?: RolePermissionUpsertWithWhereUniqueWithoutRoleInput | RolePermissionUpsertWithWhereUniqueWithoutRoleInput[]
+    createMany?: RolePermissionCreateManyRoleInputEnvelope
+    set?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    disconnect?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    delete?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    connect?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    update?: RolePermissionUpdateWithWhereUniqueWithoutRoleInput | RolePermissionUpdateWithWhereUniqueWithoutRoleInput[]
+    updateMany?: RolePermissionUpdateManyWithWhereWithoutRoleInput | RolePermissionUpdateManyWithWhereWithoutRoleInput[]
+    deleteMany?: RolePermissionScalarWhereInput | RolePermissionScalarWhereInput[]
+  }
+
+  export type ClientRoleUpdateManyWithoutRoleNestedInput = {
+    create?: XOR<ClientRoleCreateWithoutRoleInput, ClientRoleUncheckedCreateWithoutRoleInput> | ClientRoleCreateWithoutRoleInput[] | ClientRoleUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: ClientRoleCreateOrConnectWithoutRoleInput | ClientRoleCreateOrConnectWithoutRoleInput[]
+    upsert?: ClientRoleUpsertWithWhereUniqueWithoutRoleInput | ClientRoleUpsertWithWhereUniqueWithoutRoleInput[]
+    createMany?: ClientRoleCreateManyRoleInputEnvelope
+    set?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    disconnect?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    delete?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    connect?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    update?: ClientRoleUpdateWithWhereUniqueWithoutRoleInput | ClientRoleUpdateWithWhereUniqueWithoutRoleInput[]
+    updateMany?: ClientRoleUpdateManyWithWhereWithoutRoleInput | ClientRoleUpdateManyWithWhereWithoutRoleInput[]
+    deleteMany?: ClientRoleScalarWhereInput | ClientRoleScalarWhereInput[]
+  }
+
+  export type RolePermissionUncheckedUpdateManyWithoutRoleNestedInput = {
+    create?: XOR<RolePermissionCreateWithoutRoleInput, RolePermissionUncheckedCreateWithoutRoleInput> | RolePermissionCreateWithoutRoleInput[] | RolePermissionUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: RolePermissionCreateOrConnectWithoutRoleInput | RolePermissionCreateOrConnectWithoutRoleInput[]
+    upsert?: RolePermissionUpsertWithWhereUniqueWithoutRoleInput | RolePermissionUpsertWithWhereUniqueWithoutRoleInput[]
+    createMany?: RolePermissionCreateManyRoleInputEnvelope
+    set?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    disconnect?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    delete?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    connect?: RolePermissionWhereUniqueInput | RolePermissionWhereUniqueInput[]
+    update?: RolePermissionUpdateWithWhereUniqueWithoutRoleInput | RolePermissionUpdateWithWhereUniqueWithoutRoleInput[]
+    updateMany?: RolePermissionUpdateManyWithWhereWithoutRoleInput | RolePermissionUpdateManyWithWhereWithoutRoleInput[]
+    deleteMany?: RolePermissionScalarWhereInput | RolePermissionScalarWhereInput[]
+  }
+
+  export type ClientRoleUncheckedUpdateManyWithoutRoleNestedInput = {
+    create?: XOR<ClientRoleCreateWithoutRoleInput, ClientRoleUncheckedCreateWithoutRoleInput> | ClientRoleCreateWithoutRoleInput[] | ClientRoleUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: ClientRoleCreateOrConnectWithoutRoleInput | ClientRoleCreateOrConnectWithoutRoleInput[]
+    upsert?: ClientRoleUpsertWithWhereUniqueWithoutRoleInput | ClientRoleUpsertWithWhereUniqueWithoutRoleInput[]
+    createMany?: ClientRoleCreateManyRoleInputEnvelope
+    set?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    disconnect?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    delete?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    connect?: ClientRoleWhereUniqueInput | ClientRoleWhereUniqueInput[]
+    update?: ClientRoleUpdateWithWhereUniqueWithoutRoleInput | ClientRoleUpdateWithWhereUniqueWithoutRoleInput[]
+    updateMany?: ClientRoleUpdateManyWithWhereWithoutRoleInput | ClientRoleUpdateManyWithWhereWithoutRoleInput[]
+    deleteMany?: ClientRoleScalarWhereInput | ClientRoleScalarWhereInput[]
+  }
+
+  export type RoleCreateNestedOneWithoutPermissionsInput = {
+    create?: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput>
+    connectOrCreate?: RoleCreateOrConnectWithoutPermissionsInput
+    connect?: RoleWhereUniqueInput
+  }
+
+  export type PermissionCreateNestedOneWithoutRolesInput = {
+    create?: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput>
+    connectOrCreate?: PermissionCreateOrConnectWithoutRolesInput
+    connect?: PermissionWhereUniqueInput
+  }
+
+  export type RoleUpdateOneRequiredWithoutPermissionsNestedInput = {
+    create?: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput>
+    connectOrCreate?: RoleCreateOrConnectWithoutPermissionsInput
+    upsert?: RoleUpsertWithoutPermissionsInput
+    connect?: RoleWhereUniqueInput
+    update?: XOR<XOR<RoleUpdateToOneWithWhereWithoutPermissionsInput, RoleUpdateWithoutPermissionsInput>, RoleUncheckedUpdateWithoutPermissionsInput>
+  }
+
+  export type PermissionUpdateOneRequiredWithoutRolesNestedInput = {
+    create?: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput>
+    connectOrCreate?: PermissionCreateOrConnectWithoutRolesInput
+    upsert?: PermissionUpsertWithoutRolesInput
+    connect?: PermissionWhereUniqueInput
+    update?: XOR<XOR<PermissionUpdateToOneWithWhereWithoutRolesInput, PermissionUpdateWithoutRolesInput>, PermissionUncheckedUpdateWithoutRolesInput>
+  }
+
+  export type OAuthClientCreateNestedOneWithoutRolesInput = {
+    create?: XOR<OAuthClientCreateWithoutRolesInput, OAuthClientUncheckedCreateWithoutRolesInput>
+    connectOrCreate?: OAuthClientCreateOrConnectWithoutRolesInput
+    connect?: OAuthClientWhereUniqueInput
+  }
+
+  export type RoleCreateNestedOneWithoutClientsInput = {
+    create?: XOR<RoleCreateWithoutClientsInput, RoleUncheckedCreateWithoutClientsInput>
+    connectOrCreate?: RoleCreateOrConnectWithoutClientsInput
+    connect?: RoleWhereUniqueInput
+  }
+
+  export type OAuthClientUpdateOneRequiredWithoutRolesNestedInput = {
+    create?: XOR<OAuthClientCreateWithoutRolesInput, OAuthClientUncheckedCreateWithoutRolesInput>
+    connectOrCreate?: OAuthClientCreateOrConnectWithoutRolesInput
+    upsert?: OAuthClientUpsertWithoutRolesInput
+    connect?: OAuthClientWhereUniqueInput
+    update?: XOR<XOR<OAuthClientUpdateToOneWithWhereWithoutRolesInput, OAuthClientUpdateWithoutRolesInput>, OAuthClientUncheckedUpdateWithoutRolesInput>
+  }
+
+  export type RoleUpdateOneRequiredWithoutClientsNestedInput = {
+    create?: XOR<RoleCreateWithoutClientsInput, RoleUncheckedCreateWithoutClientsInput>
+    connectOrCreate?: RoleCreateOrConnectWithoutClientsInput
+    upsert?: RoleUpsertWithoutClientsInput
+    connect?: RoleWhereUniqueInput
+    update?: XOR<XOR<RoleUpdateToOneWithWhereWithoutClientsInput, RoleUpdateWithoutClientsInput>, RoleUncheckedUpdateWithoutClientsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -15931,174 +21283,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type OAuthAuthorizationCodeCreateWithoutUserInput = {
-    id?: string
-    code: string
-    redirect_uri: string
-    scope: string
-    state?: string | null
-    code_challenge?: string | null
-    code_challenge_method?: string | null
-    nonce?: string | null
-    expires_at: Date | string
-    consumed_at?: Date | string | null
-    created_at?: Date | string
-    client: OAuthClientCreateNestedOneWithoutAuthorization_codesInput
-  }
-
-  export type OAuthAuthorizationCodeUncheckedCreateWithoutUserInput = {
-    id?: string
-    code: string
-    client_id: string
-    redirect_uri: string
-    scope: string
-    state?: string | null
-    code_challenge?: string | null
-    code_challenge_method?: string | null
-    nonce?: string | null
-    expires_at: Date | string
-    consumed_at?: Date | string | null
-    created_at?: Date | string
-  }
-
-  export type OAuthAuthorizationCodeCreateOrConnectWithoutUserInput = {
-    where: OAuthAuthorizationCodeWhereUniqueInput
-    create: XOR<OAuthAuthorizationCodeCreateWithoutUserInput, OAuthAuthorizationCodeUncheckedCreateWithoutUserInput>
-  }
-
-  export type OAuthAuthorizationCodeCreateManyUserInputEnvelope = {
-    data: OAuthAuthorizationCodeCreateManyUserInput | OAuthAuthorizationCodeCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type OAuthAccessTokenCreateWithoutUserInput = {
-    id?: string
-    token: string
-    scope: string
-    token_type?: string
-    expires_at: Date | string
-    revoked_at?: Date | string | null
-    created_at?: Date | string
-    client: OAuthClientCreateNestedOneWithoutAccess_tokensInput
-  }
-
-  export type OAuthAccessTokenUncheckedCreateWithoutUserInput = {
-    id?: string
-    token: string
-    client_id: string
-    scope: string
-    token_type?: string
-    expires_at: Date | string
-    revoked_at?: Date | string | null
-    created_at?: Date | string
-  }
-
-  export type OAuthAccessTokenCreateOrConnectWithoutUserInput = {
-    where: OAuthAccessTokenWhereUniqueInput
-    create: XOR<OAuthAccessTokenCreateWithoutUserInput, OAuthAccessTokenUncheckedCreateWithoutUserInput>
-  }
-
-  export type OAuthAccessTokenCreateManyUserInputEnvelope = {
-    data: OAuthAccessTokenCreateManyUserInput | OAuthAccessTokenCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type OAuthRefreshTokenCreateWithoutUserInput = {
-    id?: string
-    token: string
-    access_token_id: string
-    scope: string
-    expires_at: Date | string
-    revoked_at?: Date | string | null
-    created_at?: Date | string
-    client: OAuthClientCreateNestedOneWithoutRefresh_tokensInput
-  }
-
-  export type OAuthRefreshTokenUncheckedCreateWithoutUserInput = {
-    id?: string
-    token: string
-    access_token_id: string
-    client_id: string
-    scope: string
-    expires_at: Date | string
-    revoked_at?: Date | string | null
-    created_at?: Date | string
-  }
-
-  export type OAuthRefreshTokenCreateOrConnectWithoutUserInput = {
-    where: OAuthRefreshTokenWhereUniqueInput
-    create: XOR<OAuthRefreshTokenCreateWithoutUserInput, OAuthRefreshTokenUncheckedCreateWithoutUserInput>
-  }
-
-  export type OAuthRefreshTokenCreateManyUserInputEnvelope = {
-    data: OAuthRefreshTokenCreateManyUserInput | OAuthRefreshTokenCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type OAuthDeviceCodeCreateWithoutUserInput = {
-    id?: string
-    device_code: string
-    user_code: string
-    scope: string
-    expires_at: Date | string
-    interval?: number
-    verified?: boolean
-    completed_at?: Date | string | null
-    created_at?: Date | string
-    client: OAuthClientCreateNestedOneWithoutDevice_codesInput
-  }
-
-  export type OAuthDeviceCodeUncheckedCreateWithoutUserInput = {
-    id?: string
-    device_code: string
-    user_code: string
-    client_id: string
-    scope: string
-    expires_at: Date | string
-    interval?: number
-    verified?: boolean
-    completed_at?: Date | string | null
-    created_at?: Date | string
-  }
-
-  export type OAuthDeviceCodeCreateOrConnectWithoutUserInput = {
-    where: OAuthDeviceCodeWhereUniqueInput
-    create: XOR<OAuthDeviceCodeCreateWithoutUserInput, OAuthDeviceCodeUncheckedCreateWithoutUserInput>
-  }
-
-  export type OAuthDeviceCodeCreateManyUserInputEnvelope = {
-    data: OAuthDeviceCodeCreateManyUserInput | OAuthDeviceCodeCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type OAuthUserConsentCreateWithoutUserInput = {
-    id?: string
-    scope: string
-    expires_at?: Date | string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    client: OAuthClientCreateNestedOneWithoutUser_consentsInput
-  }
-
-  export type OAuthUserConsentUncheckedCreateWithoutUserInput = {
-    id?: string
-    client_id: string
-    scope: string
-    expires_at?: Date | string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type OAuthUserConsentCreateOrConnectWithoutUserInput = {
-    where: OAuthUserConsentWhereUniqueInput
-    create: XOR<OAuthUserConsentCreateWithoutUserInput, OAuthUserConsentUncheckedCreateWithoutUserInput>
-  }
-
-  export type OAuthUserConsentCreateManyUserInputEnvelope = {
-    data: OAuthUserConsentCreateManyUserInput | OAuthUserConsentCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type RefreshTokenUpsertWithWhereUniqueWithoutUserInput = {
     where: RefreshTokenWhereUniqueInput
     update: XOR<RefreshTokenUpdateWithoutUserInput, RefreshTokenUncheckedUpdateWithoutUserInput>
@@ -16155,165 +21339,6 @@ export namespace Prisma {
     revoked_at?: DateTimeNullableFilter<"Session"> | Date | string | null
   }
 
-  export type OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutUserInput = {
-    where: OAuthAuthorizationCodeWhereUniqueInput
-    update: XOR<OAuthAuthorizationCodeUpdateWithoutUserInput, OAuthAuthorizationCodeUncheckedUpdateWithoutUserInput>
-    create: XOR<OAuthAuthorizationCodeCreateWithoutUserInput, OAuthAuthorizationCodeUncheckedCreateWithoutUserInput>
-  }
-
-  export type OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutUserInput = {
-    where: OAuthAuthorizationCodeWhereUniqueInput
-    data: XOR<OAuthAuthorizationCodeUpdateWithoutUserInput, OAuthAuthorizationCodeUncheckedUpdateWithoutUserInput>
-  }
-
-  export type OAuthAuthorizationCodeUpdateManyWithWhereWithoutUserInput = {
-    where: OAuthAuthorizationCodeScalarWhereInput
-    data: XOR<OAuthAuthorizationCodeUpdateManyMutationInput, OAuthAuthorizationCodeUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type OAuthAuthorizationCodeScalarWhereInput = {
-    AND?: OAuthAuthorizationCodeScalarWhereInput | OAuthAuthorizationCodeScalarWhereInput[]
-    OR?: OAuthAuthorizationCodeScalarWhereInput[]
-    NOT?: OAuthAuthorizationCodeScalarWhereInput | OAuthAuthorizationCodeScalarWhereInput[]
-    id?: StringFilter<"OAuthAuthorizationCode"> | string
-    code?: StringFilter<"OAuthAuthorizationCode"> | string
-    client_id?: StringFilter<"OAuthAuthorizationCode"> | string
-    user_id?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    redirect_uri?: StringFilter<"OAuthAuthorizationCode"> | string
-    scope?: StringFilter<"OAuthAuthorizationCode"> | string
-    state?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    code_challenge?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    code_challenge_method?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    nonce?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
-    expires_at?: DateTimeFilter<"OAuthAuthorizationCode"> | Date | string
-    consumed_at?: DateTimeNullableFilter<"OAuthAuthorizationCode"> | Date | string | null
-    created_at?: DateTimeFilter<"OAuthAuthorizationCode"> | Date | string
-  }
-
-  export type OAuthAccessTokenUpsertWithWhereUniqueWithoutUserInput = {
-    where: OAuthAccessTokenWhereUniqueInput
-    update: XOR<OAuthAccessTokenUpdateWithoutUserInput, OAuthAccessTokenUncheckedUpdateWithoutUserInput>
-    create: XOR<OAuthAccessTokenCreateWithoutUserInput, OAuthAccessTokenUncheckedCreateWithoutUserInput>
-  }
-
-  export type OAuthAccessTokenUpdateWithWhereUniqueWithoutUserInput = {
-    where: OAuthAccessTokenWhereUniqueInput
-    data: XOR<OAuthAccessTokenUpdateWithoutUserInput, OAuthAccessTokenUncheckedUpdateWithoutUserInput>
-  }
-
-  export type OAuthAccessTokenUpdateManyWithWhereWithoutUserInput = {
-    where: OAuthAccessTokenScalarWhereInput
-    data: XOR<OAuthAccessTokenUpdateManyMutationInput, OAuthAccessTokenUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type OAuthAccessTokenScalarWhereInput = {
-    AND?: OAuthAccessTokenScalarWhereInput | OAuthAccessTokenScalarWhereInput[]
-    OR?: OAuthAccessTokenScalarWhereInput[]
-    NOT?: OAuthAccessTokenScalarWhereInput | OAuthAccessTokenScalarWhereInput[]
-    id?: StringFilter<"OAuthAccessToken"> | string
-    token?: StringFilter<"OAuthAccessToken"> | string
-    client_id?: StringFilter<"OAuthAccessToken"> | string
-    user_id?: StringNullableFilter<"OAuthAccessToken"> | string | null
-    scope?: StringFilter<"OAuthAccessToken"> | string
-    token_type?: StringFilter<"OAuthAccessToken"> | string
-    expires_at?: DateTimeFilter<"OAuthAccessToken"> | Date | string
-    revoked_at?: DateTimeNullableFilter<"OAuthAccessToken"> | Date | string | null
-    created_at?: DateTimeFilter<"OAuthAccessToken"> | Date | string
-  }
-
-  export type OAuthRefreshTokenUpsertWithWhereUniqueWithoutUserInput = {
-    where: OAuthRefreshTokenWhereUniqueInput
-    update: XOR<OAuthRefreshTokenUpdateWithoutUserInput, OAuthRefreshTokenUncheckedUpdateWithoutUserInput>
-    create: XOR<OAuthRefreshTokenCreateWithoutUserInput, OAuthRefreshTokenUncheckedCreateWithoutUserInput>
-  }
-
-  export type OAuthRefreshTokenUpdateWithWhereUniqueWithoutUserInput = {
-    where: OAuthRefreshTokenWhereUniqueInput
-    data: XOR<OAuthRefreshTokenUpdateWithoutUserInput, OAuthRefreshTokenUncheckedUpdateWithoutUserInput>
-  }
-
-  export type OAuthRefreshTokenUpdateManyWithWhereWithoutUserInput = {
-    where: OAuthRefreshTokenScalarWhereInput
-    data: XOR<OAuthRefreshTokenUpdateManyMutationInput, OAuthRefreshTokenUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type OAuthRefreshTokenScalarWhereInput = {
-    AND?: OAuthRefreshTokenScalarWhereInput | OAuthRefreshTokenScalarWhereInput[]
-    OR?: OAuthRefreshTokenScalarWhereInput[]
-    NOT?: OAuthRefreshTokenScalarWhereInput | OAuthRefreshTokenScalarWhereInput[]
-    id?: StringFilter<"OAuthRefreshToken"> | string
-    token?: StringFilter<"OAuthRefreshToken"> | string
-    access_token_id?: StringFilter<"OAuthRefreshToken"> | string
-    client_id?: StringFilter<"OAuthRefreshToken"> | string
-    user_id?: StringNullableFilter<"OAuthRefreshToken"> | string | null
-    scope?: StringFilter<"OAuthRefreshToken"> | string
-    expires_at?: DateTimeFilter<"OAuthRefreshToken"> | Date | string
-    revoked_at?: DateTimeNullableFilter<"OAuthRefreshToken"> | Date | string | null
-    created_at?: DateTimeFilter<"OAuthRefreshToken"> | Date | string
-  }
-
-  export type OAuthDeviceCodeUpsertWithWhereUniqueWithoutUserInput = {
-    where: OAuthDeviceCodeWhereUniqueInput
-    update: XOR<OAuthDeviceCodeUpdateWithoutUserInput, OAuthDeviceCodeUncheckedUpdateWithoutUserInput>
-    create: XOR<OAuthDeviceCodeCreateWithoutUserInput, OAuthDeviceCodeUncheckedCreateWithoutUserInput>
-  }
-
-  export type OAuthDeviceCodeUpdateWithWhereUniqueWithoutUserInput = {
-    where: OAuthDeviceCodeWhereUniqueInput
-    data: XOR<OAuthDeviceCodeUpdateWithoutUserInput, OAuthDeviceCodeUncheckedUpdateWithoutUserInput>
-  }
-
-  export type OAuthDeviceCodeUpdateManyWithWhereWithoutUserInput = {
-    where: OAuthDeviceCodeScalarWhereInput
-    data: XOR<OAuthDeviceCodeUpdateManyMutationInput, OAuthDeviceCodeUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type OAuthDeviceCodeScalarWhereInput = {
-    AND?: OAuthDeviceCodeScalarWhereInput | OAuthDeviceCodeScalarWhereInput[]
-    OR?: OAuthDeviceCodeScalarWhereInput[]
-    NOT?: OAuthDeviceCodeScalarWhereInput | OAuthDeviceCodeScalarWhereInput[]
-    id?: StringFilter<"OAuthDeviceCode"> | string
-    device_code?: StringFilter<"OAuthDeviceCode"> | string
-    user_code?: StringFilter<"OAuthDeviceCode"> | string
-    client_id?: StringFilter<"OAuthDeviceCode"> | string
-    user_id?: StringNullableFilter<"OAuthDeviceCode"> | string | null
-    scope?: StringFilter<"OAuthDeviceCode"> | string
-    expires_at?: DateTimeFilter<"OAuthDeviceCode"> | Date | string
-    interval?: IntFilter<"OAuthDeviceCode"> | number
-    verified?: BoolFilter<"OAuthDeviceCode"> | boolean
-    completed_at?: DateTimeNullableFilter<"OAuthDeviceCode"> | Date | string | null
-    created_at?: DateTimeFilter<"OAuthDeviceCode"> | Date | string
-  }
-
-  export type OAuthUserConsentUpsertWithWhereUniqueWithoutUserInput = {
-    where: OAuthUserConsentWhereUniqueInput
-    update: XOR<OAuthUserConsentUpdateWithoutUserInput, OAuthUserConsentUncheckedUpdateWithoutUserInput>
-    create: XOR<OAuthUserConsentCreateWithoutUserInput, OAuthUserConsentUncheckedCreateWithoutUserInput>
-  }
-
-  export type OAuthUserConsentUpdateWithWhereUniqueWithoutUserInput = {
-    where: OAuthUserConsentWhereUniqueInput
-    data: XOR<OAuthUserConsentUpdateWithoutUserInput, OAuthUserConsentUncheckedUpdateWithoutUserInput>
-  }
-
-  export type OAuthUserConsentUpdateManyWithWhereWithoutUserInput = {
-    where: OAuthUserConsentScalarWhereInput
-    data: XOR<OAuthUserConsentUpdateManyMutationInput, OAuthUserConsentUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type OAuthUserConsentScalarWhereInput = {
-    AND?: OAuthUserConsentScalarWhereInput | OAuthUserConsentScalarWhereInput[]
-    OR?: OAuthUserConsentScalarWhereInput[]
-    NOT?: OAuthUserConsentScalarWhereInput | OAuthUserConsentScalarWhereInput[]
-    id?: StringFilter<"OAuthUserConsent"> | string
-    client_id?: StringFilter<"OAuthUserConsent"> | string
-    user_id?: StringFilter<"OAuthUserConsent"> | string
-    scope?: StringFilter<"OAuthUserConsent"> | string
-    expires_at?: DateTimeNullableFilter<"OAuthUserConsent"> | Date | string | null
-    created_at?: DateTimeFilter<"OAuthUserConsent"> | Date | string
-    updated_at?: DateTimeFilter<"OAuthUserConsent"> | Date | string
-  }
-
   export type UserCreateWithoutRefresh_tokensInput = {
     id?: string
     email: string
@@ -16326,11 +21351,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRefresh_tokensInput = {
@@ -16345,11 +21365,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRefresh_tokensInput = {
@@ -16380,11 +21395,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRefresh_tokensInput = {
@@ -16399,11 +21409,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -16418,11 +21423,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     refresh_tokens?: RefreshTokenCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -16437,11 +21437,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     refresh_tokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -16472,11 +21467,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     refresh_tokens?: RefreshTokenUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -16491,73 +21481,34 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     refresh_tokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type OAuthAuthorizationCodeCreateWithoutClientInput = {
-    id?: string
-    code: string
-    redirect_uri: string
-    scope: string
-    state?: string | null
-    code_challenge?: string | null
-    code_challenge_method?: string | null
-    nonce?: string | null
-    expires_at: Date | string
-    consumed_at?: Date | string | null
-    created_at?: Date | string
-    user?: UserCreateNestedOneWithoutOauth_authorization_codesInput
-  }
-
-  export type OAuthAuthorizationCodeUncheckedCreateWithoutClientInput = {
-    id?: string
-    code: string
-    user_id?: string | null
-    redirect_uri: string
-    scope: string
-    state?: string | null
-    code_challenge?: string | null
-    code_challenge_method?: string | null
-    nonce?: string | null
-    expires_at: Date | string
-    consumed_at?: Date | string | null
-    created_at?: Date | string
-  }
-
-  export type OAuthAuthorizationCodeCreateOrConnectWithoutClientInput = {
-    where: OAuthAuthorizationCodeWhereUniqueInput
-    create: XOR<OAuthAuthorizationCodeCreateWithoutClientInput, OAuthAuthorizationCodeUncheckedCreateWithoutClientInput>
-  }
-
-  export type OAuthAuthorizationCodeCreateManyClientInputEnvelope = {
-    data: OAuthAuthorizationCodeCreateManyClientInput | OAuthAuthorizationCodeCreateManyClientInput[]
-    skipDuplicates?: boolean
   }
 
   export type OAuthAccessTokenCreateWithoutClientInput = {
     id?: string
     token: string
-    scope: string
+    user_id?: string | null
+    scope?: string | null
+    permissions?: OAuthAccessTokenCreatepermissionsInput | string[]
+    roles?: OAuthAccessTokenCreaterolesInput | string[]
     token_type?: string
     expires_at: Date | string
-    revoked_at?: Date | string | null
     created_at?: Date | string
-    user?: UserCreateNestedOneWithoutOauth_access_tokensInput
+    revoked_at?: Date | string | null
+    refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutAccess_tokenInput
   }
 
   export type OAuthAccessTokenUncheckedCreateWithoutClientInput = {
     id?: string
     token: string
     user_id?: string | null
-    scope: string
+    scope?: string | null
+    permissions?: OAuthAccessTokenCreatepermissionsInput | string[]
+    roles?: OAuthAccessTokenCreaterolesInput | string[]
     token_type?: string
     expires_at: Date | string
-    revoked_at?: Date | string | null
     created_at?: Date | string
+    revoked_at?: Date | string | null
+    refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutAccess_tokenInput
   }
 
   export type OAuthAccessTokenCreateOrConnectWithoutClientInput = {
@@ -16573,12 +21524,12 @@ export namespace Prisma {
   export type OAuthRefreshTokenCreateWithoutClientInput = {
     id?: string
     token: string
-    access_token_id: string
-    scope: string
+    user_id?: string | null
+    scope?: string | null
     expires_at: Date | string
-    revoked_at?: Date | string | null
     created_at?: Date | string
-    user?: UserCreateNestedOneWithoutOauth_refresh_tokensInput
+    revoked_at?: Date | string | null
+    access_token: OAuthAccessTokenCreateNestedOneWithoutRefresh_tokensInput
   }
 
   export type OAuthRefreshTokenUncheckedCreateWithoutClientInput = {
@@ -16586,10 +21537,10 @@ export namespace Prisma {
     token: string
     access_token_id: string
     user_id?: string | null
-    scope: string
+    scope?: string | null
     expires_at: Date | string
-    revoked_at?: Date | string | null
     created_at?: Date | string
+    revoked_at?: Date | string | null
   }
 
   export type OAuthRefreshTokenCreateOrConnectWithoutClientInput = {
@@ -16602,17 +21553,59 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type OAuthAuthorizationCodeCreateWithoutClientInput = {
+    id?: string
+    code: string
+    user_id: string
+    scope?: string | null
+    redirect_uri: string
+    state?: string | null
+    code_challenge?: string | null
+    code_challenge_method?: string | null
+    nonce?: string | null
+    consumed_at?: Date | string | null
+    expires_at: Date | string
+    created_at?: Date | string
+    used_at?: Date | string | null
+  }
+
+  export type OAuthAuthorizationCodeUncheckedCreateWithoutClientInput = {
+    id?: string
+    code: string
+    user_id: string
+    scope?: string | null
+    redirect_uri: string
+    state?: string | null
+    code_challenge?: string | null
+    code_challenge_method?: string | null
+    nonce?: string | null
+    consumed_at?: Date | string | null
+    expires_at: Date | string
+    created_at?: Date | string
+    used_at?: Date | string | null
+  }
+
+  export type OAuthAuthorizationCodeCreateOrConnectWithoutClientInput = {
+    where: OAuthAuthorizationCodeWhereUniqueInput
+    create: XOR<OAuthAuthorizationCodeCreateWithoutClientInput, OAuthAuthorizationCodeUncheckedCreateWithoutClientInput>
+  }
+
+  export type OAuthAuthorizationCodeCreateManyClientInputEnvelope = {
+    data: OAuthAuthorizationCodeCreateManyClientInput | OAuthAuthorizationCodeCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
   export type OAuthDeviceCodeCreateWithoutClientInput = {
     id?: string
     device_code: string
     user_code: string
-    scope: string
+    user_id?: string | null
+    scope?: string | null
+    verified?: boolean
     expires_at: Date | string
     interval?: number
-    verified?: boolean
-    completed_at?: Date | string | null
     created_at?: Date | string
-    user?: UserCreateNestedOneWithoutOauth_device_codesInput
+    completed_at?: Date | string | null
   }
 
   export type OAuthDeviceCodeUncheckedCreateWithoutClientInput = {
@@ -16620,12 +21613,12 @@ export namespace Prisma {
     device_code: string
     user_code: string
     user_id?: string | null
-    scope: string
+    scope?: string | null
+    verified?: boolean
     expires_at: Date | string
     interval?: number
-    verified?: boolean
-    completed_at?: Date | string | null
     created_at?: Date | string
+    completed_at?: Date | string | null
   }
 
   export type OAuthDeviceCodeCreateOrConnectWithoutClientInput = {
@@ -16640,19 +21633,21 @@ export namespace Prisma {
 
   export type OAuthUserConsentCreateWithoutClientInput = {
     id?: string
-    scope: string
+    user_id: string
+    scope?: OAuthUserConsentCreatescopeInput | string[]
+    granted_at?: Date | string
     expires_at?: Date | string | null
-    created_at?: Date | string
+    revoked_at?: Date | string | null
     updated_at?: Date | string
-    user: UserCreateNestedOneWithoutOauth_consentsInput
   }
 
   export type OAuthUserConsentUncheckedCreateWithoutClientInput = {
     id?: string
     user_id: string
-    scope: string
+    scope?: OAuthUserConsentCreatescopeInput | string[]
+    granted_at?: Date | string
     expires_at?: Date | string | null
-    created_at?: Date | string
+    revoked_at?: Date | string | null
     updated_at?: Date | string
   }
 
@@ -16666,20 +21661,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutClientInput = {
-    where: OAuthAuthorizationCodeWhereUniqueInput
-    update: XOR<OAuthAuthorizationCodeUpdateWithoutClientInput, OAuthAuthorizationCodeUncheckedUpdateWithoutClientInput>
-    create: XOR<OAuthAuthorizationCodeCreateWithoutClientInput, OAuthAuthorizationCodeUncheckedCreateWithoutClientInput>
+  export type ClientRoleCreateWithoutClientInput = {
+    id?: string
+    created_at?: Date | string
+    role: RoleCreateNestedOneWithoutClientsInput
   }
 
-  export type OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutClientInput = {
-    where: OAuthAuthorizationCodeWhereUniqueInput
-    data: XOR<OAuthAuthorizationCodeUpdateWithoutClientInput, OAuthAuthorizationCodeUncheckedUpdateWithoutClientInput>
+  export type ClientRoleUncheckedCreateWithoutClientInput = {
+    id?: string
+    role_id: string
+    created_at?: Date | string
   }
 
-  export type OAuthAuthorizationCodeUpdateManyWithWhereWithoutClientInput = {
-    where: OAuthAuthorizationCodeScalarWhereInput
-    data: XOR<OAuthAuthorizationCodeUpdateManyMutationInput, OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientInput>
+  export type ClientRoleCreateOrConnectWithoutClientInput = {
+    where: ClientRoleWhereUniqueInput
+    create: XOR<ClientRoleCreateWithoutClientInput, ClientRoleUncheckedCreateWithoutClientInput>
+  }
+
+  export type ClientRoleCreateManyClientInputEnvelope = {
+    data: ClientRoleCreateManyClientInput | ClientRoleCreateManyClientInput[]
+    skipDuplicates?: boolean
   }
 
   export type OAuthAccessTokenUpsertWithWhereUniqueWithoutClientInput = {
@@ -16698,6 +21699,23 @@ export namespace Prisma {
     data: XOR<OAuthAccessTokenUpdateManyMutationInput, OAuthAccessTokenUncheckedUpdateManyWithoutClientInput>
   }
 
+  export type OAuthAccessTokenScalarWhereInput = {
+    AND?: OAuthAccessTokenScalarWhereInput | OAuthAccessTokenScalarWhereInput[]
+    OR?: OAuthAccessTokenScalarWhereInput[]
+    NOT?: OAuthAccessTokenScalarWhereInput | OAuthAccessTokenScalarWhereInput[]
+    id?: StringFilter<"OAuthAccessToken"> | string
+    token?: StringFilter<"OAuthAccessToken"> | string
+    client_id?: StringFilter<"OAuthAccessToken"> | string
+    user_id?: StringNullableFilter<"OAuthAccessToken"> | string | null
+    scope?: StringNullableFilter<"OAuthAccessToken"> | string | null
+    permissions?: StringNullableListFilter<"OAuthAccessToken">
+    roles?: StringNullableListFilter<"OAuthAccessToken">
+    token_type?: StringFilter<"OAuthAccessToken"> | string
+    expires_at?: DateTimeFilter<"OAuthAccessToken"> | Date | string
+    created_at?: DateTimeFilter<"OAuthAccessToken"> | Date | string
+    revoked_at?: DateTimeNullableFilter<"OAuthAccessToken"> | Date | string | null
+  }
+
   export type OAuthRefreshTokenUpsertWithWhereUniqueWithoutClientInput = {
     where: OAuthRefreshTokenWhereUniqueInput
     update: XOR<OAuthRefreshTokenUpdateWithoutClientInput, OAuthRefreshTokenUncheckedUpdateWithoutClientInput>
@@ -16712,6 +21730,57 @@ export namespace Prisma {
   export type OAuthRefreshTokenUpdateManyWithWhereWithoutClientInput = {
     where: OAuthRefreshTokenScalarWhereInput
     data: XOR<OAuthRefreshTokenUpdateManyMutationInput, OAuthRefreshTokenUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type OAuthRefreshTokenScalarWhereInput = {
+    AND?: OAuthRefreshTokenScalarWhereInput | OAuthRefreshTokenScalarWhereInput[]
+    OR?: OAuthRefreshTokenScalarWhereInput[]
+    NOT?: OAuthRefreshTokenScalarWhereInput | OAuthRefreshTokenScalarWhereInput[]
+    id?: StringFilter<"OAuthRefreshToken"> | string
+    token?: StringFilter<"OAuthRefreshToken"> | string
+    access_token_id?: StringFilter<"OAuthRefreshToken"> | string
+    client_id?: StringFilter<"OAuthRefreshToken"> | string
+    user_id?: StringNullableFilter<"OAuthRefreshToken"> | string | null
+    scope?: StringNullableFilter<"OAuthRefreshToken"> | string | null
+    expires_at?: DateTimeFilter<"OAuthRefreshToken"> | Date | string
+    created_at?: DateTimeFilter<"OAuthRefreshToken"> | Date | string
+    revoked_at?: DateTimeNullableFilter<"OAuthRefreshToken"> | Date | string | null
+  }
+
+  export type OAuthAuthorizationCodeUpsertWithWhereUniqueWithoutClientInput = {
+    where: OAuthAuthorizationCodeWhereUniqueInput
+    update: XOR<OAuthAuthorizationCodeUpdateWithoutClientInput, OAuthAuthorizationCodeUncheckedUpdateWithoutClientInput>
+    create: XOR<OAuthAuthorizationCodeCreateWithoutClientInput, OAuthAuthorizationCodeUncheckedCreateWithoutClientInput>
+  }
+
+  export type OAuthAuthorizationCodeUpdateWithWhereUniqueWithoutClientInput = {
+    where: OAuthAuthorizationCodeWhereUniqueInput
+    data: XOR<OAuthAuthorizationCodeUpdateWithoutClientInput, OAuthAuthorizationCodeUncheckedUpdateWithoutClientInput>
+  }
+
+  export type OAuthAuthorizationCodeUpdateManyWithWhereWithoutClientInput = {
+    where: OAuthAuthorizationCodeScalarWhereInput
+    data: XOR<OAuthAuthorizationCodeUpdateManyMutationInput, OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type OAuthAuthorizationCodeScalarWhereInput = {
+    AND?: OAuthAuthorizationCodeScalarWhereInput | OAuthAuthorizationCodeScalarWhereInput[]
+    OR?: OAuthAuthorizationCodeScalarWhereInput[]
+    NOT?: OAuthAuthorizationCodeScalarWhereInput | OAuthAuthorizationCodeScalarWhereInput[]
+    id?: StringFilter<"OAuthAuthorizationCode"> | string
+    code?: StringFilter<"OAuthAuthorizationCode"> | string
+    client_id?: StringFilter<"OAuthAuthorizationCode"> | string
+    user_id?: StringFilter<"OAuthAuthorizationCode"> | string
+    scope?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    redirect_uri?: StringFilter<"OAuthAuthorizationCode"> | string
+    state?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    code_challenge?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    code_challenge_method?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    nonce?: StringNullableFilter<"OAuthAuthorizationCode"> | string | null
+    consumed_at?: DateTimeNullableFilter<"OAuthAuthorizationCode"> | Date | string | null
+    expires_at?: DateTimeFilter<"OAuthAuthorizationCode"> | Date | string
+    created_at?: DateTimeFilter<"OAuthAuthorizationCode"> | Date | string
+    used_at?: DateTimeNullableFilter<"OAuthAuthorizationCode"> | Date | string | null
   }
 
   export type OAuthDeviceCodeUpsertWithWhereUniqueWithoutClientInput = {
@@ -16730,6 +21799,23 @@ export namespace Prisma {
     data: XOR<OAuthDeviceCodeUpdateManyMutationInput, OAuthDeviceCodeUncheckedUpdateManyWithoutClientInput>
   }
 
+  export type OAuthDeviceCodeScalarWhereInput = {
+    AND?: OAuthDeviceCodeScalarWhereInput | OAuthDeviceCodeScalarWhereInput[]
+    OR?: OAuthDeviceCodeScalarWhereInput[]
+    NOT?: OAuthDeviceCodeScalarWhereInput | OAuthDeviceCodeScalarWhereInput[]
+    id?: StringFilter<"OAuthDeviceCode"> | string
+    device_code?: StringFilter<"OAuthDeviceCode"> | string
+    user_code?: StringFilter<"OAuthDeviceCode"> | string
+    client_id?: StringFilter<"OAuthDeviceCode"> | string
+    user_id?: StringNullableFilter<"OAuthDeviceCode"> | string | null
+    scope?: StringNullableFilter<"OAuthDeviceCode"> | string | null
+    verified?: BoolFilter<"OAuthDeviceCode"> | boolean
+    expires_at?: DateTimeFilter<"OAuthDeviceCode"> | Date | string
+    interval?: IntFilter<"OAuthDeviceCode"> | number
+    created_at?: DateTimeFilter<"OAuthDeviceCode"> | Date | string
+    completed_at?: DateTimeNullableFilter<"OAuthDeviceCode"> | Date | string | null
+  }
+
   export type OAuthUserConsentUpsertWithWhereUniqueWithoutClientInput = {
     where: OAuthUserConsentWhereUniqueInput
     update: XOR<OAuthUserConsentUpdateWithoutClientInput, OAuthUserConsentUncheckedUpdateWithoutClientInput>
@@ -16746,234 +21832,49 @@ export namespace Prisma {
     data: XOR<OAuthUserConsentUpdateManyMutationInput, OAuthUserConsentUncheckedUpdateManyWithoutClientInput>
   }
 
-  export type OAuthClientCreateWithoutAuthorization_codesInput = {
-    id?: string
-    client_id: string
-    client_secret?: string | null
-    client_secret_hash?: string | null
-    name: string
-    description?: string | null
-    redirect_uris?: OAuthClientCreateredirect_urisInput | string[]
-    post_logout_redirect_uris?: OAuthClientCreatepost_logout_redirect_urisInput | string[]
-    scopes?: OAuthClientCreatescopesInput | string[]
-    grant_types?: OAuthClientCreategrant_typesInput | string[]
-    is_confidential?: boolean
-    is_public_client?: boolean
-    require_pkce?: boolean
-    access_token_lifetime?: number
-    refresh_token_lifetime?: number
-    allowed_origins?: OAuthClientCreateallowed_originsInput | string[]
-    logo_uri?: string | null
-    policy_uri?: string | null
-    tos_uri?: string | null
-    is_active?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    access_tokens?: OAuthAccessTokenCreateNestedManyWithoutClientInput
-    refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutClientInput
-    device_codes?: OAuthDeviceCodeCreateNestedManyWithoutClientInput
-    user_consents?: OAuthUserConsentCreateNestedManyWithoutClientInput
+  export type OAuthUserConsentScalarWhereInput = {
+    AND?: OAuthUserConsentScalarWhereInput | OAuthUserConsentScalarWhereInput[]
+    OR?: OAuthUserConsentScalarWhereInput[]
+    NOT?: OAuthUserConsentScalarWhereInput | OAuthUserConsentScalarWhereInput[]
+    id?: StringFilter<"OAuthUserConsent"> | string
+    user_id?: StringFilter<"OAuthUserConsent"> | string
+    client_id?: StringFilter<"OAuthUserConsent"> | string
+    scope?: StringNullableListFilter<"OAuthUserConsent">
+    granted_at?: DateTimeFilter<"OAuthUserConsent"> | Date | string
+    expires_at?: DateTimeNullableFilter<"OAuthUserConsent"> | Date | string | null
+    revoked_at?: DateTimeNullableFilter<"OAuthUserConsent"> | Date | string | null
+    updated_at?: DateTimeFilter<"OAuthUserConsent"> | Date | string
   }
 
-  export type OAuthClientUncheckedCreateWithoutAuthorization_codesInput = {
-    id?: string
-    client_id: string
-    client_secret?: string | null
-    client_secret_hash?: string | null
-    name: string
-    description?: string | null
-    redirect_uris?: OAuthClientCreateredirect_urisInput | string[]
-    post_logout_redirect_uris?: OAuthClientCreatepost_logout_redirect_urisInput | string[]
-    scopes?: OAuthClientCreatescopesInput | string[]
-    grant_types?: OAuthClientCreategrant_typesInput | string[]
-    is_confidential?: boolean
-    is_public_client?: boolean
-    require_pkce?: boolean
-    access_token_lifetime?: number
-    refresh_token_lifetime?: number
-    allowed_origins?: OAuthClientCreateallowed_originsInput | string[]
-    logo_uri?: string | null
-    policy_uri?: string | null
-    tos_uri?: string | null
-    is_active?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput
-    refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutClientInput
-    device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutClientInput
-    user_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutClientInput
+  export type ClientRoleUpsertWithWhereUniqueWithoutClientInput = {
+    where: ClientRoleWhereUniqueInput
+    update: XOR<ClientRoleUpdateWithoutClientInput, ClientRoleUncheckedUpdateWithoutClientInput>
+    create: XOR<ClientRoleCreateWithoutClientInput, ClientRoleUncheckedCreateWithoutClientInput>
   }
 
-  export type OAuthClientCreateOrConnectWithoutAuthorization_codesInput = {
-    where: OAuthClientWhereUniqueInput
-    create: XOR<OAuthClientCreateWithoutAuthorization_codesInput, OAuthClientUncheckedCreateWithoutAuthorization_codesInput>
+  export type ClientRoleUpdateWithWhereUniqueWithoutClientInput = {
+    where: ClientRoleWhereUniqueInput
+    data: XOR<ClientRoleUpdateWithoutClientInput, ClientRoleUncheckedUpdateWithoutClientInput>
   }
 
-  export type UserCreateWithoutOauth_authorization_codesInput = {
-    id?: string
-    email: string
-    password_hash: string
-    first_name?: string | null
-    last_name?: string | null
-    role?: string
-    is_active?: boolean
-    email_verified?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    refresh_tokens?: RefreshTokenCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentCreateNestedManyWithoutUserInput
+  export type ClientRoleUpdateManyWithWhereWithoutClientInput = {
+    where: ClientRoleScalarWhereInput
+    data: XOR<ClientRoleUpdateManyMutationInput, ClientRoleUncheckedUpdateManyWithoutClientInput>
   }
 
-  export type UserUncheckedCreateWithoutOauth_authorization_codesInput = {
-    id?: string
-    email: string
-    password_hash: string
-    first_name?: string | null
-    last_name?: string | null
-    role?: string
-    is_active?: boolean
-    email_verified?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    refresh_tokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutOauth_authorization_codesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutOauth_authorization_codesInput, UserUncheckedCreateWithoutOauth_authorization_codesInput>
-  }
-
-  export type OAuthClientUpsertWithoutAuthorization_codesInput = {
-    update: XOR<OAuthClientUpdateWithoutAuthorization_codesInput, OAuthClientUncheckedUpdateWithoutAuthorization_codesInput>
-    create: XOR<OAuthClientCreateWithoutAuthorization_codesInput, OAuthClientUncheckedCreateWithoutAuthorization_codesInput>
-    where?: OAuthClientWhereInput
-  }
-
-  export type OAuthClientUpdateToOneWithWhereWithoutAuthorization_codesInput = {
-    where?: OAuthClientWhereInput
-    data: XOR<OAuthClientUpdateWithoutAuthorization_codesInput, OAuthClientUncheckedUpdateWithoutAuthorization_codesInput>
-  }
-
-  export type OAuthClientUpdateWithoutAuthorization_codesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
-    client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    redirect_uris?: OAuthClientUpdateredirect_urisInput | string[]
-    post_logout_redirect_uris?: OAuthClientUpdatepost_logout_redirect_urisInput | string[]
-    scopes?: OAuthClientUpdatescopesInput | string[]
-    grant_types?: OAuthClientUpdategrant_typesInput | string[]
-    is_confidential?: BoolFieldUpdateOperationsInput | boolean
-    is_public_client?: BoolFieldUpdateOperationsInput | boolean
-    require_pkce?: BoolFieldUpdateOperationsInput | boolean
-    access_token_lifetime?: IntFieldUpdateOperationsInput | number
-    refresh_token_lifetime?: IntFieldUpdateOperationsInput | number
-    allowed_origins?: OAuthClientUpdateallowed_originsInput | string[]
-    logo_uri?: NullableStringFieldUpdateOperationsInput | string | null
-    policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
-    tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    access_tokens?: OAuthAccessTokenUpdateManyWithoutClientNestedInput
-    refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutClientNestedInput
-    device_codes?: OAuthDeviceCodeUpdateManyWithoutClientNestedInput
-    user_consents?: OAuthUserConsentUpdateManyWithoutClientNestedInput
-  }
-
-  export type OAuthClientUncheckedUpdateWithoutAuthorization_codesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
-    client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    redirect_uris?: OAuthClientUpdateredirect_urisInput | string[]
-    post_logout_redirect_uris?: OAuthClientUpdatepost_logout_redirect_urisInput | string[]
-    scopes?: OAuthClientUpdatescopesInput | string[]
-    grant_types?: OAuthClientUpdategrant_typesInput | string[]
-    is_confidential?: BoolFieldUpdateOperationsInput | boolean
-    is_public_client?: BoolFieldUpdateOperationsInput | boolean
-    require_pkce?: BoolFieldUpdateOperationsInput | boolean
-    access_token_lifetime?: IntFieldUpdateOperationsInput | number
-    refresh_token_lifetime?: IntFieldUpdateOperationsInput | number
-    allowed_origins?: OAuthClientUpdateallowed_originsInput | string[]
-    logo_uri?: NullableStringFieldUpdateOperationsInput | string | null
-    policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
-    tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput
-    refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutClientNestedInput
-    device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutClientNestedInput
-    user_consents?: OAuthUserConsentUncheckedUpdateManyWithoutClientNestedInput
-  }
-
-  export type UserUpsertWithoutOauth_authorization_codesInput = {
-    update: XOR<UserUpdateWithoutOauth_authorization_codesInput, UserUncheckedUpdateWithoutOauth_authorization_codesInput>
-    create: XOR<UserCreateWithoutOauth_authorization_codesInput, UserUncheckedCreateWithoutOauth_authorization_codesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutOauth_authorization_codesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutOauth_authorization_codesInput, UserUncheckedUpdateWithoutOauth_authorization_codesInput>
-  }
-
-  export type UserUpdateWithoutOauth_authorization_codesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
-    first_name?: NullableStringFieldUpdateOperationsInput | string | null
-    last_name?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    email_verified?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    refresh_tokens?: RefreshTokenUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutOauth_authorization_codesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
-    first_name?: NullableStringFieldUpdateOperationsInput | string | null
-    last_name?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    email_verified?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    refresh_tokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUncheckedUpdateManyWithoutUserNestedInput
+  export type ClientRoleScalarWhereInput = {
+    AND?: ClientRoleScalarWhereInput | ClientRoleScalarWhereInput[]
+    OR?: ClientRoleScalarWhereInput[]
+    NOT?: ClientRoleScalarWhereInput | ClientRoleScalarWhereInput[]
+    id?: StringFilter<"ClientRole"> | string
+    client_id?: StringFilter<"ClientRole"> | string
+    role_id?: StringFilter<"ClientRole"> | string
+    created_at?: DateTimeFilter<"ClientRole"> | Date | string
   }
 
   export type OAuthClientCreateWithoutAccess_tokensInput = {
     id?: string
     client_id: string
-    client_secret?: string | null
     client_secret_hash?: string | null
     name: string
     description?: string | null
@@ -16991,18 +21892,20 @@ export namespace Prisma {
     policy_uri?: string | null
     tos_uri?: string | null
     is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutClientInput
     refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutClientInput
+    authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutClientInput
     device_codes?: OAuthDeviceCodeCreateNestedManyWithoutClientInput
     user_consents?: OAuthUserConsentCreateNestedManyWithoutClientInput
+    roles?: ClientRoleCreateNestedManyWithoutClientInput
   }
 
   export type OAuthClientUncheckedCreateWithoutAccess_tokensInput = {
     id?: string
     client_id: string
-    client_secret?: string | null
     client_secret_hash?: string | null
     name: string
     description?: string | null
@@ -17020,12 +21923,15 @@ export namespace Prisma {
     policy_uri?: string | null
     tos_uri?: string | null
     is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutClientInput
     refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutClientInput
+    authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutClientInput
     device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutClientInput
     user_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutClientInput
+    roles?: ClientRoleUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type OAuthClientCreateOrConnectWithoutAccess_tokensInput = {
@@ -17033,47 +21939,36 @@ export namespace Prisma {
     create: XOR<OAuthClientCreateWithoutAccess_tokensInput, OAuthClientUncheckedCreateWithoutAccess_tokensInput>
   }
 
-  export type UserCreateWithoutOauth_access_tokensInput = {
+  export type OAuthRefreshTokenCreateWithoutAccess_tokenInput = {
     id?: string
-    email: string
-    password_hash: string
-    first_name?: string | null
-    last_name?: string | null
-    role?: string
-    is_active?: boolean
-    email_verified?: boolean
+    token: string
+    user_id?: string | null
+    scope?: string | null
+    expires_at: Date | string
     created_at?: Date | string
-    updated_at?: Date | string
-    refresh_tokens?: RefreshTokenCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentCreateNestedManyWithoutUserInput
+    revoked_at?: Date | string | null
+    client: OAuthClientCreateNestedOneWithoutRefresh_tokensInput
   }
 
-  export type UserUncheckedCreateWithoutOauth_access_tokensInput = {
+  export type OAuthRefreshTokenUncheckedCreateWithoutAccess_tokenInput = {
     id?: string
-    email: string
-    password_hash: string
-    first_name?: string | null
-    last_name?: string | null
-    role?: string
-    is_active?: boolean
-    email_verified?: boolean
+    token: string
+    client_id: string
+    user_id?: string | null
+    scope?: string | null
+    expires_at: Date | string
     created_at?: Date | string
-    updated_at?: Date | string
-    refresh_tokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutUserInput
+    revoked_at?: Date | string | null
   }
 
-  export type UserCreateOrConnectWithoutOauth_access_tokensInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutOauth_access_tokensInput, UserUncheckedCreateWithoutOauth_access_tokensInput>
+  export type OAuthRefreshTokenCreateOrConnectWithoutAccess_tokenInput = {
+    where: OAuthRefreshTokenWhereUniqueInput
+    create: XOR<OAuthRefreshTokenCreateWithoutAccess_tokenInput, OAuthRefreshTokenUncheckedCreateWithoutAccess_tokenInput>
+  }
+
+  export type OAuthRefreshTokenCreateManyAccess_tokenInputEnvelope = {
+    data: OAuthRefreshTokenCreateManyAccess_tokenInput | OAuthRefreshTokenCreateManyAccess_tokenInput[]
+    skipDuplicates?: boolean
   }
 
   export type OAuthClientUpsertWithoutAccess_tokensInput = {
@@ -17090,7 +21985,6 @@ export namespace Prisma {
   export type OAuthClientUpdateWithoutAccess_tokensInput = {
     id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
     client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17108,18 +22002,20 @@ export namespace Prisma {
     policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
     tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutClientNestedInput
     refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutClientNestedInput
+    authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutClientNestedInput
     device_codes?: OAuthDeviceCodeUpdateManyWithoutClientNestedInput
     user_consents?: OAuthUserConsentUpdateManyWithoutClientNestedInput
+    roles?: ClientRoleUpdateManyWithoutClientNestedInput
   }
 
   export type OAuthClientUncheckedUpdateWithoutAccess_tokensInput = {
     id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
     client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17137,67 +22033,69 @@ export namespace Prisma {
     policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
     tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientNestedInput
     refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutClientNestedInput
+    authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientNestedInput
     device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutClientNestedInput
     user_consents?: OAuthUserConsentUncheckedUpdateManyWithoutClientNestedInput
+    roles?: ClientRoleUncheckedUpdateManyWithoutClientNestedInput
   }
 
-  export type UserUpsertWithoutOauth_access_tokensInput = {
-    update: XOR<UserUpdateWithoutOauth_access_tokensInput, UserUncheckedUpdateWithoutOauth_access_tokensInput>
-    create: XOR<UserCreateWithoutOauth_access_tokensInput, UserUncheckedCreateWithoutOauth_access_tokensInput>
-    where?: UserWhereInput
+  export type OAuthRefreshTokenUpsertWithWhereUniqueWithoutAccess_tokenInput = {
+    where: OAuthRefreshTokenWhereUniqueInput
+    update: XOR<OAuthRefreshTokenUpdateWithoutAccess_tokenInput, OAuthRefreshTokenUncheckedUpdateWithoutAccess_tokenInput>
+    create: XOR<OAuthRefreshTokenCreateWithoutAccess_tokenInput, OAuthRefreshTokenUncheckedCreateWithoutAccess_tokenInput>
   }
 
-  export type UserUpdateToOneWithWhereWithoutOauth_access_tokensInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutOauth_access_tokensInput, UserUncheckedUpdateWithoutOauth_access_tokensInput>
+  export type OAuthRefreshTokenUpdateWithWhereUniqueWithoutAccess_tokenInput = {
+    where: OAuthRefreshTokenWhereUniqueInput
+    data: XOR<OAuthRefreshTokenUpdateWithoutAccess_tokenInput, OAuthRefreshTokenUncheckedUpdateWithoutAccess_tokenInput>
   }
 
-  export type UserUpdateWithoutOauth_access_tokensInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
-    first_name?: NullableStringFieldUpdateOperationsInput | string | null
-    last_name?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    email_verified?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    refresh_tokens?: RefreshTokenUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUpdateManyWithoutUserNestedInput
+  export type OAuthRefreshTokenUpdateManyWithWhereWithoutAccess_tokenInput = {
+    where: OAuthRefreshTokenScalarWhereInput
+    data: XOR<OAuthRefreshTokenUpdateManyMutationInput, OAuthRefreshTokenUncheckedUpdateManyWithoutAccess_tokenInput>
   }
 
-  export type UserUncheckedUpdateWithoutOauth_access_tokensInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
-    first_name?: NullableStringFieldUpdateOperationsInput | string | null
-    last_name?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    email_verified?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    refresh_tokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUncheckedUpdateManyWithoutUserNestedInput
+  export type OAuthAccessTokenCreateWithoutRefresh_tokensInput = {
+    id?: string
+    token: string
+    user_id?: string | null
+    scope?: string | null
+    permissions?: OAuthAccessTokenCreatepermissionsInput | string[]
+    roles?: OAuthAccessTokenCreaterolesInput | string[]
+    token_type?: string
+    expires_at: Date | string
+    created_at?: Date | string
+    revoked_at?: Date | string | null
+    client: OAuthClientCreateNestedOneWithoutAccess_tokensInput
+  }
+
+  export type OAuthAccessTokenUncheckedCreateWithoutRefresh_tokensInput = {
+    id?: string
+    token: string
+    client_id: string
+    user_id?: string | null
+    scope?: string | null
+    permissions?: OAuthAccessTokenCreatepermissionsInput | string[]
+    roles?: OAuthAccessTokenCreaterolesInput | string[]
+    token_type?: string
+    expires_at: Date | string
+    created_at?: Date | string
+    revoked_at?: Date | string | null
+  }
+
+  export type OAuthAccessTokenCreateOrConnectWithoutRefresh_tokensInput = {
+    where: OAuthAccessTokenWhereUniqueInput
+    create: XOR<OAuthAccessTokenCreateWithoutRefresh_tokensInput, OAuthAccessTokenUncheckedCreateWithoutRefresh_tokensInput>
   }
 
   export type OAuthClientCreateWithoutRefresh_tokensInput = {
     id?: string
     client_id: string
-    client_secret?: string | null
     client_secret_hash?: string | null
     name: string
     description?: string | null
@@ -17215,18 +22113,20 @@ export namespace Prisma {
     policy_uri?: string | null
     tos_uri?: string | null
     is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutClientInput
     access_tokens?: OAuthAccessTokenCreateNestedManyWithoutClientInput
+    authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutClientInput
     device_codes?: OAuthDeviceCodeCreateNestedManyWithoutClientInput
     user_consents?: OAuthUserConsentCreateNestedManyWithoutClientInput
+    roles?: ClientRoleCreateNestedManyWithoutClientInput
   }
 
   export type OAuthClientUncheckedCreateWithoutRefresh_tokensInput = {
     id?: string
     client_id: string
-    client_secret?: string | null
     client_secret_hash?: string | null
     name: string
     description?: string | null
@@ -17244,12 +22144,15 @@ export namespace Prisma {
     policy_uri?: string | null
     tos_uri?: string | null
     is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutClientInput
     access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput
+    authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutClientInput
     device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutClientInput
     user_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutClientInput
+    roles?: ClientRoleUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type OAuthClientCreateOrConnectWithoutRefresh_tokensInput = {
@@ -17257,47 +22160,43 @@ export namespace Prisma {
     create: XOR<OAuthClientCreateWithoutRefresh_tokensInput, OAuthClientUncheckedCreateWithoutRefresh_tokensInput>
   }
 
-  export type UserCreateWithoutOauth_refresh_tokensInput = {
-    id?: string
-    email: string
-    password_hash: string
-    first_name?: string | null
-    last_name?: string | null
-    role?: string
-    is_active?: boolean
-    email_verified?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    refresh_tokens?: RefreshTokenCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentCreateNestedManyWithoutUserInput
+  export type OAuthAccessTokenUpsertWithoutRefresh_tokensInput = {
+    update: XOR<OAuthAccessTokenUpdateWithoutRefresh_tokensInput, OAuthAccessTokenUncheckedUpdateWithoutRefresh_tokensInput>
+    create: XOR<OAuthAccessTokenCreateWithoutRefresh_tokensInput, OAuthAccessTokenUncheckedCreateWithoutRefresh_tokensInput>
+    where?: OAuthAccessTokenWhereInput
   }
 
-  export type UserUncheckedCreateWithoutOauth_refresh_tokensInput = {
-    id?: string
-    email: string
-    password_hash: string
-    first_name?: string | null
-    last_name?: string | null
-    role?: string
-    is_active?: boolean
-    email_verified?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    refresh_tokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutUserInput
+  export type OAuthAccessTokenUpdateToOneWithWhereWithoutRefresh_tokensInput = {
+    where?: OAuthAccessTokenWhereInput
+    data: XOR<OAuthAccessTokenUpdateWithoutRefresh_tokensInput, OAuthAccessTokenUncheckedUpdateWithoutRefresh_tokensInput>
   }
 
-  export type UserCreateOrConnectWithoutOauth_refresh_tokensInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutOauth_refresh_tokensInput, UserUncheckedCreateWithoutOauth_refresh_tokensInput>
+  export type OAuthAccessTokenUpdateWithoutRefresh_tokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    permissions?: OAuthAccessTokenUpdatepermissionsInput | string[]
+    roles?: OAuthAccessTokenUpdaterolesInput | string[]
+    token_type?: StringFieldUpdateOperationsInput | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    client?: OAuthClientUpdateOneRequiredWithoutAccess_tokensNestedInput
+  }
+
+  export type OAuthAccessTokenUncheckedUpdateWithoutRefresh_tokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    permissions?: OAuthAccessTokenUpdatepermissionsInput | string[]
+    roles?: OAuthAccessTokenUpdaterolesInput | string[]
+    token_type?: StringFieldUpdateOperationsInput | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthClientUpsertWithoutRefresh_tokensInput = {
@@ -17314,7 +22213,6 @@ export namespace Prisma {
   export type OAuthClientUpdateWithoutRefresh_tokensInput = {
     id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
     client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17332,18 +22230,20 @@ export namespace Prisma {
     policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
     tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutClientNestedInput
     access_tokens?: OAuthAccessTokenUpdateManyWithoutClientNestedInput
+    authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutClientNestedInput
     device_codes?: OAuthDeviceCodeUpdateManyWithoutClientNestedInput
     user_consents?: OAuthUserConsentUpdateManyWithoutClientNestedInput
+    roles?: ClientRoleUpdateManyWithoutClientNestedInput
   }
 
   export type OAuthClientUncheckedUpdateWithoutRefresh_tokensInput = {
     id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
     client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17361,67 +22261,160 @@ export namespace Prisma {
     policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
     tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientNestedInput
     access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput
+    authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientNestedInput
     device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutClientNestedInput
     user_consents?: OAuthUserConsentUncheckedUpdateManyWithoutClientNestedInput
+    roles?: ClientRoleUncheckedUpdateManyWithoutClientNestedInput
   }
 
-  export type UserUpsertWithoutOauth_refresh_tokensInput = {
-    update: XOR<UserUpdateWithoutOauth_refresh_tokensInput, UserUncheckedUpdateWithoutOauth_refresh_tokensInput>
-    create: XOR<UserCreateWithoutOauth_refresh_tokensInput, UserUncheckedCreateWithoutOauth_refresh_tokensInput>
-    where?: UserWhereInput
+  export type OAuthClientCreateWithoutAuthorization_codesInput = {
+    id?: string
+    client_id: string
+    client_secret_hash?: string | null
+    name: string
+    description?: string | null
+    redirect_uris?: OAuthClientCreateredirect_urisInput | string[]
+    post_logout_redirect_uris?: OAuthClientCreatepost_logout_redirect_urisInput | string[]
+    scopes?: OAuthClientCreatescopesInput | string[]
+    grant_types?: OAuthClientCreategrant_typesInput | string[]
+    is_confidential?: boolean
+    is_public_client?: boolean
+    require_pkce?: boolean
+    access_token_lifetime?: number
+    refresh_token_lifetime?: number
+    allowed_origins?: OAuthClientCreateallowed_originsInput | string[]
+    logo_uri?: string | null
+    policy_uri?: string | null
+    tos_uri?: string | null
+    is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    access_tokens?: OAuthAccessTokenCreateNestedManyWithoutClientInput
+    refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutClientInput
+    device_codes?: OAuthDeviceCodeCreateNestedManyWithoutClientInput
+    user_consents?: OAuthUserConsentCreateNestedManyWithoutClientInput
+    roles?: ClientRoleCreateNestedManyWithoutClientInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutOauth_refresh_tokensInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutOauth_refresh_tokensInput, UserUncheckedUpdateWithoutOauth_refresh_tokensInput>
+  export type OAuthClientUncheckedCreateWithoutAuthorization_codesInput = {
+    id?: string
+    client_id: string
+    client_secret_hash?: string | null
+    name: string
+    description?: string | null
+    redirect_uris?: OAuthClientCreateredirect_urisInput | string[]
+    post_logout_redirect_uris?: OAuthClientCreatepost_logout_redirect_urisInput | string[]
+    scopes?: OAuthClientCreatescopesInput | string[]
+    grant_types?: OAuthClientCreategrant_typesInput | string[]
+    is_confidential?: boolean
+    is_public_client?: boolean
+    require_pkce?: boolean
+    access_token_lifetime?: number
+    refresh_token_lifetime?: number
+    allowed_origins?: OAuthClientCreateallowed_originsInput | string[]
+    logo_uri?: string | null
+    policy_uri?: string | null
+    tos_uri?: string | null
+    is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput
+    refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutClientInput
+    device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutClientInput
+    user_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutClientInput
+    roles?: ClientRoleUncheckedCreateNestedManyWithoutClientInput
   }
 
-  export type UserUpdateWithoutOauth_refresh_tokensInput = {
+  export type OAuthClientCreateOrConnectWithoutAuthorization_codesInput = {
+    where: OAuthClientWhereUniqueInput
+    create: XOR<OAuthClientCreateWithoutAuthorization_codesInput, OAuthClientUncheckedCreateWithoutAuthorization_codesInput>
+  }
+
+  export type OAuthClientUpsertWithoutAuthorization_codesInput = {
+    update: XOR<OAuthClientUpdateWithoutAuthorization_codesInput, OAuthClientUncheckedUpdateWithoutAuthorization_codesInput>
+    create: XOR<OAuthClientCreateWithoutAuthorization_codesInput, OAuthClientUncheckedCreateWithoutAuthorization_codesInput>
+    where?: OAuthClientWhereInput
+  }
+
+  export type OAuthClientUpdateToOneWithWhereWithoutAuthorization_codesInput = {
+    where?: OAuthClientWhereInput
+    data: XOR<OAuthClientUpdateWithoutAuthorization_codesInput, OAuthClientUncheckedUpdateWithoutAuthorization_codesInput>
+  }
+
+  export type OAuthClientUpdateWithoutAuthorization_codesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
-    first_name?: NullableStringFieldUpdateOperationsInput | string | null
-    last_name?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    redirect_uris?: OAuthClientUpdateredirect_urisInput | string[]
+    post_logout_redirect_uris?: OAuthClientUpdatepost_logout_redirect_urisInput | string[]
+    scopes?: OAuthClientUpdatescopesInput | string[]
+    grant_types?: OAuthClientUpdategrant_typesInput | string[]
+    is_confidential?: BoolFieldUpdateOperationsInput | boolean
+    is_public_client?: BoolFieldUpdateOperationsInput | boolean
+    require_pkce?: BoolFieldUpdateOperationsInput | boolean
+    access_token_lifetime?: IntFieldUpdateOperationsInput | number
+    refresh_token_lifetime?: IntFieldUpdateOperationsInput | number
+    allowed_origins?: OAuthClientUpdateallowed_originsInput | string[]
+    logo_uri?: NullableStringFieldUpdateOperationsInput | string | null
+    policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
+    tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
-    email_verified?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    refresh_tokens?: RefreshTokenUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUpdateManyWithoutUserNestedInput
+    access_tokens?: OAuthAccessTokenUpdateManyWithoutClientNestedInput
+    refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutClientNestedInput
+    device_codes?: OAuthDeviceCodeUpdateManyWithoutClientNestedInput
+    user_consents?: OAuthUserConsentUpdateManyWithoutClientNestedInput
+    roles?: ClientRoleUpdateManyWithoutClientNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutOauth_refresh_tokensInput = {
+  export type OAuthClientUncheckedUpdateWithoutAuthorization_codesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
-    first_name?: NullableStringFieldUpdateOperationsInput | string | null
-    last_name?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    redirect_uris?: OAuthClientUpdateredirect_urisInput | string[]
+    post_logout_redirect_uris?: OAuthClientUpdatepost_logout_redirect_urisInput | string[]
+    scopes?: OAuthClientUpdatescopesInput | string[]
+    grant_types?: OAuthClientUpdategrant_typesInput | string[]
+    is_confidential?: BoolFieldUpdateOperationsInput | boolean
+    is_public_client?: BoolFieldUpdateOperationsInput | boolean
+    require_pkce?: BoolFieldUpdateOperationsInput | boolean
+    access_token_lifetime?: IntFieldUpdateOperationsInput | number
+    refresh_token_lifetime?: IntFieldUpdateOperationsInput | number
+    allowed_origins?: OAuthClientUpdateallowed_originsInput | string[]
+    logo_uri?: NullableStringFieldUpdateOperationsInput | string | null
+    policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
+    tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
-    email_verified?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    refresh_tokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUncheckedUpdateManyWithoutUserNestedInput
+    access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput
+    refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutClientNestedInput
+    device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutClientNestedInput
+    user_consents?: OAuthUserConsentUncheckedUpdateManyWithoutClientNestedInput
+    roles?: ClientRoleUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type OAuthClientCreateWithoutDevice_codesInput = {
     id?: string
     client_id: string
-    client_secret?: string | null
     client_secret_hash?: string | null
     name: string
     description?: string | null
@@ -17439,18 +22432,20 @@ export namespace Prisma {
     policy_uri?: string | null
     tos_uri?: string | null
     is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutClientInput
     access_tokens?: OAuthAccessTokenCreateNestedManyWithoutClientInput
     refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutClientInput
+    authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutClientInput
     user_consents?: OAuthUserConsentCreateNestedManyWithoutClientInput
+    roles?: ClientRoleCreateNestedManyWithoutClientInput
   }
 
   export type OAuthClientUncheckedCreateWithoutDevice_codesInput = {
     id?: string
     client_id: string
-    client_secret?: string | null
     client_secret_hash?: string | null
     name: string
     description?: string | null
@@ -17468,60 +22463,20 @@ export namespace Prisma {
     policy_uri?: string | null
     tos_uri?: string | null
     is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutClientInput
     access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput
     refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutClientInput
+    authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutClientInput
     user_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutClientInput
+    roles?: ClientRoleUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type OAuthClientCreateOrConnectWithoutDevice_codesInput = {
     where: OAuthClientWhereUniqueInput
     create: XOR<OAuthClientCreateWithoutDevice_codesInput, OAuthClientUncheckedCreateWithoutDevice_codesInput>
-  }
-
-  export type UserCreateWithoutOauth_device_codesInput = {
-    id?: string
-    email: string
-    password_hash: string
-    first_name?: string | null
-    last_name?: string | null
-    role?: string
-    is_active?: boolean
-    email_verified?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    refresh_tokens?: RefreshTokenCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutOauth_device_codesInput = {
-    id?: string
-    email: string
-    password_hash: string
-    first_name?: string | null
-    last_name?: string | null
-    role?: string
-    is_active?: boolean
-    email_verified?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    refresh_tokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutOauth_device_codesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutOauth_device_codesInput, UserUncheckedCreateWithoutOauth_device_codesInput>
   }
 
   export type OAuthClientUpsertWithoutDevice_codesInput = {
@@ -17538,7 +22493,6 @@ export namespace Prisma {
   export type OAuthClientUpdateWithoutDevice_codesInput = {
     id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
     client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17556,18 +22510,20 @@ export namespace Prisma {
     policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
     tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutClientNestedInput
     access_tokens?: OAuthAccessTokenUpdateManyWithoutClientNestedInput
     refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutClientNestedInput
+    authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutClientNestedInput
     user_consents?: OAuthUserConsentUpdateManyWithoutClientNestedInput
+    roles?: ClientRoleUpdateManyWithoutClientNestedInput
   }
 
   export type OAuthClientUncheckedUpdateWithoutDevice_codesInput = {
     id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
     client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17585,67 +22541,20 @@ export namespace Prisma {
     policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
     tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientNestedInput
     access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput
     refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutClientNestedInput
+    authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientNestedInput
     user_consents?: OAuthUserConsentUncheckedUpdateManyWithoutClientNestedInput
-  }
-
-  export type UserUpsertWithoutOauth_device_codesInput = {
-    update: XOR<UserUpdateWithoutOauth_device_codesInput, UserUncheckedUpdateWithoutOauth_device_codesInput>
-    create: XOR<UserCreateWithoutOauth_device_codesInput, UserUncheckedCreateWithoutOauth_device_codesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutOauth_device_codesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutOauth_device_codesInput, UserUncheckedUpdateWithoutOauth_device_codesInput>
-  }
-
-  export type UserUpdateWithoutOauth_device_codesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
-    first_name?: NullableStringFieldUpdateOperationsInput | string | null
-    last_name?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    email_verified?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    refresh_tokens?: RefreshTokenUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutOauth_device_codesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
-    first_name?: NullableStringFieldUpdateOperationsInput | string | null
-    last_name?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    email_verified?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    refresh_tokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_consents?: OAuthUserConsentUncheckedUpdateManyWithoutUserNestedInput
+    roles?: ClientRoleUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type OAuthClientCreateWithoutUser_consentsInput = {
     id?: string
     client_id: string
-    client_secret?: string | null
     client_secret_hash?: string | null
     name: string
     description?: string | null
@@ -17663,18 +22572,20 @@ export namespace Prisma {
     policy_uri?: string | null
     tos_uri?: string | null
     is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutClientInput
     access_tokens?: OAuthAccessTokenCreateNestedManyWithoutClientInput
     refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutClientInput
+    authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutClientInput
     device_codes?: OAuthDeviceCodeCreateNestedManyWithoutClientInput
+    roles?: ClientRoleCreateNestedManyWithoutClientInput
   }
 
   export type OAuthClientUncheckedCreateWithoutUser_consentsInput = {
     id?: string
     client_id: string
-    client_secret?: string | null
     client_secret_hash?: string | null
     name: string
     description?: string | null
@@ -17692,60 +22603,20 @@ export namespace Prisma {
     policy_uri?: string | null
     tos_uri?: string | null
     is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutClientInput
     access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput
     refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutClientInput
+    authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutClientInput
     device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutClientInput
+    roles?: ClientRoleUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type OAuthClientCreateOrConnectWithoutUser_consentsInput = {
     where: OAuthClientWhereUniqueInput
     create: XOR<OAuthClientCreateWithoutUser_consentsInput, OAuthClientUncheckedCreateWithoutUser_consentsInput>
-  }
-
-  export type UserCreateWithoutOauth_consentsInput = {
-    id?: string
-    email: string
-    password_hash: string
-    first_name?: string | null
-    last_name?: string | null
-    role?: string
-    is_active?: boolean
-    email_verified?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    refresh_tokens?: RefreshTokenCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutOauth_consentsInput = {
-    id?: string
-    email: string
-    password_hash: string
-    first_name?: string | null
-    last_name?: string | null
-    role?: string
-    is_active?: boolean
-    email_verified?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    refresh_tokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutUserInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutOauth_consentsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutOauth_consentsInput, UserUncheckedCreateWithoutOauth_consentsInput>
   }
 
   export type OAuthClientUpsertWithoutUser_consentsInput = {
@@ -17762,7 +22633,6 @@ export namespace Prisma {
   export type OAuthClientUpdateWithoutUser_consentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
     client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17780,18 +22650,20 @@ export namespace Prisma {
     policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
     tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutClientNestedInput
     access_tokens?: OAuthAccessTokenUpdateManyWithoutClientNestedInput
     refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutClientNestedInput
+    authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutClientNestedInput
     device_codes?: OAuthDeviceCodeUpdateManyWithoutClientNestedInput
+    roles?: ClientRoleUpdateManyWithoutClientNestedInput
   }
 
   export type OAuthClientUncheckedUpdateWithoutUser_consentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     client_id?: StringFieldUpdateOperationsInput | string
-    client_secret?: NullableStringFieldUpdateOperationsInput | string | null
     client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17809,61 +22681,447 @@ export namespace Prisma {
     policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
     tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientNestedInput
     access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput
     refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutClientNestedInput
+    authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientNestedInput
     device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutClientNestedInput
+    roles?: ClientRoleUncheckedUpdateManyWithoutClientNestedInput
   }
 
-  export type UserUpsertWithoutOauth_consentsInput = {
-    update: XOR<UserUpdateWithoutOauth_consentsInput, UserUncheckedUpdateWithoutOauth_consentsInput>
-    create: XOR<UserCreateWithoutOauth_consentsInput, UserUncheckedCreateWithoutOauth_consentsInput>
-    where?: UserWhereInput
+  export type RolePermissionCreateWithoutPermissionInput = {
+    id?: string
+    created_at?: Date | string
+    role: RoleCreateNestedOneWithoutPermissionsInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutOauth_consentsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutOauth_consentsInput, UserUncheckedUpdateWithoutOauth_consentsInput>
+  export type RolePermissionUncheckedCreateWithoutPermissionInput = {
+    id?: string
+    role_id: string
+    created_at?: Date | string
   }
 
-  export type UserUpdateWithoutOauth_consentsInput = {
+  export type RolePermissionCreateOrConnectWithoutPermissionInput = {
+    where: RolePermissionWhereUniqueInput
+    create: XOR<RolePermissionCreateWithoutPermissionInput, RolePermissionUncheckedCreateWithoutPermissionInput>
+  }
+
+  export type RolePermissionCreateManyPermissionInputEnvelope = {
+    data: RolePermissionCreateManyPermissionInput | RolePermissionCreateManyPermissionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RolePermissionUpsertWithWhereUniqueWithoutPermissionInput = {
+    where: RolePermissionWhereUniqueInput
+    update: XOR<RolePermissionUpdateWithoutPermissionInput, RolePermissionUncheckedUpdateWithoutPermissionInput>
+    create: XOR<RolePermissionCreateWithoutPermissionInput, RolePermissionUncheckedCreateWithoutPermissionInput>
+  }
+
+  export type RolePermissionUpdateWithWhereUniqueWithoutPermissionInput = {
+    where: RolePermissionWhereUniqueInput
+    data: XOR<RolePermissionUpdateWithoutPermissionInput, RolePermissionUncheckedUpdateWithoutPermissionInput>
+  }
+
+  export type RolePermissionUpdateManyWithWhereWithoutPermissionInput = {
+    where: RolePermissionScalarWhereInput
+    data: XOR<RolePermissionUpdateManyMutationInput, RolePermissionUncheckedUpdateManyWithoutPermissionInput>
+  }
+
+  export type RolePermissionScalarWhereInput = {
+    AND?: RolePermissionScalarWhereInput | RolePermissionScalarWhereInput[]
+    OR?: RolePermissionScalarWhereInput[]
+    NOT?: RolePermissionScalarWhereInput | RolePermissionScalarWhereInput[]
+    id?: StringFilter<"RolePermission"> | string
+    role_id?: StringFilter<"RolePermission"> | string
+    permission_id?: StringFilter<"RolePermission"> | string
+    created_at?: DateTimeFilter<"RolePermission"> | Date | string
+  }
+
+  export type RolePermissionCreateWithoutRoleInput = {
+    id?: string
+    created_at?: Date | string
+    permission: PermissionCreateNestedOneWithoutRolesInput
+  }
+
+  export type RolePermissionUncheckedCreateWithoutRoleInput = {
+    id?: string
+    permission_id: string
+    created_at?: Date | string
+  }
+
+  export type RolePermissionCreateOrConnectWithoutRoleInput = {
+    where: RolePermissionWhereUniqueInput
+    create: XOR<RolePermissionCreateWithoutRoleInput, RolePermissionUncheckedCreateWithoutRoleInput>
+  }
+
+  export type RolePermissionCreateManyRoleInputEnvelope = {
+    data: RolePermissionCreateManyRoleInput | RolePermissionCreateManyRoleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClientRoleCreateWithoutRoleInput = {
+    id?: string
+    created_at?: Date | string
+    client: OAuthClientCreateNestedOneWithoutRolesInput
+  }
+
+  export type ClientRoleUncheckedCreateWithoutRoleInput = {
+    id?: string
+    client_id: string
+    created_at?: Date | string
+  }
+
+  export type ClientRoleCreateOrConnectWithoutRoleInput = {
+    where: ClientRoleWhereUniqueInput
+    create: XOR<ClientRoleCreateWithoutRoleInput, ClientRoleUncheckedCreateWithoutRoleInput>
+  }
+
+  export type ClientRoleCreateManyRoleInputEnvelope = {
+    data: ClientRoleCreateManyRoleInput | ClientRoleCreateManyRoleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RolePermissionUpsertWithWhereUniqueWithoutRoleInput = {
+    where: RolePermissionWhereUniqueInput
+    update: XOR<RolePermissionUpdateWithoutRoleInput, RolePermissionUncheckedUpdateWithoutRoleInput>
+    create: XOR<RolePermissionCreateWithoutRoleInput, RolePermissionUncheckedCreateWithoutRoleInput>
+  }
+
+  export type RolePermissionUpdateWithWhereUniqueWithoutRoleInput = {
+    where: RolePermissionWhereUniqueInput
+    data: XOR<RolePermissionUpdateWithoutRoleInput, RolePermissionUncheckedUpdateWithoutRoleInput>
+  }
+
+  export type RolePermissionUpdateManyWithWhereWithoutRoleInput = {
+    where: RolePermissionScalarWhereInput
+    data: XOR<RolePermissionUpdateManyMutationInput, RolePermissionUncheckedUpdateManyWithoutRoleInput>
+  }
+
+  export type ClientRoleUpsertWithWhereUniqueWithoutRoleInput = {
+    where: ClientRoleWhereUniqueInput
+    update: XOR<ClientRoleUpdateWithoutRoleInput, ClientRoleUncheckedUpdateWithoutRoleInput>
+    create: XOR<ClientRoleCreateWithoutRoleInput, ClientRoleUncheckedCreateWithoutRoleInput>
+  }
+
+  export type ClientRoleUpdateWithWhereUniqueWithoutRoleInput = {
+    where: ClientRoleWhereUniqueInput
+    data: XOR<ClientRoleUpdateWithoutRoleInput, ClientRoleUncheckedUpdateWithoutRoleInput>
+  }
+
+  export type ClientRoleUpdateManyWithWhereWithoutRoleInput = {
+    where: ClientRoleScalarWhereInput
+    data: XOR<ClientRoleUpdateManyMutationInput, ClientRoleUncheckedUpdateManyWithoutRoleInput>
+  }
+
+  export type RoleCreateWithoutPermissionsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    clients?: ClientRoleCreateNestedManyWithoutRoleInput
+  }
+
+  export type RoleUncheckedCreateWithoutPermissionsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    clients?: ClientRoleUncheckedCreateNestedManyWithoutRoleInput
+  }
+
+  export type RoleCreateOrConnectWithoutPermissionsInput = {
+    where: RoleWhereUniqueInput
+    create: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput>
+  }
+
+  export type PermissionCreateWithoutRolesInput = {
+    id?: string
+    name: string
+    description?: string | null
+    resource: string
+    action: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PermissionUncheckedCreateWithoutRolesInput = {
+    id?: string
+    name: string
+    description?: string | null
+    resource: string
+    action: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PermissionCreateOrConnectWithoutRolesInput = {
+    where: PermissionWhereUniqueInput
+    create: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput>
+  }
+
+  export type RoleUpsertWithoutPermissionsInput = {
+    update: XOR<RoleUpdateWithoutPermissionsInput, RoleUncheckedUpdateWithoutPermissionsInput>
+    create: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput>
+    where?: RoleWhereInput
+  }
+
+  export type RoleUpdateToOneWithWhereWithoutPermissionsInput = {
+    where?: RoleWhereInput
+    data: XOR<RoleUpdateWithoutPermissionsInput, RoleUncheckedUpdateWithoutPermissionsInput>
+  }
+
+  export type RoleUpdateWithoutPermissionsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
-    first_name?: NullableStringFieldUpdateOperationsInput | string | null
-    last_name?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
-    email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    refresh_tokens?: RefreshTokenUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUpdateManyWithoutUserNestedInput
+    clients?: ClientRoleUpdateManyWithoutRoleNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutOauth_consentsInput = {
+  export type RoleUncheckedUpdateWithoutPermissionsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
-    first_name?: NullableStringFieldUpdateOperationsInput | string | null
-    last_name?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     is_active?: BoolFieldUpdateOperationsInput | boolean
-    email_verified?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    refresh_tokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    oauth_authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutUserNestedInput
-    oauth_access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    oauth_device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutUserNestedInput
+    clients?: ClientRoleUncheckedUpdateManyWithoutRoleNestedInput
+  }
+
+  export type PermissionUpsertWithoutRolesInput = {
+    update: XOR<PermissionUpdateWithoutRolesInput, PermissionUncheckedUpdateWithoutRolesInput>
+    create: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput>
+    where?: PermissionWhereInput
+  }
+
+  export type PermissionUpdateToOneWithWhereWithoutRolesInput = {
+    where?: PermissionWhereInput
+    data: XOR<PermissionUpdateWithoutRolesInput, PermissionUncheckedUpdateWithoutRolesInput>
+  }
+
+  export type PermissionUpdateWithoutRolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    resource?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PermissionUncheckedUpdateWithoutRolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    resource?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OAuthClientCreateWithoutRolesInput = {
+    id?: string
+    client_id: string
+    client_secret_hash?: string | null
+    name: string
+    description?: string | null
+    redirect_uris?: OAuthClientCreateredirect_urisInput | string[]
+    post_logout_redirect_uris?: OAuthClientCreatepost_logout_redirect_urisInput | string[]
+    scopes?: OAuthClientCreatescopesInput | string[]
+    grant_types?: OAuthClientCreategrant_typesInput | string[]
+    is_confidential?: boolean
+    is_public_client?: boolean
+    require_pkce?: boolean
+    access_token_lifetime?: number
+    refresh_token_lifetime?: number
+    allowed_origins?: OAuthClientCreateallowed_originsInput | string[]
+    logo_uri?: string | null
+    policy_uri?: string | null
+    tos_uri?: string | null
+    is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    access_tokens?: OAuthAccessTokenCreateNestedManyWithoutClientInput
+    refresh_tokens?: OAuthRefreshTokenCreateNestedManyWithoutClientInput
+    authorization_codes?: OAuthAuthorizationCodeCreateNestedManyWithoutClientInput
+    device_codes?: OAuthDeviceCodeCreateNestedManyWithoutClientInput
+    user_consents?: OAuthUserConsentCreateNestedManyWithoutClientInput
+  }
+
+  export type OAuthClientUncheckedCreateWithoutRolesInput = {
+    id?: string
+    client_id: string
+    client_secret_hash?: string | null
+    name: string
+    description?: string | null
+    redirect_uris?: OAuthClientCreateredirect_urisInput | string[]
+    post_logout_redirect_uris?: OAuthClientCreatepost_logout_redirect_urisInput | string[]
+    scopes?: OAuthClientCreatescopesInput | string[]
+    grant_types?: OAuthClientCreategrant_typesInput | string[]
+    is_confidential?: boolean
+    is_public_client?: boolean
+    require_pkce?: boolean
+    access_token_lifetime?: number
+    refresh_token_lifetime?: number
+    allowed_origins?: OAuthClientCreateallowed_originsInput | string[]
+    logo_uri?: string | null
+    policy_uri?: string | null
+    tos_uri?: string | null
+    is_active?: boolean
+    permissions?: OAuthClientCreatepermissionsInput | string[]
+    owner_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    access_tokens?: OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput
+    refresh_tokens?: OAuthRefreshTokenUncheckedCreateNestedManyWithoutClientInput
+    authorization_codes?: OAuthAuthorizationCodeUncheckedCreateNestedManyWithoutClientInput
+    device_codes?: OAuthDeviceCodeUncheckedCreateNestedManyWithoutClientInput
+    user_consents?: OAuthUserConsentUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type OAuthClientCreateOrConnectWithoutRolesInput = {
+    where: OAuthClientWhereUniqueInput
+    create: XOR<OAuthClientCreateWithoutRolesInput, OAuthClientUncheckedCreateWithoutRolesInput>
+  }
+
+  export type RoleCreateWithoutClientsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    permissions?: RolePermissionCreateNestedManyWithoutRoleInput
+  }
+
+  export type RoleUncheckedCreateWithoutClientsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    permissions?: RolePermissionUncheckedCreateNestedManyWithoutRoleInput
+  }
+
+  export type RoleCreateOrConnectWithoutClientsInput = {
+    where: RoleWhereUniqueInput
+    create: XOR<RoleCreateWithoutClientsInput, RoleUncheckedCreateWithoutClientsInput>
+  }
+
+  export type OAuthClientUpsertWithoutRolesInput = {
+    update: XOR<OAuthClientUpdateWithoutRolesInput, OAuthClientUncheckedUpdateWithoutRolesInput>
+    create: XOR<OAuthClientCreateWithoutRolesInput, OAuthClientUncheckedCreateWithoutRolesInput>
+    where?: OAuthClientWhereInput
+  }
+
+  export type OAuthClientUpdateToOneWithWhereWithoutRolesInput = {
+    where?: OAuthClientWhereInput
+    data: XOR<OAuthClientUpdateWithoutRolesInput, OAuthClientUncheckedUpdateWithoutRolesInput>
+  }
+
+  export type OAuthClientUpdateWithoutRolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    redirect_uris?: OAuthClientUpdateredirect_urisInput | string[]
+    post_logout_redirect_uris?: OAuthClientUpdatepost_logout_redirect_urisInput | string[]
+    scopes?: OAuthClientUpdatescopesInput | string[]
+    grant_types?: OAuthClientUpdategrant_typesInput | string[]
+    is_confidential?: BoolFieldUpdateOperationsInput | boolean
+    is_public_client?: BoolFieldUpdateOperationsInput | boolean
+    require_pkce?: BoolFieldUpdateOperationsInput | boolean
+    access_token_lifetime?: IntFieldUpdateOperationsInput | number
+    refresh_token_lifetime?: IntFieldUpdateOperationsInput | number
+    allowed_origins?: OAuthClientUpdateallowed_originsInput | string[]
+    logo_uri?: NullableStringFieldUpdateOperationsInput | string | null
+    policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
+    tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    access_tokens?: OAuthAccessTokenUpdateManyWithoutClientNestedInput
+    refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutClientNestedInput
+    authorization_codes?: OAuthAuthorizationCodeUpdateManyWithoutClientNestedInput
+    device_codes?: OAuthDeviceCodeUpdateManyWithoutClientNestedInput
+    user_consents?: OAuthUserConsentUpdateManyWithoutClientNestedInput
+  }
+
+  export type OAuthClientUncheckedUpdateWithoutRolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    client_secret_hash?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    redirect_uris?: OAuthClientUpdateredirect_urisInput | string[]
+    post_logout_redirect_uris?: OAuthClientUpdatepost_logout_redirect_urisInput | string[]
+    scopes?: OAuthClientUpdatescopesInput | string[]
+    grant_types?: OAuthClientUpdategrant_typesInput | string[]
+    is_confidential?: BoolFieldUpdateOperationsInput | boolean
+    is_public_client?: BoolFieldUpdateOperationsInput | boolean
+    require_pkce?: BoolFieldUpdateOperationsInput | boolean
+    access_token_lifetime?: IntFieldUpdateOperationsInput | number
+    refresh_token_lifetime?: IntFieldUpdateOperationsInput | number
+    allowed_origins?: OAuthClientUpdateallowed_originsInput | string[]
+    logo_uri?: NullableStringFieldUpdateOperationsInput | string | null
+    policy_uri?: NullableStringFieldUpdateOperationsInput | string | null
+    tos_uri?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    permissions?: OAuthClientUpdatepermissionsInput | string[]
+    owner_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    access_tokens?: OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput
+    refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutClientNestedInput
+    authorization_codes?: OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientNestedInput
+    device_codes?: OAuthDeviceCodeUncheckedUpdateManyWithoutClientNestedInput
+    user_consents?: OAuthUserConsentUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type RoleUpsertWithoutClientsInput = {
+    update: XOR<RoleUpdateWithoutClientsInput, RoleUncheckedUpdateWithoutClientsInput>
+    create: XOR<RoleCreateWithoutClientsInput, RoleUncheckedCreateWithoutClientsInput>
+    where?: RoleWhereInput
+  }
+
+  export type RoleUpdateToOneWithWhereWithoutClientsInput = {
+    where?: RoleWhereInput
+    data: XOR<RoleUpdateWithoutClientsInput, RoleUncheckedUpdateWithoutClientsInput>
+  }
+
+  export type RoleUpdateWithoutClientsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: RolePermissionUpdateManyWithoutRoleNestedInput
+  }
+
+  export type RoleUncheckedUpdateWithoutClientsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   }
 
   export type RefreshTokenCreateManyUserInput = {
@@ -17880,65 +23138,6 @@ export namespace Prisma {
     expires_at: Date | string
     created_at?: Date | string
     revoked_at?: Date | string | null
-  }
-
-  export type OAuthAuthorizationCodeCreateManyUserInput = {
-    id?: string
-    code: string
-    client_id: string
-    redirect_uri: string
-    scope: string
-    state?: string | null
-    code_challenge?: string | null
-    code_challenge_method?: string | null
-    nonce?: string | null
-    expires_at: Date | string
-    consumed_at?: Date | string | null
-    created_at?: Date | string
-  }
-
-  export type OAuthAccessTokenCreateManyUserInput = {
-    id?: string
-    token: string
-    client_id: string
-    scope: string
-    token_type?: string
-    expires_at: Date | string
-    revoked_at?: Date | string | null
-    created_at?: Date | string
-  }
-
-  export type OAuthRefreshTokenCreateManyUserInput = {
-    id?: string
-    token: string
-    access_token_id: string
-    client_id: string
-    scope: string
-    expires_at: Date | string
-    revoked_at?: Date | string | null
-    created_at?: Date | string
-  }
-
-  export type OAuthDeviceCodeCreateManyUserInput = {
-    id?: string
-    device_code: string
-    user_code: string
-    client_id: string
-    scope: string
-    expires_at: Date | string
-    interval?: number
-    verified?: boolean
-    completed_at?: Date | string | null
-    created_at?: Date | string
-  }
-
-  export type OAuthUserConsentCreateManyUserInput = {
-    id?: string
-    client_id: string
-    scope: string
-    expires_at?: Date | string | null
-    created_at?: Date | string
-    updated_at?: Date | string
   }
 
   export type RefreshTokenUpdateWithoutUserInput = {
@@ -17989,207 +23188,17 @@ export namespace Prisma {
     revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type OAuthAuthorizationCodeUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    redirect_uri?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
-    nonce?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: OAuthClientUpdateOneRequiredWithoutAuthorization_codesNestedInput
-  }
-
-  export type OAuthAuthorizationCodeUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    redirect_uri?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
-    nonce?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthAuthorizationCodeUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    redirect_uri?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
-    nonce?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthAccessTokenUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    token_type?: StringFieldUpdateOperationsInput | string
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: OAuthClientUpdateOneRequiredWithoutAccess_tokensNestedInput
-  }
-
-  export type OAuthAccessTokenUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    token_type?: StringFieldUpdateOperationsInput | string
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthAccessTokenUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    token_type?: StringFieldUpdateOperationsInput | string
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthRefreshTokenUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    access_token_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: OAuthClientUpdateOneRequiredWithoutRefresh_tokensNestedInput
-  }
-
-  export type OAuthRefreshTokenUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    access_token_id?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthRefreshTokenUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    access_token_id?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthDeviceCodeUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    device_code?: StringFieldUpdateOperationsInput | string
-    user_code?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    interval?: IntFieldUpdateOperationsInput | number
-    verified?: BoolFieldUpdateOperationsInput | boolean
-    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: OAuthClientUpdateOneRequiredWithoutDevice_codesNestedInput
-  }
-
-  export type OAuthDeviceCodeUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    device_code?: StringFieldUpdateOperationsInput | string
-    user_code?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    interval?: IntFieldUpdateOperationsInput | number
-    verified?: BoolFieldUpdateOperationsInput | boolean
-    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthDeviceCodeUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    device_code?: StringFieldUpdateOperationsInput | string
-    user_code?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    interval?: IntFieldUpdateOperationsInput | number
-    verified?: BoolFieldUpdateOperationsInput | boolean
-    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthUserConsentUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: OAuthClientUpdateOneRequiredWithoutUser_consentsNestedInput
-  }
-
-  export type OAuthUserConsentUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthUserConsentUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    client_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthAuthorizationCodeCreateManyClientInput = {
-    id?: string
-    code: string
-    user_id?: string | null
-    redirect_uri: string
-    scope: string
-    state?: string | null
-    code_challenge?: string | null
-    code_challenge_method?: string | null
-    nonce?: string | null
-    expires_at: Date | string
-    consumed_at?: Date | string | null
-    created_at?: Date | string
-  }
-
   export type OAuthAccessTokenCreateManyClientInput = {
     id?: string
     token: string
     user_id?: string | null
-    scope: string
+    scope?: string | null
+    permissions?: OAuthAccessTokenCreatepermissionsInput | string[]
+    roles?: OAuthAccessTokenCreaterolesInput | string[]
     token_type?: string
     expires_at: Date | string
-    revoked_at?: Date | string | null
     created_at?: Date | string
+    revoked_at?: Date | string | null
   }
 
   export type OAuthRefreshTokenCreateManyClientInput = {
@@ -18197,10 +23206,26 @@ export namespace Prisma {
     token: string
     access_token_id: string
     user_id?: string | null
-    scope: string
+    scope?: string | null
     expires_at: Date | string
-    revoked_at?: Date | string | null
     created_at?: Date | string
+    revoked_at?: Date | string | null
+  }
+
+  export type OAuthAuthorizationCodeCreateManyClientInput = {
+    id?: string
+    code: string
+    user_id: string
+    scope?: string | null
+    redirect_uri: string
+    state?: string | null
+    code_challenge?: string | null
+    code_challenge_method?: string | null
+    nonce?: string | null
+    consumed_at?: Date | string | null
+    expires_at: Date | string
+    created_at?: Date | string
+    used_at?: Date | string | null
   }
 
   export type OAuthDeviceCodeCreateManyClientInput = {
@@ -18208,110 +23233,80 @@ export namespace Prisma {
     device_code: string
     user_code: string
     user_id?: string | null
-    scope: string
+    scope?: string | null
+    verified?: boolean
     expires_at: Date | string
     interval?: number
-    verified?: boolean
-    completed_at?: Date | string | null
     created_at?: Date | string
+    completed_at?: Date | string | null
   }
 
   export type OAuthUserConsentCreateManyClientInput = {
     id?: string
     user_id: string
-    scope: string
+    scope?: OAuthUserConsentCreatescopeInput | string[]
+    granted_at?: Date | string
     expires_at?: Date | string | null
-    created_at?: Date | string
+    revoked_at?: Date | string | null
     updated_at?: Date | string
   }
 
-  export type OAuthAuthorizationCodeUpdateWithoutClientInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    redirect_uri?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
-    nonce?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutOauth_authorization_codesNestedInput
-  }
-
-  export type OAuthAuthorizationCodeUncheckedUpdateWithoutClientInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    redirect_uri?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
-    nonce?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    redirect_uri?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
-    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
-    nonce?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type ClientRoleCreateManyClientInput = {
+    id?: string
+    role_id: string
+    created_at?: Date | string
   }
 
   export type OAuthAccessTokenUpdateWithoutClientInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    permissions?: OAuthAccessTokenUpdatepermissionsInput | string[]
+    roles?: OAuthAccessTokenUpdaterolesInput | string[]
     token_type?: StringFieldUpdateOperationsInput | string
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutOauth_access_tokensNestedInput
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refresh_tokens?: OAuthRefreshTokenUpdateManyWithoutAccess_tokenNestedInput
   }
 
   export type OAuthAccessTokenUncheckedUpdateWithoutClientInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    permissions?: OAuthAccessTokenUpdatepermissionsInput | string[]
+    roles?: OAuthAccessTokenUpdaterolesInput | string[]
     token_type?: StringFieldUpdateOperationsInput | string
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refresh_tokens?: OAuthRefreshTokenUncheckedUpdateManyWithoutAccess_tokenNestedInput
   }
 
   export type OAuthAccessTokenUncheckedUpdateManyWithoutClientInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    permissions?: OAuthAccessTokenUpdatepermissionsInput | string[]
+    roles?: OAuthAccessTokenUpdaterolesInput | string[]
     token_type?: StringFieldUpdateOperationsInput | string
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthRefreshTokenUpdateWithoutClientInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    access_token_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutOauth_refresh_tokensNestedInput
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    access_token?: OAuthAccessTokenUpdateOneRequiredWithoutRefresh_tokensNestedInput
   }
 
   export type OAuthRefreshTokenUncheckedUpdateWithoutClientInput = {
@@ -18319,10 +23314,10 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     access_token_id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthRefreshTokenUncheckedUpdateManyWithoutClientInput = {
@@ -18330,23 +23325,71 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     access_token_id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type OAuthAuthorizationCodeUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    redirect_uri?: StringFieldUpdateOperationsInput | string
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
+    nonce?: NullableStringFieldUpdateOperationsInput | string | null
+    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    used_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type OAuthAuthorizationCodeUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    redirect_uri?: StringFieldUpdateOperationsInput | string
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
+    nonce?: NullableStringFieldUpdateOperationsInput | string | null
+    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    used_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type OAuthAuthorizationCodeUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    redirect_uri?: StringFieldUpdateOperationsInput | string
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge?: NullableStringFieldUpdateOperationsInput | string | null
+    code_challenge_method?: NullableStringFieldUpdateOperationsInput | string | null
+    nonce?: NullableStringFieldUpdateOperationsInput | string | null
+    consumed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    used_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthDeviceCodeUpdateWithoutClientInput = {
     id?: StringFieldUpdateOperationsInput | string
     device_code?: StringFieldUpdateOperationsInput | string
     user_code?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
     interval?: IntFieldUpdateOperationsInput | number
-    verified?: BoolFieldUpdateOperationsInput | boolean
-    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutOauth_device_codesNestedInput
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthDeviceCodeUncheckedUpdateWithoutClientInput = {
@@ -18354,12 +23397,12 @@ export namespace Prisma {
     device_code?: StringFieldUpdateOperationsInput | string
     user_code?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
     interval?: IntFieldUpdateOperationsInput | number
-    verified?: BoolFieldUpdateOperationsInput | boolean
-    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthDeviceCodeUncheckedUpdateManyWithoutClientInput = {
@@ -18367,39 +23410,176 @@ export namespace Prisma {
     device_code?: StringFieldUpdateOperationsInput | string
     user_code?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
     expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
     interval?: IntFieldUpdateOperationsInput | number
-    verified?: BoolFieldUpdateOperationsInput | boolean
-    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OAuthUserConsentUpdateWithoutClientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    scope?: OAuthUserConsentUpdatescopeInput | string[]
+    granted_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutOauth_consentsNestedInput
   }
 
   export type OAuthUserConsentUncheckedUpdateWithoutClientInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: OAuthUserConsentUpdatescopeInput | string[]
+    granted_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OAuthUserConsentUncheckedUpdateManyWithoutClientInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
-    scope?: StringFieldUpdateOperationsInput | string
+    scope?: OAuthUserConsentUpdatescopeInput | string[]
+    granted_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientRoleUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneRequiredWithoutClientsNestedInput
+  }
+
+  export type ClientRoleUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientRoleUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OAuthRefreshTokenCreateManyAccess_tokenInput = {
+    id?: string
+    token: string
+    client_id: string
+    user_id?: string | null
+    scope?: string | null
+    expires_at: Date | string
+    created_at?: Date | string
+    revoked_at?: Date | string | null
+  }
+
+  export type OAuthRefreshTokenUpdateWithoutAccess_tokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    client?: OAuthClientUpdateOneRequiredWithoutRefresh_tokensNestedInput
+  }
+
+  export type OAuthRefreshTokenUncheckedUpdateWithoutAccess_tokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type OAuthRefreshTokenUncheckedUpdateManyWithoutAccess_tokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type RolePermissionCreateManyPermissionInput = {
+    id?: string
+    role_id: string
+    created_at?: Date | string
+  }
+
+  export type RolePermissionUpdateWithoutPermissionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: RoleUpdateOneRequiredWithoutPermissionsNestedInput
+  }
+
+  export type RolePermissionUncheckedUpdateWithoutPermissionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RolePermissionUncheckedUpdateManyWithoutPermissionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RolePermissionCreateManyRoleInput = {
+    id?: string
+    permission_id: string
+    created_at?: Date | string
+  }
+
+  export type ClientRoleCreateManyRoleInput = {
+    id?: string
+    client_id: string
+    created_at?: Date | string
+  }
+
+  export type RolePermissionUpdateWithoutRoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    permission?: PermissionUpdateOneRequiredWithoutRolesNestedInput
+  }
+
+  export type RolePermissionUncheckedUpdateWithoutRoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    permission_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RolePermissionUncheckedUpdateManyWithoutRoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    permission_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientRoleUpdateWithoutRoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: OAuthClientUpdateOneRequiredWithoutRolesNestedInput
+  }
+
+  export type ClientRoleUncheckedUpdateWithoutRoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientRoleUncheckedUpdateManyWithoutRoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    client_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
