@@ -15,7 +15,7 @@ Follow this workflow for all feature development:
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
-│   /spec  →  /plan  →  /build  →  /test  →  /review  →  Ship│
+│   /spec  →  /plan  →  /build  →  /test  →  /review  →  Ship │
 │                                                             │
 │   Define    Plan     Build     Verify    Review     Deploy  │
 │                                                             │
