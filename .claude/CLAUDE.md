@@ -13,23 +13,33 @@ This is a **pnpm workspace monorepo** with separate NestJS services using Fastif
 Follow this workflow for all feature development:
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                                                             │
-│   /spec  →  /plan  →  /build  →  /test  →  /review  →  Ship │
-│                                                             │
-│   Define    Plan     Build     Verify    Review     Deploy  │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                             │
+│   ┌──────────────┐    ┌──────────────┐    ┌──────────────────────────┐      │
+│   │  DISCOVERY   │───▶│   PLANNING   │───▶│       EXECUTION          │      │
+│   └──────────────┘    └──────────────┘    └──────────────────────────┘      │
+│                                                                             │
+│   /spec               /plan:build           /build                          │
+│   /use-cases          /plan:test            /test                           │
+│   /sequence           /plan:ship            /review                         │
+│                                             /ship                           │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
+
+### Phase Details
 
 | Phase | Command | Purpose |
 |-------|---------|---------|
-| **Define** | `/spec` | Create PRD with objectives, scope, boundaries |
-| **Plan** | `/plan` | Decompose into vertical slices with acceptance criteria |
-| **Build** | `/build` | Implement incrementally using TDD (RED-GREEN-REFACTOR) |
-| **Verify** | `/test` | Write and verify tests; use Prove-It for bug fixes |
-| **Review** | `/review` | Five-axis code review before merge |
-| **Ship** | `/deploy` | Build, test, deploy with staged rollout |
+| **Discovery** | `/spec` | Create PRD with objectives, scope, boundaries |
+| | `/use-cases` | Breakdown into user stories and interaction flows |
+| | `/sequence` | Design PlantUML sequence diagrams for service interactions |
+| **Planning** | `/plan:build` | Decompose into vertical slices with acceptance criteria |
+| | `/plan:test` | Design test strategy, coverage targets, test types |
+| | `/plan:ship` | Define deployment strategy, rollback plan, monitoring |
+| **Execution** | `/build` | Implement incrementally using TDD (RED-GREEN-REFACTOR) |
+| | `/test` | Write and verify tests with evidence (screenshots, logs, coverage reports) |
+| | `/review` | Five-axis code review before merge |
+| | `/ship` | Build, test, deploy with staged rollout |
 
 ### Supporting Commands
 
@@ -53,6 +63,7 @@ Follow this workflow for all feature development:
 - Fix root causes, not symptoms
 - The simplest thing that could work
 - Tests are proof, not afterthought
+- Every test must have evidence — screenshots, logs, or coverage reports proving it works
 
 ---
 
@@ -380,7 +391,18 @@ Specialized skills for complex operations:
 | `spec-driven-development` | Write specs before coding |
 | `source-driven-development` | Ground decisions in official documentation |
 | `planning-and-task-breakdown` | Break work into ordered tasks |
+| `planning-and-task-breakdown` | Break work into vertical slices with acceptance criteria |
 | `plantuml` | Generate PlantUML diagrams as SVG |
+
+### Planning Sub-Commands
+
+When in Planning phase, use these sub-commands:
+
+| Command | Purpose |
+|---------|---------|
+| `/plan:build` | Create implementation plan with vertical slices |
+| `/plan:test` | Create test strategy with coverage targets |
+| `/plan:ship` | Create deployment plan with rollback strategy |
 
 ---
 
@@ -388,13 +410,29 @@ Specialized skills for complex operations:
 
 ## Agent Behavior Guidelines
 
-1. **Follow the workflow** — Use `/spec` → `/plan` → `/build` → `/review`
-2. **Apply mandatory rules** — All rules in `.claude/rules/` are non-negotiable
-3. **Test first** — Write failing tests before implementing
-4. **Incremental changes** — Small commits, always buildable
-5. **Explain before acting** — Describe changes before making them
-6. **Fix root causes** — Don't patch symptoms
-7. **Use the right agent** — Invoke specialized agents for their domains
+1. **Follow the workflow** — Discovery → Planning → Execution
+2. **Discovery first** — When a requirement arrives, use `/spec`, then `/use-cases`, then `/sequence`
+3. **Plan before building** — Use `/plan:build`, `/plan:test`, `/plan:ship` to define the full plan
+4. **Execute plan** — Use `/build` → `/test` → `/review` → `/ship` as the execution pipeline
+5. **Apply mandatory rules** — All rules in `.claude/rules/` are non-negotiable
+6. **Test first** — Write failing tests before implementing
+7. **Incremental changes** — Small commits, always buildable
+8. **Explain before acting** — Describe changes before making them
+9. **Fix root causes** — Don't patch symptoms
+10. **Use the right agent** — Invoke specialized agents for their domains
+
+---
+
+## Sequence Diagram Workflow
+
+When using `/sequence`, generate PlantUML sequence diagrams that show:
+
+1. **Service Interactions** — How services communicate (REST, RabbitMQ, etc.)
+2. **Data Flow** — What data is passed between components
+3. **Timing/Order** — Sequence of operations across services
+4. **Error Handling** — How failures propagate
+
+Diagrams are saved to `docs/services/<service>/diagrams/` following the naming conventions in `diagrams.md`.
 
 ---
 

@@ -157,14 +157,26 @@ pnpm test                               # All services
 
 ## Output Format
 
-When analyzing test coverage:
+When analyzing test coverage and verifying tests:
 
 ```markdown
 ## Test Coverage Analysis
 
+### Evidence of Test Execution
+- [ ] Jest coverage report generated (`coverage/lcov-report/index.html`)
+- [ ] Screenshots captured for E2E tests (saved to `test-evidence/`)
+- [ ] Logs showing successful test runs attached
+
 ### Current Coverage
 - [X] tests covering [Y] functions/components
 - Coverage gaps identified: [list]
+
+### Test Evidence
+| Test | Evidence Type | Location |
+|------|---------------|----------|
+| Unit tests | Jest summary | Terminal output |
+| E2E tests | Playwright screenshot | test-evidence/*.png |
+| Integration | Log output | test logs |
 
 ### Recommended Tests
 
@@ -268,6 +280,7 @@ When testing infrastructure integrations, verify:
 8. Use AAA pattern: Arrange → Act → Assert
 9. Use Playwright for E2E and browser-based verification — take screenshots as evidence
 10. For infrastructure integrations, always verify Docker services are healthy before testing
+11. Every test must produce evidence — coverage report, screenshot, or log output proving it passed
 
 ## Composition
 
