@@ -26,15 +26,15 @@
 </script>
 
 <div class="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-  <Card class="w-full max-w-sm shadow-lg">
+  <Card class="w-full max-w-sm shadow-lg" data-testid="login-card">
     <CardHeader class="space-y-1">
-      <CardTitle class="text-xl font-bold">Welcome back</CardTitle>
-      <CardDescription>Sign in to access the admin dashboard</CardDescription>
+      <CardTitle class="text-xl font-bold" data-testid="login-title">Welcome back</CardTitle>
+      <CardDescription data-testid="login-description">Sign in to access the admin dashboard</CardDescription>
     </CardHeader>
     <CardContent>
-      <form onsubmit={handleSubmit} class="space-y-4">
+      <form onsubmit={handleSubmit} class="space-y-4" data-testid="login-form">
         {#if error}
-          <div class="rounded-md bg-red-50 border border-red-200 p-3 text-sm text-red-600">
+          <div class="rounded-md bg-red-50 border border-red-200 p-3 text-sm text-red-600" data-testid="login-error">
             {error}
           </div>
         {/if}
@@ -46,6 +46,7 @@
             type="email"
             bind:value={email}
             required
+            data-testid="login-email-input"
             class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-transparent"
             placeholder="admin@example.com"
             disabled={loading}
@@ -59,13 +60,14 @@
             type="password"
             bind:value={password}
             required
+            data-testid="login-password-input"
             class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-transparent"
             placeholder="Enter your password"
             disabled={loading}
           />
         </div>
 
-        <Button type="submit" class="w-full bg-blue-600 hover:bg-blue-700" disabled={loading}>
+        <Button type="submit" class="w-full bg-blue-600 hover:bg-blue-700" disabled={loading} data-testid="login-submit-button">
           {loading ? 'Signing in...' : 'Sign In'}
         </Button>
       </form>
