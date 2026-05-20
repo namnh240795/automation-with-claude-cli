@@ -83,6 +83,7 @@ describe('AuthService', () => {
           first_name: 'John',
           last_name: 'Doe',
           role: 'USER',
+          user_type: 'PERSONAL',
           is_active: true,
           email_verified: false,
         },

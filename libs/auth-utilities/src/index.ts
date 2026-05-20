@@ -10,13 +10,22 @@ import { Reflector } from '@nestjs/core';
 export const ROLES_KEY = 'roles';
 export const PERMISSIONS_KEY = 'permissions';
 
+export interface OrganizationPayloadDto {
+  id: string;
+  display_id: string;
+  name: string;
+  role: 'ADMIN' | 'MEMBER';
+}
+
 export interface JwtPayloadDto {
   sub: string;
   email: string;
   first_name?: string;
   last_name?: string;
+  user_type?: 'PERSONAL' | 'BUSINESS';
   roles?: string[];
   permissions?: string[];
+  organizations?: OrganizationPayloadDto[];
   iat: number;
   exp: number;
   jti?: string;

@@ -18,6 +18,7 @@ import { JwtAuthGuard, AuthUser, JwtPayloadDto } from '@app/auth-utilities';
 import { AuthService } from './auth.service';
 import { SignUpDto, SignInDto } from './dto';
 import { AuthResponseDto, UserResponseDto } from './dto';
+import { UpgradeUserDto, UpgradeUserResponseDto } from './dto/upgrade-user.dto';
 
 @ApiTags('Auth')
 @Controller()
@@ -66,5 +67,30 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async getProfile(@AuthUser() user: JwtPayloadDto): Promise<UserResponseDto> {
     return this.authService.getProfile(user.sub);
+  }
+
+  @Post('users/upgrade')
+  @Version('1')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Upgrade user type from PERSONAL to BUSINESS' })
+  @ApiResponse({
+    status: 200,
+    description: 'User upgraded successfully',
+    type: UpgradeUserResponseDto,
+  })
+  @ApiResponse({ status: 400, description: 'User is already BUSINESS' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  async upgradeUser(
+    @AuthUser() user: JwtPayloadDto,
+    @Body() dto: UpgradeUserDto,
+  ): Promise<UpgradeUserResponseDto> {
+    const result = await this.authService.upgradeUser(user.sub, dto.user_type);
+    return {
+      id: result.user_id,
+      email: user.email,
+      user_type: result.user_type,
+      created_at: new Date(),
+    };
   }
 }

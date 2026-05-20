@@ -90,3 +90,30 @@ model setting_value_history {
   @@index([version])
   @@map("setting_value_history")
 }
+
+model user_secret {
+  id               String    @id @default(uuid())
+  user_id          String
+  organization_id  String?
+  name             String
+  value            String
+  description      String?
+  tags             String[]
+  secret_type      String    @default("PERSONAL")
+  can_delete       Boolean   @default(false)
+  is_active        Boolean   @default(true)
+  created_at       DateTime  @default(now())
+  updated_at       DateTime  @updatedAt
+  created_by       String
+  updated_by       String
+  deleted_at       DateTime?
+  deleted_by       String?
+
+  @@unique([organization_id, name])
+  @@unique([user_id, name])
+  @@index([user_id])
+  @@index([organization_id])
+  @@index([user_id, is_active])
+  @@index([organization_id, is_active])
+  @@map("user_secret")
+}

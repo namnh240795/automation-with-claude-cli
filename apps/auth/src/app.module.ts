@@ -7,6 +7,9 @@ import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { OAuthModule } from './oauth/oauth.module';
 import { AuthModule } from './auth/auth.module';
+import { OrganizationsModule } from './organizations/organizations.module';
+import { UserOrganizationModule } from './user-organization/user-organization.module';
+import { OrganizationInvitationsModule } from './organization-invitations/organization-invitations.module';
 import * as path from 'path';
 
 @Module({
@@ -20,6 +23,9 @@ import * as path from 'path';
     PrismaModule,
     OAuthModule,
     AuthModule,
+    OrganizationsModule,
+    UserOrganizationModule,
+    OrganizationInvitationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

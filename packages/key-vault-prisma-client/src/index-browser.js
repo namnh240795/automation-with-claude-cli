@@ -24,12 +24,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.4.1
- * Query Engine version: 55ae170b1ced7fc6ed07a15f110549408c501bb3
+ * Prisma Client JS version: 7.5.0
+ * Query Engine version: 280c870be64f457428992c43c1f6d557fab6e29e
  */
 Prisma.prismaVersion = {
-  client: "7.4.1",
-  engine: "55ae170b1ced7fc6ed07a15f110549408c501bb3"
+  client: "7.5.0",
+  engine: "280c870be64f457428992c43c1f6d557fab6e29e"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -170,6 +170,25 @@ exports.Prisma.Setting_value_historyScalarFieldEnum = {
   created_by: 'created_by'
 };
 
+exports.Prisma.User_secretScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  organization_id: 'organization_id',
+  name: 'name',
+  value: 'value',
+  description: 'description',
+  tags: 'tags',
+  secret_type: 'secret_type',
+  can_delete: 'can_delete',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -190,7 +209,8 @@ exports.Prisma.ModelName = {
   environment: 'environment',
   setting: 'setting',
   setting_value: 'setting_value',
-  setting_value_history: 'setting_value_history'
+  setting_value_history: 'setting_value_history',
+  user_secret: 'user_secret'
 };
 
 /**

@@ -1,5 +1,10 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString, IsEnum, Length } from 'class-validator';
+
+export enum UserType {
+  PERSONAL = 'PERSONAL',
+  BUSINESS = 'BUSINESS',
+}
 
 export class SignUpDto {
   @ApiProperty({
@@ -35,4 +40,14 @@ export class SignUpDto {
   @IsOptional()
   @IsString()
   last_name?: string;
+
+  @ApiPropertyOptional({
+    description: 'User type (PERSONAL or BUSINESS)',
+    enum: UserType,
+    default: UserType.PERSONAL,
+    example: 'PERSONAL',
+  })
+  @IsOptional()
+  @IsEnum(UserType)
+  user_type?: UserType;
 }

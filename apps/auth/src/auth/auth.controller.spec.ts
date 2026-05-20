@@ -29,6 +29,7 @@ describe('AuthController', () => {
     email: 'test@example.com',
     first_name: 'John',
     last_name: 'Doe',
+    user_type: 'PERSONAL' as const,
     iat: Math.floor(Date.now() / 1000),
     exp: Math.floor(Date.now() / 1000) + 3600,
   };

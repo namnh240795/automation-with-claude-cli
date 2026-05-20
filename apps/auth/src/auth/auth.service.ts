@@ -2,12 +2,14 @@ import {
   Injectable,
   ConflictException,
   UnauthorizedException,
+  BadRequestException,
   Logger,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { randomBytes } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { hashPassword, verifyPassword } from '@app/auth-utilities';
+import { LogActivity } from '@app/app-logger';
 import { SignUpDto, SignInDto } from './dto';
 import { AuthResponseDto, UserResponseDto } from './dto';
 
@@ -52,6 +54,7 @@ export class AuthService {
         first_name: dto.first_name,
         last_name: dto.last_name,
         role: 'USER',
+        user_type: dto.user_type ?? 'PERSONAL',
         is_active: true,
         email_verified: false,
       },
@@ -111,6 +114,34 @@ export class AuthService {
     return user;
   }
 
+  @LogActivity()
+  async upgradeUser(
+    userId: string,
+    userType: 'PERSONAL' | 'BUSINESS',
+  ): Promise<{ user_id: string; user_type: string }> {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, user_type: true },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    if (user.user_type === 'BUSINESS') {
+      throw new BadRequestException('User is already a BUSINESS user');
+    }
+
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { user_type: userType },
+    });
+
+    this.logger.log(`User ${userId} upgraded to ${userType}`);
+
+    return { user_id: userId, user_type: userType };
+  }
+
   private async generateAuthResponse(
     userId: string,
     email: string,
@@ -124,11 +155,54 @@ export class AuthService {
         first_name: true,
         last_name: true,
         role: true,
+        user_type: true,
       },
     });
 
     if (!user) {
       throw new UnauthorizedException('User not found');
+    }
+
+    // Get user's organizations (only for BUSINESS users)
+    let organizations: { id: string; display_id: string; name: string; role: string }[] = [];
+    if (user.user_type === 'BUSINESS') {
+      const memberships = await this.prisma.userOrganization.findMany({
+        where: {
+          user_id: userId,
+          deleted_at: null,
+          is_active: true,
+        },
+        select: {
+          organization_id: true,
+          organization_role: true,
+        },
+      });
+
+      if (memberships.length > 0) {
+        const orgIds = memberships.map(m => m.organization_id);
+        const orgs = await this.prisma.organization.findMany({
+          where: {
+            id: { in: orgIds },
+            deleted_at: null,
+            is_active: true,
+          },
+          select: {
+            id: true,
+            display_id: true,
+            name: true,
+          },
+        });
+
+        organizations = memberships.map(m => {
+          const org = orgs.find(o => o.id === m.organization_id);
+          return {
+            id: m.organization_id,
+            display_id: org?.display_id ?? '',
+            name: org?.name ?? '',
+            role: m.organization_role,
+          };
+        });
+      }
     }
 
     // Generate access token (JWT)
@@ -137,7 +211,9 @@ export class AuthService {
       email: user.email,
       first_name: user.first_name,
       last_name: user.last_name,
+      user_type: user.user_type as 'PERSONAL' | 'BUSINESS',
       roles: [user.role],
+      organizations: organizations.length > 0 ? organizations : undefined,
     });
 
     // Generate refresh token
@@ -168,7 +244,14 @@ export class AuthService {
     email: string;
     first_name?: string | null;
     last_name?: string | null;
+    user_type: 'PERSONAL' | 'BUSINESS';
     roles: string[];
+    organizations?: {
+      id: string;
+      display_id: string;
+      name: string;
+      role: string;
+    }[];
   }): string {
     const now = Math.floor(Date.now() / 1000);
     const expiresIn = this.parseExpirationTime(this.jwtExpiresIn);
@@ -183,7 +266,11 @@ export class AuthService {
       email: payload.email,
       first_name: payload.first_name,
       last_name: payload.last_name,
+      user_type: payload.user_type,
       roles: payload.roles,
+      ...(payload.organizations && payload.organizations.length > 0
+        ? { organizations: payload.organizations }
+        : {}),
       iat: now,
       exp: now + expiresIn,
     };

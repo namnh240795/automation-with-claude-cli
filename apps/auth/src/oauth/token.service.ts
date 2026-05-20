@@ -62,6 +62,7 @@ export class TokenService {
       email: data.email,
       first_name: data.first_name,
       last_name: data.last_name,
+      user_type: 'PERSONAL',
       roles: finalRoles,
       permissions: finalPermissions,
       iat: now,

@@ -8,18 +8,20 @@ datasource db {
 }
 
 model User {
-  id             String         @id @default(uuid())
-  email          String         @unique
+  id             String             @id @default(uuid())
+  email          String             @unique
   password_hash  String
   first_name     String?
   last_name      String?
-  role           String         @default("USER") // User role: USER, ADMIN, SUPER_ADMIN
-  is_active      Boolean        @default(true)
-  email_verified Boolean        @default(false)
-  created_at     DateTime       @default(now())
-  updated_at     DateTime       @updatedAt
+  role           String             @default("USER") // User role: USER, ADMIN, SUPER_ADMIN
+  user_type      String             @default("PERSONAL") // PERSONAL, BUSINESS
+  is_active      Boolean            @default(true)
+  email_verified Boolean            @default(false)
+  created_at     DateTime           @default(now())
+  updated_at     DateTime           @updatedAt
   refresh_tokens RefreshToken[]
   sessions       Session[]
+  organizations  UserOrganization[]
 
   @@map("user")
 }
@@ -248,4 +250,73 @@ model ClientRole {
   @@index([client_id])
   @@index([role_id])
   @@map("client_role")
+}
+
+// ============================================================
+// Organization Models
+// ============================================================
+
+model Organization {
+  id         String    @id @default(uuid())
+  name       String
+  display_id String    @unique // Public-facing org ID (e.g., "acme-corp")
+  type       String    @default("BUSINESS") // PERSONAL, BUSINESS
+  is_active  Boolean   @default(true)
+  created_at DateTime  @default(now())
+  created_by String
+  updated_at DateTime  @updatedAt
+  updated_by String
+  deleted_at DateTime?
+  deleted_by String?
+
+  memberships UserOrganization[]
+  invitations OrganizationInvitation[]
+
+  @@index([display_id])
+  @@index([type])
+  @@index([is_active])
+  @@index([deleted_at])
+  @@map("organization")
+}
+
+model UserOrganization {
+  id                String    @id @default(uuid())
+  user_id           String
+  organization_id   String
+  organization_role String    @default("MEMBER") // ADMIN, MEMBER
+  is_active         Boolean   @default(true)
+  created_at        DateTime  @default(now())
+  created_by        String
+  updated_at        DateTime  @updatedAt
+  updated_by        String
+  deleted_at        DateTime?
+  deleted_by        String?
+
+  user         User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organization_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, organization_id])
+  @@index([user_id])
+  @@index([organization_id])
+  @@index([organization_role])
+  @@index([deleted_at])
+  @@map("user_organization")
+}
+
+model OrganizationInvitation {
+  id              String    @id @default(uuid())
+  organization_id String
+  email           String
+  role            String    @default("MEMBER") // ADMIN, MEMBER
+  invited_by      String // user_id of inviter
+  expires_at      DateTime
+  accepted_at     DateTime?
+  created_at      DateTime  @default(now())
+
+  organization Organization @relation(fields: [organization_id], references: [id], onDelete: Cascade)
+
+  @@unique([organization_id, email])
+  @@index([email])
+  @@index([organization_id])
+  @@map("organization_invitation")
 }

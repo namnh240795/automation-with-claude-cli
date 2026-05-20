@@ -6,6 +6,7 @@ import { EnvironmentsModule } from './environments/environments.module';
 import { SettingsModule } from './settings/settings.module';
 import { SettingValuesModule } from './setting-values/setting-values.module';
 import { ServiceConsumptionModule } from './service-consumption/service-consumption.module';
+import { UserSecretsModule } from './user-secrets/user-secrets.module';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from '@app/auth-utilities';
@@ -23,6 +24,7 @@ import * as path from 'path';
     SettingsModule,
     SettingValuesModule,
     ServiceConsumptionModule,
+    UserSecretsModule,
     PassportModule.register({ defaultStrategy: 'jwt-token' }),
     JwtModule.register({}),
   ],

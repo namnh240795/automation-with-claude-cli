@@ -127,6 +127,7 @@ exports.Prisma.UserScalarFieldEnum = {
   first_name: 'first_name',
   last_name: 'last_name',
   role: 'role',
+  user_type: 'user_type',
   is_active: 'is_active',
   email_verified: 'email_verified',
   created_at: 'created_at',
@@ -278,6 +279,45 @@ exports.Prisma.ClientRoleScalarFieldEnum = {
   created_at: 'created_at'
 };
 
+exports.Prisma.OrganizationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  display_id: 'display_id',
+  type: 'type',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by'
+};
+
+exports.Prisma.UserOrganizationScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  organization_id: 'organization_id',
+  organization_role: 'organization_role',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by'
+};
+
+exports.Prisma.OrganizationInvitationScalarFieldEnum = {
+  id: 'id',
+  organization_id: 'organization_id',
+  email: 'email',
+  role: 'role',
+  invited_by: 'invited_by',
+  expires_at: 'expires_at',
+  accepted_at: 'accepted_at',
+  created_at: 'created_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -307,7 +347,10 @@ exports.Prisma.ModelName = {
   Permission: 'Permission',
   Role: 'Role',
   RolePermission: 'RolePermission',
-  ClientRole: 'ClientRole'
+  ClientRole: 'ClientRole',
+  Organization: 'Organization',
+  UserOrganization: 'UserOrganization',
+  OrganizationInvitation: 'OrganizationInvitation'
 };
 
 /**

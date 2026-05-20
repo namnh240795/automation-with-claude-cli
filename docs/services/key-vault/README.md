@@ -91,6 +91,62 @@ Centralized, secure key-value store for configuration and secrets. Only SUPER_AD
 { "service_name": "auth", "environment": "production", "settings": [{ "key": "SMTP_HOST", "value": "smtp.mailtrap.io" }] }
 ```
 
+### User Secrets
+
+| Method | Path | Auth | Description |
+|--------|------|------|-------------|
+| POST | `/v1/secrets` | JWT | Create personal secret |
+| GET | `/v1/secrets` | JWT | List all accessible secrets (personal + org) |
+| GET | `/v1/secrets/:id` | JWT | Get secret metadata |
+| GET | `/v1/secrets/:id/value` | JWT | Get decrypted secret value |
+| PATCH | `/v1/secrets/:id` | JWT | Update secret metadata/value |
+| DELETE | `/v1/secrets/:id` | JWT | Soft delete secret |
+| POST | `/v1/secrets/org` | JWT + ORG_ADMIN | Create organization secret |
+| GET | `/v1/secrets/org/:organizationId` | JWT + ORG_MEMBER | List org secrets |
+
+### POST /v1/secrets — Create Personal Secret
+**Request:**
+```json
+{ "name": "API_KEY", "value": "secret-value", "description": "My API key", "tags": ["api", "key"] }
+```
+**Response (201):**
+```json
+{ "id": "uuid", "name": "API_KEY", "description": "My API key", "tags": ["api", "key"], "secret_type": "PERSONAL", "is_active": true, "created_at": "..." }
+```
+
+### GET /v1/secrets — List Accessible Secrets
+**Response (200):**
+```json
+{
+  "personal": [{ "id": "uuid", "name": "API_KEY", "secret_type": "PERSONAL", ... }],
+  "organization": [{ "id": "uuid", "name": "ORG_API_KEY", "secret_type": "ORGANIZATION", ... }],
+  "as_admin": [{ "id": "uuid", "name": "member-secret", "owned_by": "user-id", ... }]
+}
+```
+> BUSINESS ADMINs see additional `as_admin` list containing personal secrets of org members.
+
+### GET /v1/secrets/:id/value?reveal=true — Reveal Secret Value
+**Response (200):**
+```json
+{ "value": "decrypted-secret-value" }
+```
+
+### POST /v1/secrets/org — Create Organization Secret
+**Request:**
+```json
+{ "name": "ORG_API_KEY", "value": "org-secret", "organization_id": "uuid", "description": "Org API key", "tags": ["org"], "can_delete": true }
+```
+**Response (201):**
+```json
+{ "id": "uuid", "name": "ORG_API_KEY", "secret_type": "ORGANIZATION", "organization_id": "uuid", ... }
+```
+
+### GET /v1/secrets/org/:organizationId — List Organization Secrets
+**Response (200):**
+```json
+[{ "id": "uuid", "name": "ORG_API_KEY", "secret_type": "ORGANIZATION", ... }]
+```
+
 ## Environment Variables
 
 | Variable | Required | Default | Description |
@@ -104,6 +160,7 @@ Centralized, secure key-value store for configuration and secrets. Only SUPER_AD
 ## Architecture
 
 - **Encryption**: AES-256-GCM with random IV per encryption. Stored as base64 (IV + ciphertext + authTag).
-- **Versioning**: Each `setValue` archives the current value to `setting_value_history` before creating the new version.
+- **Secret Types**: `PERSONAL` secrets belong to individual users; `ORGANIZATION` secrets belong to organizations and are accessible to all org members.
+- **Access Control**: Personal secrets are only accessible to the owner. Organization secrets are accessible to all org members. ORG_ADMINs can also view personal secrets of org members.
 - **Soft deletes**: All entities use `deleted_at` / `deleted_by` fields; queries filter `deleted_at: null`.
-- **RBAC**: Management endpoints require `SUPER_ADMIN` role; consumption endpoint requires only JWT auth.
+- **RBAC**: User secret endpoints require JWT auth only; org admin endpoints require ADMIN role in the organization.
