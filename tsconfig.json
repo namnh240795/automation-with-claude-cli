@@ -73,6 +73,12 @@
       ],
       "@app/opensearch/*": [
         "libs/opensearch/src/*"
+      ],
+      "@webs/common": [
+        "webs/common/src"
+      ],
+      "@webs/common/*": [
+        "webs/common/src/*"
       ]
     }
   }

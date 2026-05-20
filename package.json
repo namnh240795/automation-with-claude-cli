@@ -9,7 +9,8 @@
     "apps/*",
     "libs/*",
     "packages/*",
-    "tools"
+    "tools/*",
+    "webs/*"
   ],
   "scripts": {
     "prebuild": "rimraf dist",
@@ -23,7 +24,10 @@
     "build:key-vault": "BUILD=1 pnpm --filter key-vault exec rspack build -c rspack.config.js",
     "build:api": "BUILD=1 pnpm --filter api exec rspack build -c rspack.config.js",
     "start:auth": "cd apps/auth && node dist/main.js",
-    "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
+    "dev:admin": "pnpm --filter admin exec vite dev",
+    "build:admin": "pnpm --filter admin exec vite build",
+    "preview:admin": "pnpm --filter admin exec vite preview",
+    "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\" \"webs/**/*.ts\" \"webs/**/*.svelte\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",

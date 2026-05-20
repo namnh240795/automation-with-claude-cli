@@ -197,6 +197,28 @@ services:
     networks:
       - default
 
+  # Admin Frontend - SvelteKit SPA
+  # UI: http://localhost:4200
+  admin-frontend:
+    build:
+      context: ..
+      dockerfile: webs/admin/Dockerfile
+    container_name: claude-admin-frontend
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+    depends_on:
+      auth:
+        condition: service_healthy
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
 volumes:
   postgres-data:
   redis-data:

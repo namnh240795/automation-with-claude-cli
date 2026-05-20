@@ -1,0 +1,8 @@
+{
+  "$schema": "https://shadcn-svelte.com/schema.json",
+  "components": "./src/lib/components/ui",
+  "aliases": {
+    "components": "$lib/components/ui",
+    "utils": "$lib/utils"
+  }
+}

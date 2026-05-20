@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "target": "ES2021",
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "checkJs": true,
+    "allowJs": true,
+    "paths": {}
+  },
+  "include": ["src/**/*", "*.ts"]
+}
